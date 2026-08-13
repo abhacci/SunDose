@@ -1,26 +1,4 @@
-/* =========================================
-   SunDose ☀️
-   Main Styles
-   ========================================= */
-
-:root {
-    --sky-top: #78cfff;
-    --sky-middle: #bcecff;
-    --sky-bottom: #fff8d8;
-
-    --sun-yellow: #ffc928;
-    --sun-orange: #ff9f1c;
-
-    --text-dark: #3f4650;
-    --white: #ffffff;
-
-    --shadow-soft: 0 20px 45px rgba(255, 174, 0, 0.20);
-}
-
-
-/* =========================================
-   Reset
-   ========================================= */
+@import url('https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700;800&display=swap');
 
 * {
     margin: 0;
@@ -28,13 +6,421 @@
     box-sizing: border-box;
 }
 
-
-html,
-body {
-    width: 100%;
-    min-height: 100%;
+:root {
+    --yellow: #ffc928;
+    --orange: #ff9f1c;
+    --orange-dark: #f58b00;
+    --cream: #fffaf0;
+    --text: #4b3b25;
+    --muted: #8b7b65;
+    --white: #ffffff;
 }
 
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    min-height: 100vh;
+    font-family: 'Cairo', sans-serif;
+    color: var(--text);
+    background:
+        radial-gradient(circle at 50% 12%, #fff5bd 0%, transparent 30%),
+        linear-gradient(180deg, #fff8d8 0%, #fffaf0 48%, #ffffff 100%);
+}
+
+button {
+    font-family: inherit;
+    border: 0;
+    cursor: pointer;
+}
+
+.app {
+    width: 100%;
+    max-width: 520px;
+    min-height: 100vh;
+    margin: auto;
+    padding: 20px 18px 110px;
+    overflow: hidden;
+}
+
+/* =========================
+   الهيدر
+========================= */
+
+.top-bar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 18px;
+}
+
+.small-text {
+    display: block;
+    color: var(--muted);
+    font-size: 13px;
+    margin-bottom: 2px;
+}
+
+.top-bar h1 {
+    font-size: 25px;
+    font-weight: 800;
+    color: #f59b00;
+}
+
+.profile-button {
+    width: 46px;
+    height: 46px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.85);
+    box-shadow: 0 8px 25px rgba(180, 130, 20, 0.12);
+    color: #f2a000;
+    font-size: 23px;
+}
+
+/* =========================
+   الترحيب
+========================= */
+
+.welcome-card {
+    background: linear-gradient(
+        135deg,
+        rgba(255, 211, 68, 0.95),
+        rgba(255, 166, 34, 0.95)
+    );
+    border-radius: 26px;
+    padding: 20px 22px;
+    color: white;
+    box-shadow: 0 14px 35px rgba(255, 166, 34, 0.22);
+}
+
+.welcome-text .hello {
+    font-size: 14px;
+    opacity: 0.9;
+}
+
+.welcome-text h2 {
+    font-size: 25px;
+    margin: 3px 0 4px;
+    font-weight: 800;
+}
+
+.welcome-text p {
+    font-size: 13px;
+    line-height: 1.8;
+    opacity: 0.95;
+}
+
+/* =========================
+   سنا
+========================= */
+
+.sana-section {
+    position: relative;
+    height: 330px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 5px;
+}
+
+.sun-background {
+    position: absolute;
+    width: 245px;
+    height: 245px;
+    border-radius: 50%;
+    background: radial-gradient(
+        circle,
+        #ffe98b 0%,
+        #ffd84a 48%,
+        #ffc52d 100%
+    );
+    box-shadow:
+        0 0 0 16px rgba(255, 210, 65, 0.12),
+        0 0 60px rgba(255, 193, 31, 0.28);
+}
+
+.sana {
+    position: relative;
+    z-index: 2;
+    width: 285px;
+    height: 285px;
+    object-fit: contain;
+    filter: drop-shadow(0 15px 18px rgba(117, 79, 0, 0.18));
+    animation: sanaFloat 3.5s ease-in-out infinite;
+}
+
+@keyframes sanaFloat {
+    0%, 100% {
+        transform: translateY(0) rotate(0deg);
+    }
+
+    50% {
+        transform: translateY(-9px) rotate(-1deg);
+    }
+}
+
+/* =========================
+   رسالة سنا
+========================= */
+
+.sana-message {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    background: rgba(255, 255, 255, 0.9);
+    border: 1px solid rgba(255, 205, 61, 0.35);
+    border-radius: 22px;
+    padding: 16px;
+    margin-bottom: 15px;
+    box-shadow: 0 10px 30px rgba(100, 75, 20, 0.07);
+}
+
+.message-icon {
+    width: 43px;
+    height: 43px;
+    flex-shrink: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 14px;
+    background: #fff4bd;
+    font-size: 22px;
+}
+
+.sana-message strong {
+    font-size: 13px;
+    color: #e99400;
+}
+
+.sana-message p {
+    font-size: 14px;
+    line-height: 1.8;
+    margin-top: 2px;
+}
+
+/* =========================
+   التقدم
+========================= */
+
+.progress-card {
+    background: white;
+    border-radius: 24px;
+    padding: 19px;
+    box-shadow: 0 10px 30px rgba(82, 62, 20, 0.07);
+    margin-bottom: 15px;
+}
+
+.card-title {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.card-title span {
+    color: var(--muted);
+    font-size: 12px;
+}
+
+.card-title h3 {
+    font-size: 17px;
+    margin-top: 2px;
+}
+
+.progress-number {
+    font-size: 21px !important;
+    font-weight: 800;
+    color: var(--orange);
+}
+
+.progress-number span {
+    color: var(--orange);
+    font-size: 21px;
+}
+
+.progress-bar {
+    width: 100%;
+    height: 12px;
+    background: #fff0c2;
+    border-radius: 20px;
+    overflow: hidden;
+    margin-top: 15px;
+}
+
+.progress-fill {
+    width: 0%;
+    height: 100%;
+    border-radius: inherit;
+    background: linear-gradient(
+        90deg,
+        #ffd83d,
+        #ff9f1c
+    );
+    transition: width 0.7s ease;
+}
+
+.progress-text {
+    color: var(--muted);
+    font-size: 12px;
+    margin-top: 9px;
+}
+
+/* =========================
+   زر الإنجاز
+========================= */
+
+.complete-button {
+    width: 100%;
+    min-height: 60px;
+    border-radius: 20px;
+    background: linear-gradient(
+        135deg,
+        #ffd53e,
+        #ff9f1c
+    );
+    color: white;
+    font-size: 16px;
+    font-weight: 800;
+    box-shadow: 0 12px 28px rgba(255, 159, 28, 0.27);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    margin-bottom: 18px;
+}
+
+.complete-button span {
+    margin-left: 5px;
+}
+
+.complete-button:active {
+    transform: scale(0.97);
+}
+
+.complete-button.completed {
+    background: linear-gradient(
+        135deg,
+        #79c86b,
+        #4caf50
+    );
+    box-shadow: 0 12px 28px rgba(76, 175, 80, 0.22);
+}
+
+/* =========================
+   الإحصائيات
+========================= */
+
+.stats {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+.stat-card {
+    background: rgba(255, 255, 255, 0.9);
+    border-radius: 20px;
+    padding: 14px 8px;
+    text-align: center;
+    box-shadow: 0 8px 25px rgba(82, 62, 20, 0.06);
+}
+
+.stat-icon {
+    display: block;
+    font-size: 20px;
+    margin-bottom: 3px;
+}
+
+.stat-card strong {
+    display: block;
+    font-size: 20px;
+    color: #e99400;
+}
+
+.stat-card small {
+    display: block;
+    color: var(--muted);
+    font-size: 10px;
+    margin-top: 1px;
+}
+
+/* =========================
+   القائمة السفلية
+========================= */
+
+.bottom-nav {
+    position: fixed;
+    bottom: 12px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: calc(100% - 28px);
+    max-width: 490px;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    padding: 9px;
+    background: rgba(255, 255, 255, 0.94);
+    border: 1px solid rgba(240, 190, 50, 0.15);
+    border-radius: 25px;
+    box-shadow: 0 10px 35px rgba(50, 40, 20, 0.14);
+    backdrop-filter: blur(15px);
+    z-index: 100;
+}
+
+.nav-item {
+    background: transparent;
+    color: #a09583;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2px;
+    padding: 6px 2px;
+    border-radius: 17px;
+    transition: 0.2s ease;
+}
+
+.nav-item span {
+    font-size: 20px;
+}
+
+.nav-item small {
+    font-size: 9px;
+}
+
+.nav-item.active {
+    color: #ed9700;
+    background: #fff5c9;
+}
+
+/* =========================
+   شاشات صغيرة
+========================= */
+
+@media (max-width: 380px) {
+
+    .app {
+        padding-left: 13px;
+        padding-right: 13px;
+    }
+
+    .sana-section {
+        height: 290px;
+    }
+
+    .sun-background {
+        width: 215px;
+        height: 215px;
+    }
+
+    .sana {
+        width: 255px;
+        height: 255px;
+    }
+
+    .welcome-card {
+        padding: 17px;
+    }
+
+    .welcome-text h2 {
+        font-size: 22px;
+    }
+}
 
 body {
     font-family: "Cairo", Arial, sans-serif;
