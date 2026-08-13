@@ -1,40 +1,27 @@
-<!DOCTYPE html>
-<html lang="ar" dir="rtl">
+document.addEventListener("DOMContentLoaded", () => {
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    const startButton = document.getElementById("startButton");
+    const sanaText = document.getElementById("sanaText");
 
-    <title>SunDose ☀️</title>
+    if (!startButton) return;
 
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800&display=swap" rel="stylesheet">
+    startButton.addEventListener("click", () => {
 
-    <link rel="stylesheet" href="../css/style.css">
-</head>
+        sanaText.innerHTML = `
+            برافو عليك ❤️
+            <br>
+            خلينا نبدأ أول خطوة سوا.
+        `;
 
-<body>
+        startButton.textContent = "تم 🌞";
 
-    <main class="welcome-page">
+        startButton.style.background = "#63b86b";
 
-        <!-- الهيدر -->
-        <header class="top-bar">
-            <div class="logo">
-                ☀️ <span>SunDose</span>
-            </div>
+        startButton.disabled = true;
 
-            <button class="profile-button" aria-label="الملف الشخصي">
-                👤
-            </button>
-        </header>
+    });
 
-        <!-- الترحيب -->
-        <section class="welcome-card">
-
-            <div class="welcome-text">
-                <span class="small-greeting">☀️ صباح الخير</span>
-
+});
                 <h1>
                     أنا سنا
                     <span>🌻</span>
