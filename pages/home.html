@@ -1,39 +1,360 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>SunDose ☀️ — نتعرف على بعض</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 
-    <title>SunDose ☀️</title>
-
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800&display=swap" rel="stylesheet">
-
-    <link rel="stylesheet" href="../css/style.css">
+<style>
+*{box-sizing:border-box}
+body{
+  margin:0;
+  min-height:100vh;
+  font-family:"Cairo",sans-serif;
+  background:linear-gradient(180deg,#fffaf0 0%,#fff7df 100%);
+  color:#3d352d;
+}
+.app{
+  width:min(100%,520px);
+  min-height:100vh;
+  margin:auto;
+  padding:22px 18px 28px;
+  display:flex;
+  flex-direction:column;
+}
+.header{
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:20px;
+  font-weight:800;
+  color:#f2a51a;
+  margin-bottom:18px;
+}
+.progress{
+  height:6px;
+  background:#f3ead5;
+  border-radius:20px;
+  overflow:hidden;
+  margin-bottom:30px;
+}
+.progress span{
+  display:block;
+  height:100%;
+  width:16.66%;
+  background:#ffb321;
+  border-radius:20px;
+  transition:.35s ease;
+}
+.chat{
+  flex:1;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+}
+.sana{
+  width:150px;
+  height:150px;
+  object-fit:contain;
+  margin:5px 0 14px;
+  filter:drop-shadow(0 8px 12px rgba(242,165,26,.18));
+}
+.message{
+  width:100%;
+  background:#fff;
+  border-radius:24px;
+  padding:18px 18px;
+  text-align:center;
+  box-shadow:0 8px 28px rgba(84,63,25,.08);
+  font-size:18px;
+  line-height:1.8;
+}
+.message small{
+  display:block;
+  color:#9b8d7c;
+  font-size:13px;
+  margin-top:4px;
+}
+.question{
+  width:100%;
+  margin-top:22px;
+}
+input,select{
+  width:100%;
+  border:2px solid #f1e4c9;
+  outline:none;
+  background:#fff;
+  border-radius:18px;
+  padding:15px 16px;
+  font-family:inherit;
+  font-size:17px;
+  color:#3d352d;
+  text-align:right;
+}
+input:focus,select:focus{border-color:#ffbd39}
+.actions{
+  display:flex;
+  gap:10px;
+  margin-top:14px;
+}
+button{
+  border:0;
+  border-radius:18px;
+  padding:15px 20px;
+  font-family:inherit;
+  font-size:17px;
+  font-weight:700;
+  cursor:pointer;
+}
+.next{
+  flex:1;
+  background:linear-gradient(135deg,#ffc42f,#f6a516);
+  color:#fff;
+  box-shadow:0 8px 20px rgba(246,165,22,.22);
+}
+.back{
+  width:90px;
+  background:#fff;
+  color:#8d806f;
+  border:1px solid #eee2cb;
+}
+.hidden{display:none!important}
+.choice-title{
+  margin-top:28px;
+  font-size:18px;
+  font-weight:800;
+}
+.choices{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:12px;
+  width:100%;
+  margin-top:14px;
+}
+.choice{
+  background:#fff;
+  border:2px solid #f0e5d1;
+  border-radius:20px;
+  padding:18px 12px;
+  text-align:center;
+  transition:.2s;
+}
+.choice.active{
+  border-color:#ffb321;
+  background:#fff9e9;
+}
+.choice .icon{font-size:30px}
+.choice b{display:block;margin-top:6px}
+.choice p{
+  margin:6px 0 0;
+  font-size:12px;
+  line-height:1.6;
+  color:#887c6d;
+}
+.done{
+  width:100%;
+  margin-top:20px;
+  background:#ffb321;
+  color:#fff;
+}
+@media(max-width:380px){
+  .sana{width:125px;height:125px}
+  .message{font-size:16px}
+}
+</style>
 </head>
 
 <body>
+<div class="app">
+  <div class="header">☀️ SunDose</div>
 
-    <main class="dashboard">
+  <div class="progress"><span id="bar"></span></div>
 
-        <header class="dashboard-header">
+  <main class="chat">
+    <img class="sana" src="../assets/sana.png" alt="سنا">
 
-            <div>
-                <span class="hello">صباح الخير ☀️</span>
-                <h1>SunDose</h1>
-            </div>
+    <div class="message" id="message"></div>
 
-            <div class="header-sun">🌞</div>
+    <div class="question" id="question"></div>
+  </main>
+</div>
 
-        </header>
+<script>
+const data = {
+  name:"",
+  gender:"",
+  country:"",
+  height:"",
+  weight:"",
+  habits:[]
+};
 
+let step = 0;
 
-        <section class="sana-message">
+const steps = [
+  {
+    text:"أهلًا بيك ❤️ أنا سنا، وعايزة أتعرف عليك شوية الأول.<small>مش هطوّل عليك، وكل إجابة هتخليني أفهمك أكتر.</small>",
+    type:"text",
+    placeholder:"تحب أناديك بإيه؟"
+  },
+  {
+    text:"جميل يا صديقي ☀️<br>تحب سنا تكلمك بصيغة إيه؟",
+    type:"gender"
+  },
+  {
+    text:"تمام ❤️<br>قولي بس إنت موجود فين؟<small>البلد هتساعدني أفهم ظروف الجو والشمس عندك بشكل أفضل.</small>",
+    type:"text",
+    placeholder:"مثال: مصر"
+  },
+  {
+    text:"حلو جدًا 🌱<br>وطولك كام تقريبًا؟<small>مش محتاج رقم مثالي، حتى لو تقريبي تمام.</small>",
+    type:"number",
+    placeholder:"مثال: 180 سم"
+  },
+  {
+    text:"آخر حاجة في التعارف قبل ما نبدأ 👌<br>وزنك كام تقريبًا؟<small>الهدف إني أساعدك بشكل مناسب ليك، مش أحكم عليك.</small>",
+    type:"number",
+    placeholder:"مثال: 80 كجم"
+  }
+];
 
-            <img
-                src="../assets/sana.png"
-                alt="سنا"
+function render(){
+  const message=document.getElementById("message");
+  const question=document.getElementById("question");
+  const bar=document.getElementById("bar");
+
+  bar.style.width=((step+1)/steps.length*100)+"%";
+
+  const s=steps[step];
+  message.innerHTML=s.text;
+
+  if(s.type==="gender"){
+    question.innerHTML=`
+      <div class="choices" style="grid-template-columns:1fr 1fr">
+        <button class="choice" onclick="selectGender('male',this)">
+          <div class="icon">👨</div><b>ذكر</b>
+        </button>
+        <button class="choice" onclick="selectGender('female',this)">
+          <div class="icon">👩</div><b>أنثى</b>
+        </button>
+      </div>`;
+    return;
+  }
+
+  question.innerHTML=`
+    <input id="answer" type="${s.type}" placeholder="${s.placeholder}" ${s.type==="number"?'inputmode="decimal"':''}>
+    <div class="actions">
+      ${step>0?'<button class="back" onclick="prev()">رجوع</button>':''}
+      <button class="next" onclick="next()">نكمل ☀️</button>
+    </div>`;
+  document.getElementById("answer").focus();
+}
+
+function selectGender(value,el){
+  data.gender=value;
+  document.querySelectorAll(".choice").forEach(x=>x.classList.remove("active"));
+  el.classList.add("active");
+  setTimeout(next,220);
+}
+
+function next(){
+  if(step===0){
+    const v=document.getElementById("answer").value.trim();
+    if(!v)return;
+    data.name=v;
+  }
+  if(step===2){
+    const v=document.getElementById("answer").value.trim();
+    if(!v)return;
+    data.country=v;
+  }
+  if(step===3){
+    const v=document.getElementById("answer").value.trim();
+    if(!v)return;
+    data.height=v;
+  }
+  if(step===4){
+    const v=document.getElementById("answer").value.trim();
+    if(!v)return;
+    data.weight=v;
+    localStorage.setItem("sundoseUser",JSON.stringify(data));
+    showHabits();
+    return;
+  }
+
+  step++;
+  render();
+}
+
+function prev(){
+  if(step>0){
+    step--;
+    render();
+  }
+}
+
+function showHabits(){
+  document.getElementById("bar").style.width="100%";
+
+  const hello = data.gender==="female" ? "يا جميلة" : "يا بطل";
+
+  document.getElementById("message").innerHTML=
+    `كده عرفتك يا ${data.name} ❤️<br>
+     ودلوقتي أقدر أبدأ أساعدك بشكل أقرب ليك.<small>
+     اختار الحاجة اللي تحب نبدأ بيها، وأنا هكون معاك خطوة بخطوة.
+     </small>`;
+
+  document.getElementById("question").innerHTML=`
+    <div class="choice-title">تحب نبدأ بإيه؟ ☀️</div>
+    <div class="choices">
+      <button class="choice" onclick="toggleHabit(this,'sun')">
+        <div class="icon">☀️</div>
+        <b>الشمس</b>
+        <p>التعرض المناسب للشمس له دور مهم في فيتامين D وصحة الجسم.</p>
+      </button>
+
+      <button class="choice" onclick="toggleHabit(this,'water')">
+        <div class="icon">💧</div>
+        <b>المياه</b>
+        <p>الترطيب الجيد يساعد جسمك يشتغل بكفاءة ويحافظ على نشاطك.</p>
+      </button>
+
+      <button class="choice" onclick="toggleHabit(this,'sport')">
+        <div class="icon">🏃</div>
+        <b>الرياضة</b>
+        <p>الحركة المنتظمة مش لازم تكون شاقة؛ الاستمرار أهم من البداية القوية.</p>
+      </button>
+
+      <button class="choice" onclick="toggleHabit(this,'treatment')">
+        <div class="icon">💊</div>
+        <b>العلاج والمكملات</b>
+        <p>لو عندك علاج أو مكملات، نقدر ننظمها كجزء من روتينك بدون عشوائية.</p>
+      </button>
+    </div>
+    <button class="done" onclick="finish()">تمام، نبدأ من اختياري ❤️</button>
+  `;
+}
+
+function toggleHabit(el,key){
+  el.classList.toggle("active");
+  if(data.habits.includes(key)){
+    data.habits=data.habits.filter(x=>x!==key);
+  }else{
+    data.habits.push(key);
+  }
+}
+
+function finish(){
+  localStorage.setItem("sundoseUser",JSON.stringify(data));
+  window.location.href="../index.html";
+}
+
+render();
+</script>
+</body>
+</html>
                 class="sana-small"
             >
 
