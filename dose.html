@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>SunDose ☀️ — جرعتك اليومية</title>
+
+    <link rel="stylesheet" href="dose.css">
+</head>
+
+<body>
+
+    <main class="page">
+
+        <header class="topbar">
+            <div class="brand">SunDose ☀️</div>
+
+            <button class="menu-btn" type="button">
+                •••
+            </button>
+        </header>
+
+
+        <section class="hero">
+
+            <div class="sana-wrap">
+                <img
+                    src="assets/sana.png"
+                    alt="سنا"
+                    class="sana"
+                >
+            </div>
+
+            <div class="speech">
+
+                <h1 id="greeting">
+                    حلو! نبدأ من هنا 💛
+                </h1>
+
+                <p>
+                    مش هفرض عليك حاجة.
+                    اختار الحاجة اللي حابب تبدأ بيها،
+                    وأنا أشرحلك فائدتها الأول.
+                </p>
+
+            </div>
+
+        </section>
+
+
+        <section class="choices">
+
+            <button
+                class="choice-card"
+                data-type="sun"
+                type="button"
+            >
+
+                <div class="choice-head">
+                    <span>☀️</span>
+                    <h2>الشمس</h2>
+                </div>
+
+                <p>
+                    مثال: الخروج في وقت مناسب والتعرّض للشمس
+                    بشكل آمن. الشمس مصدر طبيعي لفيتامين D.
+                </p>
+
+            </button>
+
+
+            <button
+                class="choice-card"
+                data-type="water"
+                type="button"
+            >
+
+                <div class="choice-head">
+                    <span>💧</span>
+                    <h2>شرب المياه</h2>
+                </div>
+
+                <p>
+                    مثال: تنظيم شرب المياه خلال اليوم.
+                    الترطيب الجيد يساعد جسمك على أداء
+                    وظائفه بشكل طبيعي.
+                </p>
+
+            </button>
+
+
+            <button
+                class="choice-card"
+                data-type="activity"
+                type="button"
+            >
+
+                <div class="choice-head">
+                    <span>🏃</span>
+                    <h2>الرياضة والحركة</h2>
+                </div>
+
+                <p>
+                    مثال: المشي أو أي حركة مناسبة لمستواك.
+                    النشاط المنتظم مفيد للقلب واللياقة والمزاج.
+                </p>
+
+            </button>
+
+
+            <button
+                class="choice-card"
+                data-type="treatment"
+                type="button"
+            >
+
+                <div class="choice-head">
+                    <span>💊</span>
+                    <h2>العلاج أو المكملات</h2>
+                </div>
+
+                <p>
+                    لو عندك علاج موصوف أو مكمل ثابت،
+                    نقدر ننظم معلوماته.
+                    الدواء أو المكمل مش بيتاخد لمجرد اقتراح.
+                </p>
+
+            </button>
+
+
+            <button
+                class="choice-card"
+                data-type="sleep"
+                type="button"
+            >
+
+                <div class="choice-head">
+                    <span>🌙</span>
+                    <h2>النوم والراحة</h2>
+                </div>
+
+                <p>
+                    مثال: تثبيت وقت نوم مناسب.
+                    الراحة المنتظمة تساعدك تبدأ يومك
+                    بطاقة وتركيز أفضل.
+                </p>
+
+            </button>
+
+        </section>
+
+
+        <section
+            class="sana-panel"
+            id="sanaPanel"
+            hidden
+        >
+
+            <div
+                class="panel-icon"
+                id="panelIcon"
+            >
+                ☀️
+            </div>
+
+
+            <div class="panel-content">
+
+                <div
+                    class="panel-title"
+                    id="panelTitle"
+                ></div>
+
+                <p id="panelText"></p>
+
+                <div
+                    class="tip"
+                    id="panelTip"
+                ></div>
+
+            </div>
+
+
+            <button
+                class="start-dose"
+                id="startDose"
+                type="button"
+            >
+                نبدأ الجرعة 💛
+            </button>
+
+        </section>
+
+    </main>
+
+
+    <script src="dose.js"></script>
+
+</body>
+</html>
