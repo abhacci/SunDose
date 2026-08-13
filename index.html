@@ -1,39 +1,109 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
-
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SunDose ☀️</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800&display=swap" rel="stylesheet">
 
-    <title>SunDose ☀️</title>
-
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-
-    <link
-        href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700;800&display=swap"
-        rel="stylesheet"
-    >
-
-    <link rel="stylesheet" href="css/style.css">
+<style>
+*{box-sizing:border-box}
+body{
+  margin:0;
+  min-height:100vh;
+  font-family:"Cairo",sans-serif;
+  background:linear-gradient(180deg,#fffaf0,#fff3d0);
+  color:#40382f;
+}
+.app{
+  width:min(100%,520px);
+  min-height:100vh;
+  margin:auto;
+  padding:24px 20px 35px;
+  display:flex;
+  flex-direction:column;
+}
+header{
+  text-align:center;
+  color:#f2a51a;
+  font-size:21px;
+  font-weight:800;
+}
+.hero{
+  flex:1;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  text-align:center;
+  padding:30px 0;
+}
+.sun{
+  width:170px;
+  height:170px;
+  border-radius:50%;
+  display:grid;
+  place-items:center;
+  background:radial-gradient(circle,#ffe879 0%,#ffc52b 65%,#ffb21c 100%);
+  box-shadow:0 14px 35px rgba(242,165,26,.20);
+  font-size:92px;
+  margin-bottom:30px;
+}
+h1{
+  margin:0;
+  color:#f3a51b;
+  font-size:42px;
+  font-weight:800;
+}
+.subtitle{
+  margin:18px 0 34px;
+  color:#71675c;
+  font-size:18px;
+  line-height:1.9;
+}
+button{
+  width:100%;
+  border:0;
+  border-radius:20px;
+  padding:17px 20px;
+  background:linear-gradient(135deg,#ffc42d,#f6a415);
+  color:#fff;
+  font-family:inherit;
+  font-size:19px;
+  font-weight:800;
+  box-shadow:0 10px 25px rgba(246,164,21,.22);
+  cursor:pointer;
+}
+button:active{transform:scale(.99)}
+</style>
 </head>
 
 <body>
+<div class="app">
+  <header>☀️ SunDose</header>
 
-    <main class="sana-app">
+  <section class="hero">
+    <div class="sun">☀️</div>
 
-        <!-- الشريط العلوي -->
-        <header class="app-header">
+    <h1>SunDose</h1>
 
-            <div class="brand">
-                <span class="brand-sun">☀️</span>
-                <span>SunDose</span>
-            </div>
+    <div class="subtitle">
+      رفيقك اليومي للتواصل مع الشمس<br>
+      وبناء عادات صحية أفضل
+    </div>
 
-            <button class="more-button" aria-label="المزيد">
-                •••
-            </button>
+    <button id="startButton">نتعرف على بعض ☀️</button>
+  </section>
+</div>
 
+<script>
+document.getElementById("startButton").addEventListener("click", function(){
+  window.location.href = "pages/welcome.html";
+});
+</script>
+</body>
+</html>
         </header>
 
 
