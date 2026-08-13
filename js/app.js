@@ -1,40 +1,24 @@
 document.addEventListener("DOMContentLoaded", () => {
 
     const startButton = document.getElementById("startButton");
-    const sanaText = document.getElementById("sanaText");
 
     if (!startButton) return;
 
     startButton.addEventListener("click", () => {
 
-        sanaText.innerHTML = `
-            برافو عليك ❤️
-            <br>
-            خلينا نبدأ أول خطوة سوا.
+        startButton.disabled = true;
+
+        startButton.innerHTML = `
+            جاري الدخول... ☀️
         `;
 
-        startButton.textContent = "تم 🌞";
-
-        startButton.style.background = "#63b86b";
-
-        startButton.disabled = true;
+        setTimeout(() => {
+            window.location.href = "pages/home.html";
+        }, 500);
 
     });
 
-});
-                <h1>
-                    أنا سنا
-                    <span>🌻</span>
-                </h1>
-
-                <p>
-                    رفيقتك الصغيرة اللي هتساعدك تبني
-                    عادات صحية يومًا بعد يوم.
-                </p>
-            </div>
-
-            <!-- صورة سنا -->
-            <div class="sana-image">
+});            <div class="sana-image">
                 <img src="../assets/sana.png" alt="سنا">
             </div>
 
