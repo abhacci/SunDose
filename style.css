@@ -1,0 +1,37 @@
+*{box-sizing:border-box}
+html,body{margin:0;min-height:100%;font-family:Arial,"Cairo",sans-serif}
+body{background:#fff8e8;color:#3f382f}
+.screen{width:min(100%,520px);min-height:100vh;margin:auto;padding:22px 18px 32px}
+.brand{text-align:center;color:#eda51a;font-size:21px;font-weight:800;margin-bottom:22px}
+.home{display:flex;flex-direction:column}
+.home-content{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center}
+.sun-logo{width:155px;height:155px;border-radius:50%;display:grid;place-items:center;font-size:82px;background:#ffd34b;box-shadow:0 12px 30px #f3c04b55;margin-bottom:24px}
+h1{margin:0;color:#f0a018;font-size:40px}
+.home-content p{font-size:18px;line-height:1.9;color:#74695d;margin:16px 0 30px}
+.primary-btn{display:block;width:100%;border:0;border-radius:18px;padding:16px 18px;background:linear-gradient(135deg,#ffc331,#f5a415);color:#fff;text-decoration:none;text-align:center;font-size:18px;font-weight:800;box-shadow:0 9px 22px #f3a81735;cursor:pointer}
+.progress{height:6px;background:#eee3cd;border-radius:99px;overflow:hidden;margin:4px 0 24px}
+.progress span{display:block;height:100%;width:20%;background:#ffb522;border-radius:99px;transition:.3s}
+.chat-card,.habits-page{display:flex;flex-direction:column;align-items:center}
+.sana{display:block;width:155px;height:155px;object-fit:contain;margin:8px auto 14px;filter:drop-shadow(0 8px 12px #e9a91f22)}
+.sana.small{width:120px;height:120px}
+.sana-message{width:100%;background:#fff;border-radius:22px;padding:17px 16px;text-align:center;font-size:17px;line-height:1.9;box-shadow:0 7px 24px #604a2010}
+.sana-message small{display:block;color:#958979;font-size:13px;margin-top:5px}
+#form-area{width:100%;margin-top:16px}
+input,select{width:100%;border:1.5px solid #eadfc9;background:#fff;border-radius:16px;padding:14px;font:inherit;font-size:16px;outline:none}
+input:focus,select:focus{border-color:#f7b329}
+.actions{display:flex;gap:9px;margin-top:10px}
+.actions button{border:0;border-radius:16px;padding:13px 16px;font:inherit;font-weight:700;cursor:pointer}
+.next{flex:1;background:#ffb323;color:#fff}
+.back{width:85px;background:#fff;color:#877a69;border:1px solid #eadfc9!important}
+.gender-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:16px}
+.gender-btn{border:1.5px solid #eadfc9;background:#fff;border-radius:17px;padding:16px;font:inherit;font-weight:700;cursor:pointer}
+.gender-btn.active{border-color:#ffb323;background:#fff8df}
+.habits-page{padding-top:12px}
+.habit-grid{width:100%;display:grid;grid-template-columns:1fr 1fr;gap:11px;margin-top:17px}
+.habit{border:1.5px solid #eadfc9;background:#fff;border-radius:18px;padding:15px 10px;text-align:center;cursor:pointer}
+.habit.active{border-color:#ffb323;background:#fff8df}
+.habit .icon{font-size:28px}
+.habit b{display:block;margin-top:5px}
+.habit p{font-size:11px;line-height:1.6;color:#887b6b;margin:5px 0 0}
+#continue{margin-top:16px}
+@media(max-width:360px){.screen{padding-left:14px;padding-right:14px}.sana{width:130px;height:130px}.sun-logo{width:135px;height:135px;font-size:72px}}
