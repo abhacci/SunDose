@@ -3,209 +3,67 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
     <title>SunDose ☀️</title>
 
-    <meta
-        name="description"
-        content="SunDose - رفيقتك اليومية لبناء عادات صحية صغيرة تستمر معك"
-    >
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800&display=swap" rel="stylesheet">
 
-    <link rel="stylesheet" href="CSS/style.css">
+    <link rel="stylesheet" href="css/style.css">
 </head>
 
 <body>
 
-    <!-- التطبيق -->
-    <div class="app">
+    <main class="home">
 
-        <!-- الهيدر -->
-        <header class="top-bar">
-
-            <div>
-                <span class="small-text">صباح الخير 👋</span>
-                <h1>SunDose ☀️</h1>
+        <header class="header">
+            <div class="brand">
+                <span>☀️</span>
+                <strong>SunDose</strong>
             </div>
 
-            <button class="profile-button" aria-label="الملف الشخصي">
-                ♡
-            </button>
-
+            <button class="menu">•••</button>
         </header>
 
 
-        <!-- بطاقة الترحيب -->
-        <section class="welcome-card">
+        <section class="hero">
 
-            <div class="welcome-text">
-                <span class="hello">أهلاً بك</span>
+            <div class="sana-wrap">
+                <div class="sun-circle"></div>
 
-                <h2>
-                    أنا سنا ☀️
-                </h2>
+                <img
+                    src="assets/sana.png"
+                    alt="سنا"
+                    class="sana"
+                >
+            </div>
 
-                <p>
-                    رفيقتك الصغيرة التي ستساعدك
-                    تبني عادات صحية يومًا بعد يوم.
+            <div class="speech">
+                <p id="sanaText">
+                    صباح الخير ❤️
+                    <br>
+                    جاهز نبدأ يومنا؟
                 </p>
             </div>
 
-        </section>
-
-
-        <!-- شخصية سنا -->
-        <section class="sana-section">
-
-            <div class="sun-background"></div>
-
-            <img
-                src="assets/sana.png"
-                alt="سنا - رفيقتك الصحية"
-                class="sana"
-            >
+            <button id="startButton" class="start-button">
+                نبدأ اليوم ☀️
+            </button>
 
         </section>
 
 
-        <!-- رسالة سنا -->
-        <section class="sana-message">
+        <section class="mini-stats">
 
-            <div class="message-icon">
-                ☀️
+            <div>
+                <strong id="streak">0</strong>
+                <span>يوم متتالي</span>
             </div>
 
             <div>
-                <strong>سنا تقول:</strong>
-
-                <p id="sanaMessage">
-                    "مستعدة نبدأ يوم جديد مع بعض؟ 🌞"
-                </p>
-            </div>
-
-        </section>
-
-
-        <!-- التقدم اليومي -->
-        <section class="progress-card">
-
-            <div class="card-title">
-
-                <div>
-                    <span>جرعة اليوم</span>
-                    <h3>تقدمك اليومي</h3>
-                </div>
-
-                <div class="progress-number">
-                    <span id="progressNumber">0%</span>
-                </div>
-
-            </div>
-
-
-            <div class="progress-bar">
-
-                <div
-                    class="progress-fill"
-                    id="progressFill"
-                ></div>
-
-            </div>
-
-
-            <p class="progress-text" id="progressText">
-                لسه البداية... وأنا معاكي ☀️
-            </p>
-
-        </section>
-
-
-        <!-- زر الإنجاز -->
-        <button
-            class="complete-button"
-            id="completeButton"
-        >
-            <span>☀️</span>
-            أنجزت جرعتي اليوم
-        </button>
-
-
-        <!-- الإحصائيات -->
-        <section class="stats">
-
-            <div class="stat-card">
-
-                <span class="stat-icon">🔥</span>
-
-                <strong id="streak">0</strong>
-
-                <small>
-                    يوم متتالي
-                </small>
-
-            </div>
-
-
-            <div class="stat-card">
-
-                <span class="stat-icon">🏆</span>
-
-                <strong id="totalDays">0</strong>
-
-                <small>
-                    يوم إنجاز
-                </small>
-
-            </div>
-
-
-            <div class="stat-card">
-
-                <span class="stat-icon">⭐</span>
-
                 <strong id="points">0</strong>
-
-                <small>
-                    نقطة
-                </small>
-
+                <span>نقطة</span>
             </div>
-
-        </section>
-
-
-        <!-- القائمة السفلية -->
-        <nav class="bottom-nav">
-
-            <button class="nav-item active">
-                <span>☀️</span>
-                <small>الرئيسية</small>
-            </button>
-
-            <button class="nav-item">
-                <span>📅</span>
-                <small>السجل</small>
-            </button>
-
-            <button class="nav-item">
-                <span>📚</span>
-                <small>تعلم</small>
-            </button>
-
-            <button class="nav-item">
-                <span>⚙️</span>
-                <small>الإعدادات</small>
-            </button>
-
-        </nav>
-
-    </div>
-
-
-    <script src="js/app.js"></script>
-
-</body>
-</html>                <span>☀️</span>
-            </button>
 
         </section>
 
@@ -214,5 +72,4 @@
     <script src="js/app.js"></script>
 
 </body>
-
 </html>
