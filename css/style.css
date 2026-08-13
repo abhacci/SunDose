@@ -1,40 +1,363 @@
+/* =========================================
+   SunDose ☀️
+   Main Style
+   ========================================= */
+
 * {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
 }
 
-html,
+html {
+    width: 100%;
+    min-height: 100%;
+}
+
 body {
-  width: 100%;
-  min-height: 100%;
+    width: 100%;
+    min-height: 100vh;
+    font-family: "Cairo", Arial, sans-serif;
+    direction: rtl;
+    background: linear-gradient(
+        180deg,
+        #dff8ff 0%,
+        #eefcff 48%,
+        #fff9df 100%
+    );
+    color: #263238;
+    overflow-x: hidden;
 }
 
-body {
-  font-family: "Cairo", Arial, sans-serif;
-  direction: rtl;
-  background: linear-gradient(180deg, #b9eff5 0%, #dff8f4 55%, #f5f8df 100%);
-  color: #263238;
-  overflow-x: hidden;
-}
+/* =========================================
+   شاشة البداية
+   ========================================= */
 
-/* الصفحة الرئيسية */
 .splash {
-  min-height: 100vh;
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  padding: 30px 20px;
-  position: relative;
-  overflow: hidden;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 24px;
+    position: relative;
+    overflow: hidden;
 }
 
-/* تأثير الشمس في الخلفية */
 .sun-glow {
-  position: absolute;
-  width: 330px;
+    position: absolute;
+    width: 320px;
+    height: 320px;
+    border-radius: 50%;
+    background: rgba(255, 207, 58, 0.22);
+    filter: blur(45px);
+    top: 8%;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.welcome {
+    width: 100%;
+    max-width: 430px;
+    text-align: center;
+    position: relative;
+    z-index: 2;
+}
+
+.sana-placeholder {
+    width: 220px;
+    height: 270px;
+    margin: 0 auto 15px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-image: url("../assets/sana.png");
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: contain;
+    font-size: 0;
+}
+
+.welcome h1 {
+    color: #f59b18;
+    font-size: 40px;
+    font-weight: 800;
+    margin-bottom: 10px;
+}
+
+.welcome p {
+    color: #53666d;
+    font-size: 18px;
+    line-height: 1.9;
+    margin-bottom: 28px;
+}
+
+.start-btn {
+    width: 100%;
+    max-width: 360px;
+    height: 68px;
+    border: 0;
+    border-radius: 25px;
+    background: linear-gradient(135deg, #ffc928, #ff9f1c);
+    color: white;
+    font-family: inherit;
+    font-size: 21px;
+    font-weight: 800;
+    box-shadow: 0 12px 28px rgba(255, 166, 30, 0.28);
+}
+
+/* =========================================
+   شاشة الترحيب الرئيسية
+   ========================================= */
+
+.welcome-page {
+    width: 100%;
+    max-width: 520px;
+    min-height: 100vh;
+    margin: 0 auto;
+    padding: 18px 18px 105px;
+}
+
+/* الهيدر */
+
+.top-bar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 20px;
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 23px;
+    font-weight: 800;
+    color: #f39a16;
+}
+
+.profile-button {
+    width: 42px;
+    height: 42px;
+    border: 0;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.8);
+    font-size: 19px;
+}
+
+/* كارت الترحيب */
+
+.welcome-card {
+    background: rgba(255, 255, 255, 0.72);
+    border: 1px solid rgba(255, 255, 255, 0.9);
+    border-radius: 30px;
+    padding: 22px 18px 20px;
+    box-shadow: 0 12px 35px rgba(65, 120, 130, 0.10);
+    text-align: center;
+}
+
+/* النص */
+
+.small-greeting {
+    display: block;
+    color: #718188;
+    font-size: 14px;
+    margin-bottom: 4px;
+}
+
+.welcome-text h1 {
+    font-size: 30px;
+    color: #f39a16;
+    font-weight: 800;
+    margin-bottom: 7px;
+}
+
+.welcome-text p {
+    color: #65757b;
+    font-size: 15px;
+    line-height: 1.8;
+}
+
+/* =========================================
+   صورة سنا
+   ========================================= */
+
+.sana-image {
+    width: 100%;
+    height: 310px;
+    margin: 5px auto 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.sana-image img {
+    display: block;
+    width: auto;
+    height: 100%;
+    max-width: 100%;
+    object-fit: contain;
+}
+
+/* =========================================
+   رسالة سنا
+   ========================================= */
+
+.sana-message {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    text-align: right;
+    background: #fff8dc;
+    border-radius: 20px;
+    padding: 14px;
+    margin-top: 5px;
+}
+
+.message-icon {
+    font-size: 23px;
+    line-height: 1;
+}
+
+.sana-message strong {
+    display: block;
+    color: #e99012;
+    font-size: 15px;
+    margin-bottom: 4px;
+}
+
+.sana-message p {
+    color: #58676c;
+    font-size: 14px;
+    line-height: 1.7;
+}
+
+/* =========================================
+   جرعة اليوم
+   ========================================= */
+
+.daily-dose {
+    margin-top: 18px;
+    background: rgba(255, 255, 255, 0.75);
+    border-radius: 24px;
+    padding: 18px;
+}
+
+.section-title {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.section-title span {
+    color: #7a898e;
+    font-size: 13px;
+}
+
+.section-title h2 {
+    font-size: 20px;
+    color: #34464c;
+    margin-top: 2px;
+}
+
+.progress-number {
+    font-size: 20px !important;
+    font-weight: 800;
+    color: #f39a16 !important;
+}
+
+.progress-bar {
+    width: 100%;
+    height: 11px;
+    background: #e8eeee;
+    border-radius: 20px;
+    overflow: hidden;
+    margin-top: 15px;
+}
+
+.progress-fill {
+    width: 0%;
+    height: 100%;
+    border-radius: inherit;
+    background: linear-gradient(90deg, #ffd447, #ff9e1b);
+}
+
+.progress-text {
+    color: #718087;
+    font-size: 13px;
+    margin-top: 10px;
+}
+
+/* =========================================
+   زر الجرعة
+   ========================================= */
+
+.dose-button {
+    width: 100%;
+    height: 58px;
+    margin-top: 14px;
+    border: 0;
+    border-radius: 19px;
+    background: linear-gradient(135deg, #ffc82c, #ffa21d);
+    color: white;
+    font-family: inherit;
+    font-size: 16px;
+    font-weight: 800;
+    box-shadow: 0 9px 22px rgba(255, 166, 30, 0.20);
+}
+
+/* =========================================
+   الإحصائيات
+   ========================================= */
+
+.stats {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px;
+    margin-top: 14px;
+}
+
+.stat {
+    background: rgba(255, 255, 255, 0.78);
+    border-radius: 18px;
+    padding: 12px 5px;
+    text-align: center;
+}
+
+.stat span {
+    display: block;
+    font-size: 19px;
+    margin-bottom: 3px;
+}
+
+.stat strong {
+    display: block;
+    font-size: 18px;
+    color: #35474d;
+}
+
+.stat small {
+    display: block;
+    color: #7c898d;
+    font-size: 10px;
+}
+
+/* =========================================
+   شريط التنقل السفلي
+   ========================================= */
+
+.bottom-nav {
+    position: fixed;
+    bottom: 12px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: calc(100% - 28px);
+    max-width: 490px;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 4px;
+    padding: 8px;
+    background: rgba(255, 255, 255, 0.94);
+    border:   width: 330px;
   height: 330px;
   border-radius: 50%;
   background: rgba(255, 221, 80, 0.25);
