@@ -88,7 +88,7 @@ let currentStep = 0;
 
 
 /* =========================================
-   دالة إظهار صفحة
+   إظهار صفحة
 ========================================= */
 
 function showPage(page) {
@@ -140,8 +140,6 @@ function renderStep() {
     answerArea.innerHTML = "";
 
 
-    /* اختيار النوع */
-
     if (step.type === "gender") {
 
         answerArea.innerHTML = `
@@ -190,9 +188,7 @@ function renderStep() {
                     document
                         .querySelectorAll(".gender-btn")
                         .forEach(btn => {
-
                             btn.classList.remove("active");
-
                         });
 
 
@@ -206,8 +202,6 @@ function renderStep() {
         return;
     }
 
-
-    /* باقي الأسئلة */
 
     answerArea.innerHTML = `
 
@@ -270,8 +264,6 @@ nextButton.addEventListener("click", function () {
     const step = steps[currentStep];
 
 
-    /* سؤال النوع */
-
     if (step.type === "gender") {
 
         if (!user.gender) {
@@ -285,18 +277,13 @@ nextButton.addEventListener("click", function () {
 
     }
 
-
-    /* الأسئلة النصية والرقمية */
-
     else {
 
         const input =
             document.getElementById("answerInput");
 
 
-        if (!input) {
-            return;
-        }
+        if (!input) return;
 
 
         const value =
@@ -413,11 +400,6 @@ function showHabits() {
         `).join("");
 
 
-    /* =====================================
-       أهم جزء:
-       الضغط على العادة
-    ===================================== */
-
     document
         .querySelectorAll(".habit")
         .forEach(habitElement => {
@@ -430,21 +412,15 @@ function showHabits() {
                         this.dataset.habit;
 
 
-                    /* تحديد الاختيار */
-
                     document
                         .querySelectorAll(".habit")
                         .forEach(item => {
-
                             item.classList.remove("active");
-
                         });
 
 
                     this.classList.add("active");
 
-
-                    /* الشمس */
 
                     if (selectedHabit === "sun") {
 
@@ -452,37 +428,26 @@ function showHabits() {
 
                     }
 
-
-                    /* المياه */
-
                     else if (selectedHabit === "water") {
 
                         alert(
-                            "💧 قسم شرب المياه لسه هنبدأ نبنيه معاك خطوة بخطوة."
+                            "💧 قسم شرب المياه هنبدأ نبنيه بعد ما نخلص جرعة الشمس."
                         );
 
                     }
-
-
-                    /* الرياضة */
 
                     else if (selectedHabit === "exercise") {
 
                         alert(
-                            "🏃 قسم الرياضة والحركة لسه هنبدأ نبنيه معاك خطوة بخطوة."
+                            "🏃 قسم الرياضة هنبدأ نبنيه بعد جرعة الشمس."
                         );
 
                     }
 
-
-                    /* المكملات */
-
-                    else if (
-                        selectedHabit === "supplements"
-                    ) {
+                    else if (selectedHabit === "supplements") {
 
                         alert(
-                            "💊 قسم العلاج والمكملات لسه هنبدأ نبنيه بشكل آمن ومنظم."
+                            "💊 قسم العلاج والمكملات هنبدأ نبنيه بعد جرعة الشمس."
                         );
 
                     }
@@ -508,8 +473,612 @@ function openSunDose() {
         user.name || "يا صديقي";
 
 
+    /*
+       هنا بنبني شاشة جرعة الشمس
+       بالكامل من JavaScript
+    */
+
     sunMessage.textContent =
-        `تمام يا ${name} ☀️ اختيار ممتاز. هنا هنبدأ نبني جرعة الشمس الخاصة بيك خطوة بخطوة، وهنراعي بياناتك والوقت والمكان بدل ما نديك رقم عشوائي.`;
+        `تمام يا ${name} ☀️ قبل ما نحدد أي جرعة، محتاج أعرف حاجة بسيطة عن بشرتك. ده يساعدنا نعمل النظام بشكل أدق بدل رقم عشوائي.`;
+
+
+    const doseCard =
+        sunDose.querySelector(".dose-card");
+
+
+    if (!doseCard) return;
+
+
+    doseCard.innerHTML = `
+
+        <div
+            style="
+                text-align:center;
+                padding:8px 2px 5px;
+            "
+        >
+
+            <div
+                style="
+                    font-size:58px;
+                    margin-bottom:8px;
+                "
+            >
+                ☀️
+            </div>
+
+
+            <h2
+                style="
+                    margin:0 0 12px;
+                    color:#e6a119;
+                    font-size:25px;
+                "
+            >
+                نبدأ جرعة الشمس
+            </h2>
+
+
+            <p
+                style="
+                    margin:0 0 20px;
+                    color:#756b5e;
+                    line-height:1.9;
+                    font-size:16px;
+                "
+            >
+                أول خطوة إننا نحدد لون بشرتك تقريبًا.
+                اختار الأقرب ليك 👇
+            </p>
+
+
+            <div
+                id="skinChoices"
+                style="
+                    display:grid;
+                    grid-template-columns:1fr 1fr;
+                    gap:10px;
+                "
+            >
+
+                <button
+                    type="button"
+                    data-skin="very-light"
+                    style="
+                        border:1.5px solid #eadfc9;
+                        background:#fff;
+                        border-radius:16px;
+                        padding:15px 8px;
+                        font-size:15px;
+                        cursor:pointer;
+                    "
+                >
+                    🤍<br>
+                    فاتحة جدًا
+                </button>
+
+
+                <button
+                    type="button"
+                    data-skin="light"
+                    style="
+                        border:1.5px solid #eadfc9;
+                        background:#fff;
+                        border-radius:16px;
+                        padding:15px 8px;
+                        font-size:15px;
+                        cursor:pointer;
+                    "
+                >
+                    🧡<br>
+                    فاتحة
+                </button>
+
+
+                <button
+                    type="button"
+                    data-skin="medium"
+                    style="
+                        border:1.5px solid #eadfc9;
+                        background:#fff;
+                        border-radius:16px;
+                        padding:15px 8px;
+                        font-size:15px;
+                        cursor:pointer;
+                    "
+                >
+                    🤎<br>
+                    متوسطة
+                </button>
+
+
+                <button
+                    type="button"
+                    data-skin="dark"
+                    style="
+                        border:1.5px solid #eadfc9;
+                        background:#fff;
+                        border-radius:16px;
+                        padding:15px 8px;
+                        font-size:15px;
+                        cursor:pointer;
+                    "
+                >
+                    🟤<br>
+                    داكنة
+                </button>
+
+            </div>
+
+
+            <button
+                id="skinNext"
+                type="button"
+                disabled
+                style="
+                    width:100%;
+                    margin-top:16px;
+                    border:0;
+                    border-radius:16px;
+                    padding:15px;
+                    background:#ddd;
+                    color:#fff;
+                    font-size:17px;
+                    font-weight:800;
+                    cursor:not-allowed;
+                "
+            >
+                نكمل ☀️
+            </button>
+
+        </div>
+
+    `;
+
+
+    const skinButtons =
+        document.querySelectorAll("[data-skin]");
+
+    const skinNext =
+        document.getElementById("skinNext");
+
+
+    let selectedSkin = "";
+
+
+    skinButtons.forEach(button => {
+
+        button.addEventListener("click", function () {
+
+            selectedSkin =
+                this.dataset.skin;
+
+
+            skinButtons.forEach(btn => {
+
+                btn.style.borderColor =
+                    "#eadfc9";
+
+                btn.style.background =
+                    "#fff";
+
+            });
+
+
+            this.style.borderColor =
+                "#ffb323";
+
+            this.style.background =
+                "#fff8df";
+
+
+            skinNext.disabled = false;
+
+            skinNext.style.background =
+                "linear-gradient(135deg,#ffc331,#f5a415)";
+
+            skinNext.style.cursor =
+                "pointer";
+
+        });
+
+    });
+
+
+    skinNext.addEventListener("click", function () {
+
+        if (!selectedSkin) return;
+
+
+        openSunTimeStep(selectedSkin);
+
+    });
+
+}
+
+
+/* =========================================
+   اختيار وقت التعرض
+========================================= */
+
+function openSunTimeStep(skin) {
+
+    const name =
+        user.name || "يا صديقي";
+
+
+    sunMessage.textContent =
+        `ممتاز يا ${name} 💛 عرفنا لون بشرتك. الخطوة الجاية مهمة: إمتى عادةً تقدر تتعرض للشمس؟`;
+
+
+    const doseCard =
+        sunDose.querySelector(".dose-card");
+
+
+    doseCard.innerHTML = `
+
+        <div
+            style="
+                text-align:center;
+                padding:8px 2px 5px;
+            "
+        >
+
+            <div
+                style="
+                    font-size:55px;
+                    margin-bottom:8px;
+                "
+            >
+                🕐
+            </div>
+
+
+            <h2
+                style="
+                    margin:0 0 12px;
+                    color:#e6a119;
+                    font-size:24px;
+                "
+            >
+                اختار الوقت الأقرب ليك
+            </h2>
+
+
+            <p
+                style="
+                    margin:0 0 18px;
+                    color:#756b5e;
+                    line-height:1.9;
+                    font-size:15px;
+                "
+            >
+                مش هنحدد مدة التعرض دلوقتي.
+                الأول محتاجين نعرف الوقت، وبعدها نقدر
+                نراعي شدة الشمس بشكل أفضل.
+            </p>
+
+
+            <div
+                id="timeChoices"
+                style="
+                    display:grid;
+                    gap:10px;
+                "
+            >
+
+                <button
+                    type="button"
+                    data-time="morning"
+                    style="
+                        border:1.5px solid #eadfc9;
+                        background:#fff;
+                        border-radius:16px;
+                        padding:16px;
+                        font-size:16px;
+                        font-weight:700;
+                        cursor:pointer;
+                    "
+                >
+                    🌅 الصبح
+                </button>
+
+
+                <button
+                    type="button"
+                    data-time="midday"
+                    style="
+                        border:1.5px solid #eadfc9;
+                        background:#fff;
+                        border-radius:16px;
+                        padding:16px;
+                        font-size:16px;
+                        font-weight:700;
+                        cursor:pointer;
+                    "
+                >
+                    ☀️ منتصف اليوم
+                </button>
+
+
+                <button
+                    type="button"
+                    data-time="afternoon"
+                    style="
+                        border:1.5px solid #eadfc9;
+                        background:#fff;
+                        border-radius:16px;
+                        padding:16px;
+                        font-size:16px;
+                        font-weight:700;
+                        cursor:pointer;
+                    "
+                >
+                    🌤️ بعد الظهر
+                </button>
+
+            </div>
+
+
+            <button
+                id="timeNext"
+                type="button"
+                disabled
+                style="
+                    width:100%;
+                    margin-top:16px;
+                    border:0;
+                    border-radius:16px;
+                    padding:15px;
+                    background:#ddd;
+                    color:#fff;
+                    font-size:17px;
+                    font-weight:800;
+                    cursor:not-allowed;
+                "
+            >
+                نكمل ☀️
+            </button>
+
+        </div>
+
+    `;
+
+
+    const timeButtons =
+        document.querySelectorAll("[data-time]");
+
+    const timeNext =
+        document.getElementById("timeNext");
+
+
+    let selectedTime = "";
+
+
+    timeButtons.forEach(button => {
+
+        button.addEventListener("click", function () {
+
+            selectedTime =
+                this.dataset.time;
+
+
+            timeButtons.forEach(btn => {
+
+                btn.style.borderColor =
+                    "#eadfc9";
+
+                btn.style.background =
+                    "#fff";
+
+            });
+
+
+            this.style.borderColor =
+                "#ffb323";
+
+            this.style.background =
+                "#fff8df";
+
+
+            timeNext.disabled = false;
+
+            timeNext.style.background =
+                "linear-gradient(135deg,#ffc331,#f5a415)";
+
+            timeNext.style.cursor =
+                "pointer";
+
+        });
+
+    });
+
+
+    timeNext.addEventListener("click", function () {
+
+        if (!selectedTime) return;
+
+
+        showSunSummary(
+            skin,
+            selectedTime
+        );
+
+    });
+
+}
+
+
+/* =========================================
+   ملخص جرعة الشمس
+========================================= */
+
+function showSunSummary(skin, time) {
+
+    const name =
+        user.name || "يا صديقي";
+
+
+    let skinText = "";
+
+    if (skin === "very-light") {
+        skinText = "فاتحة جدًا";
+    }
+
+    else if (skin === "light") {
+        skinText = "فاتحة";
+    }
+
+    else if (skin === "medium") {
+        skinText = "متوسطة";
+    }
+
+    else {
+        skinText = "داكنة";
+    }
+
+
+    let timeText = "";
+
+    if (time === "morning") {
+        timeText = "الصبح";
+    }
+
+    else if (time === "midday") {
+        timeText = "منتصف اليوم";
+    }
+
+    else {
+        timeText = "بعد الظهر";
+    }
+
+
+    const doseCard =
+        sunDose.querySelector(".dose-card");
+
+
+    sunMessage.textContent =
+        `تمام يا ${name} ☀️ كده عندي أول معلومات تساعدني أبني جرعتك بشكل أفضل.`;
+
+
+    doseCard.innerHTML = `
+
+        <div
+            style="
+                text-align:center;
+                padding:8px 2px;
+            "
+        >
+
+            <div
+                style="
+                    font-size:58px;
+                    margin-bottom:8px;
+                "
+            >
+                🌞
+            </div>
+
+
+            <h2
+                style="
+                    margin:0 0 15px;
+                    color:#e6a119;
+                    font-size:24px;
+                "
+            >
+                بيانات جرعتك
+            </h2>
+
+
+            <div
+                style="
+                    background:#fffaf0;
+                    border:1px solid #eadfc9;
+                    border-radius:17px;
+                    padding:15px;
+                    text-align:right;
+                    line-height:2;
+                    font-size:16px;
+                "
+            >
+
+                <div>
+                    👤 الاسم:
+                    <strong>${name}</strong>
+                </div>
+
+                <div>
+                    🎨 لون البشرة:
+                    <strong>${skinText}</strong>
+                </div>
+
+                <div>
+                    🕐 الوقت المفضل:
+                    <strong>${timeText}</strong>
+                </div>
+
+                <div>
+                    📍 البلد:
+                    <strong>${user.country || "غير محددة"}</strong>
+                </div>
+
+            </div>
+
+
+            <div
+                style="
+                    margin-top:16px;
+                    background:#fff4cf;
+                    border-radius:17px;
+                    padding:15px;
+                    color:#725b24;
+                    line-height:1.8;
+                    font-size:14px;
+                "
+            >
+                💛 لسه مش هنقولك رقم دقائق ثابت.
+                SunDose هيراعي شدة الشمس وبياناتك
+                قبل ما يقترح أي مدة تعرض.
+            </div>
+
+
+            <button
+                id="sunDone"
+                type="button"
+                style="
+                    width:100%;
+                    margin-top:16px;
+                    border:0;
+                    border-radius:16px;
+                    padding:15px;
+                    background:linear-gradient(135deg,#ffc331,#f5a415);
+                    color:#fff;
+                    font-size:17px;
+                    font-weight:800;
+                    cursor:pointer;
+                "
+            >
+                حفظ جرعتي ☀️
+            </button>
+
+        </div>
+
+    `;
+
+
+    document
+        .getElementById("sunDone")
+        .addEventListener("click", function () {
+
+            this.textContent =
+                "✅ تم حفظ الخطوة";
+
+            this.disabled = true;
+
+            this.style.opacity = "0.7";
+
+        });
 
 }
 
@@ -529,29 +1098,23 @@ backToHabits.addEventListener(
 
 
 /* =========================================
-   حماية لو عنصر ناقص
+   حماية من العناصر الناقصة
 ========================================= */
 
 if (!startButton) {
-
     console.error(
         "SunDose: startButton غير موجود في index.html"
     );
-
 }
 
 if (!nextButton) {
-
     console.error(
         "SunDose: nextButton غير موجود في index.html"
     );
-
 }
 
 if (!habitList) {
-
     console.error(
         "SunDose: habitList غير موجود في index.html"
     );
-
 }
