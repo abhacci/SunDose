@@ -1,3 +1,8 @@
+/* =========================================
+   SunDose ☀️
+   التطبيق الرئيسي
+========================================= */
+
 const user = {
     name: "",
     gender: "",
@@ -6,45 +11,10 @@ const user = {
     country: ""
 };
 
-const steps = [
-    {
-        key: "name",
-        question: "قبل ما نبدأ... تحب أناديك بإيه؟ 😊",
-        type: "text",
-        label: "اسمك",
-        placeholder: "اكتب اسمك هنا"
-    },
-    {
-        key: "gender",
-        question: "جميل! أكلّمك بصيغة إيه عشان كلامنا يبقى مريح ليك؟ 💛",
-        type: "gender"
-    },
-    {
-        key: "weight",
-        question: "طيب قولي وزنك كام تقريبًا؟ 😄",
-        type: "number",
-        label: "الوزن",
-        placeholder: "مثال: 80",
-        unit: "كجم"
-    },
-    {
-        key: "height",
-        question: "وطولك كام؟ 🌱",
-        type: "number",
-        label: "الطول",
-        placeholder: "مثال: 175",
-        unit: "سم"
-    },
-    {
-        key: "country",
-        question: "وآخر حاجة... إنت من أنهي بلد؟ 🌍",
-        type: "text",
-        label: "البلد",
-        placeholder: "مثال: مصر"
-    }
-];
 
-let currentStep = 0;
+/* =========================================
+   عناصر الصفحات
+========================================= */
 
 const home = document.getElementById("home");
 const welcome = document.getElementById("welcome");
@@ -65,14 +35,70 @@ const sunMessage = document.getElementById("sunMessage");
 const backToHabits = document.getElementById("backToHabits");
 
 
-function showScreen(screen) {
+/* =========================================
+   خطوات التعارف
+========================================= */
+
+const steps = [
+
+    {
+        key: "name",
+        question: "قبل ما نبدأ... تحب أناديك بإيه؟ 😊",
+        type: "text",
+        label: "اسمك",
+        placeholder: "اكتب اسمك هنا"
+    },
+
+    {
+        key: "gender",
+        question: "جميل! طيب أكلّمك بصيغة إيه عشان كلامنا يبقى مريح ولطيف ليك؟ 💛",
+        type: "gender"
+    },
+
+    {
+        key: "weight",
+        question: "طيب قولي وزنك كام تقريبًا؟ 😄 الرقم ده بس يساعدني أفهم احتياجك أكتر.",
+        type: "number",
+        label: "الوزن",
+        placeholder: "مثال: 80",
+        unit: "كجم"
+    },
+
+    {
+        key: "height",
+        question: "وطولك كام؟ 🌱 عشان أقدر أكون صورة أوضح عن جسمك ونشاطك.",
+        type: "number",
+        label: "الطول",
+        placeholder: "مثال: 175",
+        unit: "سم"
+    },
+
+    {
+        key: "country",
+        question: "وآخر حاجة في التعارف... إنت من أنهي بلد؟ 🌍",
+        type: "text",
+        label: "البلد",
+        placeholder: "مثال: مصر"
+    }
+
+];
+
+
+let currentStep = 0;
+
+
+/* =========================================
+   دالة إظهار صفحة
+========================================= */
+
+function showPage(page) {
 
     home.classList.add("hidden");
     welcome.classList.add("hidden");
     habits.classList.add("hidden");
     sunDose.classList.add("hidden");
 
-    screen.classList.remove("hidden");
+    page.classList.remove("hidden");
 
     window.scrollTo({
         top: 0,
@@ -81,19 +107,24 @@ function showScreen(screen) {
 }
 
 
-/* البداية */
+/* =========================================
+   بداية التطبيق
+========================================= */
 
 startButton.addEventListener("click", function () {
 
     currentStep = 0;
 
-    showScreen(welcome);
+    showPage(welcome);
 
     renderStep();
+
 });
 
 
-/* رسم السؤال */
+/* =========================================
+   رسم سؤال التعارف
+========================================= */
 
 function renderStep() {
 
@@ -108,60 +139,83 @@ function renderStep() {
 
     answerArea.innerHTML = "";
 
+
+    /* اختيار النوع */
+
     if (step.type === "gender") {
 
         answerArea.innerHTML = `
+
             <div class="gender-grid">
 
                 <button
-                    class="gender-btn"
                     type="button"
+                    class="gender-btn"
                     data-gender="male"
                 >
                     👨 ذكر
                 </button>
 
                 <button
-                    class="gender-btn"
                     type="button"
+                    class="gender-btn"
                     data-gender="female"
                 >
                     👩 أنثى
                 </button>
 
             </div>
+
         `;
+
 
         document
             .querySelectorAll(".gender-btn")
             .forEach(button => {
 
-                if (button.dataset.gender === user.gender) {
+                if (
+                    user.gender ===
+                    button.dataset.gender
+                ) {
                     button.classList.add("active");
                 }
 
+
                 button.addEventListener("click", function () {
 
-                    user.gender = this.dataset.gender;
+                    user.gender =
+                        this.dataset.gender;
+
 
                     document
                         .querySelectorAll(".gender-btn")
-                        .forEach(btn =>
-                            btn.classList.remove("active")
-                        );
+                        .forEach(btn => {
+
+                            btn.classList.remove("active");
+
+                        });
+
 
                     this.classList.add("active");
+
                 });
 
             });
 
+
         return;
     }
 
+
+    /* باقي الأسئلة */
+
     answerArea.innerHTML = `
+
         <div class="field">
 
-            <label>${step.label}</label>
+            <label>
+                ${step.label}
+            </label>
 
             <input
                 id="answerInput"
@@ -172,159 +226,332 @@ function renderStep() {
 
             ${
                 step.unit
-                    ? `<div class="unit">${step.unit}</div>`
-                    : ""
+                ?
+                `<div class="unit">${step.unit}</div>`
+                :
+                ""
             }
 
         </div>
+
     `;
+
+
+    const input =
+        document.getElementById("answerInput");
+
+
+    if (input) {
+
+        input.focus();
+
+
+        input.addEventListener("keydown", function (event) {
+
+            if (event.key === "Enter") {
+
+                nextButton.click();
+
+            }
+
+        });
+
+    }
+
 }
 
 
-/* التالي */
+/* =========================================
+   زر التالي
+========================================= */
 
 nextButton.addEventListener("click", function () {
 
     const step = steps[currentStep];
 
+
+    /* سؤال النوع */
+
     if (step.type === "gender") {
 
         if (!user.gender) {
 
-            alert("اختار الأول يا حبيبي 💛");
+            alert(
+                "اختار الأول الصيغة اللي تحب سنا تكلمك بيها 💛"
+            );
 
             return;
         }
 
-    } else {
+    }
 
-        const input = document.getElementById("answerInput");
 
-        const value = input.value.trim();
+    /* الأسئلة النصية والرقمية */
+
+    else {
+
+        const input =
+            document.getElementById("answerInput");
+
+
+        if (!input) {
+            return;
+        }
+
+
+        const value =
+            input.value.trim();
+
 
         if (!value) {
 
-            alert("اكتب الإجابة الأول 😊");
+            alert(
+                "اكتبلي الإجابة الأول عشان نكمل 😊"
+            );
 
             input.focus();
 
             return;
         }
 
+
         user[step.key] = value;
+
     }
 
+
     currentStep++;
+
 
     if (currentStep < steps.length) {
 
         renderStep();
 
-    } else {
+    }
+
+    else {
 
         showHabits();
+
     }
+
 });
 
 
-/* العادات */
+/* =========================================
+   صفحة العادات
+========================================= */
 
 function showHabits() {
 
-    showScreen(habits);
+    showPage(habits);
 
-    const name = user.name || "يا صديقي";
+
+    const name =
+        user.name || "يا صديقي";
+
 
     habitMessage.textContent =
-        `كده اتعرفنا يا ${name} 💛 دلوقتي اختار الحاجة اللي حابب تبدأ بيها، وأنا أمشي معاك واحدة واحدة.`;
+        `كده اتعرفنا يا ${name} 💛 دلوقتي نقدر نبدأ الجزء المهم. اختار الحاجة اللي حابب تبدأ بيها وأنا أمشي معاك فيها واحدة واحدة.`;
 
-    const habitsData = [
+
+    const habitData = [
 
         {
-            type: "sun",
+            id: "sun",
             icon: "☀️",
-            title: "الشمس",
-            text: "نتعلم إزاي نخلي التعرض للشمس عادة مناسبة وآمنة."
+            title: "جرعة الشمس",
+            text: "نبدأ بخطوات بسيطة لفهم جرعة الشمس المناسبة ليك."
         },
 
         {
-            type: "water",
+            id: "water",
             icon: "💧",
             title: "شرب المياه",
-            text: "تنظيم شرب المياه خلال اليوم بطريقة بسيطة."
+            text: "ننظم شرب المياه خلال اليوم بطريقة بسيطة."
         },
 
         {
-            type: "activity",
+            id: "exercise",
             icon: "🏃",
             title: "الرياضة والحركة",
-            text: "حركة ونشاط مناسبين لمستواك وحياتك اليومية."
+            text: "نختار حركة مناسبة لمستواك ونبني عليها تدريجيًا."
         },
 
         {
-            type: "treatment",
+            id: "supplements",
             icon: "💊",
             title: "العلاج أو المكملات",
-            text: "تنظيم معلومات العلاج أو المكمل الموصوف بدون اقتراح عشوائي."
+            text: "نرتب معلومات العلاج أو المكملات بدون اقتراح أدوية من نفسنا."
         }
+
     ];
 
-    habitList.innerHTML = "";
 
-    habitsData.forEach(habit => {
+    habitList.innerHTML =
+        habitData.map(habit => `
 
-        const element = document.createElement("button");
+            <div
+                class="habit"
+                data-habit="${habit.id}"
+            >
 
-        element.type = "button";
-        element.className = "habit";
+                <div class="icon">
+                    ${habit.icon}
+                </div>
 
-        element.innerHTML = `
-            <strong>
-                ${habit.icon} ${habit.title}
-            </strong>
+                <b>
+                    ${habit.title}
+                </b>
 
-            <p>
-                ${habit.text}
-            </p>
-        `;
+                <p>
+                    ${habit.text}
+                </p>
 
-        element.addEventListener("click", function () {
+            </div>
 
-            if (habit.type === "sun") {
+        `).join("");
 
-                openSunDose();
 
-            } else {
+    /* =====================================
+       أهم جزء:
+       الضغط على العادة
+    ===================================== */
 
-                habitMessage.textContent =
-                    `اختيار حلو يا ${name} 😊 نقدر نبدأ بـ ${habit.title}، وهنمشي فيها واحدة واحدة.`;
+    document
+        .querySelectorAll(".habit")
+        .forEach(habitElement => {
 
-            }
+            habitElement.addEventListener(
+                "click",
+                function () {
+
+                    const selectedHabit =
+                        this.dataset.habit;
+
+
+                    /* تحديد الاختيار */
+
+                    document
+                        .querySelectorAll(".habit")
+                        .forEach(item => {
+
+                            item.classList.remove("active");
+
+                        });
+
+
+                    this.classList.add("active");
+
+
+                    /* الشمس */
+
+                    if (selectedHabit === "sun") {
+
+                        openSunDose();
+
+                    }
+
+
+                    /* المياه */
+
+                    else if (selectedHabit === "water") {
+
+                        alert(
+                            "💧 قسم شرب المياه لسه هنبدأ نبنيه معاك خطوة بخطوة."
+                        );
+
+                    }
+
+
+                    /* الرياضة */
+
+                    else if (selectedHabit === "exercise") {
+
+                        alert(
+                            "🏃 قسم الرياضة والحركة لسه هنبدأ نبنيه معاك خطوة بخطوة."
+                        );
+
+                    }
+
+
+                    /* المكملات */
+
+                    else if (
+                        selectedHabit === "supplements"
+                    ) {
+
+                        alert(
+                            "💊 قسم العلاج والمكملات لسه هنبدأ نبنيه بشكل آمن ومنظم."
+                        );
+
+                    }
+
+                }
+            );
 
         });
 
-        habitList.appendChild(element);
-    });
 }
 
 
-/* ⭐ أهم جزء: الشمس */
+/* =========================================
+   فتح جرعة الشمس
+========================================= */
 
 function openSunDose() {
 
-    const name = user.name || "يا صديقي";
+    showPage(sunDose);
+
+
+    const name =
+        user.name || "يا صديقي";
+
 
     sunMessage.textContent =
-        `اختيار حلو يا ${name} 😊 نبدأ بالشمس. خلّيني أمشي معاك فيها واحدة واحدة وبشكل يناسبك.`;
+        `تمام يا ${name} ☀️ اختيار ممتاز. هنا هنبدأ نبني جرعة الشمس الخاصة بيك خطوة بخطوة، وهنراعي بياناتك والوقت والمكان بدل ما نديك رقم عشوائي.`;
 
-    showScreen(sunDose);
 }
 
 
-/* الرجوع */
+/* =========================================
+   الرجوع للعادات
+========================================= */
 
-backToHabits.addEventListener("click", function () {
+backToHabits.addEventListener(
+    "click",
+    function () {
 
-    showHabits();
+        showPage(habits);
 
-});
+    }
+);
+
+
+/* =========================================
+   حماية لو عنصر ناقص
+========================================= */
+
+if (!startButton) {
+
+    console.error(
+        "SunDose: startButton غير موجود في index.html"
+    );
+
+}
+
+if (!nextButton) {
+
+    console.error(
+        "SunDose: nextButton غير موجود في index.html"
+    );
+
+}
+
+if (!habitList) {
+
+    console.error(
+        "SunDose: habitList غير موجود في index.html"
+    );
+
+}
