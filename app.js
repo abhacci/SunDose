@@ -1,17 +1,22 @@
 /* =========================================
    SunDose ☀️
    Sana Conversation Engine
-   ========================================= */
+========================================= */
+
+
+/* =========================================
+   بيانات المستخدم
+========================================= */
 
 const user = {
+
     name: "",
     gender: "",
     age: "",
     weight: "",
     height: "",
-    country: "",
-    skin: "",
-    sunTime: ""
+    country: ""
+
 };
 
 
@@ -19,30 +24,53 @@ const user = {
    عناصر الصفحات
 ========================================= */
 
-const home = document.getElementById("home");
-const welcome = document.getElementById("welcome");
-const habits = document.getElementById("habits");
-const sunDose = document.getElementById("sunDose");
+const home =
+    document.getElementById("home");
 
-const startButton = document.getElementById("startButton");
-const nextButton = document.getElementById("nextButton");
+const welcome =
+    document.getElementById("welcome");
 
-const question = document.getElementById("question");
-const answerArea = document.getElementById("answerArea");
-const progressBar = document.getElementById("progressBar");
+const habits =
+    document.getElementById("habits");
 
-const habitMessage = document.getElementById("habitMessage");
-const habitList = document.getElementById("habitList");
+const sunDose =
+    document.getElementById("sunDose");
 
-const sunMessage = document.getElementById("sunMessage");
-const backToHabits = document.getElementById("backToHabits");
+
+const startButton =
+    document.getElementById("startButton");
+
+const nextButton =
+    document.getElementById("nextButton");
+
+const question =
+    document.getElementById("question");
+
+const answerArea =
+    document.getElementById("answerArea");
+
+const progressBar =
+    document.getElementById("progressBar");
+
+const habitMessage =
+    document.getElementById("habitMessage");
+
+const habitList =
+    document.getElementById("habitList");
+
+const sunMessage =
+    document.getElementById("sunMessage");
+
+const backToHabits =
+    document.getElementById("backToHabits");
 
 
 /* =========================================
-   حالة المحادثة
+   الحالة
 ========================================= */
 
 let currentStep = 0;
+
 let waitingForContinue = false;
 
 
@@ -54,51 +82,98 @@ const steps = [
 
     {
         key: "name",
-        question: "قبل ما نبدأ... تحب أناديك بإيه؟ 😊",
+
+        question:
+            "قبل ما نبدأ... تحب أناديك بإيه؟ 😊",
+
         type: "text",
+
         label: "اسمك",
-        placeholder: "اكتب اسمك هنا"
+
+        placeholder:
+            "اكتب اسمك هنا"
+
     },
+
 
     {
         key: "gender",
-        question: "جميل! طيب أكلّمك بصيغة إيه عشان كلامنا يبقى مريح ولطيف ليك؟ 💛",
+
+        question:
+            "جميل! طيب أكلّمك بصيغة إيه عشان كلامنا يبقى مريح ولطيف ليك؟ 💛",
+
         type: "gender"
+
     },
+
 
     {
         key: "age",
-        question: "طب قولي سنك كام؟ 👀 متقلقش، أنا مش هحكم عليك... بس عايزة أعرفك أكتر.",
+
+        question:
+            "طب قولي سنك كام؟ 👀 متقلقش، أنا مش هحكم عليك... أنا بس عايزة أعرفك أكتر.",
+
         type: "number",
+
         label: "السن",
-        placeholder: "مثال: 22",
+
+        placeholder:
+            "مثال: 22",
+
         unit: "سنة"
+
     },
+
 
     {
         key: "weight",
-        question: "طيب وزنك كام تقريبًا؟ 😄 الرقم لوحده مش هيحكيلي كل حاجة، بس هيساعدني أفهم الصورة لما أربطه بباقي بياناتك.",
+
+        question:
+            "طيب وزنك كام تقريبًا؟ 😄 الرقم لوحده مش هيحكيلي كل حاجة، بس لما أربطه بباقي بياناتك هيفيدني.",
+
         type: "number",
+
         label: "الوزن",
-        placeholder: "مثال: 80",
+
+        placeholder:
+            "مثال: 80",
+
         unit: "كجم"
+
     },
+
 
     {
         key: "height",
-        question: "وطولك كام؟ 🌱 كده الأرقام بدأت تتكلم معايا أكتر.",
+
+        question:
+            "وطولك كام؟ 🌱 كده الأرقام بدأت تتكلم معايا أكتر.",
+
         type: "number",
+
         label: "الطول",
-        placeholder: "مثال: 175",
+
+        placeholder:
+            "مثال: 175",
+
         unit: "سم"
+
     },
+
 
     {
         key: "country",
-        question: "وآخر حاجة في التعارف... إنت من أنهي بلد؟ 🌍 البلد هتفرق معايا جدًا لما نتكلم عن الشمس والجو.",
+
+        question:
+            "وآخر حاجة في التعارف... إنت من أنهي بلد؟ 🌍 البلد هتفرق معايا خصوصًا لما نتكلم عن الشمس والجو.",
+
         type: "text",
+
         label: "البلد",
-        placeholder: "مثال: مصر"
+
+        placeholder:
+            "مثال: مصر"
+
     }
 
 ];
@@ -108,233 +183,440 @@ const steps = [
    إظهار صفحة
 ========================================= */
 
-function showPage(page) {
+function showPage(page){
 
     home.classList.add("hidden");
+
     welcome.classList.add("hidden");
+
     habits.classList.add("hidden");
+
     sunDose.classList.add("hidden");
+
 
     page.classList.remove("hidden");
 
+
     window.scrollTo({
+
         top: 0,
+
         behavior: "smooth"
+
     });
+
 }
 
 
 /* =========================================
-   أسماء لطيفة حسب النوع
+   اسم لطيف
 ========================================= */
 
-function getFriendlyName() {
+function getName(){
 
-    if (user.name) {
+    if(user.name){
+
         return user.name;
+
     }
 
-    if (user.gender === "female") {
+    if(user.gender === "female"){
+
         return "يا جميلة";
+
     }
 
     return "يا صاحبي";
+
 }
 
 
 /* =========================================
-   ردود سنا الذكية
+   رد سنا
 ========================================= */
 
-function getResponse(step, value) {
+function getResponse(step, value){
 
-    const name = user.name || "يا صاحبي";
+    const name =
+        user.name || "يا صاحبي";
+
 
     /* الاسم */
 
-    if (step.key === "name") {
+    if(step.key === "name"){
 
-        return user.gender === "female"
+        if(user.gender === "female"){
 
-            ? `حلو أوي يا ${value} 💛 من أولها كده الاسم عاجبني... خلاص ثبتّه عندي، ومن هنا ورايح الكلام بينا هيبقى على اسمك.`
+            return `
+                حلو أوي يا ${value} 💛
+                الاسم عاجبني من أولها 😄
+                خلاص كده ثبتّه عندي، ومن هنا ورايح
+                هكلمك باسمك بدل ما أفضل أقول يا جميلة وخلاص.
+            `;
 
-            : `حلو أوي يا ${value} 😄 كده بقى عرفت أناديك بإيه بدل ما أفضل أقول يا صاحبي وخلاص. الاسم اتسجل عندي يا نجم 💛`;
+        }
+
+
+        return `
+            حلو أوي يا ${value} 😄
+            كده بقى عرفت أناديك بإيه بدل ما أفضل أقول يا صاحبي.
+            الاسم اتسجل عندي يا نجم 💛
+        `;
+
     }
 
 
     /* النوع */
 
-    if (step.key === "gender") {
+    if(step.key === "gender"){
 
-        if (value === "female") {
+        if(value === "female"){
 
-            return `تمام يا ${name} 💛 كده عرفت أكلمك بالطريقة اللي تريحك. وبالمناسبة... اختيارك لطيف، حاسة إننا هنفهم بعض بسرعة 😄`;
+            return `
+                تمام يا ${name} 💛
+                كده عرفت أكلمك بالطريقة اللي تريحك.
+                وخلاص من هنا الكلام بينا هيبقى على راحتنا،
+                من غير رسمية ولا كلام كتب 😄
+            `;
 
         }
 
-        return `تمام يا ${name} يا نجم 😄 كده عرفت أكلمك بصيغة مناسبة ليك. خلاص، من هنا الكلام هيبقى على مزاجك ومن غير رسمية زيادة 💛`;
+
+        return `
+            تمام يا ${name} يا نجم 😄
+            كده عرفت أكلمك بصيغة مناسبة ليك.
+            خلاص من هنا بقى الكلام بينا على راحتنا،
+            ومش هنعملها مقابلة شغل 😂💛
+        `;
+
     }
 
 
     /* العمر */
 
-    if (step.key === "age") {
+    if(step.key === "age"){
 
-        const age = Number(value);
+        const age =
+            Number(value);
 
-        if (age < 18) {
 
-            return `يا ${name} 😄 تمام، ${age} سنة. بما إنك لسه صغير، هراعي ده جدًا في طريقة الكلام والنصائح، ومش هعاملك كأنك شخص بالغ. المهم عندي سلامتك قبل أي حاجة 💛`;
+        if(age < 18){
 
-        }
-
-        if (age >= 18 && age <= 25) {
-
-            return `يا ${name} 😄 ${age} سنة؟ لسه في سن حلو جدًا تبني فيه عادات تفضل معاك سنين. جسمك وحياتك لسه قدامهم كتير، فبدل ما نعمل حاجات قاسية، أنا عايزاك تبني أساس تقدر تكمل عليه.`;
-
-        }
-
-        if (age >= 26 && age <= 39) {
-
-            return `تمام يا ${name} 👀 ${age} سنة. كده بدأت أفهم المرحلة اللي إنت فيها أكتر. هنا الاستمرارية بتفرق جدًا، ومش محتاج تعمل حاجات خارقة؛ محتاج عادات واقعية تقدر تدخلها وسط شغلك وحياتك.`;
+            return `
+                يا ${name} 😄
+                ${age} سنة؟
+                تمام، كده عرفت إنك لسه صغير،
+                وده مهم جدًا عندي لأن طريقة النصائح
+                والاحتياطات هتختلف عن شخص بالغ.
+                سلامتك أهم من أي رقم أو عادة 💛
+            `;
 
         }
 
-        if (age >= 40 && age <= 59) {
 
-            return `تمام يا ${name} 💛 ${age} سنة. السن ده بيخليني أهتم أكتر بالاستمرارية، النوم، الحركة، والتغذية بدل فكرة "أعمل جامد كام يوم". جسمك يستاهل اهتمام ثابت مش حماس مؤقت.`;
+        if(age <= 25){
+
+            return `
+                يا ${name} 😄
+                ${age} سنة؟
+                يا سلام، لسه قدامك وقت حلو جدًا
+                تبني فيه عادات تفضل معاك سنين.
+                في المرحلة دي مش محتاج تعمل حاجات
+                قاسية ولا تعقد الدنيا...
+                محتاج أساس كويس تقدر تكمل عليه.
+            `;
 
         }
 
-        return `ما شاء الله يا ${name} ❤️ ${age} سنة. السن عمره ما كان مجرد رقم عندي؛ كل مرحلة ليها احتياجاتها وطريقتها. هنركز على الحاجات المفيدة والآمنة اللي تناسبك فعلًا.`;
+
+        if(age <= 39){
+
+            return `
+                تمام يا ${name} 👀
+                ${age} سنة.
+                كده بدأت أفهم المرحلة اللي إنت فيها أكتر.
+                هنا الاستمرارية أهم من الحماس اللي يومين
+                وبعدها نختفي 😂
+                فهنخلي اللي نعمله واقعي وينفع يدخل وسط حياتك.
+            `;
+
+        }
+
+
+        if(age <= 59){
+
+            return `
+                تمام يا ${name} 💛
+                ${age} سنة.
+                في المرحلة دي أنا ههتم أكتر بالاستمرارية،
+                والحركة، والنوم، والتغذية،
+                بدل فكرة إنك تعمل كل حاجة مرة واحدة.
+                جسمك محتاج اهتمام ثابت مش حماس مؤقت.
+            `;
+
+        }
+
+
+        return `
+            ما شاء الله يا ${name} ❤️
+            ${age} سنة.
+            السن عندي مش مجرد رقم،
+            كل مرحلة ليها احتياجاتها وطريقتها.
+            وهنركز على الحاجات اللي تفيدك فعلًا
+            وتكون مناسبة وآمنة ليك.
+        `;
+
     }
 
 
     /* الوزن */
 
-    if (step.key === "weight") {
+    if(step.key === "weight"){
 
-        const weight = Number(value);
+        const weight =
+            Number(value);
 
-        return `تمام يا ${name} 👀 سجلت وزنك ${weight} كجم. بس خد بالك من حاجة مهمة: أنا مش هبص للرقم وأقولك حلو أو وحش. الوزن لوحده مش بيحكي القصة كلها؛ لازم أربطه بطولك وسنك ونشاطك وباقي الصورة. يعني الميزان عندي معلومة... مش حكم عليك 😄💛`;
+
+        return `
+            تمام يا ${name} 👀
+            سجلت وزنك ${weight} كجم.
+            بس خد بالك من حاجة مهمة:
+            أنا مش هبص للرقم وأقولك حلو أو وحش.
+            الوزن لوحده مش بيحكي القصة كلها.
+            لازم أربطه بطولك وسنك ونشاطك وباقي الصورة.
+            يعني الميزان عندي معلومة...
+            مش حكم عليك 😄💛
+        `;
+
     }
 
 
     /* الطول */
 
-    if (step.key === "height") {
+    if(step.key === "height"){
 
-        const height = Number(value);
-        const weight = Number(user.weight);
-        const age = Number(user.age);
+        const height =
+            Number(value);
 
-        let extra = "";
+        const weight =
+            Number(user.weight);
 
-        if (height >= 180) {
 
-            extra = ` و${height} سم؟ يا نجم إنت طويل كده 😄`;
+        let comment = "";
 
-        } else if (height >= 170) {
 
-            extra = ` و${height} سم، تمام، كده عندي رقم مهم جدًا عشان أربطه بوزنك.`;
+        if(height >= 180){
 
-        } else {
-
-            extra = ` و${height} سم، تمام يا ${name} 💛 وكل طول له جسمه واحتياجاته، مفيش رقم يخلي الشخص أحسن من غيره.`;
+            comment =
+                `و${height} سم كمان؟ يا نجم إنت طويل كده 😄`;
 
         }
+
+        else if(height >= 170){
+
+            comment =
+                `و${height} سم، تمام يا ${name}، كده عندي رقم مهم جدًا أربطه بوزنك.`;
+
+        }
+
+        else{
+
+            comment =
+                `${height} سم، تمام يا ${name} 💛 وكل طول له جسمه واحتياجاته، مفيش رقم يخلي حد أحسن من حد.`;
+
+        }
+
 
         let bmiText = "";
 
-        if (weight > 0 && height > 0) {
 
-            const bmi =
-                weight / Math.pow(height / 100, 2);
+        if(weight > 0 && height > 0){
 
-            bmiText =
-                ` دلوقتي أقدر أطلع مؤشر كتلة الجسم بشكل مبدئي، لكن مش هعتبره تشخيص ولا حكم نهائي؛ لأنه مش بيقيس تركيب الجسم ولا بيفرق بين الدهون والعضلات.`;
+            bmiText = `
+                دلوقتي أقدر أطلع مؤشر كتلة الجسم
+                بشكل مبدئي، لكن مش هعتبره تشخيص
+                ولا حكم نهائي عليك؛
+                لأنه مش بيقيس تركيب الجسم
+                ومش بيفرق بين الدهون والعضلات.
+            `;
 
         }
 
-        return `تمام يا ${name} 😄${extra}${bmiText} كده بدأت الصورة عندي تبقى أوضح، خصوصًا لما أربط الطول بالوزن والسن بدل ما أبص لكل رقم لوحده.`;
+
+        return `
+            ${comment}
+
+            كده الصورة بدأت تبقى أوضح عندي،
+            خصوصًا لما أربط الطول بالوزن والسن
+            بدل ما أبص لكل رقم لوحده.
+
+            ${bmiText}
+        `;
+
     }
 
 
     /* البلد */
 
-    if (step.key === "country") {
+    if(step.key === "country"){
 
-        const country = value.trim().toLowerCase();
+        const country =
+            String(value)
+                .trim()
+                .toLowerCase();
 
-        if (
+
+        if(
             country.includes("مصر") ||
             country.includes("egypt")
-        ) {
+        ){
 
-            return `مصر 🇪🇬؟ طب كده دخلنا في حتة مهمة جدًا يا ${name} ☀️. عندنا الشمس قوية في أوقات كتير من السنة، لكن ده مش معناه إن كل وقت مناسب للتعرض. شدة الأشعة فوق البنفسجية بتتغير حسب الوقت والتاريخ والمكان والظروف الجوية. عشان كده لما أوصلك لجرعة الشمس، مش هديك رقم محفوظ وخلاص؛ هراعي مكانك ووقت التعرض وشدة الشمس ودرجة بشرتك. كده بقى أنا مش بس عرفت بلدك... أنا بدأت أفهم البيئة اللي حواليك. 💛`;
+            return `
+                مصر 🇪🇬؟
+                طب كده دخلنا في حتة مهمة جدًا يا ${name} ☀️
+
+                عندنا الشمس قوية في أوقات كتير من السنة،
+                لكن ده مش معناه إن كل وقت مناسب للتعرض.
+
+                شدة الأشعة فوق البنفسجية بتتغير حسب
+                الوقت والتاريخ والمكان والظروف الجوية.
+
+                عشان كده لما نوصل لجرعة الشمس،
+                مش هديك رقم محفوظ وخلاص.
+                هراعي مكانك ووقت التعرض وشدة الشمس
+                ودرجة بشرتك.
+
+                كده بقى أنا مش عرفت بلدك بس...
+                أنا بدأت أفهم البيئة اللي حواليك كمان 💛
+            `;
 
         }
 
-        if (
+
+        if(
             country.includes("المغرب") ||
             country.includes("morocco")
-        ) {
+        ){
 
-            return `المغرب 🇲🇦؟ جميل يا ${name} 😄 كده معلومات الشمس عندك هتتحسب باعتبار موقعك وظروف بلدك، ومش هتعامل المغرب كأنها مصر أو أي بلد تانية. الموقع الجغرافي، الوقت من السنة، ووقت اليوم كلهم بيفرقوا في شدة الأشعة. ولما نوصل للجرعة، هنخلي الكلام مبني على الظروف الفعلية مش كلام محفوظ. ☀️`;
+            return `
+                المغرب 🇲🇦؟
+                جميل يا ${name} 😄
+
+                كده معلومات الشمس عندك هتتحسب
+                باعتبار موقعك وظروف بلدك،
+                ومش هتعامل المغرب كأنها مصر
+                أو أي بلد تانية.
+
+                الموقع الجغرافي،
+                والوقت من السنة،
+                ووقت اليوم،
+                كلهم بيفرقوا في شدة الأشعة.
+
+                ولما نوصل للجرعة،
+                هنخلي الكلام مبني على الظروف الفعلية
+                مش كلام محفوظ ☀️
+            `;
 
         }
 
-        return `تمام يا ${name} 🌍 سجلت ${value}. ودي مش خانة بكتبها وخلاص؛ البلد والموقع الجغرافي ممكن يفرقوا جدًا في موضوع الشمس والطقس وشدة الأشعة خلال اليوم. عشان كده لما نبدأ الجرعة هراعي المكان اللي إنت فيه بدل ما أديك نصيحة واحدة لكل الناس. كده بدأت أعرفك والبيئة اللي حواليك في نفس الوقت 💛`;
+
+        return `
+            تمام يا ${name} 🌍
+            سجلت ${value}.
+
+            ودي مش خانة بكتبها وخلاص؛
+            البلد والموقع الجغرافي ممكن يفرقوا
+            جدًا في موضوع الشمس والطقس
+            وشدة الأشعة خلال اليوم.
+
+            عشان كده لما نبدأ الجرعة
+            هراعي المكان اللي إنت فيه
+            بدل ما أدي نصيحة واحدة لكل الناس.
+
+            كده بدأت أعرفك
+            وأفهم البيئة اللي حواليك في نفس الوقت 💛
+        `;
+
     }
 
-    return `تمام يا ${name} 💛 سجلت المعلومة دي. كده بنقرب أكتر للصورة الكاملة.`;
+
+    return `
+        تمام يا ${name} 💛
+        سجلت المعلومة دي.
+        كده بنقرب أكتر للصورة الكاملة.
+    `;
+
 }
 
 
 /* =========================================
-   كتابة سنا تدريجيًا
+   سنا تتكلم
 ========================================= */
 
-function sanaSpeak(text, callback) {
+function sanaSpeak(text, callback){
 
-    question.classList.add("sana-speaking");
-
-    question.innerHTML =
-        `<span class="typing-dots">•••</span>`;
+    waitingForContinue = true;
 
     nextButton.disabled = true;
 
-    setTimeout(() => {
 
-        question.innerHTML = "";
+    question.innerHTML = `
+
+        <span class="typing-dots">
+            •••
+        </span>
+
+    `;
+
+
+    setTimeout(function(){
+
+        question.textContent = "";
+
 
         let index = 0;
 
-        const speed = 16;
+        const cleanText =
+            text
+                .replace(/\s+/g," ")
+                .trim();
 
-        const timer = setInterval(() => {
 
-            question.textContent += text[index];
+        const speed = 18;
 
-            index++;
 
-            if (index >= text.length) {
+        const timer =
+            setInterval(function(){
 
-                clearInterval(timer);
+                question.textContent +=
+                    cleanText[index];
 
-                question.classList.remove("sana-speaking");
 
-                nextButton.disabled = false;
+                index++;
 
-                if (callback) {
-                    callback();
+
+                if(index >= cleanText.length){
+
+                    clearInterval(timer);
+
+
+                    nextButton.disabled =
+                        false;
+
+
+                    if(callback){
+
+                        callback();
+
+                    }
+
                 }
 
-            }
+            },speed);
 
-        }, speed);
 
-    }, 550);
+    },600);
+
 }
 
 
@@ -342,48 +624,63 @@ function sanaSpeak(text, callback) {
    بداية التطبيق
 ========================================= */
 
-startButton.addEventListener("click", function () {
+startButton.addEventListener(
+    "click",
+    function(){
 
-    currentStep = 0;
+        currentStep = 0;
 
-    waitingForContinue = false;
+        waitingForContinue = false;
 
-    showPage(welcome);
+        showPage(welcome);
 
-    renderStep();
+        renderStep();
 
-});
+    }
+);
 
 
 /* =========================================
    رسم السؤال
 ========================================= */
 
-function renderStep() {
+function renderStep(){
 
-    const step = steps[currentStep];
+    const step =
+        steps[currentStep];
+
 
     waitingForContinue = false;
 
-    question.textContent = step.question;
+
+    question.textContent =
+        step.question;
+
 
     const progress =
-        ((currentStep + 1) / steps.length) * 100;
+        ((currentStep + 1) /
+        steps.length) * 100;
+
 
     progressBar.style.width =
         progress + "%";
 
-    answerArea.innerHTML = "";
 
-    nextButton.disabled = false;
+    answerArea.innerHTML =
+        "";
+
+
+    nextButton.disabled =
+        false;
+
 
     nextButton.textContent =
         "تمام، قولي 💛";
 
 
-    /* اختيار النوع */
+    /* النوع */
 
-    if (step.type === "gender") {
+    if(step.type === "gender"){
 
         answerArea.innerHTML = `
 
@@ -411,29 +708,35 @@ function renderStep() {
 
 
         document
-            .querySelectorAll(".gender-btn")
+            .querySelectorAll(
+                ".gender-btn"
+            )
             .forEach(button => {
 
-                if (
+                if(
                     user.gender ===
                     button.dataset.gender
-                ) {
+                ){
 
-                    button.classList.add("active");
+                    button.classList.add(
+                        "active"
+                    );
 
                 }
 
 
                 button.addEventListener(
                     "click",
-                    function () {
+                    function(){
 
                         user.gender =
                             this.dataset.gender;
 
 
                         document
-                            .querySelectorAll(".gender-btn")
+                            .querySelectorAll(
+                                ".gender-btn"
+                            )
                             .forEach(btn => {
 
                                 btn.classList.remove(
@@ -443,7 +746,9 @@ function renderStep() {
                             });
 
 
-                        this.classList.add("active");
+                        this.classList.add(
+                            "active"
+                        );
 
                     }
                 );
@@ -452,6 +757,7 @@ function renderStep() {
 
 
         return;
+
     }
 
 
@@ -470,13 +776,14 @@ function renderStep() {
                 type="${step.type}"
                 placeholder="${step.placeholder}"
                 value="${user[step.key]}"
-                min="${step.type === "number" ? "1" : ""}"
             >
 
             ${
                 step.unit
                 ?
-                `<div class="unit">${step.unit}</div>`
+                `<div class="unit">
+                    ${step.unit}
+                </div>`
                 :
                 ""
             }
@@ -487,19 +794,24 @@ function renderStep() {
 
 
     const input =
-        document.getElementById("answerInput");
+        document.getElementById(
+            "answerInput"
+        );
 
 
-    if (input) {
+    if(input){
 
         input.focus();
 
 
         input.addEventListener(
             "keydown",
-            function (event) {
+            function(event){
 
-                if (event.key === "Enter") {
+                if(
+                    event.key ===
+                    "Enter"
+                ){
 
                     nextButton.click();
 
@@ -517,230 +829,279 @@ function renderStep() {
    زر التالي
 ========================================= */
 
-nextButton.addEventListener("click", function () {
+nextButton.addEventListener(
+    "click",
+    function(){
 
-    /* لو سنا ردت بالفعل */
-    if (waitingForContinue) {
+        /* سنا خلصت كلامها */
 
-        currentStep++;
+        if(waitingForContinue){
 
-        if (currentStep < steps.length) {
-
-            renderStep();
-
-        } else {
-
-            showHabits();
-
-        }
-
-        return;
-    }
+            currentStep++;
 
 
-    const step = steps[currentStep];
+            if(
+                currentStep <
+                steps.length
+            ){
 
+                renderStep();
 
-    /* النوع */
+            }
 
-    if (step.type === "gender") {
+            else{
 
-        if (!user.gender) {
+                showHabits();
 
-            question.textContent =
-                "استنى يا جميل 😄 اختار الأول الصيغة اللي تحبني أكلمك بيها.";
+            }
 
-            return;
-
-        }
-
-        answerArea.innerHTML = "";
-
-    }
-
-
-    /* باقي الأسئلة */
-
-    else {
-
-        const input =
-            document.getElementById("answerInput");
-
-
-        if (!input) {
-            return;
-        }
-
-
-        const value =
-            input.value.trim();
-
-
-        if (!value) {
-
-            question.textContent =
-                "بصلي كده 😄 اكتبلي الإجابة الأول عشان أعرفك أكتر.";
-
-            input.focus();
 
             return;
 
         }
 
 
-        if (
-            step.type === "number" &&
-            Number(value) <= 0
-        ) {
-
-            question.textContent =
-                "استنى بس 😄 اكتبلي رقم منطقي عشان أعرف أتعامل معاه صح.";
-
-            input.focus();
-
-            return;
-
-        }
+        const step =
+            steps[currentStep];
 
 
-        user[step.key] = value;
+        /* النوع */
 
-        answerArea.innerHTML = "";
+        if(
+            step.type ===
+            "gender"
+        ){
 
-    }
+            if(!user.gender){
 
+                question.textContent =
+                    "استنى يا جميل 😄 اختار الأول الصيغة اللي تحبني أكلمك بيها.";
 
-    /* =====================================
-       سنا ترد على الإجابة
-    ===================================== */
-
-    const value =
-        step.type === "gender"
-            ? user.gender
-            : user[step.key];
-
-
-    const response =
-        getResponse(step, value);
-
-
-    waitingForContinue = true;
-
-
-    nextButton.textContent =
-        "كده تمام، كمّلي معايا 💛";
-
-
-    sanaSpeak(
-        response,
-        function () {
-
-            if (currentStep === steps.length - 1) {
-
-                nextButton.textContent =
-                    "ورّيني بقى هنعمل إيه ☀️";
+                return;
 
             }
 
         }
-    );
 
-});
+
+        /* باقي البيانات */
+
+        else{
+
+            const input =
+                document.getElementById(
+                    "answerInput"
+                );
+
+
+            if(!input){
+
+                return;
+
+            }
+
+
+            const value =
+                input.value.trim();
+
+
+            if(!value){
+
+                question.textContent =
+                    "بصلي كده 😄 اكتبلي الإجابة الأول عشان أعرفك أكتر.";
+
+                input.focus();
+
+                return;
+
+            }
+
+
+            if(
+                step.type ===
+                "number" &&
+                Number(value) <= 0
+            ){
+
+                question.textContent =
+                    "استنى بس 😄 اكتبلي رقم منطقي عشان أعرف أتعامل معاه صح.";
+
+                input.focus();
+
+                return;
+
+            }
+
+
+            user[step.key] =
+                value;
+
+        }
+
+
+        const value =
+            step.type === "gender"
+            ? user.gender
+            : user[step.key];
+
+
+        const response =
+            getResponse(
+                step,
+                value
+            );
+
+
+        nextButton.textContent =
+            "استنى عليا... 💛";
+
+
+        sanaSpeak(
+            response,
+            function(){
+
+                if(
+                    currentStep ===
+                    steps.length - 1
+                ){
+
+                    nextButton.textContent =
+                        "ورّيني بقى هنعمل إيه ☀️";
+
+                }
+                else{
+
+                    nextButton.textContent =
+                        "كده تمام، كمّل معايا 💛";
+
+                }
+
+            }
+        );
+
+    }
+);
 
 
 /* =========================================
    صفحة العادات
 ========================================= */
 
-function showHabits() {
+function showHabits(){
 
     showPage(habits);
 
 
     const name =
-        user.name || "يا صديقي";
+        user.name ||
+        "يا صديقي";
 
 
     habitMessage.textContent =
-        `استنى كده يا ${name} 😄 أنا عايزة أقولك حاجة قبل ما نبدأ. أنا دلوقتي عرفت عنك شوية حاجات مهمة، ومش هستخدمهم لمجرد إنهم أرقام محفوظة. هنربطهم ببعض ونشوف إيه اللي يناسبك فعلًا. اختار أول حاجة نفسك تبدأ بيها وأنا هشرحلك ليه ممكن تكون مناسبة ليك. 💛`;
+
+        `استنى كده يا ${name} 😄 أنا دلوقتي بدأت ألمّ الصورة بتاعتك واحدة واحدة. مش هتعامل مع البيانات اللي قلتها كأنها شوية أرقام في استمارة؛ هنربطها ببعض ونشوف إيه اللي يناسبك فعلًا. اختار أول حاجة نفسك تبدأ بيها وأنا أمشي معاك فيها واحدة واحدة. 💛`;
 
 
     const habitData = [
 
         {
-            id: "sun",
-            icon: "☀️",
-            title: "جرعة الشمس",
+            id:"sun",
+
+            icon:"☀️",
+
+            title:"جرعة الشمس",
+
             text:
                 "نفهم الشمس ودرجة بشرتك ووقت التعرض ونبني الجرعة خطوة خطوة."
+
         },
 
-        {
-            id: "water",
-            icon: "💧",
-            title: "شرب المياه",
-            text:
-                "ننظم شرب المياه بطريقة تناسب يومك بدل ما نخلي الموضوع عشوائي."
-        },
 
         {
-            id: "exercise",
-            icon: "🏃",
-            title: "الرياضة والحركة",
+            id:"water",
+
+            icon:"💧",
+
+            title:"شرب المياه",
+
             text:
-                "نختار حركة تناسب مستواك ونبني عليها من غير تهور."
+                "ننظم شرب المياه خلال اليوم بطريقة بسيطة تناسب حياتك."
+
         },
 
+
         {
-            id: "supplements",
-            icon: "💊",
-            title: "العلاج أو المكملات",
+            id:"exercise",
+
+            icon:"🏃",
+
+            title:"الرياضة والحركة",
+
             text:
-                "ننظم المعلومات الموجودة عندك من غير ما نخترع علاج من نفسنا."
+                "نختار حركة مناسبة لمستواك ونبني عليها تدريجيًا."
+
+        },
+
+
+        {
+            id:"supplements",
+
+            icon:"💊",
+
+            title:"العلاج أو المكملات",
+
+            text:
+                "ننظم المعلومات الموجودة عندك بشكل آمن ومن غير تخمين."
+
         }
 
     ];
 
 
     habitList.innerHTML =
-        habitData.map(habit => `
 
-            <div
-                class="habit"
-                data-habit="${habit.id}"
-            >
+        habitData.map(
+            habit => `
 
-                <div class="icon">
-                    ${habit.icon}
+                <div
+                    class="habit"
+                    data-habit="${habit.id}"
+                >
+
+                    <div class="icon">
+                        ${habit.icon}
+                    </div>
+
+                    <b>
+                        ${habit.title}
+                    </b>
+
+                    <p>
+                        ${habit.text}
+                    </p>
+
                 </div>
 
-                <b>
-                    ${habit.title}
-                </b>
-
-                <p>
-                    ${habit.text}
-                </p>
-
-            </div>
-
-        `).join("");
+            `
+        ).join("");
 
 
     document
         .querySelectorAll(".habit")
-        .forEach(habitElement => {
+        .forEach(element => {
 
-            habitElement.addEventListener(
+            element.addEventListener(
                 "click",
-                function () {
+                function(){
 
-                    const selectedHabit =
+                    const selected =
                         this.dataset.habit;
 
 
                     document
-                        .querySelectorAll(".habit")
+                        .querySelectorAll(
+                            ".habit"
+                        )
                         .forEach(item => {
 
                             item.classList.remove(
@@ -750,41 +1111,49 @@ function showHabits() {
                         });
 
 
-                    this.classList.add("active");
+                    this.classList.add(
+                        "active"
+                    );
 
 
-                    if (selectedHabit === "sun") {
+                    if(
+                        selected ===
+                        "sun"
+                    ){
 
                         openSunDose();
 
                     }
 
 
-                    else if (
-                        selectedHabit === "water"
-                    ) {
+                    else if(
+                        selected ===
+                        "water"
+                    ){
 
                         alert(
-                            "💧 قسم المياه هنبدأ نبنيه بعد ما نثبت تجربة سنا الأساسية."
+                            "💧 قسم المياه لسه بنبنيه معاك واحدة واحدة."
                         );
 
                     }
 
 
-                    else if (
-                        selectedHabit === "exercise"
-                    ) {
+                    else if(
+                        selected ===
+                        "exercise"
+                    ){
 
                         alert(
-                            "🏃 قسم الحركة هنبدأ نبنيه خطوة خطوة."
+                            "🏃 قسم الرياضة هنبدأ نبنيه خطوة خطوة."
                         );
 
                     }
 
 
-                    else if (
-                        selectedHabit === "supplements"
-                    ) {
+                    else if(
+                        selected ===
+                        "supplements"
+                    ){
 
                         alert(
                             "💊 قسم العلاج والمكملات هنخليه منظم وآمن."
@@ -804,31 +1173,32 @@ function showHabits() {
    جرعة الشمس
 ========================================= */
 
-function openSunDose() {
+function openSunDose(){
 
     showPage(sunDose);
 
 
     const name =
-        user.name || "يا صديقي";
+        user.name ||
+        "يا صديقي";
 
 
     sunMessage.textContent =
-        `تمام يا ${name} ☀️ اختيار حلو. بما إني عرفت سنك وطولك ووزنك وبلدك، هنبدأ دلوقتي نضيف درجة بشرتك ووقت التعرض وباقي العوامل المهمة، وبعدها نبني جرعة الشمس بدل ما نرمي رقم عشوائي.`;
 
+        `تمام يا ${name} ☀️ اختيار حلو. بما إني عرفت سنك وطولك ووزنك وبلدك، هنبدأ دلوقتي نضيف المعلومات الخاصة بالشمس، زي درجة بشرتك ووقت التعرض، وبعدها نبني الجرعة بدل ما نرمي رقم عشوائي.`;
 
 }
 
 
 /* =========================================
-   الرجوع للعادات
+   الرجوع
 ========================================= */
 
-if (backToHabits) {
+if(backToHabits){
 
     backToHabits.addEventListener(
         "click",
-        function () {
+        function(){
 
             showPage(habits);
 
@@ -842,20 +1212,26 @@ if (backToHabits) {
    حماية
 ========================================= */
 
-if (!startButton) {
+if(!startButton){
+
     console.error(
         "SunDose: startButton غير موجود"
     );
+
 }
 
-if (!nextButton) {
+if(!nextButton){
+
     console.error(
         "SunDose: nextButton غير موجود"
     );
+
 }
 
-if (!habitList) {
+if(!habitList){
+
     console.error(
         "SunDose: habitList غير موجود"
     );
+
 }
