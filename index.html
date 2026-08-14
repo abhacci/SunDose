@@ -1,15 +1,23 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
+
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+>
 
 <title>SunDose ☀️</title>
 
+
 <style>
+
 *{
     box-sizing:border-box;
 }
+
 
 html,body{
     margin:0;
@@ -20,15 +28,18 @@ html,body{
     color:#403a32;
 }
 
+
 body{
     overflow-x:hidden;
 }
+
 
 .app{
     min-height:100vh;
     display:flex;
     justify-content:center;
 }
+
 
 .screen{
     width:min(100%,520px);
@@ -38,6 +49,7 @@ body{
     flex-direction:column;
 }
 
+
 .top{
     text-align:center;
     font-size:20px;
@@ -46,7 +58,10 @@ body{
     margin-bottom:25px;
 }
 
-/* الصفحة الرئيسية */
+
+/* ==============================
+   الصفحة الرئيسية
+   ============================== */
 
 .hero{
     min-height:100vh;
@@ -56,6 +71,7 @@ body{
     text-align:center;
 }
 
+
 .sana{
     width:155px;
     height:155px;
@@ -64,12 +80,14 @@ body{
     margin:0 auto 12px;
 }
 
+
 .title{
     margin:5px 0 12px;
     font-size:32px;
     font-weight:900;
     color:#332d26;
 }
+
 
 .sub{
     margin:0 auto 25px;
@@ -78,6 +96,7 @@ body{
     line-height:1.9;
     color:#766d61;
 }
+
 
 .btn{
     width:100%;
@@ -92,15 +111,20 @@ body{
     box-shadow:0 10px 25px rgba(242,170,25,.20);
 }
 
+
 .btn:active{
     transform:scale(.99);
 }
 
-/* شاشة التعارف */
+
+/* ==============================
+   شاشة التعارف
+   ============================== */
 
 .hidden{
     display:none !important;
 }
+
 
 .card{
     background:rgba(255,255,255,.94);
@@ -108,6 +132,7 @@ body{
     padding:22px 18px;
     box-shadow:0 10px 35px rgba(0,0,0,.06);
 }
+
 
 .small-sana{
     width:80px;
@@ -117,6 +142,7 @@ body{
     margin:0 auto 5px;
 }
 
+
 .progress{
     height:7px;
     background:#eee4d0;
@@ -124,6 +150,7 @@ body{
     overflow:hidden;
     margin-bottom:20px;
 }
+
 
 .progress span{
     display:block;
@@ -133,6 +160,7 @@ body{
     border-radius:20px;
     transition:.3s;
 }
+
 
 .message{
     background:#fff;
@@ -144,6 +172,7 @@ body{
     line-height:1.9;
 }
 
+
 .message strong{
     display:block;
     color:#e0a016;
@@ -151,9 +180,11 @@ body{
     margin-bottom:3px;
 }
 
+
 .field{
     margin-top:15px;
 }
+
 
 .field label{
     display:block;
@@ -161,6 +192,7 @@ body{
     font-weight:800;
     margin-bottom:8px;
 }
+
 
 input{
     width:100%;
@@ -172,9 +204,11 @@ input{
     outline:none;
 }
 
+
 input:focus{
     border-color:#f2b522;
 }
+
 
 .unit{
     margin-top:6px;
@@ -182,11 +216,13 @@ input:focus{
     font-size:14px;
 }
 
+
 .gender{
     display:grid;
     grid-template-columns:1fr 1fr;
     gap:10px;
 }
+
 
 .gender button{
     border:1px solid #eadfc8;
@@ -196,7 +232,9 @@ input:focus{
     font-size:17px;
     font-weight:700;
     color:#4b443b;
+    cursor:pointer;
 }
+
 
 .gender button.active{
     background:#fff1c4;
@@ -204,11 +242,15 @@ input:focus{
     color:#c58200;
 }
 
+
 .actions{
     margin-top:20px;
 }
 
-/* العادات */
+
+/* ==============================
+   العادات
+   ============================== */
 
 .habit{
     background:#fff;
@@ -217,13 +259,23 @@ input:focus{
     padding:17px;
     margin-top:12px;
     cursor:pointer;
+    transition:
+        transform .15s ease,
+        box-shadow .15s ease;
 }
+
+
+.habit:active{
+    transform:scale(.98);
+}
+
 
 .habit strong{
     display:block;
     font-size:18px;
     margin-bottom:7px;
 }
+
 
 .habit p{
     margin:0;
@@ -232,41 +284,95 @@ input:focus{
     font-size:15px;
 }
 
+
+/* ==============================
+   رسالة الانتقال
+   ============================== */
+
+.transition-message{
+    margin-top:18px;
+    padding:16px;
+    border-radius:18px;
+    background:#fff8dc;
+    color:#72591b;
+    font-size:16px;
+    line-height:1.8;
+    text-align:center;
+    display:none;
+}
+
+
+.transition-message.show{
+    display:block;
+    animation:fadeIn .35s ease;
+}
+
+
+@keyframes fadeIn{
+
+    from{
+        opacity:0;
+        transform:translateY(8px);
+    }
+
+    to{
+        opacity:1;
+        transform:translateY(0);
+    }
+
+}
+
+
 @media(max-width:380px){
 
     .screen{
         padding:20px 14px 30px;
     }
 
+
     .sana{
         width:130px;
         height:130px;
     }
 
+
     .title{
         font-size:28px;
     }
 
+
     .sub{
         font-size:16px;
     }
+
 }
+
 </style>
+
 </head>
 
+
 <body>
+
 
 <div class="app">
 
 <main class="screen">
 
-<!-- البداية -->
 
-<section id="home" class="hero">
+<!-- ==============================
+     البداية
+     ============================== -->
+
+<section
+    id="home"
+    class="hero"
+>
 
     <div class="top">
         SunDose ☀️
     </div>
+
 
     <img
         src="assets/sana.png"
@@ -274,9 +380,11 @@ input:focus{
         alt="سنا"
     >
 
+
     <h1 class="title">
         أهلاً... أنا سنا 💛
     </h1>
+
 
     <p class="sub">
         خلّينا نتعرّف على بعض الأول،
@@ -284,26 +392,40 @@ input:focus{
         اللي تناسبك.
     </p>
 
-    <button class="btn" id="startButton">
+
+    <button
+        class="btn"
+        id="startButton"
+        type="button"
+    >
         نتعرّف على بعض ☀️
     </button>
 
 </section>
 
 
-<!-- التعارف -->
 
-<section id="welcome" class="hidden">
+<!-- ==============================
+     التعارف
+     ============================== -->
+
+<section
+    id="welcome"
+    class="hidden"
+>
 
     <div class="top">
         SunDose ☀️
     </div>
 
+
     <div class="progress">
         <span id="progressBar"></span>
     </div>
 
+
     <div class="card">
+
 
         <img
             src="assets/sana.png"
@@ -311,41 +433,57 @@ input:focus{
             alt="سنا"
         >
 
+
         <div class="message">
 
-            <strong>سنا 💛</strong>
+            <strong>
+                سنا 💛
+            </strong>
+
 
             <span id="question"></span>
 
         </div>
 
+
         <div id="answerArea"></div>
+
 
         <div class="actions">
 
             <button
                 class="btn"
                 id="nextButton"
+                type="button"
             >
                 نكمل سوا ☀️
             </button>
 
         </div>
 
+
     </div>
 
 </section>
 
 
-<!-- العادات -->
 
-<section id="habits" class="hidden">
+<!-- ==============================
+     العادات
+     ============================== -->
+
+<section
+    id="habits"
+    class="hidden"
+>
 
     <div class="top">
         SunDose ☀️
     </div>
 
+
     <div class="card">
+
 
         <img
             src="assets/sana.png"
@@ -353,90 +491,146 @@ input:focus{
             alt="سنا"
         >
 
+
         <div class="message">
 
-            <strong>سنا 💛</strong>
+            <strong>
+                سنا 💛
+            </strong>
+
 
             <span id="habitMessage"></span>
 
         </div>
 
+
         <div id="habitList"></div>
+
+
+        <div
+            id="transitionMessage"
+            class="transition-message"
+        >
+            تمام يا صديقي 💛
+            سنا هتجهزلك جرعة الشمس...
+        </div>
+
 
     </div>
 
 </section>
+
 
 </main>
 
 </div>
 
 
+
 <script>
 
+/* =========================================
+   بيانات المستخدم
+   ========================================= */
+
 const user = {
+
     name:"",
     gender:"",
     weight:"",
     height:"",
     country:""
+
 };
 
+
+
+/* =========================================
+   أسئلة التعارف
+   ========================================= */
 
 const steps = [
 
     {
         key:"name",
+
         question:
         "قبل ما نبدأ... تحب أناديك بإيه؟ 😊",
+
         type:"text",
+
         label:"اسمك",
+
         placeholder:"اكتب اسمك هنا"
     },
 
+
     {
         key:"gender",
+
         question:
         "جميل! طيب أكلّمك بصيغة إيه عشان كلامنا يبقى مريح ولطيف ليك؟ 💛",
+
         type:"gender"
     },
 
+
     {
         key:"weight",
+
         question:
         "طيب قولي وزنك كام تقريبًا؟ 😄 مش امتحان خالص، الرقم ده بس يساعدني أفهم احتياجك أكتر.",
+
         type:"number",
+
         label:"الوزن",
+
         placeholder:"مثال: 80",
+
         unit:"كجم"
     },
 
+
     {
         key:"height",
+
         question:
         "وطولك كام؟ 🌱 عشان أقدر أكون صورة أوضح عن جسمك ونشاطك.",
+
         type:"number",
+
         label:"الطول",
+
         placeholder:"مثال: 175",
+
         unit:"سم"
     },
 
+
     {
         key:"country",
+
         question:
         "وآخر حاجة في التعارف... إنت من أنهي بلد؟ 🌍 الجو والشمس والعادات بتفرق من مكان لمكان.",
+
         type:"text",
+
         label:"البلد",
+
         placeholder:"مثال: مصر"
     }
 
 ];
 
 
+
 let currentStep = 0;
 
 
-/* بداية التعارف */
+
+/* =========================================
+   بداية التعارف
+   ========================================= */
 
 document
 .getElementById("startButton")
@@ -446,32 +640,43 @@ document
     .getElementById("home")
     .classList.add("hidden");
 
+
     document
     .getElementById("welcome")
     .classList.remove("hidden");
+
 
     renderStep();
 
 });
 
 
-/* رسم السؤال */
+
+/* =========================================
+   رسم السؤال
+   ========================================= */
 
 function renderStep(){
 
-    const step = steps[currentStep];
+    const step =
+    steps[currentStep];
+
 
     document
     .getElementById("question")
-    .textContent = step.question;
+    .textContent =
+    step.question;
 
 
     const progress =
-    ((currentStep + 1) / steps.length) * 100;
+    ((currentStep + 1) /
+    steps.length) * 100;
+
 
     document
     .getElementById("progressBar")
-    .style.width = progress + "%";
+    .style.width =
+    progress + "%";
 
 
     let html = "";
@@ -490,6 +695,7 @@ function renderStep(){
                 👨 ذكر
             </button>
 
+
             <button
                 type="button"
                 data-gender="female"
@@ -503,6 +709,7 @@ function renderStep(){
 
     }
 
+
     else{
 
         html = `
@@ -513,12 +720,14 @@ function renderStep(){
                 ${step.label}
             </label>
 
+
             <input
                 id="answerInput"
                 type="${step.type}"
                 placeholder="${step.placeholder}"
                 value="${user[step.key]}"
             >
+
 
             ${
                 step.unit
@@ -537,7 +746,9 @@ function renderStep(){
 
     document
     .getElementById("answerArea")
-    .innerHTML = html;
+    .innerHTML =
+    html;
+
 
 
     if(step.type === "gender"){
@@ -545,6 +756,7 @@ function renderStep(){
         document
         .querySelectorAll("[data-gender]")
         .forEach(button => {
+
 
             if(
                 user.gender ===
@@ -556,22 +768,31 @@ function renderStep(){
             }
 
 
-            button.addEventListener("click",function(){
+            button.addEventListener(
+                "click",
+                function(){
 
-                user.gender =
-                this.dataset.gender;
-
-
-                document
-                .querySelectorAll("[data-gender]")
-                .forEach(b =>
-                    b.classList.remove("active")
-                );
+                    user.gender =
+                    this.dataset.gender;
 
 
-                this.classList.add("active");
+                    document
+                    .querySelectorAll(
+                        "[data-gender]"
+                    )
+                    .forEach(b =>
+                        b.classList.remove(
+                            "active"
+                        )
+                    );
 
-            });
+
+                    this.classList.add(
+                        "active"
+                    );
+
+                }
+            );
 
         });
 
@@ -580,13 +801,17 @@ function renderStep(){
 }
 
 
-/* زر التالي */
+
+/* =========================================
+   زر التالي
+   ========================================= */
 
 document
 .getElementById("nextButton")
 .addEventListener("click",function(){
 
-    const step = steps[currentStep];
+    const step =
+    steps[currentStep];
 
 
     if(step.type === "gender"){
@@ -598,14 +823,19 @@ document
             );
 
             return;
+
         }
 
     }
 
+
     else{
 
         const input =
-        document.getElementById("answerInput");
+        document.getElementById(
+            "answerInput"
+        );
+
 
         const value =
         input.value.trim();
@@ -618,10 +848,12 @@ document
             );
 
             return;
+
         }
 
 
-        user[step.key] = value;
+        user[step.key] =
+        value;
 
     }
 
@@ -629,11 +861,15 @@ document
     currentStep++;
 
 
-    if(currentStep < steps.length){
+    if(
+        currentStep <
+        steps.length
+    ){
 
         renderStep();
 
     }
+
 
     else{
 
@@ -644,7 +880,10 @@ document
 });
 
 
-/* مرحلة العادات */
+
+/* =========================================
+   مرحلة العادات
+   ========================================= */
 
 function showHabits(){
 
@@ -659,7 +898,8 @@ function showHabits(){
 
 
     const name =
-    user.name || "يا صديقي";
+    user.name ||
+    "يا صديقي";
 
 
     document
@@ -670,32 +910,44 @@ function showHabits(){
     أنا مش هفرض عليك حاجة؛ اختار الحاجة اللي حابب تبدأ بيها وأنا أشرحلك فائدتها الأول.`;
 
 
+
     const habits = [
 
         {
             icon:"☀️",
+
             title:"الشمس",
+
             text:
             "مثال: الخروج في وقت مناسب والتعرّض للشمس بشكل آمن. الشمس مصدر طبيعي لفيتامين D."
         },
 
+
         {
             icon:"💧",
+
             title:"شرب المياه",
+
             text:
             "مثال: تنظيم شرب المياه خلال اليوم. الترطيب الجيد يساعد جسمك على أداء وظائفه بشكل طبيعي."
         },
 
+
         {
             icon:"🏃",
+
             title:"الرياضة والحركة",
+
             text:
             "مثال: المشي أو أي حركة مناسبة لمستواك. النشاط المنتظم مفيد للقلب واللياقة والمزاج."
         },
 
+
         {
             icon:"💊",
+
             title:"العلاج أو المكملات",
+
             text:
             "لو عندك علاج موصوف أو نقص مُثبت، نقدر ننظّم معلوماته. الدواء أو المكمل مش بيتاخد لمجرد اقتراح."
         }
@@ -703,10 +955,13 @@ function showHabits(){
     ];
 
 
+
     document
     .getElementById("habitList")
     .innerHTML =
-    habits.map((habit,index)=>`
+
+    habits.map(
+        (habit,index) => `
 
         <div
             class="habit"
@@ -718,33 +973,90 @@ function showHabits(){
                 ${habit.title}
             </strong>
 
+
             <p>
                 ${habit.text}
             </p>
 
         </div>
 
-    `).join("");
+        `
+    ).join("");
 
+
+
+    /* =====================================
+       الضغط على العادة
+       ===================================== */
 
     document
     .querySelectorAll(".habit")
     .forEach(element => {
 
-        element.addEventListener("click",function(){
 
-            const habit =
-            habits[this.dataset.index];
+        element.addEventListener(
+            "click",
+            function(){
+
+                const habit =
+                habits[this.dataset.index];
 
 
-            document
-            .getElementById("habitMessage")
-            .textContent =
-            `اختيار حلو يا ${name} 😊
-            نبدأ بـ ${habit.title}.
-            خلّيني أمشي معاك فيها واحدة واحدة وبشكل يناسبك.`;
+                /*
+                 * أولًا سنا ترد على المستخدم
+                 */
 
-        });
+                document
+                .getElementById(
+                    "habitMessage"
+                )
+                .textContent =
+
+                `اختيار حلو يا ${name} 😊
+                نبدأ بـ ${habit.title}.
+                خلّيني أمشي معاك فيها واحدة واحدة وبشكل يناسبك.`;
+
+
+
+                /*
+                 * لو الاختيار هو الشمس
+                 */
+
+                if(
+                    habit.title ===
+                    "الشمس"
+                ){
+
+                    const transition =
+                    document.getElementById(
+                        "transitionMessage"
+                    );
+
+
+                    transition.classList.add(
+                        "show"
+                    );
+
+
+                    /*
+                     * ننتظر قليلًا حتى يقرأ
+                     * المستخدم رد سنا
+                     */
+
+                    setTimeout(
+                        function(){
+
+                            window.location.href =
+                            "./sun-dose.html";
+
+                        },
+                        900
+                    );
+
+                }
+
+            }
+        );
 
     });
 
