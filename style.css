@@ -1,297 +1,710 @@
-* {
-    box-sizing: border-box;
+/* =========================================
+   SunDose ☀️
+   التصميم الكامل
+========================================= */
+
+*{
+    box-sizing:border-box;
 }
 
 html,
-body {
-    margin: 0;
-    padding: 0;
-    min-height: 100%;
-    font-family: Arial, "Cairo", sans-serif;
+body{
+    margin:0;
+    padding:0;
+    min-height:100%;
+    font-family:
+        Arial,
+        "Cairo",
+        Tahoma,
+        sans-serif;
 }
 
-body {
-    background: #fff8e8;
-    color: #3f382f;
+body{
+    background:#fff8e8;
+    color:#40382f;
+    overflow-x:hidden;
 }
 
 button,
-input {
-    font-family: inherit;
+input{
+    font-family:inherit;
 }
 
-button {
-    cursor: pointer;
+button{
+    -webkit-tap-highlight-color:transparent;
 }
 
-.hidden {
-    display: none !important;
+.hidden{
+    display:none !important;
 }
 
-.app {
-    width: 100%;
-    min-height: 100vh;
+
+/* =========================================
+   التطبيق
+========================================= */
+
+.app{
+    width:100%;
+    min-height:100vh;
 }
 
-.screen {
-    width: min(100%, 520px);
-    min-height: 100vh;
-    margin: auto;
-    padding: 22px 18px 35px;
+.screen{
+    width:min(100%,520px);
+    min-height:100vh;
+    margin:auto;
+    padding:22px 18px 35px;
 }
 
-.brand {
-    text-align: center;
-    color: #eda51a;
-    font-size: 21px;
-    font-weight: 800;
-    margin-bottom: 22px;
+
+/* =========================================
+   العلامة
+========================================= */
+
+.brand{
+    text-align:center;
+    color:#eda51a;
+    font-size:21px;
+    font-weight:900;
+    margin-bottom:22px;
 }
 
-.home-content {
-    min-height: calc(100vh - 100px);
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
+
+/* =========================================
+   الصفحة الرئيسية
+========================================= */
+
+.home-content{
+    min-height:calc(100vh - 80px);
+
+    display:flex;
+    flex-direction:column;
+
+    align-items:center;
+    justify-content:center;
+
+    text-align:center;
 }
 
-.sana {
-    width: 155px;
-    height: 155px;
-    object-fit: contain;
-    display: block;
-    margin: 0 auto 15px;
-    filter: drop-shadow(0 8px 12px rgba(233, 169, 31, .15));
+.sana-wrap{
+    display:flex;
+    justify-content:center;
+    align-items:center;
 }
 
-.sana.small {
-    width: 120px;
-    height: 120px;
+.sana{
+    display:block;
+
+    width:155px;
+    height:155px;
+
+    object-fit:contain;
+
+    filter:
+        drop-shadow(
+            0 10px 15px
+            rgba(233,169,31,.18)
+        );
+
+    animation:
+        sanaIdle 3.5s ease-in-out infinite;
+
+    transform-origin:center bottom;
 }
 
-h1 {
-    margin: 5px 0 12px;
-    color: #e9a018;
-    font-size: 32px;
+.sana.small{
+    width:125px;
+    height:125px;
 }
 
-.home-content p {
-    max-width: 430px;
-    margin: 0 auto 28px;
-    color: #74695d;
-    font-size: 18px;
-    line-height: 1.9;
+h1{
+    margin:8px 0 12px;
+
+    color:#eda51a;
+
+    font-size:36px;
+    font-weight:900;
 }
 
-.primary-btn {
-    width: 100%;
-    border: 0;
-    border-radius: 18px;
-    padding: 16px 18px;
-    background: linear-gradient(135deg, #ffc331, #f5a415);
-    color: white;
-    font-size: 18px;
-    font-weight: 800;
-    box-shadow: 0 9px 22px rgba(243, 168, 23, .20);
+.home-text{
+    max-width:430px;
+
+    margin:0 0 28px;
+
+    color:#756b5f;
+
+    font-size:18px;
+    line-height:1.9;
 }
 
-.primary-btn:active {
-    transform: scale(.99);
+
+/* =========================================
+   الأزرار
+========================================= */
+
+.primary-btn{
+    width:100%;
+
+    border:0;
+    border-radius:18px;
+
+    padding:16px 18px;
+
+    background:
+        linear-gradient(
+            135deg,
+            #ffc331,
+            #f5a415
+        );
+
+    color:#fff;
+
+    font-size:18px;
+    font-weight:900;
+
+    cursor:pointer;
+
+    box-shadow:
+        0 10px 24px
+        rgba(243,168,23,.20);
+
+    transition:
+        transform .18s ease,
+        box-shadow .18s ease,
+        opacity .18s ease;
 }
 
-.secondary-btn {
-    width: 100%;
-    margin-top: 14px;
-    border: 1px solid #eadfc9;
-    border-radius: 18px;
-    padding: 15px;
-    background: white;
-    color: #7d7162;
-    font-size: 17px;
-    font-weight: 700;
+.primary-btn:hover{
+    transform:translateY(-1px);
 }
 
-.progress {
-    height: 7px;
-    background: #eee3cd;
-    border-radius: 99px;
-    overflow: hidden;
-    margin: 5px 0 20px;
+.primary-btn:active{
+    transform:scale(.98);
 }
 
-.progress span {
-    display: block;
-    height: 100%;
-    width: 0;
-    background: #ffb522;
-    border-radius: 99px;
-    transition: width .3s ease;
+.primary-btn:disabled{
+    opacity:.6;
+    cursor:wait;
 }
 
-.message {
-    width: 100%;
-    background: white;
-    border-radius: 22px;
-    padding: 18px 16px;
-    text-align: center;
-    box-shadow: 0 7px 24px rgba(96, 74, 32, .07);
-    margin-bottom: 16px;
+.secondary-btn{
+    width:100%;
+
+    border:1px solid #eadfc9;
+    border-radius:17px;
+
+    padding:14px;
+
+    background:#fff;
+
+    color:#776c5e;
+
+    font-size:16px;
+    font-weight:800;
+
+    cursor:pointer;
 }
 
-.message strong {
-    display: block;
-    color: #e0a016;
-    font-size: 15px;
-    margin-bottom: 5px;
+
+/* =========================================
+   شريط التقدم
+========================================= */
+
+.progress{
+    height:7px;
+
+    background:#eee3cd;
+
+    border-radius:99px;
+
+    overflow:hidden;
+
+    margin:3px 0 22px;
 }
 
-.message p {
-    margin: 0;
-    font-size: 18px;
-    line-height: 1.9;
+.progress span{
+    display:block;
+
+    height:100%;
+    width:0;
+
+    background:#ffb522;
+
+    border-radius:99px;
+
+    transition:
+        width .4s ease;
 }
 
-#answerArea {
-    width: 100%;
-    margin-bottom: 12px;
+
+/* =========================================
+   المحادثة
+========================================= */
+
+.conversation{
+    display:flex;
+    flex-direction:column;
+    align-items:center;
 }
 
-.field {
-    width: 100%;
+.conversation-sana{
+    margin:0 0 8px;
 }
 
-.field label {
-    display: block;
-    margin-bottom: 8px;
-    font-weight: 700;
+.message{
+    width:100%;
+
+    background:#fff;
+
+    border-radius:23px;
+
+    padding:18px 17px;
+
+    text-align:right;
+
+    box-shadow:
+        0 8px 25px
+        rgba(96,74,32,.07);
+
+    animation:
+        messageIn .4s ease;
 }
 
-input {
-    width: 100%;
-    border: 1.5px solid #eadfc9;
-    background: white;
-    border-radius: 16px;
-    padding: 14px;
-    font-size: 17px;
-    outline: none;
+.message-name{
+    color:#e2a014;
+
+    font-size:15px;
+    font-weight:900;
+
+    margin-bottom:7px;
 }
 
-input:focus {
-    border-color: #f7b329;
+.question{
+    min-height:45px;
+
+    font-size:17px;
+
+    line-height:1.95;
+
+    color:#463e34;
+
+    transition:
+        opacity .25s ease,
+        transform .25s ease;
 }
 
-.unit {
-    color: #8a7e6d;
-    font-size: 14px;
-    margin-top: 6px;
+.answer-area{
+    width:100%;
+
+    margin-top:15px;
+
+    animation:
+        answerIn .35s ease;
 }
 
-.gender-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 10px;
+
+/* =========================================
+   الحقول
+========================================= */
+
+.field{
+    width:100%;
 }
 
-.gender-btn {
-    border: 1.5px solid #eadfc9;
-    background: white;
-    border-radius: 17px;
-    padding: 16px 10px;
-    font-size: 17px;
-    font-weight: 700;
-    color: #4b443b;
+.field label{
+    display:block;
+
+    margin-bottom:8px;
+
+    font-size:16px;
+    font-weight:900;
 }
 
-.gender-btn.active {
-    border-color: #ffb323;
-    background: #fff8df;
-    color: #c98900;
+input{
+    width:100%;
+
+    border:1.5px solid #eadfc9;
+
+    background:#fff;
+
+    border-radius:16px;
+
+    padding:14px;
+
+    color:#40382f;
+
+    font-size:17px;
+
+    outline:none;
+
+    transition:
+        border-color .2s ease,
+        box-shadow .2s ease;
 }
 
-.habit-list {
-    width: 100%;
+input:focus{
+    border-color:#f5b126;
+
+    box-shadow:
+        0 0 0 3px
+        rgba(245,177,38,.10);
 }
 
-.habit {
-    width: 100%;
-    border: 1.5px solid #eadfc9;
-    background: white;
-    border-radius: 19px;
-    padding: 19px 16px;
-    margin-bottom: 12px;
-    text-align: right;
-    transition: .2s;
+.unit{
+    margin-top:6px;
+
+    color:#938675;
+
+    font-size:13px;
 }
 
-.habit:active {
-    transform: scale(.99);
+
+/* =========================================
+   النوع
+========================================= */
+
+.gender-grid{
+    width:100%;
+
+    display:grid;
+
+    grid-template-columns:1fr 1fr;
+
+    gap:10px;
 }
 
-.habit strong {
-    display: block;
-    font-size: 20px;
-    margin-bottom: 8px;
+.gender-btn{
+    border:1.5px solid #eadfc9;
+
+    background:#fff;
+
+    border-radius:17px;
+
+    padding:16px 10px;
+
+    color:#4b4339;
+
+    font-size:17px;
+    font-weight:900;
+
+    cursor:pointer;
+
+    transition:
+        .2s ease;
 }
 
-.habit p {
-    margin: 0;
-    color: #71685d;
-    font-size: 15px;
-    line-height: 1.8;
+.gender-btn:hover{
+    transform:translateY(-1px);
 }
 
-.dose-card {
-    width: 100%;
-    background: white;
-    border: 1.5px solid #eadfc9;
-    border-radius: 22px;
-    padding: 25px 18px;
-    text-align: center;
-    box-shadow: 0 7px 24px rgba(96, 74, 32, .06);
+.gender-btn.active{
+    border-color:#ffb323;
+
+    background:#fff8df;
+
+    color:#c98700;
+
+    box-shadow:
+        0 5px 15px
+        rgba(255,179,35,.10);
 }
 
-.dose-icon {
-    font-size: 55px;
-    margin-bottom: 8px;
+
+/* =========================================
+   زر التالي
+========================================= */
+
+.next-btn{
+    margin-top:12px;
 }
 
-.dose-card h2 {
-    margin: 0 0 10px;
-    color: #e5a017;
-    font-size: 26px;
+
+/* =========================================
+   الكتابة
+========================================= */
+
+.typing-dots{
+    display:inline-block;
+
+    color:#f2ae1c;
+
+    font-size:20px;
+    font-weight:900;
+
+    letter-spacing:5px;
+
+    animation:
+        typingDots 1s
+        infinite ease-in-out;
 }
 
-.dose-card p {
-    margin: 0;
-    color: #71685d;
-    font-size: 17px;
-    line-height: 1.9;
-}
+@keyframes typingDots{
 
-@media (max-width: 360px) {
-
-    .screen {
-        padding-left: 14px;
-        padding-right: 14px;
+    0%{
+        opacity:.25;
+        transform:translateY(0);
     }
 
-    .sana {
-        width: 130px;
-        height: 130px;
+    50%{
+        opacity:1;
+        transform:translateY(-2px);
     }
 
-    .sana.small {
-        width: 105px;
-        height: 105px;
+    100%{
+        opacity:.25;
+        transform:translateY(0);
     }
 
-    h1 {
-        font-size: 28px;
+}
+
+
+/* =========================================
+   حركة سنا
+========================================= */
+
+@keyframes sanaIdle{
+
+    0%,
+    100%{
+        transform:
+            translateY(0)
+            rotate(0deg);
     }
 
-    .home-content p {
-        font-size: 16px;
+    50%{
+        transform:
+            translateY(-5px)
+            rotate(-1deg);
     }
+
+}
+
+
+/* =========================================
+   دخول الرسالة
+========================================= */
+
+@keyframes messageIn{
+
+    from{
+        opacity:0;
+
+        transform:
+            translateY(10px)
+            scale(.98);
+    }
+
+    to{
+        opacity:1;
+
+        transform:
+            translateY(0)
+            scale(1);
+    }
+
+}
+
+
+/* =========================================
+   دخول الإجابة
+========================================= */
+
+@keyframes answerIn{
+
+    from{
+        opacity:0;
+
+        transform:
+            translateY(7px);
+    }
+
+    to{
+        opacity:1;
+
+        transform:
+            translateY(0);
+    }
+
+}
+
+
+/* =========================================
+   العادات
+========================================= */
+
+#habitMessage{
+    font-size:17px;
+    line-height:1.95;
+}
+
+.habit-list{
+    width:100%;
+
+    display:grid;
+
+    grid-template-columns:
+        repeat(2,1fr);
+
+    gap:11px;
+
+    margin-top:15px;
+}
+
+.habit{
+    border:1.5px solid #eadfc9;
+
+    background:#fff;
+
+    border-radius:19px;
+
+    padding:16px 11px;
+
+    text-align:center;
+
+    cursor:pointer;
+
+    transition:
+        transform .18s ease,
+        border-color .18s ease,
+        background .18s ease;
+}
+
+.habit:hover{
+    transform:translateY(-2px);
+}
+
+.habit.active{
+    border-color:#ffb323;
+
+    background:#fff8df;
+}
+
+.habit .icon{
+    font-size:30px;
+}
+
+.habit b{
+    display:block;
+
+    margin-top:6px;
+
+    font-size:16px;
+}
+
+.habit p{
+    margin:6px 0 0;
+
+    color:#887b6b;
+
+    font-size:12px;
+
+    line-height:1.65;
+}
+
+
+/* =========================================
+   جرعة الشمس
+========================================= */
+
+.sun-placeholder{
+    width:100%;
+
+    margin-top:16px;
+
+    padding:25px 18px;
+
+    background:#fff;
+
+    border:1px solid #eee1ca;
+
+    border-radius:22px;
+
+    text-align:center;
+
+    box-shadow:
+        0 7px 24px
+        rgba(96,74,32,.06);
+}
+
+.sun-big{
+    font-size:65px;
+
+    animation:
+        sunPulse 2.5s
+        ease-in-out
+        infinite;
+}
+
+.sun-placeholder h2{
+    margin:8px 0;
+
+    color:#e7a017;
+
+    font-size:24px;
+}
+
+.sun-placeholder p{
+    margin:0;
+
+    color:#807465;
+
+    font-size:15px;
+
+    line-height:1.8;
+}
+
+#backToHabits{
+    margin-top:12px;
+}
+
+@keyframes sunPulse{
+
+    0%,
+    100%{
+        transform:scale(1);
+    }
+
+    50%{
+        transform:scale(1.08);
+    }
+
+}
+
+
+/* =========================================
+   موبايل صغير
+========================================= */
+
+@media(max-width:380px){
+
+    .screen{
+        padding-left:14px;
+        padding-right:14px;
+    }
+
+    .sana{
+        width:130px;
+        height:130px;
+    }
+
+    .sana.small{
+        width:110px;
+        height:110px;
+    }
+
+    h1{
+        font-size:30px;
+    }
+
+    .home-text{
+        font-size:16px;
+    }
+
+    .question{
+        font-size:16px;
+    }
+
+    .habit-list{
+        grid-template-columns:1fr;
+    }
+
 }
