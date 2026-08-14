@@ -1,41 +1,38 @@
 /* =========================================
    SunDose ☀️
-   التصميم الكامل
+   التصميم الرئيسي
 ========================================= */
 
-*{
-    box-sizing:border-box;
+* {
+    box-sizing: border-box;
 }
 
 html,
-body{
-    margin:0;
-    padding:0;
-    min-height:100%;
-    font-family:
-        Arial,
-        "Cairo",
-        Tahoma,
-        sans-serif;
+body {
+    margin: 0;
+    padding: 0;
+    min-height: 100%;
+    font-family: Arial, "Cairo", Tahoma, sans-serif;
+    background: #fff9e9;
+    color: #40382f;
 }
 
-body{
-    background:#fff8e8;
-    color:#40382f;
-    overflow-x:hidden;
+body {
+    overflow-x: hidden;
 }
 
 button,
-input{
-    font-family:inherit;
+input,
+select {
+    font-family: inherit;
 }
 
-button{
-    -webkit-tap-highlight-color:transparent;
+button {
+    -webkit-tap-highlight-color: transparent;
 }
 
-.hidden{
-    display:none !important;
+.hidden {
+    display: none !important;
 }
 
 
@@ -43,16 +40,15 @@ button{
    التطبيق
 ========================================= */
 
-.app{
-    width:100%;
-    min-height:100vh;
+.app {
+    min-height: 100vh;
 }
 
-.screen{
-    width:min(100%,520px);
-    min-height:100vh;
-    margin:auto;
-    padding:22px 18px 35px;
+.screen {
+    width: min(100%, 520px);
+    min-height: 100vh;
+    margin: auto;
+    padding: 22px 18px 35px;
 }
 
 
@@ -60,80 +56,85 @@ button{
    العلامة
 ========================================= */
 
-.brand{
-    text-align:center;
-    color:#eda51a;
-    font-size:21px;
-    font-weight:900;
-    margin-bottom:22px;
+.brand {
+    text-align: center;
+    color: #eca719;
+    font-size: 21px;
+    font-weight: 900;
+    margin-bottom: 22px;
 }
 
 
 /* =========================================
-   الصفحة الرئيسية
+   الرئيسية
 ========================================= */
 
-.home-content{
-    min-height:calc(100vh - 80px);
-
-    display:flex;
-    flex-direction:column;
-
-    align-items:center;
-    justify-content:center;
-
-    text-align:center;
+.home-content {
+    min-height: calc(100vh - 90px);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
 }
 
-.sana-wrap{
-    display:flex;
-    justify-content:center;
-    align-items:center;
+.home-content h1 {
+    margin: 5px 0 12px;
+    color: #eaa019;
+    font-size: 34px;
+    font-weight: 900;
 }
 
-.sana{
-    display:block;
-
-    width:155px;
-    height:155px;
-
-    object-fit:contain;
-
-    filter:
-        drop-shadow(
-            0 10px 15px
-            rgba(233,169,31,.18)
-        );
-
-    animation:
-        sanaIdle 3.5s ease-in-out infinite;
-
-    transform-origin:center bottom;
+.home-text {
+    max-width: 430px;
+    margin: 0 auto 28px;
+    color: #756b5f;
+    font-size: 18px;
+    line-height: 1.9;
 }
 
-.sana.small{
-    width:125px;
-    height:125px;
+
+/* =========================================
+   سنا
+========================================= */
+
+.sana-wrap {
+    position: relative;
 }
 
-h1{
-    margin:8px 0 12px;
-
-    color:#eda51a;
-
-    font-size:36px;
-    font-weight:900;
+.sana {
+    width: 160px;
+    height: 160px;
+    object-fit: contain;
+    display: block;
 }
 
-.home-text{
-    max-width:430px;
+#homeSana {
+    animation: sanaFloat 3.2s ease-in-out infinite;
+}
 
-    margin:0 0 28px;
+.sana-area {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 155px;
+}
 
-    color:#756b5f;
+.sana-chat {
+    animation: sanaTalk 2.8s ease-in-out infinite;
+    filter: drop-shadow(0 9px 13px rgba(231, 168, 27, .18));
+}
 
-    font-size:18px;
-    line-height:1.9;
+.sana-chat.happy {
+    animation: sanaHappy 1.5s ease-in-out infinite;
+}
+
+.sana.thinking {
+    animation: sanaThinking 1.2s ease-in-out infinite;
+}
+
+.sana.excited {
+    animation: sanaExcited .8s ease-in-out infinite;
 }
 
 
@@ -141,67 +142,33 @@ h1{
    الأزرار
 ========================================= */
 
-.primary-btn{
-    width:100%;
-
-    border:0;
-    border-radius:18px;
-
-    padding:16px 18px;
-
-    background:
-        linear-gradient(
-            135deg,
-            #ffc331,
-            #f5a415
-        );
-
-    color:#fff;
-
-    font-size:18px;
-    font-weight:900;
-
-    cursor:pointer;
-
-    box-shadow:
-        0 10px 24px
-        rgba(243,168,23,.20);
-
-    transition:
-        transform .18s ease,
-        box-shadow .18s ease,
-        opacity .18s ease;
+.primary-btn {
+    width: 100%;
+    border: 0;
+    border-radius: 18px;
+    padding: 16px 18px;
+    background: linear-gradient(135deg, #ffc52e, #f4a719);
+    color: #fff;
+    font-size: 18px;
+    font-weight: 900;
+    cursor: pointer;
+    box-shadow: 0 10px 25px rgba(242, 170, 25, .20);
+    transition: transform .18s ease, box-shadow .18s ease;
 }
 
-.primary-btn:hover{
-    transform:translateY(-1px);
+.primary-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 13px 28px rgba(242, 170, 25, .27);
 }
 
-.primary-btn:active{
-    transform:scale(.98);
+.primary-btn:active {
+    transform: scale(.98);
 }
 
-.primary-btn:disabled{
-    opacity:.6;
-    cursor:wait;
-}
-
-.secondary-btn{
-    width:100%;
-
-    border:1px solid #eadfc9;
-    border-radius:17px;
-
-    padding:14px;
-
-    background:#fff;
-
-    color:#776c5e;
-
-    font-size:16px;
-    font-weight:800;
-
-    cursor:pointer;
+.primary-btn:disabled {
+    opacity: .55;
+    cursor: not-allowed;
+    transform: none;
 }
 
 
@@ -209,152 +176,106 @@ h1{
    شريط التقدم
 ========================================= */
 
-.progress{
-    height:7px;
-
-    background:#eee3cd;
-
-    border-radius:99px;
-
-    overflow:hidden;
-
-    margin:3px 0 22px;
+.progress {
+    height: 7px;
+    background: #eee3ce;
+    border-radius: 99px;
+    overflow: hidden;
+    margin: 2px 0 20px;
 }
 
-.progress span{
-    display:block;
-
-    height:100%;
-    width:0;
-
-    background:#ffb522;
-
-    border-radius:99px;
-
-    transition:
-        width .4s ease;
+.progress span {
+    display: block;
+    height: 100%;
+    width: 0;
+    background: linear-gradient(90deg, #ffd34b, #f3a718);
+    border-radius: 99px;
+    transition: width .6s ease;
 }
 
 
 /* =========================================
-   المحادثة
+   رسالة سنا
 ========================================= */
 
-.conversation{
-    display:flex;
-    flex-direction:column;
-    align-items:center;
+.message {
+    width: 100%;
+    background: rgba(255, 255, 255, .96);
+    border-radius: 23px;
+    padding: 18px 17px;
+    text-align: center;
+    font-size: 18px;
+    line-height: 2;
+    box-shadow: 0 8px 28px rgba(96, 74, 32, .07);
+    min-height: 92px;
 }
 
-.conversation-sana{
-    margin:0 0 8px;
+.message-name {
+    color: #e6a015;
+    font-size: 15px;
+    font-weight: 900;
+    margin-bottom: 5px;
 }
 
-.message{
-    width:100%;
-
-    background:#fff;
-
-    border-radius:23px;
-
-    padding:18px 17px;
-
-    text-align:right;
-
-    box-shadow:
-        0 8px 25px
-        rgba(96,74,32,.07);
-
-    animation:
-        messageIn .4s ease;
-}
-
-.message-name{
-    color:#e2a014;
-
-    font-size:15px;
-    font-weight:900;
-
-    margin-bottom:7px;
-}
-
-.question{
-    min-height:45px;
-
-    font-size:17px;
-
-    line-height:1.95;
-
-    color:#463e34;
-
-    transition:
-        opacity .25s ease,
-        transform .25s ease;
-}
-
-.answer-area{
-    width:100%;
-
-    margin-top:15px;
-
-    animation:
-        answerIn .35s ease;
+.typing-text {
+    min-height: 36px;
 }
 
 
 /* =========================================
-   الحقول
+   منطقة الإجابة
 ========================================= */
 
-.field{
-    width:100%;
+#answerArea,
+#sunStepArea {
+    width: 100%;
+    margin-top: 16px;
 }
 
-.field label{
-    display:block;
-
-    margin-bottom:8px;
-
-    font-size:16px;
-    font-weight:900;
+.field {
+    width: 100%;
 }
 
-input{
-    width:100%;
-
-    border:1.5px solid #eadfc9;
-
-    background:#fff;
-
-    border-radius:16px;
-
-    padding:14px;
-
-    color:#40382f;
-
-    font-size:17px;
-
-    outline:none;
-
-    transition:
-        border-color .2s ease,
-        box-shadow .2s ease;
+.field label {
+    display: block;
+    font-weight: 900;
+    margin-bottom: 8px;
+    font-size: 16px;
 }
 
-input:focus{
-    border-color:#f5b126;
-
-    box-shadow:
-        0 0 0 3px
-        rgba(245,177,38,.10);
+input,
+select {
+    width: 100%;
+    border: 1.5px solid #eadfc9;
+    background: #fff;
+    border-radius: 16px;
+    padding: 15px;
+    outline: none;
+    font-size: 17px;
+    color: #40382f;
+    transition: border-color .2s, box-shadow .2s;
 }
 
-.unit{
-    margin-top:6px;
+input:focus,
+select:focus {
+    border-color: #f5b323;
+    box-shadow: 0 0 0 3px rgba(245, 179, 35, .10);
+}
 
-    color:#938675;
+.unit {
+    color: #8c8172;
+    font-size: 14px;
+    margin-top: 6px;
+}
 
-    font-size:13px;
+
+/* =========================================
+   الأزرار السفلية
+========================================= */
+
+.actions {
+    width: 100%;
+    margin-top: 15px;
 }
 
 
@@ -362,168 +283,68 @@ input:focus{
    النوع
 ========================================= */
 
-.gender-grid{
-    width:100%;
-
-    display:grid;
-
-    grid-template-columns:1fr 1fr;
-
-    gap:10px;
+.gender-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
 }
 
-.gender-btn{
-    border:1.5px solid #eadfc9;
-
-    background:#fff;
-
-    border-radius:17px;
-
-    padding:16px 10px;
-
-    color:#4b4339;
-
-    font-size:17px;
-    font-weight:900;
-
-    cursor:pointer;
-
-    transition:
-        .2s ease;
+.gender-btn {
+    border: 1.5px solid #eadfc9;
+    background: #fff;
+    border-radius: 17px;
+    padding: 17px 10px;
+    color: #4c443a;
+    font-size: 17px;
+    font-weight: 800;
+    cursor: pointer;
+    transition: .2s;
 }
 
-.gender-btn:hover{
-    transform:translateY(-1px);
+.gender-btn:hover {
+    transform: translateY(-2px);
 }
 
-.gender-btn.active{
-    border-color:#ffb323;
-
-    background:#fff8df;
-
-    color:#c98700;
-
-    box-shadow:
-        0 5px 15px
-        rgba(255,179,35,.10);
+.gender-btn.active {
+    border-color: #f3af1c;
+    background: #fff5d5;
+    color: #c98400;
+    box-shadow: 0 5px 15px rgba(243, 175, 28, .10);
 }
 
 
 /* =========================================
-   زر التالي
+   كروت المراجعة
 ========================================= */
 
-.next-btn{
-    margin-top:12px;
+.summary-card {
+    width: 100%;
+    background: #fff;
+    border-radius: 22px;
+    padding: 17px;
+    margin: 15px 0;
+    box-shadow: 0 7px 23px rgba(96, 74, 32, .06);
 }
 
-
-/* =========================================
-   الكتابة
-========================================= */
-
-.typing-dots{
-    display:inline-block;
-
-    color:#f2ae1c;
-
-    font-size:20px;
-    font-weight:900;
-
-    letter-spacing:5px;
-
-    animation:
-        typingDots 1s
-        infinite ease-in-out;
+.summary-row {
+    display: flex;
+    justify-content: space-between;
+    gap: 10px;
+    padding: 11px 0;
+    border-bottom: 1px solid #f1eadb;
 }
 
-@keyframes typingDots{
-
-    0%{
-        opacity:.25;
-        transform:translateY(0);
-    }
-
-    50%{
-        opacity:1;
-        transform:translateY(-2px);
-    }
-
-    100%{
-        opacity:.25;
-        transform:translateY(0);
-    }
-
+.summary-row:last-child {
+    border-bottom: 0;
 }
 
-
-/* =========================================
-   حركة سنا
-========================================= */
-
-@keyframes sanaIdle{
-
-    0%,
-    100%{
-        transform:
-            translateY(0)
-            rotate(0deg);
-    }
-
-    50%{
-        transform:
-            translateY(-5px)
-            rotate(-1deg);
-    }
-
+.summary-label {
+    color: #8a7d6d;
 }
 
-
-/* =========================================
-   دخول الرسالة
-========================================= */
-
-@keyframes messageIn{
-
-    from{
-        opacity:0;
-
-        transform:
-            translateY(10px)
-            scale(.98);
-    }
-
-    to{
-        opacity:1;
-
-        transform:
-            translateY(0)
-            scale(1);
-    }
-
-}
-
-
-/* =========================================
-   دخول الإجابة
-========================================= */
-
-@keyframes answerIn{
-
-    from{
-        opacity:0;
-
-        transform:
-            translateY(7px);
-    }
-
-    to{
-        opacity:1;
-
-        transform:
-            translateY(0);
-    }
-
+.summary-value {
+    font-weight: 900;
+    color: #4a4035;
 }
 
 
@@ -531,73 +352,49 @@ input:focus{
    العادات
 ========================================= */
 
-#habitMessage{
-    font-size:17px;
-    line-height:1.95;
+.habit-list {
+    width: 100%;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 11px;
+    margin-top: 16px;
 }
 
-.habit-list{
-    width:100%;
-
-    display:grid;
-
-    grid-template-columns:
-        repeat(2,1fr);
-
-    gap:11px;
-
-    margin-top:15px;
+.habit {
+    background: #fff;
+    border: 1.5px solid #eadfc9;
+    border-radius: 19px;
+    padding: 17px 10px;
+    text-align: center;
+    cursor: pointer;
+    transition: .22s;
 }
 
-.habit{
-    border:1.5px solid #eadfc9;
-
-    background:#fff;
-
-    border-radius:19px;
-
-    padding:16px 11px;
-
-    text-align:center;
-
-    cursor:pointer;
-
-    transition:
-        transform .18s ease,
-        border-color .18s ease,
-        background .18s ease;
+.habit:hover {
+    transform: translateY(-3px);
 }
 
-.habit:hover{
-    transform:translateY(-2px);
+.habit.active {
+    border-color: #f3b020;
+    background: #fff7dc;
 }
 
-.habit.active{
-    border-color:#ffb323;
-
-    background:#fff8df;
+.habit-icon {
+    font-size: 31px;
 }
 
-.habit .icon{
-    font-size:30px;
+.habit-title {
+    display: block;
+    margin-top: 6px;
+    font-weight: 900;
+    font-size: 16px;
 }
 
-.habit b{
-    display:block;
-
-    margin-top:6px;
-
-    font-size:16px;
-}
-
-.habit p{
-    margin:6px 0 0;
-
-    color:#887b6b;
-
-    font-size:12px;
-
-    line-height:1.65;
+.habit-description {
+    margin: 6px 0 0;
+    color: #897c6c;
+    font-size: 12px;
+    line-height: 1.7;
 }
 
 
@@ -605,66 +402,186 @@ input:focus{
    جرعة الشمس
 ========================================= */
 
-.sun-placeholder{
-    width:100%;
-
-    margin-top:16px;
-
-    padding:25px 18px;
-
-    background:#fff;
-
-    border:1px solid #eee1ca;
-
-    border-radius:22px;
-
-    text-align:center;
-
-    box-shadow:
-        0 7px 24px
-        rgba(96,74,32,.06);
+.sun-choice-title {
+    font-weight: 900;
+    font-size: 17px;
+    margin-bottom: 11px;
 }
 
-.sun-big{
-    font-size:65px;
-
-    animation:
-        sunPulse 2.5s
-        ease-in-out
-        infinite;
+.skin-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 9px;
 }
 
-.sun-placeholder h2{
-    margin:8px 0;
-
-    color:#e7a017;
-
-    font-size:24px;
+.skin-btn {
+    border: 1.5px solid #eadfc9;
+    background: #fff;
+    border-radius: 17px;
+    padding: 14px 7px;
+    cursor: pointer;
+    transition: .2s;
 }
 
-.sun-placeholder p{
-    margin:0;
-
-    color:#807465;
-
-    font-size:15px;
-
-    line-height:1.8;
+.skin-btn.active {
+    border-color: #f2ad1d;
+    background: #fff5d2;
+    transform: translateY(-2px);
 }
 
-#backToHabits{
-    margin-top:12px;
+.skin-color {
+    width: 39px;
+    height: 39px;
+    margin: auto;
+    border-radius: 50%;
+    border: 2px solid rgba(0,0,0,.07);
 }
 
-@keyframes sunPulse{
+.skin-name {
+    display: block;
+    margin-top: 7px;
+    font-size: 13px;
+    font-weight: 800;
+}
 
-    0%,
-    100%{
-        transform:scale(1);
+.time-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+}
+
+.time-btn {
+    border: 1.5px solid #eadfc9;
+    background: #fff;
+    border-radius: 17px;
+    padding: 15px 8px;
+    font-weight: 800;
+    cursor: pointer;
+}
+
+.time-btn.active {
+    border-color: #f2ad1d;
+    background: #fff5d2;
+    color: #c68100;
+}
+
+.result-card {
+    width: 100%;
+    background: linear-gradient(145deg, #fff, #fff9e9);
+    border: 1.5px solid #f0dfba;
+    border-radius: 22px;
+    padding: 19px 16px;
+    margin-top: 15px;
+    text-align: center;
+}
+
+.result-number {
+    font-size: 38px;
+    font-weight: 900;
+    color: #efa719;
+}
+
+.result-note {
+    color: #756b5f;
+    font-size: 14px;
+    line-height: 1.8;
+    margin-top: 8px;
+}
+
+
+/* =========================================
+   مؤشر الكتابة
+========================================= */
+
+.typing-cursor::after {
+    content: "▋";
+    display: inline-block;
+    margin-right: 3px;
+    color: #efaa19;
+    animation: blink .7s infinite;
+}
+
+
+/* =========================================
+   الحركات
+========================================= */
+
+@keyframes sanaFloat {
+
+    0%, 100% {
+        transform: translateY(0) rotate(0deg);
     }
 
-    50%{
-        transform:scale(1.08);
+    50% {
+        transform: translateY(-9px) rotate(1.5deg);
+    }
+
+}
+
+@keyframes sanaTalk {
+
+    0%, 100% {
+        transform: translateY(0) rotate(0deg);
+    }
+
+    25% {
+        transform: translateY(-4px) rotate(-1deg);
+    }
+
+    50% {
+        transform: translateY(-7px) rotate(1deg);
+    }
+
+    75% {
+        transform: translateY(-3px) rotate(-.5deg);
+    }
+
+}
+
+@keyframes sanaHappy {
+
+    0%, 100% {
+        transform: translateY(0) scale(1);
+    }
+
+    50% {
+        transform: translateY(-10px) scale(1.04);
+    }
+
+}
+
+@keyframes sanaThinking {
+
+    0%, 100% {
+        transform: rotate(0);
+    }
+
+    50% {
+        transform: rotate(-4deg) translateY(-3px);
+    }
+
+}
+
+@keyframes sanaExcited {
+
+    0%, 100% {
+        transform: scale(1) rotate(0);
+    }
+
+    25% {
+        transform: scale(1.04) rotate(-2deg);
+    }
+
+    75% {
+        transform: scale(1.04) rotate(2deg);
+    }
+
+}
+
+@keyframes blink {
+
+    50% {
+        opacity: 0;
     }
 
 }
@@ -674,37 +591,28 @@ input:focus{
    موبايل صغير
 ========================================= */
 
-@media(max-width:380px){
+@media (max-width: 380px) {
 
-    .screen{
-        padding-left:14px;
-        padding-right:14px;
+    .screen {
+        padding-left: 14px;
+        padding-right: 14px;
     }
 
-    .sana{
-        width:130px;
-        height:130px;
+    .sana {
+        width: 135px;
+        height: 135px;
     }
 
-    .sana.small{
-        width:110px;
-        height:110px;
+    .home-content h1 {
+        font-size: 29px;
     }
 
-    h1{
-        font-size:30px;
+    .home-text {
+        font-size: 16px;
     }
 
-    .home-text{
-        font-size:16px;
-    }
-
-    .question{
-        font-size:16px;
-    }
-
-    .habit-list{
-        grid-template-columns:1fr;
+    .habit-list {
+        gap: 8px;
     }
 
 }
