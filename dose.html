@@ -1,38 +1,54 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
+
 <head>
+
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
 
     <title>SunDose ☀️ — جرعتك اليومية</title>
 
     <link rel="stylesheet" href="dose.css">
+
 </head>
+
 
 <body>
 
     <main class="page">
 
+
         <!-- =========================
              TOP BAR
         ========================== -->
+
         <header class="topbar">
 
             <div class="brand">
                 SunDose ☀️
             </div>
 
-            <button class="menu-btn" type="button">
+            <button
+                class="menu-btn"
+                type="button"
+            >
                 •••
             </button>
 
         </header>
 
 
+
         <!-- =========================
-             SANA INTRO
+             HERO
         ========================== -->
+
         <section class="hero">
+
 
             <div class="sana-wrap">
 
@@ -45,34 +61,36 @@
             </div>
 
 
+
             <div class="speech">
 
-                <div class="sana-name">
-                    💛 سنا
-                </div>
-
                 <h1 id="greeting">
-                    حلو! نبدأ من هنا 😊
+                    حلو يا وليد 😊
                 </h1>
 
                 <p>
-                    الجزء المهم... أنا مش هفرض عليك حاجة.
-                    اختار الحاجة اللي حابب تبدأ بيها،
+                    الجزء المهم بقى...
+                    أنا مش هفرض عليك حاجة.
+                    اختار الحاجة اللي حابب تبدأ بيها
                     وأنا أشرحلك فائدتها الأول.
                 </p>
 
             </div>
 
+
         </section>
+
 
 
         <!-- =========================
              CHOICES
         ========================== -->
+
         <section class="choices">
 
 
             <!-- الشمس -->
+
             <button
                 class="choice-card"
                 data-type="sun"
@@ -90,14 +108,17 @@
                 </div>
 
                 <p>
-                    مثال: الخروج في وقت مناسب والتعرّض للشمس
-                    بشكل آمن. الشمس مصدر طبيعي لفيتامين D.
+                    مثال: الخروج في وقت مناسب
+                    والتعرض للشمس بشكل آمن.
+                    الشمس مصدر طبيعي لفيتامين D.
                 </p>
 
             </button>
 
 
+
             <!-- المياه -->
+
             <button
                 class="choice-card"
                 data-type="water"
@@ -116,14 +137,16 @@
 
                 <p>
                     مثال: تنظيم شرب المياه خلال اليوم.
-                    الترطيب الجيد يساعد جسمك على أداء
-                    وظائفه بشكل طبيعي.
+                    الترطيب الجيد يساعد جسمك
+                    على أداء وظائفه بشكل طبيعي.
                 </p>
 
             </button>
 
 
+
             <!-- الرياضة -->
+
             <button
                 class="choice-card"
                 data-type="activity"
@@ -141,14 +164,18 @@
                 </div>
 
                 <p>
-                    مثال: المشي أو أي حركة مناسبة لمستواك.
-                    النشاط المنتظم مفيد للقلب واللياقة والمزاج.
+                    مثال: المشي أو أي حركة مناسبة
+                    لمستواك.
+                    النشاط المنتظم مفيد للقلب
+                    واللياقة والمزاج.
                 </p>
 
             </button>
 
 
+
             <!-- العلاج -->
+
             <button
                 class="choice-card"
                 data-type="treatment"
@@ -166,15 +193,19 @@
                 </div>
 
                 <p>
-                    لو عندك علاج موصوف أو مكمل ثابت،
+                    لو عندك علاج موصوف
+                    أو مكمل ثابت،
                     نقدر ننظم معلوماته.
-                    الدواء أو المكمل مش بيتاخد لمجرد اقتراح.
+                    الدواء أو المكمل مش بيتاخد
+                    لمجرد اقتراح.
                 </p>
 
             </button>
 
 
+
             <!-- النوم -->
+
             <button
                 class="choice-card"
                 data-type="sleep"
@@ -193,8 +224,8 @@
 
                 <p>
                     مثال: تثبيت وقت نوم مناسب.
-                    الراحة المنتظمة تساعدك تبدأ يومك
-                    بطاقة وتركيز أفضل.
+                    الراحة المنتظمة تساعدك تبدأ
+                    يومك بطاقة وتركيز أفضل.
                 </p>
 
             </button>
@@ -203,14 +234,17 @@
         </section>
 
 
+
         <!-- =========================
              SANA RESPONSE PANEL
         ========================== -->
+
         <section
             class="sana-panel"
             id="sanaPanel"
             hidden
         >
+
 
             <div
                 class="panel-icon"
@@ -220,25 +254,32 @@
             </div>
 
 
+
             <div class="panel-content">
+
 
                 <div
                     class="panel-title"
                     id="panelTitle"
-                ></div>
+                >
+                </div>
 
 
-                <p
-                    id="panelText"
-                ></p>
+
+                <p id="panelText">
+                </p>
+
 
 
                 <div
                     class="tip"
                     id="panelTip"
-                ></div>
+                >
+                </div>
+
 
             </div>
+
 
 
             <button
@@ -249,267 +290,379 @@
                 نبدأ الجرعة 💛
             </button>
 
+
         </section>
+
 
 
     </main>
 
 
-    <!-- =========================
-         JAVASCRIPT
-         ========================== -->
+
+    <!-- ==================================================
+         SUNDOSE — INLINE JAVASCRIPT
+         لا يعتمد على dose.js
+    =================================================== -->
 
     <script>
 
-        document.addEventListener("DOMContentLoaded", function () {
-
-            const cards =
-                document.querySelectorAll(".choice-card");
-
-            const panel =
-                document.getElementById("sanaPanel");
-
-            const panelIcon =
-                document.getElementById("panelIcon");
-
-            const panelTitle =
-                document.getElementById("panelTitle");
-
-            const panelText =
-                document.getElementById("panelText");
-
-            const panelTip =
-                document.getElementById("panelTip");
-
-            const startDose =
-                document.getElementById("startDose");
+        document.addEventListener(
+            "DOMContentLoaded",
+            function () {
 
 
-            /*
-             * ردود سنا
-             */
+                /* =========================
+                   العناصر
+                ========================== */
 
-            const replies = {
-
-                sun: {
-
-                    icon: "☀️",
-
-                    title:
-                        "اختيار ممتاز يا وليد 💛",
-
-                    text:
-                        "حلو إنك اخترت الشمس 😊 خلينا نبدأ بهدوء ونشوف إزاي نخليها جزء مفيد وآمن من يومك، وبطريقة تناسبك أنت.",
-
-                    tip:
-                        "☀️ الحكمة: جسمك محتاج الشمس، لكن الأهم إننا نعرف إمتى وقد إيه."
-                },
+                const cards =
+                    document.querySelectorAll(
+                        ".choice-card"
+                    );
 
 
-                water: {
-
-                    icon: "💧",
-
-                    title:
-                        "اختيار ممتاز 💙",
-
-                    text:
-                        "حلو! المياه بداية بسيطة جدًا، لكن تأثيرها مهم. خلينا نخلي شربك للمياه عادة سهلة ومستمرة خلال يومك.",
-
-                    tip:
-                        "💧 الحكمة: الحاجة الصغيرة لما تتكرر كل يوم بتعمل فرق كبير."
-                },
+                const panel =
+                    document.getElementById(
+                        "sanaPanel"
+                    );
 
 
-                activity: {
-
-                    icon: "🏃",
-
-                    title:
-                        "اختيار ممتاز 💚",
-
-                    text:
-                        "حلو إنك اخترت الحركة. ومش لازم تبدأ بتمرين صعب، هنبدأ بحاجة تناسب مستواك وتقدر تكمل عليها.",
-
-                    tip:
-                        "🏃 الحكمة: مش لازم تبدأ بأقوى خطوة، المهم تبدأ بخطوة تقدر تكملها."
-                },
+                const panelIcon =
+                    document.getElementById(
+                        "panelIcon"
+                    );
 
 
-                treatment: {
-
-                    icon: "💊",
-
-                    title:
-                        "تمام، خلينا نهتم بده ❤️",
-
-                    text:
-                        "لو عندك علاج أو مكمل، الأول نفهمه كويس وننظم معلوماته. ومش هنضيف أي دواء أو مكمل من نفسنا.",
-
-                    tip:
-                        "💊 الحكمة: صحتك تستاهل إنك تعرف إيه اللي بتاخده وليه."
-                },
+                const panelTitle =
+                    document.getElementById(
+                        "panelTitle"
+                    );
 
 
-                sleep: {
-
-                    icon: "🌙",
-
-                    title:
-                        "اختيار جميل 💜",
-
-                    text:
-                        "النوم مش مجرد راحة، ده جزء مهم من يومك. هنحاول نخليه عادة أهدى وأسهل وتناسب روتينك.",
-
-                    tip:
-                        "🌙 الحكمة: الراحة مش تعطيل ليومك، الراحة هي اللي بتخليك تكمل."
-                }
-
-            };
+                const panelText =
+                    document.getElementById(
+                        "panelText"
+                    );
 
 
-            /*
-             * عند الضغط على أي اختيار
-             */
+                const panelTip =
+                    document.getElementById(
+                        "panelTip"
+                    );
 
-            cards.forEach(function (card) {
 
-                card.addEventListener("click", function () {
+                const startDose =
+                    document.getElementById(
+                        "startDose"
+                    );
 
-                    const type =
-                        card.getAttribute("data-type");
 
-                    const reply =
-                        replies[type];
 
-                    if (!reply) {
-                        return;
+                /* =========================
+                   ردود سنا
+                ========================== */
+
+                const replies = {
+
+
+                    sun: {
+
+                        icon: "☀️",
+
+                        title:
+                            "اختيار ممتاز يا وليد 💛",
+
+                        text:
+                            "الشمس ممكن تكون بداية جميلة. هنخلي التعرض ليها بطريقة مناسبة وآمنة، وبخطوة بسيطة تقدر تستمر عليها.",
+
+                        tip:
+                            "💛 سنا: حلو! يلا نمشي فيها واحدة واحدة وبشكل يناسبك.",
+
+                        button:
+                            "ابدأ جرعة الشمس ☀️"
+
+                    },
+
+
+                    water: {
+
+                        icon: "💧",
+
+                        title:
+                            "اختيار ممتاز يا وليد 💧",
+
+                        text:
+                            "المياه عادة بسيطة ومهمة. هنبدأ بطريقة سهلة ونخلي شرب المياه جزء طبيعي من يومك.",
+
+                        tip:
+                            "💙 سنا: مش محتاج تعمل حاجة كبيرة... شوية شوية ونوصل.",
+
+                        button:
+                            "ابدأ جرعة المياه 💧"
+
+                    },
+
+
+                    activity: {
+
+                        icon: "🏃",
+
+                        title:
+                            "اختيار ممتاز يا وليد 🏃",
+
+                        text:
+                            "الحركة مش لازم تكون تمرين صعب. هنبدأ بمستوى مناسب ليك ونبني عليه واحدة واحدة.",
+
+                        tip:
+                            "💚 سنا: المهم تبدأ بحاجة تقدر تكمل عليها.",
+
+                        button:
+                            "ابدأ جرعة الحركة 🏃"
+
+                    },
+
+
+                    treatment: {
+
+                        icon: "💊",
+
+                        title:
+                            "تمام يا وليد 💊",
+
+                        text:
+                            "هننظم معلومات العلاج أو المكملات اللي عندك، من غير ما نقترح دواء أو مكمل من نفسنا.",
+
+                        tip:
+                            "❤️ سنا: صحتك أهم حاجة، فخلينا نمشي صح.",
+
+                        button:
+                            "ابدأ تنظيم العلاج 💊"
+
+                    },
+
+
+                    sleep: {
+
+                        icon: "🌙",
+
+                        title:
+                            "اختيار ممتاز يا وليد 🌙",
+
+                        text:
+                            "النوم والراحة جزء مهم من يومك. هنبدأ بتنظيم بسيط تقدر تلتزم بيه.",
+
+                        tip:
+                            "💜 سنا: الراحة مش أقل أهمية من الحركة.",
+
+                        button:
+                            "ابدأ جرعة النوم 🌙"
+
                     }
-
-
-                    /*
-                     * إظهار رد سنا
-                     */
-
-                    panel.hidden = false;
-
-
-                    panelIcon.textContent =
-                        reply.icon;
-
-
-                    panelTitle.textContent =
-                        reply.title;
-
-
-                    panelText.textContent =
-                        reply.text;
-
-
-                    panelTip.textContent =
-                        reply.tip;
-
-
-                    /*
-                     * تحديد الاختيار
-                     */
-
-                    cards.forEach(function (item) {
-
-                        item.classList.remove("selected");
-
-                    });
-
-
-                    card.classList.add("selected");
-
-
-                    /*
-                     * تخزين نوع الجرعة
-                     */
-
-                    startDose.dataset.type =
-                        type;
-
-
-                    /*
-                     * ننزل عند رد سنا
-                     */
-
-                    setTimeout(function () {
-
-                        panel.scrollIntoView({
-
-                            behavior: "smooth",
-
-                            block: "center"
-
-                        });
-
-                    }, 100);
-
-                });
-
-            });
-
-
-            /*
-             * زر بدء الجرعة
-             */
-
-            startDose.addEventListener("click", function () {
-
-                const type =
-                    startDose.dataset.type;
-
-
-                if (!type) {
-                    return;
-                }
-
-
-                const nextPages = {
-
-                    sun: "sun-dose.html",
-
-                    water: "water-dose.html",
-
-                    activity: "activity-dose.html",
-
-                    treatment: "treatment-dose.html",
-
-                    sleep: "sleep-dose.html"
 
                 };
 
 
-                const nextPage =
-                    nextPages[type];
+
+                /* =========================
+                   عند اختيار أي عادة
+                ========================== */
+
+                cards.forEach(
+                    function (card) {
 
 
-                if (!nextPage) {
-                    return;
-                }
+                        card.addEventListener(
+                            "click",
+                            function () {
 
 
-                startDose.disabled = true;
+                                const type =
+                                    card.getAttribute(
+                                        "data-type"
+                                    );
 
-                startDose.textContent =
-                    "ثواني يا صديقي ☀️";
+
+                                const reply =
+                                    replies[type];
 
 
-                setTimeout(function () {
+                                if (!reply) {
 
-                    window.location.href =
-                        nextPage;
+                                    return;
 
-                }, 450);
+                                }
 
-            });
 
-        });
+
+                                /* إظهار لوحة سنا */
+
+                                panel.hidden = false;
+
+
+
+                                /* تغيير المحتوى */
+
+                                panelIcon.textContent =
+                                    reply.icon;
+
+
+                                panelTitle.textContent =
+                                    reply.title;
+
+
+                                panelText.textContent =
+                                    reply.text;
+
+
+                                panelTip.textContent =
+                                    reply.tip;
+
+
+                                startDose.textContent =
+                                    reply.button;
+
+
+
+                                /* حفظ الاختيار */
+
+                                startDose.setAttribute(
+                                    "data-type",
+                                    type
+                                );
+
+
+
+                                /* تمييز الكارت */
+
+                                cards.forEach(
+                                    function (item) {
+
+                                        item.classList.remove(
+                                            "selected"
+                                        );
+
+                                    }
+                                );
+
+
+                                card.classList.add(
+                                    "selected"
+                                );
+
+
+
+                                /* النزول للرد */
+
+                                setTimeout(
+                                    function () {
+
+                                        panel.scrollIntoView(
+                                            {
+                                                behavior:
+                                                    "smooth",
+
+                                                block:
+                                                    "center"
+                                            }
+                                        );
+
+                                    },
+                                    100
+                                );
+
+                            }
+                        );
+
+                    }
+                );
+
+
+
+                /* =========================
+                   زر بدء الجرعة
+                ========================== */
+
+                startDose.addEventListener(
+                    "click",
+                    function () {
+
+
+                        const type =
+                            startDose.getAttribute(
+                                "data-type"
+                            );
+
+
+                        if (!type) {
+
+                            return;
+
+                        }
+
+
+
+                        const pages = {
+
+                            sun:
+                                "sun-dose.html",
+
+                            water:
+                                "water-dose.html",
+
+                            activity:
+                                "activity-dose.html",
+
+                            treatment:
+                                "treatment-dose.html",
+
+                            sleep:
+                                "sleep-dose.html"
+
+                        };
+
+
+                        const nextPage =
+                            pages[type];
+
+
+                        if (!nextPage) {
+
+                            return;
+
+                        }
+
+
+
+                        startDose.disabled =
+                            true;
+
+
+                        startDose.textContent =
+                            "ثواني يا وليد ☀️";
+
+
+
+                        setTimeout(
+                            function () {
+
+                                window.location.href =
+                                    nextPage;
+
+                            },
+                            300
+                        );
+
+
+                    }
+                );
+
+
+            }
+        );
 
     </script>
 
+
 </body>
+
 </html>
