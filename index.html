@@ -14,14 +14,12 @@
 <div class="app">
 
     <!-- =========================
-         البداية
+         الصفحة الرئيسية
     ========================== -->
 
     <section id="home" class="screen">
 
-        <div class="brand">
-            SunDose ☀️
-        </div>
+        <div class="brand">SunDose ☀️</div>
 
         <div class="home-content">
 
@@ -29,25 +27,21 @@
                 <img
                     src="assets/sana.png"
                     class="sana"
+                    id="homeSana"
                     alt="سنا"
                 >
             </div>
 
-            <h1>
-                أهلاً... أنا سنا 💛
-            </h1>
+            <h1>أهلاً... أنا سنا 💛</h1>
 
             <p class="home-text">
-                مش هسألك شوية أسئلة وخلاص...
-                عايزة أتعرف عليك الأول،
-                وبعدها أبدأ أفهمك وأساعدك واحدة واحدة.
+                مش هسألك كام سؤال وخلاص...
+                أنا عايزة أعرفك بجد، وأفهم جسمك ومكانك وعاداتك،
+                وبعدها نمشي سوا خطوة خطوة.
             </p>
 
-            <button
-                id="startButton"
-                class="primary-btn"
-            >
-                نتعرف على بعض ☀️
+            <button id="startButton" class="primary-btn">
+                نبدأ سوا ☀️
             </button>
 
         </div>
@@ -56,63 +50,94 @@
 
 
     <!-- =========================
-         التعارف
+         شاشة التعارف
     ========================== -->
 
-    <section
-        id="welcome"
-        class="screen hidden"
-    >
+    <section id="welcome" class="screen hidden">
 
-        <div class="brand">
-            SunDose ☀️
-        </div>
+        <div class="brand">SunDose ☀️</div>
 
         <div class="progress">
             <span id="progressBar"></span>
         </div>
 
-        <div class="conversation">
+        <div class="sana-area" id="sanaArea">
 
-            <div class="sana-wrap conversation-sana">
+            <img
+                src="assets/sana.png"
+                class="sana sana-chat"
+                id="chatSana"
+                alt="سنا"
+            >
 
-                <img
-                    src="assets/sana.png"
-                    class="sana small"
-                    alt="سنا"
-                >
+        </div>
 
+        <div class="message">
+
+            <div class="message-name">
+                سنا 💛
             </div>
-
-
-            <div class="message">
-
-                <div class="message-name">
-                    سنا 💛
-                </div>
-
-                <div
-                    id="question"
-                    class="question"
-                ></div>
-
-            </div>
-
 
             <div
-                id="answerArea"
-                class="answer-area"
+                id="question"
+                class="typing-text"
             ></div>
 
+        </div>
+
+        <div id="answerArea"></div>
+
+        <div class="actions">
 
             <button
                 id="nextButton"
-                class="primary-btn next-btn"
+                class="primary-btn"
             >
-                تمام، قولي 💛
+                تمام، نكمل ☀️
             </button>
 
         </div>
+
+    </section>
+
+
+    <!-- =========================
+         مراجعة البيانات
+    ========================== -->
+
+    <section id="summary" class="screen hidden">
+
+        <div class="brand">SunDose ☀️</div>
+
+        <div class="sana-area">
+
+            <img
+                src="assets/sana.png"
+                class="sana sana-chat happy"
+                id="summarySana"
+                alt="سنا"
+            >
+
+        </div>
+
+        <div class="message summary-message">
+
+            <div class="message-name">
+                سنا 💛
+            </div>
+
+            <div id="summaryText"></div>
+
+        </div>
+
+        <div class="summary-card" id="summaryCard"></div>
+
+        <button
+            id="goToHabits"
+            class="primary-btn"
+        >
+            طب وريني نبدأ منين ☀️
+        </button>
 
     </section>
 
@@ -121,45 +146,32 @@
          العادات
     ========================== -->
 
-    <section
-        id="habits"
-        class="screen hidden"
-    >
+    <section id="habits" class="screen hidden">
 
-        <div class="brand">
-            SunDose ☀️
-        </div>
+        <div class="brand">SunDose ☀️</div>
 
-        <div class="conversation">
+        <div class="sana-area">
 
-            <div class="sana-wrap conversation-sana">
-
-                <img
-                    src="assets/sana.png"
-                    class="sana small"
-                    alt="سنا"
-                >
-
-            </div>
-
-
-            <div class="message">
-
-                <div class="message-name">
-                    سنا 💛
-                </div>
-
-                <div id="habitMessage"></div>
-
-            </div>
-
-
-            <div
-                id="habitList"
-                class="habit-list"
-            ></div>
+            <img
+                src="assets/sana.png"
+                class="sana sana-chat"
+                id="habitsSana"
+                alt="سنا"
+            >
 
         </div>
+
+        <div class="message">
+
+            <div class="message-name">
+                سنا 💛
+            </div>
+
+            <div id="habitMessage"></div>
+
+        </div>
+
+        <div id="habitList" class="habit-list"></div>
 
     </section>
 
@@ -168,62 +180,40 @@
          جرعة الشمس
     ========================== -->
 
-    <section
-        id="sunDose"
-        class="screen hidden"
-    >
+    <section id="sunDose" class="screen hidden">
 
-        <div class="brand">
-            SunDose ☀️
+        <div class="brand">SunDose ☀️</div>
+
+        <div class="sana-area">
+
+            <img
+                src="assets/sana.png"
+                class="sana sana-chat"
+                id="sunSana"
+                alt="سنا"
+            >
+
         </div>
 
-        <div class="conversation">
+        <div class="message">
 
-            <div class="sana-wrap conversation-sana">
-
-                <img
-                    src="assets/sana.png"
-                    class="sana small"
-                    alt="سنا"
-                >
-
+            <div class="message-name">
+                سنا ☀️
             </div>
 
+            <div id="sunMessage"></div>
 
-            <div class="message">
+        </div>
 
-                <div class="message-name">
-                    سنا 💛
-                </div>
+        <div id="sunStepArea"></div>
 
-                <div id="sunMessage"></div>
-
-            </div>
-
-
-            <div class="sun-placeholder">
-
-                <div class="sun-big">
-                    ☀️
-                </div>
-
-                <h2>
-                    جرعة الشمس
-                </h2>
-
-                <p>
-                    هنا هنكمل مع سنا خطوة بخطوة
-                    ونبني الجرعة حسب بياناتك.
-                </p>
-
-            </div>
-
+        <div class="actions">
 
             <button
-                id="backToHabits"
-                class="secondary-btn"
+                id="sunNext"
+                class="primary-btn"
             >
-                رجوع للعادات
+                نكمل ☀️
             </button>
 
         </div>
