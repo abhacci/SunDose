@@ -1,12 +1,12 @@
-/* =========================================
+/* =========================================================
    SunDose ☀️
-   سنا - النسخة الحوارية
-========================================= */
+   النسخة الجديدة - رحلة التعارف مع سنا
+========================================================= */
 
 
-/* =========================================
+/* =========================================================
    بيانات المستخدم
-========================================= */
+========================================================= */
 
 const user = {
 
@@ -16,26 +16,32 @@ const user = {
     weight: "",
     height: "",
     country: "",
-
     skin: "",
-    sunTime: ""
+    skinLabel: "",
+    sunTime: "",
+    sunTimeLabel: ""
 
 };
 
 
-/* =========================================
+/* =========================================================
    عناصر الصفحات
-========================================= */
+========================================================= */
 
-const pages = {
+const home =
+    document.getElementById("home");
 
-    home: document.getElementById("home"),
-    welcome: document.getElementById("welcome"),
-    summary: document.getElementById("summary"),
-    habits: document.getElementById("habits"),
-    sunDose: document.getElementById("sunDose")
+const conversation =
+    document.getElementById("conversation");
 
-};
+const review =
+    document.getElementById("review");
+
+const habits =
+    document.getElementById("habits");
+
+const sunDose =
+    document.getElementById("sunDose");
 
 
 const startButton =
@@ -44,14 +50,15 @@ const startButton =
 const nextButton =
     document.getElementById("nextButton");
 
-const goToHabits =
-    document.getElementById("goToHabits");
+const finishReview =
+    document.getElementById("finishReview");
 
-const sunNext =
-    document.getElementById("sunNext");
+const backToHabits =
+    document.getElementById("backToHabits");
 
-const question =
-    document.getElementById("question");
+
+const sanaText =
+    document.getElementById("sanaText");
 
 const answerArea =
     document.getElementById("answerArea");
@@ -59,11 +66,11 @@ const answerArea =
 const progressBar =
     document.getElementById("progressBar");
 
-const summaryText =
-    document.getElementById("summaryText");
+const reviewText =
+    document.getElementById("reviewText");
 
-const summaryCard =
-    document.getElementById("summaryCard");
+const reviewCards =
+    document.getElementById("reviewCards");
 
 const habitMessage =
     document.getElementById("habitMessage");
@@ -74,96 +81,104 @@ const habitList =
 const sunMessage =
     document.getElementById("sunMessage");
 
-const sunStepArea =
-    document.getElementById("sunStepArea");
+const doseSkin =
+    document.getElementById("doseSkin");
 
-const chatSana =
-    document.getElementById("chatSana");
+const doseTime =
+    document.getElementById("doseTime");
 
-const summarySana =
-    document.getElementById("summarySana");
-
-const habitsSana =
-    document.getElementById("habitsSana");
-
-const sunSana =
-    document.getElementById("sunSana");
+const doseCountry =
+    document.getElementById("doseCountry");
 
 
-/* =========================================
+/* =========================================================
+   الحالة
+========================================================= */
+
+let currentStep = 0;
+
+let typingTimer = null;
+
+
+/* =========================================================
    خطوات التعارف
-========================================= */
+========================================================= */
 
 const steps = [
 
     {
+        key: "intro",
+        type: "intro"
+    },
+
+    {
         key: "name",
         type: "text",
-        question:
-            "نبدأ بحاجة بسيطة كده... تحب أناديك بإيه؟ 😊",
         label: "اسمك",
         placeholder: "اكتب اسمك هنا"
     },
 
     {
         key: "gender",
-        type: "gender",
-        question:
-            "حلو الاسم ده 👀 طيب قولي أكلمك بصيغة ولد ولا بنت؟ عشان سنا تعرف تدلعك صح 😌💛"
+        type: "gender"
     },
 
     {
         key: "age",
         type: "number",
-        question:
-            "طب كام سنة بقى؟ ومتقلقش... السن عندي مش رقم، ده بيفرق في طريقة كلامي معاك وفهمي لاحتياجاتك 😉",
-        label: "العمر",
-        placeholder: "مثال: 22",
-        unit: "سنة"
-    },
-
-    {
-        key: "weight",
-        type: "number",
-        question:
-            "تعالى بقى للوزن... قولي الرقم زي ما هو، من غير كسوف 😄 أنا هنا أفهمك مش أحكم عليك.",
-        label: "الوزن",
-        placeholder: "مثال: 80",
-        unit: "كجم"
+        label: "عمرك",
+        placeholder: "مثال: 22"
     },
 
     {
         key: "height",
         type: "number",
-        question:
-            "والطول يا طويل/ة القامة 😌 كام سنتي؟ عايزة أشوف الصورة كاملة مش رقم لوحده.",
-        label: "الطول",
+        label: "طولك",
         placeholder: "مثال: 175",
         unit: "سم"
     },
 
     {
+        key: "weight",
+        type: "number",
+        label: "وزنك",
+        placeholder: "مثال: 80",
+        unit: "كجم"
+    },
+
+    {
         key: "country",
         type: "text",
-        question:
-            "آخر حاجة في التعارف... إنت عايش في أنهي بلد؟ 🌍 المكان بيفرق معايا فعلًا، خصوصًا لما نتكلم عن الشمس والجو والعادات.",
-        label: "البلد",
+        label: "بلدك",
         placeholder: "مثال: مصر"
+    },
+
+    {
+        key: "skin",
+        type: "skin"
+    },
+
+    {
+        key: "sunTime",
+        type: "time"
     }
 
 ];
 
 
-let currentStep = 0;
+/* =========================================================
+   تغيير الصفحة
+========================================================= */
 
+function showPage(page){
 
-/* =========================================
-   إظهار صفحة
-========================================= */
-
-function showPage(page) {
-
-    Object.values(pages).forEach(section => {
+    [
+        home,
+        conversation,
+        review,
+        habits,
+        sunDose
+    ].forEach(section => {
 
         section.classList.add("hidden");
 
@@ -179,35 +194,41 @@ function showPage(page) {
 }
 
 
-/* =========================================
-   الكتابة البطيئة
-========================================= */
+/* =========================================================
+   الكتابة التدريجية
+========================================================= */
 
-let typingTimer = null;
-
-function typeText(element, text, speed = 45) {
+function typeSana(text, speed = 42){
 
     return new Promise(resolve => {
 
         clearInterval(typingTimer);
 
-        element.textContent = "";
-        element.classList.add("typing-cursor");
+        sanaText.innerHTML = "";
+
+        sanaText.classList.add("typing-cursor");
+
+        const stage =
+            conversation.querySelector(".conversation-layout");
+
+        stage.classList.add("speaking");
 
         let index = 0;
 
         typingTimer = setInterval(() => {
 
-            element.textContent =
-                text.slice(0, index + 1);
+            sanaText.textContent =
+                text.substring(0, index);
 
             index++;
 
-            if (index >= text.length) {
+            if(index > text.length){
 
                 clearInterval(typingTimer);
 
-                element.classList.remove("typing-cursor");
+                sanaText.classList.remove("typing-cursor");
+
+                stage.classList.remove("speaking");
 
                 resolve();
 
@@ -220,187 +241,367 @@ function typeText(element, text, speed = 45) {
 }
 
 
-/* =========================================
-   حركة سنا أثناء الكلام
-========================================= */
+/* =========================================================
+   كتابة في المراجعة
+========================================================= */
 
-function talkingSana(element) {
+function typeReview(text, speed = 38){
 
-    if (!element) return;
+    return new Promise(resolve => {
 
-    element.classList.remove(
-        "thinking",
-        "happy",
-        "excited"
-    );
+        clearInterval(typingTimer);
 
-    element.classList.add("sana-chat");
+        reviewText.innerHTML =
+            "";
 
-}
+        let index = 0;
 
+        typingTimer = setInterval(() => {
 
-function thinkingSana(element) {
+            reviewText.textContent =
+                text.substring(0,index);
 
-    if (!element) return;
+            index++;
 
-    element.classList.remove(
-        "happy",
-        "excited"
-    );
+            if(index > text.length){
 
-    element.classList.add("thinking");
+                clearInterval(typingTimer);
 
-}
+                resolve();
 
+            }
 
-function happySana(element) {
+        }, speed);
 
-    if (!element) return;
-
-    element.classList.remove(
-        "thinking",
-        "excited"
-    );
-
-    element.classList.add("happy");
+    });
 
 }
 
 
-function excitedSana(element) {
+/* =========================================================
+   بداية التطبيق
+========================================================= */
 
-    if (!element) return;
+startButton.addEventListener(
+    "click",
+    async function(){
 
-    element.classList.remove(
-        "thinking",
-        "happy"
-    );
+        currentStep = 0;
 
-    element.classList.add("excited");
+        showPage(conversation);
 
-}
+        await renderStep();
 
-
-/* =========================================
-   بدء التعارف
-========================================= */
-
-startButton.addEventListener("click", async function () {
-
-    currentStep = 0;
-
-    showPage(pages.welcome);
-
-    renderStep();
-
-});
+    }
+);
 
 
-/* =========================================
-   عرض السؤال
-========================================= */
+/* =========================================================
+   رسم المرحلة
+========================================================= */
 
-async function renderStep() {
+async function renderStep(){
 
-    const step = steps[currentStep];
+    const step =
+        steps[currentStep];
 
-    const progress =
-        ((currentStep + 1) / steps.length) * 100;
 
     progressBar.style.width =
-        progress + "%";
+        ((currentStep + 1) / steps.length * 100) + "%";
+
 
     answerArea.innerHTML = "";
 
-    nextButton.disabled = true;
+    nextButton.classList.add("hidden");
 
-    talkingSana(chatSana);
 
-    await typeText(
-        question,
-        step.question,
-        48
-    );
+    /* =====================================
+       المقدمة
+    ===================================== */
 
-    renderAnswer(step);
+    if(step.type === "intro"){
 
-    nextButton.disabled = false;
+        await typeSana(
+            "بص بقى... أنا سنا ☀️💛. اسمي مش اختيار عشوائي خالص؛ سنا يعني الضوء واللمعة اللي بتطلع من الشمس، وده تقريبًا كل اللي أنا عايزة أساعدك تفهمه من غير تعقيد ولا كلام طبي ناشف.",
+            38
+        );
+
+        await delay(500);
+
+        await typeSana(
+            "فكرة SunDose بدأت أصلًا من حاجة بسيطة جدًا... شخص كان عنده مشكلة مرتبطة بفيتامين D، وكنا بنحاول نعمل له حاجة صغيرة تفتكره بعلاجه وتهتم بعاداته. وبعدها الفكرة كبرت شوية بشوية لحد ما بقيت أنا موجودة هنا 😌☀️.",
+            38
+        );
+
+        await delay(500);
+
+        await typeSana(
+            "بس قبل الشمس والمياه والرياضة والحسابات دي كلها... أنا عايزة أعرف الشخص اللي قدامي الأول. يعني بالراحة كده، نتعرف بجد مش نعمل استمارة حكومية 😂💛.",
+            38
+        );
+
+        nextButton.textContent =
+            "طيب نبدأ منين؟ 😌";
+
+        nextButton.classList.remove("hidden");
+
+        return;
+
+    }
+
+
+    /* =====================================
+       الاسم
+    ===================================== */
+
+    if(step.key === "name"){
+
+        await typeSana(
+            "طيب نبدأ بحاجة بسيطة... اسمك إيه؟ عايزة أعرف أنادي الشخص اللي هكلمه طول الرحلة دي بإيه 😊",
+            43
+        );
+
+        createInput(step);
+
+        nextButton.textContent =
+            "عرفتك 😌";
+
+        nextButton.classList.remove("hidden");
+
+        return;
+
+    }
+
+
+    /* =====================================
+       النوع
+    ===================================== */
+
+    if(step.key === "gender"){
+
+        await typeSana(
+            `جميل يا ${user.name} 💛. دلوقتي عرفت اسمك، ومش هقولك "تحب أناديك بإيه؟" لأنك خلاص قلتلي اسمك 😄. محتاجة أعرف بس أخاطبك بصيغة إيه عشان كلامي معاك يبقى طبيعي ومريح.`,
+            42
+        );
+
+        createGender();
+
+        return;
+
+    }
+
+
+    /* =====================================
+       العمر
+    ===================================== */
+
+    if(step.key === "age"){
+
+        await typeSana(
+            getAgeQuestion(),
+            42
+        );
+
+        createInput(step);
+
+        nextButton.textContent =
+            "كمّل معايا 😌";
+
+        nextButton.classList.remove("hidden");
+
+        return;
+
+    }
+
+
+    /* =====================================
+       الطول
+    ===================================== */
+
+    if(step.key === "height"){
+
+        await typeSana(
+            getHeightQuestion(),
+            40
+        );
+
+        createInput(step);
+
+        nextButton.textContent =
+            "وريني كده 😄";
+
+        nextButton.classList.remove("hidden");
+
+        return;
+
+    }
+
+
+    /* =====================================
+       الوزن
+    ===================================== */
+
+    if(step.key === "weight"){
+
+        await typeSana(
+            getWeightQuestion(),
+            40
+        );
+
+        createInput(step);
+
+        nextButton.textContent =
+            "تمام يا نجم 💛";
+
+        nextButton.classList.remove("hidden");
+
+        return;
+
+    }
+
+
+    /* =====================================
+       البلد
+    ===================================== */
+
+    if(step.key === "country"){
+
+        await typeSana(
+            getCountryQuestion(),
+            40
+        );
+
+        createInput(step);
+
+        nextButton.textContent =
+            "عرفت بلدك 🌍";
+
+        nextButton.classList.remove("hidden");
+
+        return;
+
+    }
+
+
+    /* =====================================
+       لون البشرة
+    ===================================== */
+
+    if(step.key === "skin"){
+
+        await typeSana(
+            getSkinIntro(),
+            40
+        );
+
+        createSkin();
+
+        return;
+
+    }
+
+
+    /* =====================================
+       وقت الشمس
+    ===================================== */
+
+    if(step.key === "sunTime"){
+
+        await typeSana(
+            getTimeIntro(),
+            40
+        );
+
+        createTime();
+
+        return;
+
+    }
 
 }
 
 
-/* =========================================
-   رسم الإجابة
-========================================= */
+/* =========================================================
+   أسئلة ديناميكية
+========================================================= */
 
-function renderAnswer(step) {
+function getAgeQuestion(){
 
-    if (step.type === "gender") {
+    if(user.gender === "female"){
 
-        answerArea.innerHTML = `
+        return `بما إننا بقينا أصحاب يا ${user.name} 💛 قولي سنك كام؟ متقلقيش، أنا مش هحكم عليكي... بس ممكن أعمل تعليق صغير على الرقم كده 😌😂`;
 
-            <div class="gender-grid">
-
-                <button
-                    type="button"
-                    class="gender-btn"
-                    data-gender="male"
-                >
-                    👨 ولد
-                </button>
-
-                <button
-                    type="button"
-                    class="gender-btn"
-                    data-gender="female"
-                >
-                    👩 بنت
-                </button>
-
-            </div>
-
-        `;
-
-
-        document
-            .querySelectorAll(".gender-btn")
-            .forEach(button => {
-
-                if (
-                    user.gender ===
-                    button.dataset.gender
-                ) {
-
-                    button.classList.add("active");
-
-                }
-
-
-                button.addEventListener(
-                    "click",
-                    function () {
-
-                        user.gender =
-                            this.dataset.gender;
-
-                        document
-                            .querySelectorAll(".gender-btn")
-                            .forEach(btn =>
-                                btn.classList.remove("active")
-                            );
-
-                        this.classList.add("active");
-
-                        excitedSana(chatSana);
-
-                    }
-                );
-
-            });
-
-        return;
     }
 
+    return `طيب يا ${user.name} 😄 قولي سنك كام؟ عايز أعرف أنا بتعامل مع شاب لسه الدنيا قدامه ولا واحد داخل ينافسني على لقب "عم سنا" 😂.`;
+
+}
+
+
+function getHeightQuestion(){
+
+    if(user.gender === "female"){
+
+        return `وطولك كام يا ${user.name}؟ 🌱 الرقم ده مهم عندي عشان أفهم جسمك بشكل أفضل، ومش هعمل فيها لجنة تحكيم على الطول طبعًا... إلا لو كان الطول حلو زيادة عن اللزوم 😌💛`;
+
+    }
+
+    return `طيب يا ${user.name}، طولك كام؟ 😄 عايز أجمع الصورة كاملة. ولو طالع طويل هضطر أبصلك من تحت لفوق وأنا بكلمك 😂.`;
+
+}
+
+
+function getWeightQuestion(){
+
+    if(user.gender === "female"){
+
+        return `دلوقتي الوزن يا ${user.name} 💛. قولي الرقم براحتك، مش ميزان محكمة ولا حاجة 😄. الرقم عندي مجرد معلومة تساعدني أفهم احتياجات جسمك، مش عشان أحكم عليكي.`;
+
+    }
+
+    return `والوزن يا ${user.name} 😄؟ قولي الرقم زي ما هو، أنا مش ميزان بيتكسف ولا هقولك "إيه ده يا نجم" 😂. المهم أفهم جسمك عشان أتعامل معاك صح.`;
+
+}
+
+
+function getCountryQuestion(){
+
+    if(user.gender === "female"){
+
+        return `حلو كده يا ${user.name} 💛. آخر حاجة في الجزء ده: إنتِ من أنهي بلد؟ ودي مش معلومة هحطها في خانة وخلاص؛ الشمس والجو والعادات بتفرق جدًا من مكان لمكان، وأنا عايزة أعرف البيئة اللي عايشة فيها. 🌍`;
+
+    }
+
+    return `حلو يا ${user.name} 😌. قولي بقى إنت من أنهي بلد؟ وركز معايا هنا، البلد عندي مش مجرد اسم يتخزن؛ الجو والشمس ودرجة الحرارة والعادات اليومية كلها ممكن تغيّر طريقة نصيحتي ليك. 🌍☀️`;
+
+}
+
+
+function getSkinIntro(){
+
+    if(user.gender === "female"){
+
+        return `وصلنا لنقطة مهمة يا ${user.name} 💛. عايزة أعرف لون بشرتك التقريبي، مش عشان أصنف جمالك طبعًا... أنا متأكدة إن الموضوع محسوم من غيري 😌😂. لكن علميًا لون البشرة بيفرق في طريقة استجابة الجلد للشمس وتكوين فيتامين D.`;
+
+    }
+
+    return `وصلنا لحاجة مهمة يا ${user.name} ☀️. عايز أعرف لون بشرتك التقريبي. ودي مش مسابقة وسامة يا نجم 😂؛ لون البشرة فعلًا له علاقة بكمية الميلانين واستجابة الجلد للأشعة وتكوين فيتامين D.`;
+
+}
+
+
+function getTimeIntro(){
+
+    return `باقي آخر قطعة في اللغز يا ${user.name} ☀️. بتحب أو تقدر تتعرض للشمس في أنهي وقت؟ هستخدم الوقت ده مع البلد ولون بشرتك وباقي بياناتك عشان الخطة بعد كده تبقى مبنية على سياقك، مش رقم مرمي على أي حد.`;
+
+}
+
+
+/* =========================================================
+   إنشاء حقل
+========================================================= */
+
+function createInput(step){
 
     answerArea.innerHTML = `
 
@@ -413,15 +614,19 @@ function renderAnswer(step) {
             <input
                 id="answerInput"
                 type="${step.type}"
+                inputmode="${step.type === "number" ? "numeric" : "text"}"
                 placeholder="${step.placeholder}"
-                value="${user[step.key]}"
-                min="${step.type === "number" ? "1" : ""}"
+                value="${user[step.key] || ""}"
+                min="${step.key === "age" ? "1" : ""}"
+                max="${step.key === "age" ? "120" : ""}"
             >
 
             ${
                 step.unit
-                    ? `<div class="unit">${step.unit}</div>`
-                    : ""
+                ?
+                `<div class="unit">${step.unit}</div>`
+                :
+                ""
             }
 
         </div>
@@ -438,9 +643,9 @@ function renderAnswer(step) {
 
     input.addEventListener(
         "keydown",
-        function (event) {
+        function(event){
 
-            if (event.key === "Enter") {
+            if(event.key === "Enter"){
 
                 nextButton.click();
 
@@ -452,298 +657,331 @@ function renderAnswer(step) {
 }
 
 
-/* =========================================
-   رد سنا بعد كل إجابة
-========================================= */
+/* =========================================================
+   اختيار الجنس
+========================================================= */
 
-function getResponse(step) {
+function createGender(){
 
-    const name =
-        user.name || "يا جميل";
+    answerArea.innerHTML = `
 
+        <div class="gender-grid">
 
-    /* الاسم */
+            <button
+                class="gender-btn"
+                type="button"
+                data-gender="male"
+            >
+                👨 ولد
+            </button>
 
-    if (step.key === "name") {
+            <button
+                class="gender-btn"
+                type="button"
+                data-gender="female"
+            >
+                👩 بنت
+            </button>
 
-        if (user.gender === "female") {
+        </div>
 
-            return `
-                اسمك ${user.name}؟ يا سلام 😌💛
-                خلاص كده الاسم دخل عندي رسمي.
-                من هنا ورايح هكلمك باسمك عشان أحس إننا بنتكلم بجد، مش بعمل فورم تسجيل وخلاص.
-            `;
-
-        }
-
-        return `
-            ${user.name}؟ حلو الاسم يا ${user.name} 😌💛
-            خلاص كده حفظته، ومش هفضل أقولك يا نجم ويا صاحبي كل شوية.
-            من هنا ورايح إنت ${user.name} وخلاص.
-        `;
-
-    }
-
-
-    /* النوع */
-
-    if (step.key === "gender") {
-
-        if (user.gender === "female") {
-
-            return `
-                تمام يا ${name} 💛
-                كده عرفت أكلمك بالطريقة اللي تليق بيكي.
-                وبصراحة اختيارك خلّى سنا تاخد بالها أكتر من طريقة الكلام معاكي 😌
-            `;
-
-        }
-
-        return `
-            تمام يا ${name} 💛
-            كده عرفت إن قدامي راجل.
-            خلاص هات بقى اللي عندك، وسنا هتفضل مركزة معاك في كل تفصيلة 😌
-        `;
-
-    }
-
-
-    /* العمر */
-
-    if (step.key === "age") {
-
-        const age = Number(user.age);
-
-        if (age < 18) {
-
-            return `
-                ${name}، ${age} سنة؟ 😄
-                لسه بدري عليك يا بطل، وده معناه إن تركيزي معاك هيبقى على العادات الصحية الآمنة والنمو والنشاط،
-                ومش هتعامل معاك كأنك شخص كبير وخلاص.
-            `;
-
-        }
-
-        if (age <= 24) {
-
-            return `
-                ${name}، ${age} سنة... شباب لسه في عزّه 😌
-                السن ده مهم جدًا لأن جسمك غالبًا لسه قدامه مساحة كبيرة تتحسن فيها اللياقة والعادات والنوم والحركة.
-                فمش هدفي أخليك تعمل حاجة قاسية؛ هدفي نخلي جسمك ياخد حقه من غير تعقيد.
-            `;
-
-        }
-
-        if (age <= 39) {
-
-            return `
-                ${name}، ${age} سنة.
-                كده دخلنا مرحلة الجسم فيها بيحب النظام أكتر من العشوائية 😄
-                نومك، حركتك، أكلك وتعرضك للشمس كلهم بيفرقوا، وأنا هربطهم ببعض بدل ما أديك نصايح منفصلة.
-            `;
-
-        }
-
-        return `
-            ${name}، ${age} سنة؟
-            جميل... هنا الخبرة بقى 😌
-            وكل ما السن يزيد، التفاصيل الصغيرة في النوم والحركة والتغذية والتعرض للشمس بتبقى أهم،
-            فهخلي كلامي معاك محسوب ومناسب لمرحلتك.
-        `;
-
-    }
-
-
-    /* الوزن */
-
-    if (step.key === "weight") {
-
-        const weight = Number(user.weight);
-
-        if (weight < 50) {
-
-            return `
-                تمام يا ${name}، سجلت ${weight} كجم.
-                الرقم لوحده عمره ما يكفي نحكم على الجسم، وخصوصًا من غير الطول والعمر.
-                استنى عليا لما أجمع الصورة كاملة وبعدها أقولك اللي يهمك فعلًا 😉
-            `;
-
-        }
-
-        if (weight < 90) {
-
-            return `
-                تمام يا ${name}، ${weight} كجم اتسجلوا.
-                بس مش هطلعلك حكم سريع من رقم واحد، لأن الوزن من غير الطول والعمر ميدينيش الصورة الحقيقية.
-                فاضل عندي كام تفصيلة وأربطهم ببعض.
-            `;
-
-        }
-
-        return `
-            ${name}، ${weight} كجم.
-            وصلتني المعلومة، ومش هعمل فيها دكتور وأحكم عليك من الوزن لوحده 😄
-            الطول والسن هيخلوني أفهم الصورة أحسن بكتير، وساعتها أقولك الكلام المفيد فعلًا.
-        `;
-
-    }
-
-
-    /* الطول */
-
-    if (step.key === "height") {
-
-        const height = Number(user.height);
-        const weight = Number(user.weight);
-        const age = Number(user.age);
-
-        let bmi = null;
-
-        if (height > 0 && weight > 0) {
-
-            bmi =
-                weight /
-                Math.pow(height / 100, 2);
-
-        }
-
-
-        if (bmi) {
-
-            let assessment = "";
-
-            if (bmi < 18.5) {
-                assessment =
-                    "الرقم المبدئي عندي منخفض نسبيًا";
-            }
-            else if (bmi < 25) {
-                assessment =
-                    "الرقم المبدئي داخل النطاق المعتاد";
-            }
-            else if (bmi < 30) {
-                assessment =
-                    "الرقم المبدئي أعلى من النطاق المعتاد";
-            }
-            else {
-                assessment =
-                    "الرقم المبدئي مرتفع ويستحق اهتمام";
-            }
-
-
-            return `
-                حلو يا ${name}، كده الصورة بدأت تبان 👀
-                طولك ${height} سم ووزنك ${weight} كجم، وعند سن ${age} سنة.
-                بالحساب المبدئي مؤشر كتلة الجسم حوالي ${bmi.toFixed(1)}،
-                وده معناه إن ${assessment}.
-                بس خليك فاكر: BMI مؤشر مبدئي مش تشخيص، وأنا مش هختزلك في رقم واحد 💛
-            `;
-
-        }
-
-
-        return `
-            تمام يا ${name}، طولك ${height} سم اتسجل.
-            كده بقيت أعرف عن جسمك تفاصيل أكتر، وآخر قطعة في الصورة هتبقى البلد.
-        `;
-
-    }
-
-
-    /* البلد */
-
-    if (step.key === "country") {
-
-        const country =
-            user.country.trim().toLowerCase();
-
-        if (
-            country.includes("مصر") ||
-            country.includes("egypt")
-        ) {
-
-            return `
-                مصر؟ 🇪🇬
-                كده الموضوع بقى له طعم تاني 😄
-                الشمس عندنا قوية أغلب السنة، والحرارة والرطوبة ووقت الخروج كلهم ممكن يغيروا تجربة التعرض للشمس.
-                عشان كده مش هقولك رقم محفوظ من على النت؛ هراعي المكان والوقت ونوع بشرتك لما نوصل لجرعة الشمس.
-                وكده أنا بدأت أفهم ${name} مش مجرد أجمع بياناته 💛
-            `;
-
-        }
-
-
-        if (
-            country.includes("المغرب") ||
-            country.includes("morocco")
-        ) {
-
-            return `
-                المغرب 🇲🇦؟
-                جميل يا ${name} 😌
-                الموقع والمناخ واختلاف الفصول هناك مهمين جدًا لما نتكلم عن الشمس،
-                وعشان كده البلد عندي مش خانة بنحط فيها كلمتين وخلاص.
-                هستخدمها كجزء من الصورة لما نحسب جرعتك.
-            `;
-
-        }
-
-
-        if (
-            country.includes("السعود") ||
-            country.includes("saudi")
-        ) {
-
-            return `
-                السعودية 🇸🇦
-                وصلت يا ${name} 💛
-                الحرارة وقوة الشمس ووقت اليوم عوامل مهمة جدًا هناك،
-                فاختيار وقت التعرض هيبقى له وزن كبير عندنا.
-                وأنا هربط ده ببياناتك بدل ما أديك توصية عامة لكل الناس.
-            `;
-
-        }
-
-
-        return `
-            ${country} 🌍
-            وصلت يا ${name}.
-            حلو إنك قلتلي المكان، لأن البلد والمناخ والموقع الجغرافي ممكن يغيروا طريقة تعاملنا مع الشمس.
-            مش هفترض إن كل البلاد زي بعض؛ هنخلي المكان جزء أساسي من الحساب.
-        `;
-
-    }
-
-
-    return `
-        تمام يا ${name} 💛
-        سنا سجلت المعلومة وبتربطها بباقي الصورة.
     `;
+
+
+    document
+        .querySelectorAll(".gender-btn")
+        .forEach(button => {
+
+            button.addEventListener(
+                "click",
+                function(){
+
+                    user.gender =
+                        this.dataset.gender;
+
+
+                    document
+                        .querySelectorAll(".gender-btn")
+                        .forEach(btn =>
+                            btn.classList.remove("active")
+                        );
+
+
+                    this.classList.add("active");
+
+
+                    nextButton.textContent =
+                        user.gender === "female"
+                        ? "كملي معايا يا جميلة 💛"
+                        : "كمّل معايا يا نجم 💛";
+
+
+                    nextButton.classList.remove("hidden");
+
+                }
+            );
+
+        });
 
 }
 
 
-/* =========================================
-   التالي
-========================================= */
+/* =========================================================
+   لون البشرة
+========================================================= */
+
+function createSkin(){
+
+    const skins = [
+
+        {
+            id:"very-light",
+            label:"فاتحة جدًا",
+            note:"تحمر بسرعة",
+            color:"#f8dfcf"
+        },
+
+        {
+            id:"light",
+            label:"فاتحة",
+            note:"فاتحة وبتتأثر بالشمس",
+            color:"#edc2a5"
+        },
+
+        {
+            id:"medium",
+            label:"متوسطة",
+            note:"لون قمحي تقريبًا",
+            color:"#c98e68"
+        },
+
+        {
+            id:"dark",
+            label:"داكنة",
+            note:"ميلانين أعلى",
+            color:"#805039"
+        }
+
+    ];
+
+
+    answerArea.innerHTML = `
+
+        <div class="skin-grid">
+
+            ${
+                skins.map(skin => `
+
+                    <button
+                        type="button"
+                        class="skin-btn"
+                        data-skin="${skin.id}"
+                        data-label="${skin.label}"
+                    >
+
+                        <div
+                            class="skin-color"
+                            style="background:${skin.color}"
+                        ></div>
+
+                        ${skin.label}
+
+                        <small>
+                            ${skin.note}
+                        </small>
+
+                    </button>
+
+                `).join("")
+            }
+
+        </div>
+
+    `;
+
+
+    document
+        .querySelectorAll(".skin-btn")
+        .forEach(button => {
+
+            button.addEventListener(
+                "click",
+                function(){
+
+                    user.skin =
+                        this.dataset.skin;
+
+                    user.skinLabel =
+                        this.dataset.label;
+
+
+                    document
+                        .querySelectorAll(".skin-btn")
+                        .forEach(btn =>
+                            btn.classList.remove("active")
+                        );
+
+
+                    this.classList.add("active");
+
+
+                    nextButton.textContent =
+                        "تمام، عرفتها ☀️";
+
+                    nextButton.classList.remove("hidden");
+
+                }
+            );
+
+        });
+
+}
+
+
+/* =========================================================
+   أوقات الشمس
+========================================================= */
+
+function createTime(){
+
+    const times = [
+
+        {
+            id:"morning",
+            label:"الصبح",
+            note:"بعد الشروق بفترة",
+            icon:"🌤️"
+        },
+
+        {
+            id:"midday",
+            label:"الظهر",
+            note:"منتصف اليوم",
+            icon:"☀️"
+        },
+
+        {
+            id:"afternoon",
+            label:"العصر",
+            note:"قبل الغروب بفترة",
+            icon:"🌇"
+        },
+
+        {
+            id:"flexible",
+            label:"مش فارقة",
+            note:"أنا مرن في الوقت",
+            icon:"🕐"
+        }
+
+    ];
+
+
+    answerArea.innerHTML = `
+
+        <div class="time-grid">
+
+            ${
+                times.map(time => `
+
+                    <button
+                        type="button"
+                        class="time-btn"
+                        data-time="${time.id}"
+                        data-label="${time.label}"
+                    >
+
+                        <span>
+                            ${time.icon}
+                        </span>
+
+                        ${time.label}
+
+                        <small>
+                            ${time.note}
+                        </small>
+
+                    </button>
+
+                `).join("")
+            }
+
+        </div>
+
+    `;
+
+
+    document
+        .querySelectorAll(".time-btn")
+        .forEach(button => {
+
+            button.addEventListener(
+                "click",
+                function(){
+
+                    user.sunTime =
+                        this.dataset.time;
+
+                    user.sunTimeLabel =
+                        this.dataset.label;
+
+
+                    document
+                        .querySelectorAll(".time-btn")
+                        .forEach(btn =>
+                            btn.classList.remove("active")
+                        );
+
+
+                    this.classList.add("active");
+
+
+                    nextButton.textContent =
+                        "خلاص، سنا جمعت الصورة ☀️";
+
+                    nextButton.classList.remove("hidden");
+
+                }
+            );
+
+        });
+
+}
+
+
+/* =========================================================
+   زر التالي
+========================================================= */
 
 nextButton.addEventListener(
     "click",
-    async function () {
+    async function(){
 
         const step =
             steps[currentStep];
 
 
-        /* النوع */
+        /* المقدمة */
 
-        if (step.type === "gender") {
+        if(step.type === "intro"){
 
-            if (!user.gender) {
+            currentStep++;
 
-                await typeText(
-                    question,
-                    "استنى بس 😄 اختارلي الأول ولد ولا بنت عشان أعرف أكلمك بالطريقة الصح 💛",
-                    45
+            await renderStep();
+
+            return;
+
+        }
+
+
+        /* الجنس */
+
+        if(step.type === "gender"){
+
+            if(!user.gender){
+
+                alert(
+                    "اختار الأول يا جميل 💛"
                 );
 
                 return;
@@ -753,27 +991,63 @@ nextButton.addEventListener(
         }
 
 
-        /* باقي الأسئلة */
+        /* البشرة */
 
-        else {
+        else if(step.type === "skin"){
+
+            if(!user.skin){
+
+                alert(
+                    "اختار لون البشرة التقريبي الأول ☀️"
+                );
+
+                return;
+
+            }
+
+        }
+
+
+        /* الوقت */
+
+        else if(step.type === "time"){
+
+            if(!user.sunTime){
+
+                alert(
+                    "اختار الوقت اللي يناسبك الأول 🌤️"
+                );
+
+                return;
+
+            }
+
+        }
+
+
+        /* باقي الحقول */
+
+        else if(step.type === "text" || step.type === "number"){
 
             const input =
                 document.getElementById("answerInput");
 
 
-            if (!input) return;
+            if(!input){
+
+                return;
+
+            }
 
 
             const value =
                 input.value.trim();
 
 
-            if (!value) {
+            if(!value){
 
-                await typeText(
-                    question,
-                    "اكتبلي الإجابة الأول يا جميل، وأنا مستنياك 😊",
-                    45
+                alert(
+                    "اكتبلي الإجابة الأول عشان أعرف أكمل معاك 😊"
                 );
 
                 input.focus();
@@ -783,67 +1057,45 @@ nextButton.addEventListener(
             }
 
 
-            if (
-                step.type === "number" &&
-                Number(value) <= 0
-            ) {
+            if(step.key === "age"){
 
-                await typeText(
-                    question,
-                    "مممم الرقم ده مش منطقي 😄 جرب تكتبهولي بشكل صحيح.",
-                    45
-                );
+                const age =
+                    Number(value);
 
-                input.focus();
 
-                return;
+                if(age < 1 || age > 120){
+
+                    alert(
+                        "اكتب سن صحيح من فضلك 😊"
+                    );
+
+                    input.focus();
+
+                    return;
+
+                }
 
             }
 
 
-            user[step.key] = value;
+            user[step.key] =
+                value;
 
         }
-
-
-        /* عرض رد سنا */
-
-        nextButton.disabled = true;
-
-        thinkingSana(chatSana);
-
-        const response =
-            getResponse(step);
-
-        await typeText(
-            question,
-            response,
-            38
-        );
-
-
-        happySana(chatSana);
-
-
-        /* زر جديد */
-
-        await new Promise(resolve =>
-            setTimeout(resolve, 650)
-        );
 
 
         currentStep++;
 
 
-        if (currentStep < steps.length) {
+        if(currentStep < steps.length){
 
-            renderStep();
+            await renderStep();
 
         }
 
-        else {
+        else{
 
-            showSummary();
+            await showReview();
 
         }
 
@@ -851,18 +1103,81 @@ nextButton.addEventListener(
 );
 
 
-/* =========================================
-   مراجعة كل البيانات
-========================================= */
+/* =========================================================
+   مراجعة البيانات
+========================================================= */
 
-async function showSummary() {
+async function showReview(){
 
-    showPage(pages.summary);
+    showPage(review);
 
-    thinkingSana(summarySana);
 
-    const name =
-        user.name;
+    reviewCards.innerHTML = "";
+
+
+    const genderText =
+        user.gender === "female"
+        ? "بنت"
+        : "ولد";
+
+
+    const cards = [
+
+        ["الاسم",user.name],
+
+        ["العمر",user.age + " سنة"],
+
+        ["النوع",genderText],
+
+        ["الطول",user.height + " سم"],
+
+        ["الوزن",user.weight + " كجم"],
+
+        ["البلد",user.country],
+
+        ["البشرة",user.skinLabel],
+
+        ["وقت الشمس",user.sunTimeLabel]
+
+    ];
+
+
+    reviewCards.innerHTML =
+        cards.map(card => `
+
+            <div class="review-card">
+
+                <span>
+                    ${card[0]}
+                </span>
+
+                <strong>
+                    ${card[1]}
+                </strong>
+
+            </div>
+
+        `).join("");
+
+
+    const reviewMessage =
+        buildReviewMessage();
+
+
+    await typeReview(
+        reviewMessage,
+        36
+    );
+
+
+    finishReview.classList.remove(
+        "hidden"
+    );
+
+}
+
+
+function buildReviewMessage(){
 
     const age =
         Number(user.age);
@@ -874,192 +1189,197 @@ async function showSummary() {
         Number(user.height);
 
 
-    let bmi =
-        weight /
-        Math.pow(height / 100, 2);
+    let agePart = "";
 
 
-    let bodyComment = "";
+    if(age < 18){
 
-
-    if (bmi < 18.5) {
-
-        bodyComment =
-            "مؤشر الوزن بالنسبة للطول منخفض نسبيًا";
+        agePart =
+            `وعندك ${age} سنة، يعني لسه في مرحلة جسمك فيها بيكبر وبيتغير، فمش هتعامل معاك بنفس طريقة شخص بالغ.`;
 
     }
-    else if (bmi < 25) {
 
-        bodyComment =
-            "مؤشر الوزن بالنسبة للطول داخل النطاق المعتاد";
+    else if(age < 25){
 
-    }
-    else if (bmi < 30) {
-
-        bodyComment =
-            "مؤشر الوزن بالنسبة للطول أعلى من النطاق المعتاد";
+        agePart =
+            `وعندك ${age} سنة، يعني لسه في سن النشاط والحركة وبناء عادات هتفرق معاك جدًا على المدى الطويل.`;
 
     }
-    else {
 
-        bodyComment =
-            "مؤشر الوزن بالنسبة للطول مرتفع ويستحق اهتمام";
+    else if(age < 40){
+
+        agePart =
+            `وعندك ${age} سنة، ودي مرحلة مهم فيها إن العادات اليومية تبقى متوازنة بدل ما نستنى الجسم يطلب اهتمامه بالعافية.`;
+
+    }
+
+    else{
+
+        agePart =
+            `وعندك ${age} سنة، وده يخليني أهتم أكتر بالاستمرارية وجودة العادات بدل فكرة إننا نعمل حاجة جامدة يومين ونختفي بعدها.`;
 
     }
 
 
-    const intro =
-        user.gender === "female"
-
-            ? `
-                خلاص يا ${name} 💛
-                دلوقتي أقدر أقول إني بدأت أعرفك بجد.
-                عندي سنك، وطولك، ووزنك، وبلدك، وعرفت كمان الطريقة اللي تحبي سنا تكلمك بيها.
-                `
-
-            : `
-                خلاص يا ${name} 💛
-                كده الصورة بدأت تكتمل عندي.
-                عرفت سنك، وطولك، ووزنك، وبلدك، وعرفت كمان الطريقة اللي تحب سنا تكلمك بيها.
-                `;
+    let bodyPart = "";
 
 
-    await typeText(
-        summaryText,
-        intro,
-        34
-    );
+    if(height > 0 && weight > 0){
+
+        const bmi =
+            weight / Math.pow(height / 100,2);
 
 
-    summaryCard.innerHTML = `
+        if(bmi < 18.5){
 
-        <div class="summary-row">
-            <span class="summary-label">الاسم</span>
-            <span class="summary-value">${user.name}</span>
-        </div>
+            bodyPart =
+                `وطولك ${height} سم ووزنك ${weight} كجم، وده يخليني أخلي موضوع التغذية والطاقة جزء من الصورة، مش أركز على الشمس لوحدها.`;
 
-        <div class="summary-row">
-            <span class="summary-label">العمر</span>
-            <span class="summary-value">${user.age} سنة</span>
-        </div>
+        }
 
-        <div class="summary-row">
-            <span class="summary-label">الطول</span>
-            <span class="summary-value">${user.height} سم</span>
-        </div>
+        else if(bmi < 25){
 
-        <div class="summary-row">
-            <span class="summary-label">الوزن</span>
-            <span class="summary-value">${user.weight} كجم</span>
-        </div>
+            bodyPart =
+                `وطولك ${height} سم ووزنك ${weight} كجم، والأرقام دي هتساعدني أتعامل مع نشاطك واحتياجاتك اليومية بشكل أدق.`;
 
-        <div class="summary-row">
-            <span class="summary-label">البلد</span>
-            <span class="summary-value">${user.country}</span>
-        </div>
+        }
 
-        <div class="summary-row">
-            <span class="summary-label">BMI مبدئي</span>
-            <span class="summary-value">${bmi.toFixed(1)}</span>
-        </div>
+        else if(bmi < 30){
 
+            bodyPart =
+                `وطولك ${height} سم ووزنك ${weight} كجم، وده معناه إن الحركة اليومية والنشاط هيبقوا جزء مهم من الخطة مع الشمس والمياه.`;
+
+        }
+
+        else{
+
+            bodyPart =
+                `وطولك ${height} سم ووزنك ${weight} كجم، وعلشان كده مش هبص للشمس كموضوع منفصل؛ النشاط والمياه والنوم والعادات اليومية كلهم داخلين في الصورة.`;
+
+        }
+
+    }
+
+
+    const countryPart =
+        `وأنت من ${user.country}، ودي معلومة مهمة فعلًا؛ لأن الجو وكمية الشمس ودرجة الحرارة ونمط الحياة مش واحدين في كل مكان.`;
+
+
+    const skinPart =
+        `ولون بشرتك ${user.skinLabel}، وده مهم لأن كمية الميلانين بتأثر في استجابة الجلد للأشعة وتكوين فيتامين D.`;
+
+
+    const timePart =
+        `وكمان أنت اخترت ${user.sunTimeLabel} كوقت مناسب ليك، فهخلي ده نقطة بداية بدل ما أفرض عليك وقت مش مناسب لحياتك.`;
+
+
+    let personality = "";
+
+
+    if(user.gender === "female"){
+
+        personality =
+            `وبالمناسبة يا ${user.name}... أنا خدت بالي من كل ده، مش هسيبك ترميلي شوية أرقام وأعمل نفسي آلة حاسبة 😂💛. إنتِ بقيتي بالنسبة لي صورة كاملة محتاجة خطة على مقاسها.`;
+
+    }
+
+    else{
+
+        personality =
+            `وبالمناسبة يا ${user.name}... أنا خدت بالي من كل ده يا نجم، مش هسيبك ترميلي شوية أرقام وأقولك تمام وخلاص 😂💛. كده أنا بدأت أفهمك فعلًا وأقدر أبني معاك حاجة على مقاسك.`;
+
+    }
+
+
+    return `
+        ${agePart}
+        ${bodyPart}
+        ${countryPart}
+        ${skinPart}
+        ${timePart}
+        ${personality}
     `;
-
-
-    const finalComment = `
-        وبالمناسبة، ${bodyComment}.
-        ده مؤشر مبدئي مش تشخيص طبي، وأنا مش هختزلك في رقم.
-        اللي جاي أهم: هنستخدم البيانات دي عشان نخلي SunDose يتعامل معاك بشكل شخصي فعلًا.
-    `;
-
-
-    await new Promise(resolve =>
-        setTimeout(resolve, 400)
-    );
-
-
-    await typeText(
-        summaryText,
-        intro + "\n\n" + finalComment,
-        32
-    );
-
-
-    happySana(summarySana);
 
 }
 
 
-/* =========================================
-   الذهاب للعادات
-========================================= */
+/* =========================================================
+   بعد المراجعة
+========================================================= */
 
-goToHabits.addEventListener(
+finishReview.addEventListener(
     "click",
-    function () {
+    async function(){
 
-        showHabits();
+        showPage(habits);
+
+
+        const name =
+            user.name;
+
+
+        let opening;
+
+
+        if(user.gender === "female"){
+
+            opening =
+                `خلاص يا ${name} 💛 كده أنا فعلًا عرفت عنك حاجات أكتر من مجرد اسم ورقم. دلوقتي نبدأ بقى الجزء اللي يهمك: جسمك وعاداتك اليومية، وكل حاجة هنمشي فيها واحدة واحدة ومن غير ضغط.`;
+
+        }
+
+        else{
+
+            opening =
+                `خلاص يا ${name} 💛 كده أنا فعلًا فهمت الصورة يا نجم. دلوقتي نبدأ الجزء اللي يهمك: جسمك وعاداتك اليومية، وكل حاجة هنمشي فيها واحدة واحدة ومن غير ما أحول حياتك لمعسكر 😂.`;
+
+        }
+
+
+        habitMessage.textContent =
+            opening;
+
+
+        createHabits();
 
     }
 );
 
 
-/* =========================================
-   صفحة العادات
-========================================= */
+/* =========================================================
+   العادات
+========================================================= */
 
-function showHabits() {
-
-    showPage(pages.habits);
-
-    talkingSana(habitsSana);
-
-    const name =
-        user.name;
-
-
-    habitMessage.textContent = "";
-
-
-    typeText(
-        habitMessage,
-        `تمام يا ${name} 💛 كده بقى عندنا صورة حقيقية عنك. دلوقتي اختار أول حاجة نفسك نشتغل عليها، وسنا مش هترمي عليك معلومات وخلاص؛ هنمشي فيها واحدة واحدة.`,
-        35
-    );
-
+function createHabits(){
 
     const habits = [
 
         {
-            id: "sun",
-            icon: "☀️",
-            title: "جرعة الشمس",
-            description:
-                "نحدد وقت وطريقة تعرض مناسبة ليك."
+            id:"sun",
+            icon:"☀️",
+            title:"جرعة الشمس",
+            text:"نبني خطة تعرض مناسبة لبياناتك ومكانك."
         },
 
         {
-            id: "water",
-            icon: "💧",
-            title: "شرب المياه",
-            description:
-                "نظبط الترطيب حسب يومك ونشاطك."
+            id:"water",
+            icon:"💧",
+            title:"المياه",
+            text:"نحسب احتياجك التقريبي وننظمه خلال اليوم."
         },
 
         {
-            id: "exercise",
-            icon: "🏃",
-            title: "الحركة",
-            description:
-                "نختار نشاط مناسب ونبنيه تدريجيًا."
+            id:"exercise",
+            icon:"🏃",
+            title:"الحركة",
+            text:"نشوف مستوى نشاط يناسب جسمك وحياتك."
         },
 
         {
-            id: "supplements",
-            icon: "💊",
-            title: "المكملات",
-            description:
-                "نفهم إمتى تكون مفيدة وإمتى لأ."
+            id:"supplements",
+            icon:"💊",
+            title:"العلاج والمكملات",
+            text:"نرتب المعلومات بدون اقتراح علاج من نفسنا."
         }
 
     ];
@@ -1073,16 +1393,16 @@ function showHabits() {
                 data-habit="${habit.id}"
             >
 
-                <div class="habit-icon">
+                <div class="icon">
                     ${habit.icon}
                 </div>
 
-                <span class="habit-title">
+                <b>
                     ${habit.title}
-                </span>
+                </b>
 
-                <p class="habit-description">
-                    ${habit.description}
+                <p>
+                    ${habit.text}
                 </p>
 
             </div>
@@ -1096,7 +1416,7 @@ function showHabits() {
 
             element.addEventListener(
                 "click",
-                function () {
+                function(){
 
                     const selected =
                         this.dataset.habit;
@@ -1112,38 +1432,32 @@ function showHabits() {
                     this.classList.add("active");
 
 
-                    if (selected === "sun") {
+                    if(selected === "sun"){
 
                         openSunDose();
 
                     }
 
-                    else if (selected === "water") {
+                    else if(selected === "water"){
 
-                        typeText(
-                            habitMessage,
-                            `المياه اختيار حلو يا ${name} 💧 بس نخليها بعد جرعة الشمس، عشان نبني التطبيق جزء جزء بدل ما نرمي عليك كل حاجة مرة واحدة.`,
-                            35
+                        alert(
+                            "💧 قسم المياه جاهز للخطوة الجاية. هنستخدم الوزن والنشاط والجو بدل رقم ثابت لكل الناس."
                         );
 
                     }
 
-                    else if (selected === "exercise") {
+                    else if(selected === "exercise"){
 
-                        typeText(
-                            habitMessage,
-                            `الحركة مهمة جدًا يا ${name} 🏃 وهنخليها مبنية على مستواك الحقيقي، مش نصيحة عامة من نوع "اتحرك وخلاص" 😄`,
-                            35
+                        alert(
+                            "🏃 قسم الحركة هنربطه بالعمر والوزن ومستوى النشاط في المرحلة الجاية."
                         );
 
                     }
 
-                    else {
+                    else if(selected === "supplements"){
 
-                        typeText(
-                            habitMessage,
-                            `المكملات مش لعبة يا ${name} 💊، وعلشان كده القسم ده هنخليه مبني على الاحتياج والمعلومات الموثوقة، مش مجرد أسماء منتجات.`,
-                            35
+                        alert(
+                            "💊 القسم ده هيكون للمعلومات والتنظيم فقط، وأي علاج أو مكمل لازم يبقى مبني على احتياج حقيقي أو توجيه طبي."
                         );
 
                     }
@@ -1156,460 +1470,123 @@ function showHabits() {
 }
 
 
-/* =========================================
+/* =========================================================
    جرعة الشمس
-========================================= */
+========================================================= */
 
-let sunStep = 0;
+async function openSunDose(){
+
+    showPage(sunDose);
 
 
-/* =========================================
-   فتح جرعة الشمس
-========================================= */
+    doseSkin.textContent =
+        user.skinLabel || "—";
 
-function openSunDose() {
 
-    showPage(pages.sunDose);
+    doseTime.textContent =
+        user.sunTimeLabel || "—";
 
-    sunStep = 0;
 
-    talkingSana(sunSana);
+    doseCountry.textContent =
+        user.country || "—";
 
-    renderSunStep();
+
+    const name =
+        user.name;
+
+
+    let message;
+
+
+    if(user.gender === "female"){
+
+        message =
+            `وصلنا يا ${name} ☀️💛. هنا بقى هنبدأ نحول كل اللي عرفته عنك لخطة شمس شخصية. عندي سنك، طولك، وزنك، بلدك، لون بشرتك والوقت اللي يناسبك. مش هديكي رقم عشوائي؛ هنطوّر الجزء ده خطوة بخطوة عشان سنا تبقى فعلًا فاهمة جسمك والبيئة اللي حواليكي.`;
+
+    }
+
+    else{
+
+        message =
+            `وصلنا يا ${name} ☀️💛. هنا بقى هنبدأ نحول كل اللي عرفته عنك لخطة شمس شخصية. عندي سنك، طولك، وزنك، بلدك، لون بشرتك والوقت اللي يناسبك. مش هديك رقم عشوائي يا نجم؛ هنطوّر الجزء ده خطوة بخطوة عشان سنا تبقى فعلًا فاهمة جسمك والبيئة اللي حواليك.`;
+
+    }
+
+
+    await typeSunMessage(
+        message,
+        38
+    );
 
 }
 
 
-/* =========================================
-   مراحل جرعة الشمس
-========================================= */
+/* =========================================================
+   كتابة رسالة الشمس
+========================================================= */
 
-async function renderSunStep() {
+function typeSunMessage(text,speed){
 
-    sunNext.disabled = true;
+    return new Promise(resolve => {
 
-    thinkingSana(sunSana);
+        let index = 0;
 
+        sunMessage.textContent = "";
 
-    if (sunStep === 0) {
+        const timer =
+            setInterval(() => {
 
-        await typeText(
-            sunMessage,
-            `تمام يا ${user.name} ☀️ دخلنا بقى في الجزء اللي كنت مستنيه. قبل ما أقولك أي وقت أو مدة، لازم أعرف لون بشرتك الأول، لأن البشرة مش كلها بتتعامل مع الشمس بنفس الطريقة.`,
-            35
-        );
+                sunMessage.textContent =
+                    text.substring(0,index);
 
+                index++;
 
-        sunStepArea.innerHTML = `
+                if(index > text.length){
 
-            <div class="sun-choice-title">
-                أقرب درجة لبشرتك إيه؟
-            </div>
+                    clearInterval(timer);
 
-            <div class="skin-grid">
-
-                <button class="skin-btn" data-skin="very-light">
-                    <div
-                        class="skin-color"
-                        style="background:#f6d2b5"
-                    ></div>
-                    <span class="skin-name">فاتحة جدًا</span>
-                </button>
-
-                <button class="skin-btn" data-skin="light">
-                    <div
-                        class="skin-color"
-                        style="background:#e9b990"
-                    ></div>
-                    <span class="skin-name">فاتحة</span>
-                </button>
-
-                <button class="skin-btn" data-skin="medium">
-                    <div
-                        class="skin-color"
-                        style="background:#c98d62"
-                    ></div>
-                    <span class="skin-name">متوسطة</span>
-                </button>
-
-                <button class="skin-btn" data-skin="tan">
-                    <div
-                        class="skin-color"
-                        style="background:#9a633f"
-                    ></div>
-                    <span class="skin-name">سمراء فاتحة</span>
-                </button>
-
-                <button class="skin-btn" data-skin="brown">
-                    <div
-                        class="skin-color"
-                        style="background:#70442d"
-                    ></div>
-                    <span class="skin-name">بنية</span>
-                </button>
-
-                <button class="skin-btn" data-skin="dark">
-                    <div
-                        class="skin-color"
-                        style="background:#43281f"
-                    ></div>
-                    <span class="skin-name">داكنة</span>
-                </button>
-
-            </div>
-
-        `;
-
-
-        bindSkinButtons();
-
-    }
-
-
-    else if (sunStep === 1) {
-
-        await typeText(
-            sunMessage,
-            `حلو يا ${user.name} 💛 دلوقتي قولي بتحب تتعرض للشمس إمتى غالبًا؟ مش لازم يكون الوقت المثالي؛ قولي الوقت اللي فعلًا تقدر تلتزم بيه.`,
-            35
-        );
-
-
-        sunStepArea.innerHTML = `
-
-            <div class="sun-choice-title">
-                وقت التعرض المفضل
-            </div>
-
-            <div class="time-grid">
-
-                <button class="time-btn" data-time="morning">
-                    🌅 الصبح
-                </button>
-
-                <button class="time-btn" data-time="midday">
-                    ☀️ منتصف اليوم
-                </button>
-
-                <button class="time-btn" data-time="afternoon">
-                    🌤️ بعد الظهر
-                </button>
-
-                <button class="time-btn" data-time="flexible">
-                    🕐 مش فارقة
-                </button>
-
-            </div>
-
-        `;
-
-
-        bindTimeButtons();
-
-    }
-
-
-    else {
-
-        await showSunResult();
-
-        return;
-
-    }
-
-
-    sunNext.disabled = false;
-
-}
-
-
-/* =========================================
-   اختيار البشرة
-========================================= */
-
-function bindSkinButtons() {
-
-    document
-        .querySelectorAll(".skin-btn")
-        .forEach(button => {
-
-            button.addEventListener(
-                "click",
-                async function () {
-
-                    user.skin =
-                        this.dataset.skin;
-
-
-                    document
-                        .querySelectorAll(".skin-btn")
-                        .forEach(btn =>
-                            btn.classList.remove("active")
-                        );
-
-
-                    this.classList.add("active");
-
-                    excitedSana(sunSana);
-
-
-                    await typeText(
-                        sunMessage,
-                        getSkinComment(),
-                        34
-                    );
+                    resolve();
 
                 }
-            );
 
-        });
+            },speed);
 
-}
-
-
-function getSkinComment() {
-
-    const comments = {
-
-        "very-light":
-            `آه، بشرتك فاتحة جدًا يا ${user.name} 😌 يبقى لازم ناخد موضوع مدة التعرض بجدية، لأن الاحمرار والحرق ممكن يحصلوا أسرع.`,
-
-        "light":
-            `تمام يا ${user.name} 💛 بشرتك فاتحة، وده معناه إننا هنوازن بين الاستفادة من الشمس وبين إننا مانسيبش الجلد يتعرض زيادة عن اللزوم.`,
-
-        "medium":
-            `بشرة متوسطة؟ تمام يا ${user.name} 😌 كده عندنا توازن مختلف شوية، وبرضه الوقت والمكان وقوة الشمس هيفرقوا.`,
-
-        "tan":
-            `سمراء فاتحة؟ جميل يا ${user.name} 💛 لون البشرة عامل مهم، بس مش العامل الوحيد؛ المكان والوقت وقوة الشمس لسه لهم كلمة.`,
-
-        "brown":
-            `بشرة بنية يا ${user.name} ☀️ وصلت. لون البشرة بيأثر في استجابة الجلد للأشعة، وعلشان كده مش هنستخدم نفس التوصية للجميع.`,
-
-        "dark":
-            `تمام يا ${user.name} 💛 بشرتك داكنة، وده من العوامل اللي لازم تدخل في تقدير التعرض للشمس، لكن برضه مش هنسلّم كل الحساب للون البشرة وحده.`
-
-    };
-
-
-    return comments[user.skin];
+    });
 
 }
 
 
-/* =========================================
-   اختيار الوقت
-========================================= */
+/* =========================================================
+   الرجوع للعادات
+========================================================= */
 
-function bindTimeButtons() {
-
-    document
-        .querySelectorAll(".time-btn")
-        .forEach(button => {
-
-            button.addEventListener(
-                "click",
-                function () {
-
-                    user.sunTime =
-                        this.dataset.time;
-
-
-                    document
-                        .querySelectorAll(".time-btn")
-                        .forEach(btn =>
-                            btn.classList.remove("active")
-                        );
-
-
-                    this.classList.add("active");
-
-                    excitedSana(sunSana);
-
-                }
-            );
-
-        });
-
-}
-
-
-/* =========================================
-   زر جرعة الشمس
-========================================= */
-
-sunNext.addEventListener(
+backToHabits.addEventListener(
     "click",
-    async function () {
+    function(){
 
-        if (sunStep === 0 && !user.skin) {
-
-            await typeText(
-                sunMessage,
-                `اختارلي درجة بشرتك الأول يا ${user.name} 😄 عشان سنا متطلعش لك بتوصية من عندها.`,
-                40
-            );
-
-            return;
-
-        }
-
-
-        if (sunStep === 1 && !user.sunTime) {
-
-            await typeText(
-                sunMessage,
-                `اختار الوقت اللي يناسبك الأول يا ${user.name} ☀️ وأنا أكمل معاك.`,
-                40
-            );
-
-            return;
-
-        }
-
-
-        sunStep++;
-
-        renderSunStep();
+        showPage(habits);
 
     }
 );
 
 
-/* =========================================
-   نتيجة جرعة الشمس
-========================================= */
+/* =========================================================
+   تأخير
+========================================================= */
 
-async function showSunResult() {
+function delay(ms){
 
-    thinkingSana(sunSana);
-
-    sunStepArea.innerHTML = "";
-
-    const country =
-        user.country.toLowerCase();
-
-
-    let locationText =
-        "بلدك";
-
-    if (
-        country.includes("مصر") ||
-        country.includes("egypt")
-    ) {
-
-        locationText =
-            "مصر";
-
-    }
-    else if (
-        country.includes("المغرب") ||
-        country.includes("morocco")
-    ) {
-
-        locationText =
-            "المغرب";
-
-    }
-    else if (
-        country.includes("السعود") ||
-        country.includes("saudi")
-    ) {
-
-        locationText =
-            "السعودية";
-
-    }
-
-
-    await typeText(
-        sunMessage,
-        `كده يا ${user.name} عندي أهم البيانات: عمرك ${user.age} سنة، طولك ${user.height} سم، وزنك ${user.weight} كجم، بشرتك ${getSkinArabic()}، وبتفضل ${getTimeArabic()}، وعايش في ${locationText}. دلوقتي أقدر أقولك حاجة أهم: مفيش رقم سحري ثابت لكل الناس، لأن مؤشر الأشعة والطقس ومساحة الجلد المكشوفة ودرجة البشرة والوقت كلها بتفرق.`,
-        30
+    return new Promise(
+        resolve => setTimeout(resolve,ms)
     );
 
-
-    sunStepArea.innerHTML = `
-
-        <div class="result-card">
-
-            <div class="result-number">
-                ☀️
-            </div>
-
-            <strong>
-                ملف جرعة الشمس اتجهز
-            </strong>
-
-            <div class="result-note">
-                الخطوة دي جهزت بياناتك الأساسية.
-                في النسخة التالية هنربطها ببيانات الطقس
-                ومؤشر الأشعة فوق البنفسجية والموقع الفعلي،
-                وبعدها نطلع توصية أكثر تخصيصًا بدل رقم عشوائي.
-            </div>
-
-        </div>
-
-    `;
-
-
-    sunNext.textContent =
-        "رجوع للعادات 💛";
-
-    sunNext.onclick = function () {
-
-        sunNext.onclick = null;
-
-        sunNext.textContent =
-            "نكمل ☀️";
-
-        showHabits();
-
-    };
-
-
-    happySana(sunSana);
-
 }
 
 
-/* =========================================
-   تحويل البشرة للعربي
-========================================= */
+/* =========================================================
+   تشغيل أولي
+========================================================= */
 
-function getSkinArabic() {
-
-    const map = {
-
-        "very-light": "فاتحة جدًا",
-        "light": "فاتحة",
-        "medium": "متوسطة",
-        "tan": "سمراء فاتحة",
-        "brown": "بنية",
-        "dark": "داكنة"
-
-    };
-
-    return map[user.skin] || "غير محددة";
-
-}
-
-
-/* =========================================
-   تحويل الوقت للعربي
-========================================= */
-
-function getTimeArabic() {
-
-    const map = {
-
-        morning: "الصبح",
-        midday: "منتصف اليوم",
-        afternoon: "بعد الظهر",
-        flexible: "وقت مرن"
-
-    };
-
-    return map[user.sunTime] || "وقت غير محدد";
-
-    }
+console.log(
+    "SunDose ☀️ loaded successfully"
+);
