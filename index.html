@@ -11,37 +11,33 @@
 
 <body>
 
-<div class="app">
+<div id="app">
 
     <!-- =========================
-         الصفحة الرئيسية
+         شاشة البداية
     ========================== -->
 
-    <section id="home" class="screen">
+    <section id="home" class="screen home-screen">
 
         <div class="brand">SunDose ☀️</div>
 
         <div class="home-content">
 
-            <div class="sana-wrap">
-                <img
-                    src="assets/sana.png"
-                    class="sana"
-                    id="homeSana"
-                    alt="سنا"
-                >
+            <div class="sana-stage">
+                <img src="assets/sana.png" class="sana hero-sana" alt="سنا">
+                <div class="sana-glow"></div>
             </div>
 
             <h1>أهلاً... أنا سنا 💛</h1>
 
             <p class="home-text">
-                مش هسألك كام سؤال وخلاص...
-                أنا عايزة أعرفك بجد، وأفهم جسمك ومكانك وعاداتك،
-                وبعدها نمشي سوا خطوة خطوة.
+                قبل ما أساعدك في الشمس والمياه والحركة،
+                نفسي نتعرف على بعض الأول...
+                مش عايزاك تحس إنك داخل تملى بيانات وخلاص 😌
             </p>
 
             <button id="startButton" class="primary-btn">
-                نبدأ سوا ☀️
+                خلينا نتعرف ☀️
             </button>
 
         </div>
@@ -53,7 +49,7 @@
          شاشة التعارف
     ========================== -->
 
-    <section id="welcome" class="screen hidden">
+    <section id="conversation" class="screen hidden">
 
         <div class="brand">SunDose ☀️</div>
 
@@ -61,39 +57,27 @@
             <span id="progressBar"></span>
         </div>
 
-        <div class="sana-area" id="sanaArea">
+        <div class="conversation-layout">
 
-            <img
-                src="assets/sana.png"
-                class="sana sana-chat"
-                id="chatSana"
-                alt="سنا"
-            >
-
-        </div>
-
-        <div class="message">
-
-            <div class="message-name">
-                سنا 💛
+            <div class="sana-stage small-stage">
+                <img src="assets/sana.png" class="sana small-sana" alt="سنا">
+                <div class="talking-dot"></div>
             </div>
 
-            <div
-                id="question"
-                class="typing-text"
-            ></div>
+            <div class="speech-bubble">
 
-        </div>
+                <div class="sana-name">
+                    سنا 💛
+                </div>
 
-        <div id="answerArea"></div>
+                <div id="sanaText" class="sana-text"></div>
 
-        <div class="actions">
+            </div>
 
-            <button
-                id="nextButton"
-                class="primary-btn"
-            >
-                تمام، نكمل ☀️
+            <div id="answerArea"></div>
+
+            <button id="nextButton" class="primary-btn hidden">
+                كملي يا سنا ☀️
             </button>
 
         </div>
@@ -102,76 +86,67 @@
 
 
     <!-- =========================
-         مراجعة البيانات
+         شاشة المراجعة
     ========================== -->
 
-    <section id="summary" class="screen hidden">
+    <section id="review" class="screen hidden">
 
         <div class="brand">SunDose ☀️</div>
 
-        <div class="sana-area">
+        <div class="conversation-layout">
 
-            <img
-                src="assets/sana.png"
-                class="sana sana-chat happy"
-                id="summarySana"
-                alt="سنا"
-            >
-
-        </div>
-
-        <div class="message summary-message">
-
-            <div class="message-name">
-                سنا 💛
+            <div class="sana-stage small-stage">
+                <img src="assets/sana.png" class="sana small-sana" alt="سنا">
             </div>
 
-            <div id="summaryText"></div>
+            <div class="speech-bubble">
+
+                <div class="sana-name">
+                    سنا 💛
+                </div>
+
+                <div id="reviewText" class="sana-text"></div>
+
+            </div>
+
+            <div id="reviewCards" class="review-cards"></div>
+
+            <button id="finishReview" class="primary-btn hidden">
+                كده أنا فهمتك ☀️
+            </button>
 
         </div>
-
-        <div class="summary-card" id="summaryCard"></div>
-
-        <button
-            id="goToHabits"
-            class="primary-btn"
-        >
-            طب وريني نبدأ منين ☀️
-        </button>
 
     </section>
 
 
     <!-- =========================
-         العادات
+         شاشة العادات
     ========================== -->
 
     <section id="habits" class="screen hidden">
 
         <div class="brand">SunDose ☀️</div>
 
-        <div class="sana-area">
+        <div class="conversation-layout">
 
-            <img
-                src="assets/sana.png"
-                class="sana sana-chat"
-                id="habitsSana"
-                alt="سنا"
-            >
-
-        </div>
-
-        <div class="message">
-
-            <div class="message-name">
-                سنا 💛
+            <div class="sana-stage small-stage">
+                <img src="assets/sana.png" class="sana small-sana" alt="سنا">
             </div>
 
-            <div id="habitMessage"></div>
+            <div class="speech-bubble">
+
+                <div class="sana-name">
+                    سنا 💛
+                </div>
+
+                <div id="habitMessage" class="sana-text"></div>
+
+            </div>
+
+            <div id="habitList" class="habit-list"></div>
 
         </div>
-
-        <div id="habitList" class="habit-list"></div>
 
     </section>
 
@@ -184,36 +159,56 @@
 
         <div class="brand">SunDose ☀️</div>
 
-        <div class="sana-area">
+        <div class="conversation-layout">
 
-            <img
-                src="assets/sana.png"
-                class="sana sana-chat"
-                id="sunSana"
-                alt="سنا"
-            >
-
-        </div>
-
-        <div class="message">
-
-            <div class="message-name">
-                سنا ☀️
+            <div class="sana-stage small-stage">
+                <img src="assets/sana.png" class="sana small-sana" alt="سنا">
             </div>
 
-            <div id="sunMessage"></div>
+            <div class="speech-bubble">
 
-        </div>
+                <div class="sana-name">
+                    سنا ☀️
+                </div>
 
-        <div id="sunStepArea"></div>
+                <div id="sunMessage" class="sana-text"></div>
 
-        <div class="actions">
+            </div>
 
-            <button
-                id="sunNext"
-                class="primary-btn"
-            >
-                نكمل ☀️
+            <div class="dose-card">
+
+                <div class="dose-sun">☀️</div>
+
+                <h2>جرعة الشمس</h2>
+
+                <p>
+                    هنا هنحوّل البيانات اللي عرفتها عنك
+                    إلى خطة شمس شخصية خطوة بخطوة.
+                </p>
+
+                <div class="dose-info">
+
+                    <div>
+                        <span>البشرة</span>
+                        <strong id="doseSkin">—</strong>
+                    </div>
+
+                    <div>
+                        <span>الوقت المفضل</span>
+                        <strong id="doseTime">—</strong>
+                    </div>
+
+                    <div>
+                        <span>البلد</span>
+                        <strong id="doseCountry">—</strong>
+                    </div>
+
+                </div>
+
+            </div>
+
+            <button id="backToHabits" class="secondary-btn">
+                رجوع للعادات
             </button>
 
         </div>
@@ -221,7 +216,6 @@
     </section>
 
 </div>
-
 
 <script src="app.js"></script>
 
