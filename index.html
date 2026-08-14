@@ -13,29 +13,41 @@
 
 <div class="app">
 
-    <!-- الصفحة الرئيسية -->
+    <!-- =========================
+         البداية
+    ========================== -->
+
     <section id="home" class="screen">
 
-        <div class="brand">SunDose ☀️</div>
+        <div class="brand">
+            SunDose ☀️
+        </div>
 
         <div class="home-content">
 
-            <img
-                src="assets/sana.png"
-                class="sana"
-                alt="سنا"
-            >
+            <div class="sana-wrap">
+                <img
+                    src="assets/sana.png"
+                    class="sana"
+                    alt="سنا"
+                >
+            </div>
 
-            <h1>أهلاً... أنا سنا 💛</h1>
+            <h1>
+                أهلاً... أنا سنا 💛
+            </h1>
 
-            <p>
-                خلّينا نتعرّف على بعض الأول،
-                وبعدها أساعدك تختار العادات الصحية
-                اللي تناسبك.
+            <p class="home-text">
+                مش هسألك شوية أسئلة وخلاص...
+                عايزة أتعرف عليك الأول،
+                وبعدها أبدأ أفهمك وأساعدك واحدة واحدة.
             </p>
 
-            <button id="startButton" class="primary-btn">
-                نتعرّف على بعض ☀️
+            <button
+                id="startButton"
+                class="primary-btn"
+            >
+                نتعرف على بعض ☀️
             </button>
 
         </div>
@@ -43,97 +55,178 @@
     </section>
 
 
-    <!-- التعارف -->
-    <section id="welcome" class="screen hidden">
+    <!-- =========================
+         التعارف
+    ========================== -->
 
-        <div class="brand">SunDose ☀️</div>
+    <section
+        id="welcome"
+        class="screen hidden"
+    >
+
+        <div class="brand">
+            SunDose ☀️
+        </div>
 
         <div class="progress">
             <span id="progressBar"></span>
         </div>
 
-        <img
-            src="assets/sana.png"
-            class="sana small"
-            alt="سنا"
-        >
+        <div class="conversation">
 
-        <div class="message">
+            <div class="sana-wrap conversation-sana">
 
-            <strong>سنا 💛</strong>
+                <img
+                    src="assets/sana.png"
+                    class="sana small"
+                    alt="سنا"
+                >
 
-            <p id="question"></p>
+            </div>
+
+
+            <div class="message">
+
+                <div class="message-name">
+                    سنا 💛
+                </div>
+
+                <div
+                    id="question"
+                    class="question"
+                ></div>
+
+            </div>
+
+
+            <div
+                id="answerArea"
+                class="answer-area"
+            ></div>
+
+
+            <button
+                id="nextButton"
+                class="primary-btn next-btn"
+            >
+                تمام، قولي 💛
+            </button>
 
         </div>
-
-        <div id="answerArea"></div>
-
-        <button id="nextButton" class="primary-btn">
-            نكمل سوا ☀️
-        </button>
 
     </section>
 
 
-    <!-- العادات -->
-    <section id="habits" class="screen hidden">
+    <!-- =========================
+         العادات
+    ========================== -->
 
-        <div class="brand">SunDose ☀️</div>
+    <section
+        id="habits"
+        class="screen hidden"
+    >
 
-        <img
-            src="assets/sana.png"
-            class="sana small"
-            alt="سنا"
-        >
-
-        <div class="message">
-
-            <strong>سنا 💛</strong>
-
-            <p id="habitMessage"></p>
-
+        <div class="brand">
+            SunDose ☀️
         </div>
 
-        <div id="habitList" class="habit-list"></div>
+        <div class="conversation">
+
+            <div class="sana-wrap conversation-sana">
+
+                <img
+                    src="assets/sana.png"
+                    class="sana small"
+                    alt="سنا"
+                >
+
+            </div>
+
+
+            <div class="message">
+
+                <div class="message-name">
+                    سنا 💛
+                </div>
+
+                <div id="habitMessage"></div>
+
+            </div>
+
+
+            <div
+                id="habitList"
+                class="habit-list"
+            ></div>
+
+        </div>
 
     </section>
 
 
-    <!-- جرعة الشمس -->
-    <section id="sunDose" class="screen hidden">
+    <!-- =========================
+         جرعة الشمس
+    ========================== -->
 
-        <div class="brand">SunDose ☀️</div>
+    <section
+        id="sunDose"
+        class="screen hidden"
+    >
 
-        <img
-            src="assets/sana.png"
-            class="sana small"
-            alt="سنا"
-        >
-
-        <div class="message">
-
-            <strong>سنا 💛</strong>
-
-            <p id="sunMessage"></p>
-
+        <div class="brand">
+            SunDose ☀️
         </div>
 
-        <div class="dose-card">
+        <div class="conversation">
 
-            <div class="dose-icon">☀️</div>
+            <div class="sana-wrap conversation-sana">
 
-            <h2>جرعة الشمس</h2>
+                <img
+                    src="assets/sana.png"
+                    class="sana small"
+                    alt="سنا"
+                >
 
-            <p>
-                هنا هنبدأ نبني جرعتك اليومية
-                بشكل يناسبك خطوة بخطوة.
-            </p>
+            </div>
+
+
+            <div class="message">
+
+                <div class="message-name">
+                    سنا 💛
+                </div>
+
+                <div id="sunMessage"></div>
+
+            </div>
+
+
+            <div class="sun-placeholder">
+
+                <div class="sun-big">
+                    ☀️
+                </div>
+
+                <h2>
+                    جرعة الشمس
+                </h2>
+
+                <p>
+                    هنا هنكمل مع سنا خطوة بخطوة
+                    ونبني الجرعة حسب بياناتك.
+                </p>
+
+            </div>
+
+
+            <button
+                id="backToHabits"
+                class="secondary-btn"
+            >
+                رجوع للعادات
+            </button>
 
         </div>
-
-        <button id="backToHabits" class="secondary-btn">
-            رجوع للعادات
-        </button>
 
     </section>
 
