@@ -25,9 +25,9 @@
 <div class="app">
 
 
-    <!-- =========================
+    <!-- =================================
          الصفحة الرئيسية
-    ========================== -->
+    ================================== -->
 
     <section
         id="home"
@@ -53,7 +53,7 @@
                 <img
                     id="sanaImage"
                     src="assets/sana_welcome_01.png"
-                    class="sana sana-character sana-enter"
+                    class="sana sana-character"
                     alt="سنا"
                 >
 
@@ -95,9 +95,9 @@
 
 
 
-    <!-- =========================
+    <!-- =================================
          التعارف
-    ========================== -->
+    ================================== -->
 
     <section
         id="welcome"
@@ -110,7 +110,11 @@
 
 
         <div class="progress">
-            <span id="progressBar"></span>
+
+            <span
+                id="progressBar"
+            ></span>
+
         </div>
 
 
@@ -157,9 +161,9 @@
 
 
 
-    <!-- =========================
+    <!-- =================================
          العادات
-    ========================== -->
+    ================================== -->
 
     <section
         id="habits"
@@ -206,9 +210,9 @@
 
 
 
-    <!-- =========================
+    <!-- =================================
          جرعة الشمس
-    ========================== -->
+    ================================== -->
 
     <section
         id="sunDose"
@@ -219,6 +223,8 @@
             ☀️ SunDose
         </div>
 
+
+        <!-- سنا كبيرة فوق المشهد -->
 
         <div class="sana-stage">
 
@@ -231,6 +237,8 @@
 
         </div>
 
+
+        <!-- كلام سنا -->
 
         <div class="sana-message">
 
@@ -246,100 +254,117 @@
         </div>
 
 
-        <!-- =========================
+        <!-- =================================
              مشهد الشمس
-        ========================== -->
+        ================================== -->
 
-        <div class="sun-scene">
+        <div
+            id="sunScene"
+            class="sun-scene scene-morning"
+        >
 
             <div
-                id="sunVisual"
-                class="sun-visual"
+                id="sunGlow"
+                class="sun-glow"
+            ></div>
+
+
+            <div
+                id="sunRays"
+                class="sun-rays"
+            ></div>
+
+
+            <div
+                id="sunOrb"
+                class="sun-orb"
             ></div>
 
         </div>
 
 
-        <!-- =========================
-             بيانات الاختيارات
-        ========================== -->
+        <!-- =================================
+             بيانات المستخدم
+        ================================== -->
 
-        <div class="sun-info-grid">
+        <div class="dose-data">
 
+            <div class="dose-data-card">
 
-            <div class="sun-info-card">
+                <small>
+                    درجة البشرة
+                </small>
 
-                <div
-                    id="selectedSkinVisual"
-                    class="info-skin"
-                ></div>
-
-                <div>
-
-                    <small>
-                        درجة البشرة
-                    </small>
-
-                    <strong
-                        id="selectedSkinName"
-                    >
-                        لم يتم الاختيار
-                    </strong>
-
-                </div>
-
-            </div>
-
-
-            <div class="sun-info-card">
-
-                <div
-                    id="selectedTimeVisual"
-                    class="info-time"
+                <strong
+                    id="doseSkinValue"
                 >
-                    ☀️
-                </div>
-
-                <div>
-
-                    <small>
-                        وقت التعرض
-                    </small>
-
-                    <strong
-                        id="selectedTimeName"
-                    >
-                        لم يتم الاختيار
-                    </strong>
-
-                </div>
+                    —
+                </strong>
 
             </div>
 
+
+            <div class="dose-data-card">
+
+                <small>
+                    وقت التعرض
+                </small>
+
+                <strong
+                    id="doseTimeValue"
+                >
+                    —
+                </strong>
+
+            </div>
+
+
+            <div class="dose-data-card">
+
+                <small>
+                    المكان
+                </small>
+
+                <strong
+                    id="doseLocationValue"
+                >
+                    —
+                </strong>
+
+            </div>
 
         </div>
 
 
-        <!-- =========================
+        <!-- =================================
              كارت جرعة الشمس
-        ========================== -->
+        ================================== -->
 
         <div class="dose-card">
 
             <div class="dose-icon">
-                ☀️
+                ☀
             </div>
+
 
             <h2>
                 جرعة الشمس
             </h2>
 
+
             <p>
                 هنا هنبدأ نبني جرعتك اليومية
                 بشكل يناسب بياناتك خطوة بخطوة.
-                المرحلة دي هي بداية الحساب الحقيقي،
-                مش مجرد رقم ثابت لكل الناس.
+                مش هنفترض رقم ثابت لكل الناس.
             </p>
+
+
+            <div
+                id="doseStatus"
+                class="dose-status"
+            >
+                جاهز لقراءة مؤشر الأشعة فوق البنفسجية
+            </div>
 
         </div>
 
@@ -347,6 +372,7 @@
         <button
             id="backToHabits"
             class="secondary-btn"
+            style="margin-top:14px;"
         >
             رجوع للعادات
         </button>
