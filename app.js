@@ -1,22 +1,19 @@
 /* =========================================
    SunDose ☀️
-   app.js
-   النسخة الكاملة
-   + حركة سنا
-   + رحلة جرعة الشمس
+   المرحلة الأولى + محطة الشمس
 ========================================= */
 
 
 const user = {
 
-    name: "",
-    gender: "",
-    age: "",
-    weight: "",
-    height: "",
-    country: "",
-    skinTone: "",
-    sunTime: ""
+    name:"",
+    gender:"",
+    age:"",
+    weight:"",
+    height:"",
+    country:"",
+    skinTone:"",
+    sunTime:""
 
 };
 
@@ -60,6 +57,12 @@ const answerArea =
 const progressBar =
     document.getElementById("progressBar");
 
+const stepNumber =
+    document.getElementById("stepNumber");
+
+const stepTotal =
+    document.getElementById("stepTotal");
+
 
 const habitMessage =
     document.getElementById("habitMessage");
@@ -74,10 +77,6 @@ const sunMessage =
 const backToHabits =
     document.getElementById("backToHabits");
 
-
-/* =========================================
-   صور سنا
-========================================= */
 
 const sanaImage =
     document.getElementById("sanaImage");
@@ -96,7 +95,39 @@ const sanaReaction =
 
 
 /* =========================================
-   حالة التطبيق
+   عناصر محطة الشمس
+========================================= */
+
+const locationButton =
+    document.getElementById("locationButton");
+
+const sunStatus =
+    document.getElementById("sunStatus");
+
+const sunSkinValue =
+    document.getElementById("sunSkinValue");
+
+const sunTimeValue =
+    document.getElementById("sunTimeValue");
+
+const sunLocationValue =
+    document.getElementById("sunLocationValue");
+
+const uvValue =
+    document.getElementById("uvValue");
+
+const analysisTitle =
+    document.getElementById("analysisTitle");
+
+const analysisText =
+    document.getElementById("analysisText");
+
+const analysisIcon =
+    document.getElementById("analysisIcon");
+
+
+/* =========================================
+   الحالة
 ========================================= */
 
 let introStep = 0;
@@ -109,7 +140,7 @@ let typingTimer = null;
 
 let waitingForContinue = false;
 
-let sunFlowRunning = false;
+let sunData = null;
 
 
 /* =========================================
@@ -141,9 +172,9 @@ function changeSanaImage(
     element.src = image;
 
 
-    if (sanaReaction) {
+    if (sanaReaction){
 
-        if (reaction) {
+        if (reaction){
 
             sanaReaction.textContent =
                 reaction;
@@ -152,7 +183,7 @@ function changeSanaImage(
                 "hidden"
             );
 
-        } else {
+        }else{
 
             sanaReaction.classList.add(
                 "hidden"
@@ -166,7 +197,7 @@ function changeSanaImage(
 
 
 /* =========================================
-   إظهار صفحة واحدة فقط
+   عرض صفحة
 ========================================= */
 
 function showPage(page){
@@ -178,7 +209,7 @@ function showPage(page){
         sunDose
     ].forEach(section => {
 
-        if (section) {
+        if(section){
 
             section.classList.add(
                 "hidden"
@@ -189,7 +220,7 @@ function showPage(page){
     });
 
 
-    if (page) {
+    if(page){
 
         page.classList.remove(
             "hidden"
@@ -199,31 +230,28 @@ function showPage(page){
 
 
     window.scrollTo({
-
-        top: 0,
-
-        behavior: "smooth"
-
+        top:0,
+        behavior:"smooth"
     });
 
 }
 
 
 /* =========================================
-   كتابة سنا ببطء
+   الكتابة
 ========================================= */
 
 function typeSanaText(
     text,
     element,
-    speed = 55,
+    speed = 42,
     callback = null
 ){
 
-    if (!element) return;
+    if(!element) return;
 
 
-    if (typingTimer) {
+    if(typingTimer){
 
         clearInterval(
             typingTimer
@@ -242,46 +270,42 @@ function typeSanaText(
     let index = 0;
 
 
-    typingTimer = setInterval(() => {
+    typingTimer =
+        setInterval(() => {
 
-        element.textContent +=
-            text.charAt(index);
+            element.textContent +=
+                text.charAt(index);
 
-
-        index++;
-
-
-        if (index >= text.length){
-
-            clearInterval(
-                typingTimer
-            );
-
-            typingTimer = null;
-
-            isTyping = false;
+            index++;
 
 
-            if (callback){
+            if(index >= text.length){
 
-                callback();
+                clearInterval(
+                    typingTimer
+                );
+
+                typingTimer = null;
+
+                isTyping = false;
+
+
+                if(callback){
+
+                    callback();
+
+                }
 
             }
 
-        }
-
-    }, speed);
+        }, speed);
 
 }
 
 
-/* =========================================
-   إنهاء الكتابة فورًا
-========================================= */
-
 function finishTypingImmediately(){
 
-    if (
+    if(
         !isTyping ||
         !typingTimer
     ){
@@ -299,112 +323,92 @@ function finishTypingImmediately(){
 
     isTyping = false;
 
-
     return true;
 
 }
 
 
 /* =========================================
-   مقدمة سنا
+   المقدمة
 ========================================= */
 
 const introMessages = [
 
-    "أهلًا 💛 أنا سنا... ويمكن دي أول مرة نتقابل فيها، فمش عايزة أبدأ معاك بأسئلة كأنك داخل تملى استمارة 😄",
+    "أهلًا 💛 أنا سنا... ومش عايزة أبدأ معاك بأسئلة كأنك داخل تملى استمارة 😄",
 
-    "أنا سنا ☀️ واسمي مرتبط بالشمس والنور، وده جزء كبير من الحكاية اللي خلتني أكون هنا.",
+    "أنا سنا ☀️ ووجودي هنا له علاقة بالشمس والنور والعادات اللي ممكن تفرق في يومك.",
 
-    "الفكرة بدأت من حاجة بسيطة جدًا: شخص كان عنده مشكلة مرتبطة بفيتامين D، وكان محتاج حد يفكره بالعلاج والعادات المهمة.",
+    "الفكرة بدأت من حاجة بسيطة... شخص كان محتاج حد يساعده يفتكر العلاج والعادات المهمة.",
 
-    "ومن هنا الفكرة كبرت... وبدل ما يكون مجرد موقع بيفكّر الشخص بحاجة، بقى SunDose عايز يكون رفيق يفهم الشخص نفسه ومكانه وعاداته.",
+    "ومن هنا SunDose كبر. مش مجرد تذكير، لكن رفيق يحاول يفهم الشخص ومكانه وعاداته.",
 
-    "وعشان كده مش هبدأ أقولك اعمل إيه. الأول نتعرف، وبعدها كل معلومة تقولها لي هتفرق في اللي هقولهولك.",
+    "عشان كده مش هقولك تعمل إيه من أول ثانية. الأول نتعرف، وبعدها كل معلومة منك هتفرق.",
 
-    "خد راحتك 💛 مفيش استعجال. نبدأ باسمك الأول، وبعدها نمشي خطوة خطوة."
-
+    "خد راحتك 💛 نبدأ باسمك، وبعدها نمشي خطوة خطوة."
 ];
 
 
-/* =========================================
-   حركة الترحيب
-========================================= */
-
 function setIntroSana(){
 
-    if (!sanaImage) return;
+    if(!sanaImage) return;
 
 
-    if (introStep === 0){
+    const images = [
 
-        changeSanaImage(
-            sanaImage,
+        [
             "assets/sana_welcome_01.png",
             "✨"
-        );
+        ],
 
-    }
-
-    else if (introStep === 1){
-
-        changeSanaImage(
-            sanaImage,
+        [
             "assets/sana_welcome_02.png",
             "👋"
-        );
+        ],
 
-    }
-
-    else if (introStep === 2){
-
-        changeSanaImage(
-            sanaImage,
+        [
             "assets/sana_curious.png",
             "👀"
-        );
+        ],
 
-    }
-
-    else if (introStep === 3){
-
-        changeSanaImage(
-            sanaImage,
+        [
             "assets/sana_happy.png",
             "💛"
-        );
+        ],
 
-    }
-
-    else if (introStep === 4){
-
-        changeSanaImage(
-            sanaImage,
+        [
             "assets/sana_calm.png",
             "🌱"
-        );
+        ],
 
-    }
-
-    else {
-
-        changeSanaImage(
-            sanaImage,
+        [
             "assets/sana_excited.png",
             "☀️"
-        );
+        ]
 
-    }
+    ];
+
+
+    const current =
+        images[
+            Math.min(
+                introStep,
+                images.length - 1
+            )
+        ];
+
+
+    changeSanaImage(
+        sanaImage,
+        current[0],
+        current[1]
+    );
 
 }
 
 
-/* =========================================
-   عرض المقدمة
-========================================= */
-
 function renderIntro(){
 
-    if (
+    if(
         !introText ||
         !introNext
     ){
@@ -416,7 +420,6 @@ function renderIntro(){
 
     introNext.disabled = true;
 
-
     setIntroSana();
 
 
@@ -426,29 +429,18 @@ function renderIntro(){
 
         introText,
 
-        55,
+        42,
 
         function(){
 
             introNext.disabled = false;
 
-
-            if (
+            introNext.textContent =
                 introStep ===
                 introMessages.length - 1
-            ){
 
-                introNext.textContent =
-                    "نبدأ التعارف ☀️";
-
-            }
-
-            else{
-
-                introNext.textContent =
-                    "متابعة";
-
-            }
+                    ? "نبدأ التعارف ☀️"
+                    : "متابعة";
 
         }
 
@@ -457,11 +449,7 @@ function renderIntro(){
 }
 
 
-/* =========================================
-   تشغيل المقدمة
-========================================= */
-
-if (
+if(
     introText &&
     introNext
 ){
@@ -473,42 +461,29 @@ if (
         "click",
         function(){
 
-            if (
+            if(
                 finishTypingImmediately()
             ){
 
                 introText.textContent =
                     introMessages[introStep];
 
-
                 introNext.disabled =
                     false;
 
-
-                if (
+                introNext.textContent =
                     introStep ===
                     introMessages.length - 1
-                ){
 
-                    introNext.textContent =
-                        "نبدأ التعارف ☀️";
-
-                }
-
-                else{
-
-                    introNext.textContent =
-                        "متابعة";
-
-                }
-
+                        ? "نبدأ التعارف ☀️"
+                        : "متابعة";
 
                 return;
 
             }
 
 
-            if (
+            if(
                 introStep <
                 introMessages.length - 1
             ){
@@ -517,33 +492,19 @@ if (
 
                 renderIntro();
 
-            }
-
-            else{
+            }else{
 
                 introNext.classList.add(
                     "hidden"
                 );
 
-
-                if (startButton){
+                if(startButton){
 
                     startButton.classList.remove(
                         "hidden"
                     );
 
                 }
-
-
-                changeSanaImage(
-
-                    sanaImage,
-
-                    "assets/sana_welcome_02.png",
-
-                    "☀️"
-
-                );
 
             }
 
@@ -554,227 +515,166 @@ if (
 
 
 /* =========================================
-   أسئلة التعارف
+   الأسئلة
 ========================================= */
 
 const steps = [
 
     {
         key:"name",
-
         question:
             "أول حاجة بقى... اسمك إيه؟ 😊",
-
         type:"text",
-
         label:"اسمك",
-
-        placeholder:
-            "اكتب اسمك هنا"
+        placeholder:"اكتب اسمك هنا"
     },
 
 
     {
         key:"gender",
-
         question:
-            "حلو جدًا 💛 دلوقتي عايزة أعرف أخاطبك إزاي عشان كلامي معاك يبقى مناسب ليك.",
-
+            "حلو جدًا 💛 أخاطبك إزاي عشان كلام سنا يبقى طبيعي ومناسب ليك؟",
         type:"gender"
     },
 
 
     {
         key:"age",
-
         question:
-            "طيب قولي سنك كام؟ 😄 السن هيساعدني أفهم المرحلة اللي جسمك فيها وأخلي كلامي مناسب ليك.",
-
+            "طيب سنك كام؟ 😄 السن هيساعدني أفهم المرحلة العمرية المناسبة.",
         type:"number",
-
         label:"العمر",
-
-        placeholder:
-            "مثال: 23",
-
+        placeholder:"مثال: 23",
         unit:"سنة"
     },
 
 
     {
         key:"weight",
-
         question:
-            "تمام يا ${name}... وزنك كام تقريبًا؟ 😄 الرقم مش حكم عليك، أنا هربطه بباقي بياناتك.",
-
+            "وزنك كام تقريبًا؟ الرقم مش حكم عليك، هربطه بباقي بياناتك.",
         type:"number",
-
         label:"الوزن",
-
-        placeholder:
-            "مثال: 80",
-
+        placeholder:"مثال: 80",
         unit:"كجم"
     },
 
 
     {
         key:"height",
-
         question:
-            "وطولك كام؟ 🌱 كده أقدر أربط الطول بالوزن والعمر بدل ما أبص لكل رقم لوحده.",
-
+            "وطولك كام؟ 🌱 كده أقدر أربط الطول بالوزن والعمر.",
         type:"number",
-
         label:"الطول",
-
-        placeholder:
-            "مثال: 175",
-
+        placeholder:"مثال: 175",
         unit:"سم"
     },
 
 
     {
         key:"country",
-
         question:
-            "وإنت من أنهي بلد؟ 🌍 المكان عندي مش مجرد اسم؛ الشمس والطقس وطول النهار بيختلفوا من مكان لمكان.",
-
+            "إنت من أنهي بلد؟ 🌍 المكان بيفرق في الشمس والطقس وطول النهار.",
         type:"text",
-
         label:"البلد",
-
-        placeholder:
-            "مثال: مصر"
+        placeholder:"مثال: مصر"
     },
 
 
     {
         key:"skinTone",
-
         question:
-            "وصلنا لحاجة مهمة جدًا ☀️ لون بشرتك أقرب لأنهي درجة؟ ده هيفرق معايا في فهم استجابة بشرتك للشمس.",
-
+            "وصلنا لحاجة مهمة ☀️ لون بشرتك أقرب لأنهي درجة؟",
         type:"skin"
     },
 
 
     {
         key:"sunTime",
-
         question:
-            "ولو هتتعرض للشمس، بتحب يكون الوقت اللي يناسبك إمتى؟ ☀️",
-
+            "ولو هتتعرض للشمس، أنهي وقت يناسب يومك أكتر؟ ☀️",
         type:"time"
     }
 
 ];
 
 
+if(stepTotal){
+
+    stepTotal.textContent =
+        steps.length;
+
+}
+
+
 /* =========================================
-   صورة سنا حسب السؤال
+   صور سنا حسب السؤال
 ========================================= */
 
 function setQuestionSana(){
 
-    if (!questionSana) return;
+    if(!questionSana) return;
 
 
     const step =
         steps[currentStep];
 
 
-    if (step.key === "name"){
+    const map = {
 
-        changeSanaImage(
-            questionSana,
+        name:[
             "assets/sana_curious.png",
             "👀"
-        );
+        ],
 
-    }
-
-    else if (
-        step.key === "gender"
-    ){
-
-        changeSanaImage(
-            questionSana,
+        gender:[
             "assets/sana_happy.png",
             "💛"
-        );
+        ],
 
-    }
-
-    else if (
-        step.key === "age"
-    ){
-
-        changeSanaImage(
-            questionSana,
+        age:[
             "assets/sana_curious.png",
             "😄"
-        );
+        ],
 
-    }
-
-    else if (
-        step.key === "weight"
-    ){
-
-        changeSanaImage(
-            questionSana,
+        weight:[
             "assets/sana_calm.png",
             "💛"
-        );
+        ],
 
-    }
-
-    else if (
-        step.key === "height"
-    ){
-
-        changeSanaImage(
-            questionSana,
+        height:[
             "assets/sana_thinking.png",
             "🤔"
-        );
+        ],
 
-    }
-
-    else if (
-        step.key === "country"
-    ){
-
-        changeSanaImage(
-            questionSana,
+        country:[
             "assets/sana_curious.png",
             "🌍"
-        );
+        ],
 
-    }
-
-    else if (
-        step.key === "skinTone"
-    ){
-
-        changeSanaImage(
-            questionSana,
+        skinTone:[
             "assets/sana_thinking.png",
             "☀️"
-        );
+        ],
 
-    }
+        sunTime:[
+            "assets/sana_sun_01.png",
+            "☀️"
+        ]
 
-    else if (
-        step.key === "sunTime"
-    ){
+    };
+
+
+    const selected =
+        map[step.key];
+
+
+    if(selected){
 
         changeSanaImage(
             questionSana,
-            "assets/sana_sun_01.png",
-            "☀️"
+            selected[0],
+            selected[1]
         );
 
     }
@@ -783,7 +683,7 @@ function setQuestionSana(){
 
 
 /* =========================================
-   اسم المستخدم داخل السؤال
+   تخصيص السؤال
 ========================================= */
 
 function personalizeQuestion(text){
@@ -798,254 +698,7 @@ function personalizeQuestion(text){
 
 
 /* =========================================
-   ردود سنا
-========================================= */
-
-function getResponse(step){
-
-    const name =
-        user.name ||
-        "يا صديقي";
-
-
-    const female =
-        user.gender === "female";
-
-
-    if (
-        step.key === "name"
-    ){
-
-        changeSanaImage(
-            questionSana,
-            "assets/sana_happy.png",
-            "💛"
-        );
-
-
-        return `تشرفت بيك يا ${user.name} 💛 اسمك حلو فعلًا. دلوقتي بقى عرفت أول حاجة عن الشخص اللي هكمل معاه الرحلة دي.`;
-
-    }
-
-
-    if (
-        step.key === "gender"
-    ){
-
-        changeSanaImage(
-            questionSana,
-
-            female
-                ? "assets/sana_flirty.png"
-                : "assets/sana_happy.png",
-
-            "💛"
-        );
-
-
-        if (female){
-
-            return `تمام يا ${name} 💛 كده عرفت إنّي أكلمك بصيغة المؤنث من هنا ورايح، وده هيخلّي كلام سنا معاكي طبيعي ومريح.`;
-
-        }
-
-
-        return `تمام يا ${name} 😄 كده عرفت إنّي أكلمك بصيغة المذكر من هنا ورايح، ونكمّل براحتنا.`;
-
-    }
-
-
-    if (
-        step.key === "age"
-    ){
-
-        changeSanaImage(
-            questionSana,
-            "assets/sana_curious.png",
-            "😄"
-        );
-
-
-        const age =
-            Number(user.age);
-
-
-        if (age < 18){
-
-            return `يا ${name} 💛 سن ${age} سنة ولسه جسمك في مرحلة نمو، فهكون حريصة جدًا إن أي نصيحة أقولها تكون مناسبة لمرحلتك.`;
-
-        }
-
-
-        if (age <= 25){
-
-            return female
-
-                ? `يا ${name} 😄 ${age} سنة؟ لسه في سن جميل جدًا، ودي فرصة ممتازة تبني عادات صحية تفضل معاكي سنين.`
-
-                : `يا ${name} 😄 ${age} سنة؟ لسه في بداية الشباب، ودي فرصة ممتازة تبني عادات صحية تفضل معاك سنين.`;
-
-        }
-
-
-        if (age <= 40){
-
-            return `ما شاء الله يا ${name} 💛 ${age} سنة. سن ممتاز نخلي فيه الجسم والطاقة والعادات اليومية ماشيين في صالحك بدل ما نستنى المشاكل تظهر.`;
-
-        }
-
-
-        return `يا ${name} 💛 ${age} سنة معناها إننا هنركز أكتر على العادات اللي تحافظ على صحتك ونشاطك على المدى الطويل.`;
-
-    }
-
-
-    if (
-        step.key === "weight"
-    ){
-
-        changeSanaImage(
-            questionSana,
-            "assets/sana_calm.png",
-            "💛"
-        );
-
-
-        return `وصلني وزنك ${user.weight} كجم يا ${name} 💛 ومش هطلع حكم من الرقم ده لوحده. لسه عندي الطول والعمر، وبعدهم أقدر أكون صورة أصدق عن جسمك بدل الأحكام السريعة.`;
-
-    }
-
-
-    if (
-        step.key === "height"
-    ){
-
-        changeSanaImage(
-            questionSana,
-            "assets/sana_thinking.png",
-            "🤔"
-        );
-
-
-        const weight =
-            Number(user.weight);
-
-
-        const height =
-            Number(user.height);
-
-
-        const bmi =
-            height > 0
-                ? weight /
-                  ((height / 100) ** 2)
-                : 0;
-
-
-        if (bmi > 0){
-
-            if (bmi < 18.5){
-
-                return `تمام يا ${name} 🌱 طولك ${user.height} سم مع وزنك ${user.weight} كجم، وده مبدئيًا يخليني أحتاج أبص للصورة كاملة قبل أي حكم. المؤشر الحسابي هنا منخفض، لكن مش هعتبره تشخيص ولا هختصر جسمك في رقم.`;
-
-            }
-
-
-            if (bmi < 25){
-
-                return `حلو يا ${name} 🌱 طولك ${user.height} سم مع وزنك ${user.weight} كجم. كده عندي بيانات أهم بكتير من الوزن لوحده، ونقدر نكمل الصورة بهدوء.`;
-
-            }
-
-
-            if (bmi < 30){
-
-                return `تمام يا ${name} 💛 دلوقتي الصورة أوضح: ${user.height} سم طول و${user.weight} كجم وزن. المؤشر الحسابي يوحي إن الوزن أعلى من النطاق المعتاد، لكن ده مش تشخيص ولا حكم على شكل جسمك، ولسه محتاجين نفهم نشاطك وعاداتك.`;
-
-            }
-
-
-            return `بص يا ${name} 💛 دلوقتي عندي الطول ${user.height} سم والوزن ${user.weight} كجم. المؤشر الحسابي مرتفع، وده معناه إننا نحتاج نتعامل مع الموضوع بهدوء وذكاء ونركز على صحتك وعاداتك، مش على الرقم كأنه حكم عليك.`;
-
-        }
-
-
-        return `تمام يا ${name} 🌱 سجلت طولك ${user.height} سم، وكده بدأت الصورة عندي تكتمل.`;
-
-    }
-
-
-    if (
-        step.key === "country"
-    ){
-
-        changeSanaImage(
-            questionSana,
-            "assets/sana_curious.png",
-            "🌍"
-        );
-
-
-        const country =
-            user.country
-                .trim()
-                .toLowerCase();
-
-
-        if (
-            country.includes("مصر") ||
-            country.includes("egypt")
-        ){
-
-            return `مصر بقى 🇪🇬💛 تمام يا ${name}. كده أقدر أخلي معلومات الشمس والجو وطول النهار مرتبطة بمكانك بدل ما أديك كلام عام.`;
-
-        }
-
-
-        return `وصلت يا ${name} 🌍 ${user.country}. المكان اتسجل عندي، وده مهم لأن ظروف الشمس والطقس وطول النهار بتختلف من مكان لمكان.`;
-
-    }
-
-
-    if (
-        step.key === "skinTone"
-    ){
-
-        changeSanaImage(
-            questionSana,
-            "assets/sana_thinking.png",
-            "☀️"
-        );
-
-
-        return `تمام يا ${name} ☀️ سجلت درجة بشرتك. المعلومة دي مهمة لأن لون البشرة من العوامل اللي تدخل في استجابة الجلد للشمس.`;
-
-    }
-
-
-    if (
-        step.key === "sunTime"
-    ){
-
-        changeSanaImage(
-            questionSana,
-            "assets/sana_excited.png",
-            "☀️"
-        );
-
-
-        return `حلو يا ${name} ☀️ كده بقي عندي وقت التعرض اللي يناسب يومك. دلوقتي نقدر ندخل للمرحلة اللي كنت مستنيها... جرعة الشمس.`;
-
-    }
-
-
-    return `تمام يا ${name} 💛 سجلت المعلومة دي.`;
-
-}
-
-
-/* =========================================
-   عرض سؤال جديد
+   عرض السؤال
 ========================================= */
 
 function renderStep(){
@@ -1060,40 +713,41 @@ function renderStep(){
         );
 
 
-    const progress =
-        ((currentStep + 1) /
-        steps.length) * 100;
+    if(progressBar){
+
+        progressBar.style.width =
+            (
+                (currentStep + 1) /
+                steps.length *
+                100
+            ) + "%";
+
+    }
 
 
-    progressBar.style.width =
-        progress + "%";
+    if(stepNumber){
+
+        stepNumber.textContent =
+            currentStep + 1;
+
+    }
 
 
     answerArea.innerHTML = "";
 
-
     nextButton.textContent =
-        "متابعة";
+        "نكمّل سوا 💛";
 
+    nextButton.disabled = false;
 
-    nextButton.disabled =
-        false;
-
-
-    waitingForContinue =
-        false;
-
+    waitingForContinue = false;
 
     setQuestionSana();
 
 
-    /* =====================================
-       الجنس
-    ===================================== */
+    /* الجنس */
 
-    if (
-        step.type === "gender"
-    ){
+    if(step.type === "gender"){
 
         answerArea.innerHTML = `
 
@@ -1121,12 +775,10 @@ function renderStep(){
 
 
         document
-            .querySelectorAll(
-                ".gender-btn"
-            )
+            .querySelectorAll(".gender-btn")
             .forEach(button => {
 
-                if (
+                if(
                     user.gender ===
                     button.dataset.gender
                 ){
@@ -1150,13 +802,11 @@ function renderStep(){
                             .querySelectorAll(
                                 ".gender-btn"
                             )
-                            .forEach(btn => {
-
+                            .forEach(btn =>
                                 btn.classList.remove(
                                     "active"
-                                );
-
-                            });
+                                )
+                            );
 
 
                         this.classList.add(
@@ -1181,19 +831,14 @@ function renderStep(){
 
             });
 
-
         return;
 
     }
 
 
-    /* =====================================
-       لون البشرة
-    ===================================== */
+    /* البشرة */
 
-    if (
-        step.type === "skin"
-    ){
+    if(step.type === "skin"){
 
         answerArea.innerHTML = `
 
@@ -1201,47 +846,47 @@ function renderStep(){
 
                 <button
                     type="button"
-                    class="skin-btn skin-1"
+                    class="skin-btn"
                     data-skin="very-light"
                 >
-                    <span class="skin-swatch"></span>
-                    <b>فاتحة جدًا</b>
+                    🤍<br>
+                    فاتحة جدًا
                 </button>
 
                 <button
                     type="button"
-                    class="skin-btn skin-2"
+                    class="skin-btn"
                     data-skin="light"
                 >
-                    <span class="skin-swatch"></span>
-                    <b>فاتحة</b>
+                    🩷<br>
+                    فاتحة
                 </button>
 
                 <button
                     type="button"
-                    class="skin-btn skin-3"
+                    class="skin-btn"
                     data-skin="medium"
                 >
-                    <span class="skin-swatch"></span>
-                    <b>متوسطة</b>
+                    🤎<br>
+                    متوسطة
                 </button>
 
                 <button
                     type="button"
-                    class="skin-btn skin-4"
+                    class="skin-btn"
                     data-skin="dark"
                 >
-                    <span class="skin-swatch"></span>
-                    <b>سمراء</b>
+                    🤎<br>
+                    سمراء
                 </button>
 
                 <button
                     type="button"
-                    class="skin-btn skin-5"
+                    class="skin-btn"
                     data-skin="very-dark"
                 >
-                    <span class="skin-swatch"></span>
-                    <b>داكنة</b>
+                    🖤<br>
+                    داكنة
                 </button>
 
             </div>
@@ -1250,12 +895,10 @@ function renderStep(){
 
 
         document
-            .querySelectorAll(
-                ".skin-btn"
-            )
+            .querySelectorAll(".skin-btn")
             .forEach(button => {
 
-                if (
+                if(
                     user.skinTone ===
                     button.dataset.skin
                 ){
@@ -1279,13 +922,11 @@ function renderStep(){
                             .querySelectorAll(
                                 ".skin-btn"
                             )
-                            .forEach(btn => {
-
+                            .forEach(btn =>
                                 btn.classList.remove(
                                     "active"
-                                );
-
-                            });
+                                )
+                            );
 
 
                         this.classList.add(
@@ -1294,13 +935,9 @@ function renderStep(){
 
 
                         changeSanaImage(
-
                             questionSana,
-
                             "assets/sana_thinking.png",
-
                             "☀️"
-
                         );
 
                     }
@@ -1308,19 +945,14 @@ function renderStep(){
 
             });
 
-
         return;
 
     }
 
 
-    /* =====================================
-       وقت التعرض
-    ===================================== */
+    /* الوقت */
 
-    if (
-        step.type === "time"
-    ){
+    if(step.type === "time"){
 
         answerArea.innerHTML = `
 
@@ -1331,9 +963,8 @@ function renderStep(){
                     class="time-btn"
                     data-time="morning"
                 >
-                    🌅
-                    <strong>الصبح</strong>
-                    <small>بداية اليوم</small>
+                    🌅<br>
+                    الصبح
                 </button>
 
                 <button
@@ -1341,9 +972,8 @@ function renderStep(){
                     class="time-btn"
                     data-time="midday"
                 >
-                    ☀️
-                    <strong>الظهر</strong>
-                    <small>الشمس أقوى</small>
+                    ☀️<br>
+                    الظهر
                 </button>
 
                 <button
@@ -1351,9 +981,8 @@ function renderStep(){
                     class="time-btn"
                     data-time="afternoon"
                 >
-                    🌤️
-                    <strong>بعد الظهر</strong>
-                    <small>بعد منتصف اليوم</small>
+                    🌤️<br>
+                    بعد الظهر
                 </button>
 
                 <button
@@ -1361,9 +990,8 @@ function renderStep(){
                     class="time-btn"
                     data-time="evening"
                 >
-                    🌇
-                    <strong>العصر</strong>
-                    <small>قبل الغروب</small>
+                    🌇<br>
+                    العصر
                 </button>
 
             </div>
@@ -1372,12 +1000,10 @@ function renderStep(){
 
 
         document
-            .querySelectorAll(
-                ".time-btn"
-            )
+            .querySelectorAll(".time-btn")
             .forEach(button => {
 
-                if (
+                if(
                     user.sunTime ===
                     button.dataset.time
                 ){
@@ -1401,13 +1027,11 @@ function renderStep(){
                             .querySelectorAll(
                                 ".time-btn"
                             )
-                            .forEach(btn => {
-
+                            .forEach(btn =>
                                 btn.classList.remove(
                                     "active"
-                                );
-
-                            });
+                                )
+                            );
 
 
                         this.classList.add(
@@ -1416,13 +1040,9 @@ function renderStep(){
 
 
                         changeSanaImage(
-
                             questionSana,
-
                             "assets/sana_sun_01.png",
-
                             "☀️"
-
                         );
 
                     }
@@ -1430,15 +1050,12 @@ function renderStep(){
 
             });
 
-
         return;
 
     }
 
 
-    /* =====================================
-       باقي الأسئلة
-    ===================================== */
+    /* باقي الأسئلة */
 
     answerArea.innerHTML = `
 
@@ -1472,7 +1089,7 @@ function renderStep(){
         );
 
 
-    if (input){
+    if(input){
 
         setTimeout(
             () => input.focus(),
@@ -1482,9 +1099,9 @@ function renderStep(){
 
         input.addEventListener(
             "keydown",
-            function(event){
+            event => {
 
-                if (
+                if(
                     event.key === "Enter"
                 ){
 
@@ -1501,7 +1118,7 @@ function renderStep(){
 
 
 /* =========================================
-   التحقق من الإجابة
+   حفظ الإجابة
 ========================================= */
 
 function saveCurrentAnswer(){
@@ -1510,11 +1127,9 @@ function saveCurrentAnswer(){
         steps[currentStep];
 
 
-    if (
-        step.type === "gender"
-    ){
+    if(step.type === "gender"){
 
-        if (!user.gender){
+        if(!user.gender){
 
             alert(
                 "اختار الأول الطريقة اللي تحب سنا تكلمك بيها 💛"
@@ -1529,11 +1144,9 @@ function saveCurrentAnswer(){
     }
 
 
-    if (
-        step.type === "skin"
-    ){
+    if(step.type === "skin"){
 
-        if (!user.skinTone){
+        if(!user.skinTone){
 
             alert(
                 "اختار درجة بشرتك الأول ☀️"
@@ -1548,11 +1161,9 @@ function saveCurrentAnswer(){
     }
 
 
-    if (
-        step.type === "time"
-    ){
+    if(step.type === "time"){
 
-        if (!user.sunTime){
+        if(!user.sunTime){
 
             alert(
                 "اختار الوقت اللي يناسبك الأول ☀️"
@@ -1573,7 +1184,7 @@ function saveCurrentAnswer(){
         );
 
 
-    if (!input){
+    if(!input){
 
         return false;
 
@@ -1584,15 +1195,13 @@ function saveCurrentAnswer(){
         input.value.trim();
 
 
-    if (!value){
+    if(!value){
 
         alert(
             "اكتبلي الإجابة الأول 😊"
         );
 
-
         input.focus();
-
 
         return false;
 
@@ -1609,6 +1218,174 @@ function saveCurrentAnswer(){
 
 
 /* =========================================
+   الردود
+========================================= */
+
+function getResponse(step){
+
+    const name =
+        user.name ||
+        "يا صديقي";
+
+
+    const female =
+        user.gender === "female";
+
+
+    if(step.key === "name"){
+
+        changeSanaImage(
+            questionSana,
+            "assets/sana_happy.png",
+            "💛"
+        );
+
+        return `
+            تشرفت بيك يا ${user.name} 💛
+            كده بدأت أعرف أول حاجة عنك.
+        `;
+
+    }
+
+
+    if(step.key === "gender"){
+
+        return female
+
+            ? `تمام يا ${name} 💛 من هنا هكلمك بصيغة المؤنث.`
+
+            : `تمام يا ${name} 😄 من هنا هكلمك بصيغة المذكر.`;
+
+    }
+
+
+    if(step.key === "age"){
+
+        const age =
+            Number(user.age);
+
+
+        changeSanaImage(
+            questionSana,
+            "assets/sana_curious.png",
+            "😄"
+        );
+
+
+        if(age < 18){
+
+            return `
+                تمام يا ${name} 💛
+                سجلت سنك، وهنراعي إنك لسه في مرحلة نمو.
+            `;
+
+        }
+
+
+        return `
+            تمام يا ${name} 😄
+            سنك ${age} سنة واتسجل عندي.
+        `;
+
+    }
+
+
+    if(step.key === "weight"){
+
+        changeSanaImage(
+            questionSana,
+            "assets/sana_calm.png",
+            "💛"
+        );
+
+
+        return `
+            وصلني وزنك ${user.weight} كجم يا ${name} 💛
+            ولسه مش هحكم على الرقم لوحده.
+        `;
+
+    }
+
+
+    if(step.key === "height"){
+
+        changeSanaImage(
+            questionSana,
+            "assets/sana_thinking.png",
+            "🤔"
+        );
+
+
+        return `
+            تمام يا ${name} 🌱
+            ${user.height} سم مع الوزن والعمر بقوا جزء من الصورة.
+        `;
+
+    }
+
+
+    if(step.key === "country"){
+
+        changeSanaImage(
+            questionSana,
+            "assets/sana_curious.png",
+            "🌍"
+        );
+
+
+        return `
+            وصلت يا ${name} 🌍
+            سجلت ${user.country}.
+            والمكان هيساعدنا بعد كده نقرأ الشمس الحقيقية.
+        `;
+
+    }
+
+
+    if(step.key === "skinTone"){
+
+        changeSanaImage(
+            questionSana,
+            "assets/sana_thinking.png",
+            "☀️"
+        );
+
+
+        return `
+            تمام يا ${name} ☀️
+            درجة بشرتك بقت جزء من الحساب.
+        `;
+
+    }
+
+
+    if(step.key === "sunTime"){
+
+        changeSanaImage(
+            questionSana,
+            "assets/sana_sun_01.png",
+            "☀️"
+        );
+
+
+        return `
+            حلو يا ${name} ☀️
+            كده خلصنا أول طبقة من بياناتك.
+            دلوقتي نخرج من الأسئلة ونبدأ نتعامل مع الشمس نفسها.
+        `;
+
+    }
+
+
+    return `
+        تمام يا ${name} 💛
+        سجلت المعلومة.
+    `;
+
+}
+
+
+/* =========================================
    زر متابعة
 ========================================= */
 
@@ -1616,7 +1393,7 @@ nextButton.addEventListener(
     "click",
     function(){
 
-        if (isTyping){
+        if(isTyping){
 
             finishTypingImmediately();
 
@@ -1628,37 +1405,33 @@ nextButton.addEventListener(
         }
 
 
-        if (waitingForContinue){
+        if(waitingForContinue){
 
             waitingForContinue =
                 false;
 
-
             currentStep++;
 
 
-            if (
+            if(
                 currentStep <
                 steps.length
             ){
 
                 renderStep();
 
-            }
-
-            else{
+            }else{
 
                 showHabits();
 
             }
-
 
             return;
 
         }
 
 
-        if (!saveCurrentAnswer()){
+        if(!saveCurrentAnswer()){
 
             return;
 
@@ -1685,17 +1458,13 @@ nextButton.addEventListener(
             true;
 
 
-        nextButton.textContent =
-            "متابعة";
-
-
         typeSanaText(
 
             response,
 
             question,
 
-            55,
+            40,
 
             function(){
 
@@ -1714,7 +1483,7 @@ nextButton.addEventListener(
    بدء التعارف
 ========================================= */
 
-if (startButton){
+if(startButton){
 
     startButton.addEventListener(
         "click",
@@ -1742,13 +1511,9 @@ function showHabits(){
 
 
     changeSanaImage(
-
         habitSana,
-
         "assets/sana_happy.png",
-
         "💛"
-
     );
 
 
@@ -1759,7 +1524,7 @@ function showHabits(){
 
     habitMessage.textContent =
 
-        `كده يا ${name} أنا بقيت أعرف عنك حاجات مهمة فعلًا 💛 عندي سنك وبيانات جسمك ومكانك ودرجة بشرتك ووقت الشمس. دلوقتي نبدأ نحول المعلومات دي لاحتياجات حقيقية، بند بند، بدل أرقام محفوظة للجميع.`;
+        `كده يا ${name} أنا عرفت عنك طبقة مهمة من المعلومات 💛 دلوقتي نبدأ نحولها لحاجات حقيقية تخص يومك.`;
 
 
     const habitData = [
@@ -1768,28 +1533,28 @@ function showHabits(){
             id:"sun",
             icon:"☀️",
             title:"جرعة الشمس",
-            text:"نربط بياناتك بالشمس والطقس ودرجة البشرة."
+            text:"المكان + UV + البشرة + الوقت."
         },
 
         {
             id:"water",
             icon:"💧",
             title:"شرب المياه",
-            text:"نقدّر احتياجك اليومي ونبني طريقة سهلة للالتزام."
+            text:"هنبنيها من بياناتك ونشاطك."
         },
 
         {
             id:"exercise",
             icon:"🏃",
-            title:"الرياضة والحركة",
-            text:"نحدد مستوى مناسب حسب جسمك ونشاطك."
+            title:"الحركة",
+            text:"نشاط مناسب ليومك."
         },
 
         {
             id:"supplements",
             icon:"💊",
             title:"العلاج والمكملات",
-            text:"نرتب المعلومات بأمان ومن غير وصف أدوية."
+            text:"تنظيم آمن للمعلومات."
         }
 
     ];
@@ -1836,16 +1601,12 @@ function showHabits(){
 
 
                     document
-                        .querySelectorAll(
-                            ".habit"
-                        )
-                        .forEach(item => {
-
+                        .querySelectorAll(".habit")
+                        .forEach(item =>
                             item.classList.remove(
                                 "active"
-                            );
-
-                        });
+                            )
+                        );
 
 
                     this.classList.add(
@@ -1853,45 +1614,9 @@ function showHabits(){
                     );
 
 
-                    if (
-                        selected === "sun"
-                    ){
+                    if(selected === "sun"){
 
                         openSunDose();
-
-                    }
-
-                    else if (
-                        selected === "water"
-                    ){
-
-                        changeSanaImage(
-                            habitSana,
-                            "assets/sana_calm.png",
-                            "💧"
-                        );
-
-
-                        alert(
-                            "💧 قسم المياه هنبدأ نبنيه بناءً على بياناتك."
-                        );
-
-                    }
-
-                    else if (
-                        selected === "exercise"
-                    ){
-
-                        changeSanaImage(
-                            habitSana,
-                            "assets/sana_sport.png",
-                            "🏃"
-                        );
-
-
-                        alert(
-                            "🏃 قسم الحركة والرياضة هنبدأ نحسبه بناءً على بياناتك."
-                        );
 
                     }
 
@@ -1900,12 +1625,12 @@ function showHabits(){
                         changeSanaImage(
                             habitSana,
                             "assets/sana_thinking.png",
-                            "💊"
+                            "💛"
                         );
 
 
                         alert(
-                            "💊 قسم العلاج والمكملات هنخليه منظم وآمن."
+                            "القسم ده جاي بعد محطة الشمس ☀️"
                         );
 
                     }
@@ -1919,678 +1644,7 @@ function showHabits(){
 
 
 /* =========================================
-   بناء بيانات الجرعة
-========================================= */
-
-function getSkinLabel(){
-
-    const labels = {
-
-        "very-light":
-            "فاتحة جدًا",
-
-        "light":
-            "فاتحة",
-
-        "medium":
-            "متوسطة",
-
-        "dark":
-            "سمراء",
-
-        "very-dark":
-            "داكنة"
-
-    };
-
-
-    return labels[user.skinTone] ||
-        "غير محددة";
-
-}
-
-
-function getTimeLabel(){
-
-    const labels = {
-
-        morning:
-            "الصبح",
-
-        midday:
-            "الظهر",
-
-        afternoon:
-            "بعد الظهر",
-
-        evening:
-            "العصر"
-
-    };
-
-
-    return labels[user.sunTime] ||
-        "غير محدد";
-
-}
-
-
-/* =========================================
-   شاشة التحليل
-========================================= */
-
-function buildSunAnalysis(){
-
-    return `
-
-        <div
-            id="sunAnalysis"
-            class="sun-analysis"
-        >
-
-            <div class="analysis-header">
-
-                <span class="analysis-orbit"></span>
-
-                <span class="analysis-small-sun">
-                    ☀️
-                </span>
-
-                <h3>
-                    سنا بتقرأ بياناتك...
-                </h3>
-
-                <p id="analysisStatus">
-                    لحظة واحدة، خليني أربط المعلومات ببعض.
-                </p>
-
-            </div>
-
-
-            <div class="data-scan">
-
-                <div
-                    class="scan-line"
-                    id="scanLine"
-                ></div>
-
-
-                <div class="scan-row">
-
-                    <span>
-                        👤 بياناتك
-                    </span>
-
-                    <strong id="scanUser">
-                        جاري القراءة...
-                    </strong>
-
-                </div>
-
-
-                <div class="scan-row">
-
-                    <span>
-                        🌍 موقعك
-                    </span>
-
-                    <strong id="scanCountry">
-                        جاري القراءة...
-                    </strong>
-
-                </div>
-
-
-                <div class="scan-row">
-
-                    <span>
-                        🎨 بشرتك
-                    </span>
-
-                    <strong id="scanSkin">
-                        جاري القراءة...
-                    </strong>
-
-                </div>
-
-
-                <div class="scan-row">
-
-                    <span>
-                        🌅 وقتك
-                    </span>
-
-                    <strong id="scanTime">
-                        جاري القراءة...
-                    </strong>
-
-                </div>
-
-            </div>
-
-
-            <div
-                id="analysisComplete"
-                class="analysis-complete hidden"
-            >
-
-                <div class="complete-check">
-                    ✓
-                </div>
-
-                <div>
-
-                    <b>
-                        الصورة اكتملت
-                    </b>
-
-                    <span>
-                        البيانات الأساسية جاهزة للمرحلة التالية
-                    </span>
-
-                </div>
-
-            </div>
-
-        </div>
-
-    `;
-
-}
-
-
-/* =========================================
-   نتيجة الجرعة
-========================================= */
-
-function buildSunResult(){
-
-    const skin =
-        getSkinLabel();
-
-    const time =
-        getTimeLabel();
-
-
-    return `
-
-        <div
-            id="sunResult"
-            class="sun-result"
-        >
-
-            <div class="result-sun">
-
-                <div class="result-rays"></div>
-
-                <div class="result-core">
-                    ☀️
-                </div>
-
-            </div>
-
-
-            <div class="result-title">
-
-                <span>
-                    سنا خلصت القراءة
-                </span>
-
-                <h2>
-                    الشمس مش رقم واحد للجميع
-                </h2>
-
-            </div>
-
-
-            <div class="result-summary">
-
-                <div class="result-item">
-
-                    <span>
-                        البشرة
-                    </span>
-
-                    <b>
-                        ${skin}
-                    </b>
-
-                </div>
-
-
-                <div class="result-item">
-
-                    <span>
-                        الوقت
-                    </span>
-
-                    <b>
-                        ${time}
-                    </b>
-
-                </div>
-
-
-                <div class="result-item">
-
-                    <span>
-                        المكان
-                    </span>
-
-                    <b>
-                        ${user.country || "غير محدد"}
-                    </b>
-
-                </div>
-
-            </div>
-
-
-            <div class="result-message">
-
-                <span class="result-sana-mark">
-                    ☀️
-                </span>
-
-                <p>
-                    دلوقتي عندي الأساس اللي محتاجاه.
-                    لكن قبل ما أقولك رقم تعرض، لازم أعرف
-                    <strong>مؤشر الأشعة فوق البنفسجية UV</strong>
-                    والظروف الفعلية للشمس.
-                </p>
-
-                <small>
-                    وده اللي هنوصله في الخطوة التالية بدل ما نخمن رقم من غير بيانات حقيقية.
-                </small>
-
-            </div>
-
-
-            <button
-                id="sunNextStage"
-                class="primary-btn"
-            >
-                ندخل على الحساب الحقيقي ☀️
-            </button>
-
-        </div>
-
-    `;
-
-}
-
-
-/* =========================================
-   تشغيل رحلة الشمس
-========================================= */
-
-function startSunJourney(){
-
-    if (sunFlowRunning) return;
-
-    sunFlowRunning = true;
-
-
-    const container =
-        document.getElementById(
-            "sunJourney"
-        );
-
-
-    if (!container){
-
-        sunFlowRunning = false;
-
-        return;
-
-    }
-
-
-    container.innerHTML =
-        buildSunAnalysis();
-
-
-    const status =
-        document.getElementById(
-            "analysisStatus"
-        );
-
-    const scanUser =
-        document.getElementById(
-            "scanUser"
-        );
-
-    const scanCountry =
-        document.getElementById(
-            "scanCountry"
-        );
-
-    const scanSkin =
-        document.getElementById(
-            "scanSkin"
-        );
-
-    const scanTime =
-        document.getElementById(
-            "scanTime"
-        );
-
-
-    /* البداية */
-
-    changeSanaImage(
-
-        sunSana,
-
-        "assets/sana_thinking.png",
-
-        "🤔"
-
-    );
-
-
-    typeSanaText(
-
-        `استنى يا ${user.name || "صديقي"}... متستعجلش النتيجة. أنا عايزة أبص على كل حاجة مع بعض الأول.`,
-
-        sunMessage,
-
-        48
-
-    );
-
-
-    /* خطوة 1 */
-
-    setTimeout(() => {
-
-        if (status){
-
-            status.textContent =
-                "بقرأ بياناتك الأساسية...";
-
-        }
-
-
-        if (scanUser){
-
-            scanUser.textContent =
-                `${user.age || "--"} سنة · ${user.height || "--"} سم · ${user.weight || "--"} كجم`;
-
-        }
-
-    }, 900);
-
-
-    /* خطوة 2 */
-
-    setTimeout(() => {
-
-        if (status){
-
-            status.textContent =
-                "بشوف موقعك ووقت التعرض...";
-
-        }
-
-
-        if (scanCountry){
-
-            scanCountry.textContent =
-                user.country || "غير محدد";
-
-        }
-
-
-        if (scanTime){
-
-            scanTime.textContent =
-                getTimeLabel();
-
-        }
-
-    }, 1800);
-
-
-    /* خطوة 3 */
-
-    setTimeout(() => {
-
-        if (status){
-
-            status.textContent =
-                "درجة البشرة دخلت في التحليل...";
-
-        }
-
-
-        if (scanSkin){
-
-            scanSkin.textContent =
-                getSkinLabel();
-
-        }
-
-
-        changeSanaImage(
-
-            sunSana,
-
-            "assets/sana_curious.png",
-
-            "👀"
-
-        );
-
-    }, 2700);
-
-
-    /* خطوة 4 */
-
-    setTimeout(() => {
-
-        if (status){
-
-            status.textContent =
-                "بجمع الصورة كلها...";
-
-        }
-
-
-        changeSanaImage(
-
-            sunSana,
-
-            "assets/sana_sun_01.png",
-
-            "☀️"
-
-        );
-
-    }, 3600);
-
-
-    /* اكتمال التحليل */
-
-    setTimeout(() => {
-
-        const complete =
-            document.getElementById(
-                "analysisComplete"
-            );
-
-
-        if (complete){
-
-            complete.classList.remove(
-                "hidden"
-            );
-
-        }
-
-
-        if (status){
-
-            status.textContent =
-                "تمام... الصورة الأساسية اكتملت.";
-
-        }
-
-    }, 4500);
-
-
-    /* النتيجة */
-
-    setTimeout(() => {
-
-        container.innerHTML =
-            buildSunResult();
-
-
-        changeSanaImage(
-
-            sunSana,
-
-            "assets/sana_happy.png",
-
-            "✨"
-
-        );
-
-
-        typeSanaText(
-
-            `شوفت؟ 💛 أنا مش عايزة أديك رقم محفوظ وخلاص. دلوقتي بقينا عارفين البيانات اللي هنحتاجها عشان الحساب الحقيقي يبقى مبني على ظروفك أنت.`,
-
-            sunMessage,
-
-            45
-
-        );
-
-
-        const nextStage =
-            document.getElementById(
-                "sunNextStage"
-            );
-
-
-        if (nextStage){
-
-            nextStage.addEventListener(
-                "click",
-                function(){
-
-                    showSunFinalMessage();
-
-                }
-            );
-
-        }
-
-
-        sunFlowRunning = false;
-
-    }, 5600);
-
-}
-
-
-/* =========================================
-   الرسالة الأخيرة للمرحلة الأولى
-========================================= */
-
-function showSunFinalMessage(){
-
-    const container =
-        document.getElementById(
-            "sunJourney"
-        );
-
-
-    if (!container) return;
-
-
-    changeSanaImage(
-
-        sunSana,
-
-        "assets/sana_excited.png",
-
-        "☀️"
-
-    );
-
-
-    container.innerHTML = `
-
-        <div class="final-sun-screen">
-
-            <div class="final-sun-animation">
-
-                <div class="sun-glow"></div>
-
-                <div class="big-final-sun">
-                    ☀️
-                </div>
-
-            </div>
-
-
-            <div class="final-sun-text">
-
-                <span>
-                    المرحلة الأولى اكتملت
-                </span>
-
-                <h2>
-                    دلوقتي نقدر نبدأ بجد.
-                </h2>
-
-                <p>
-                    أنا عرفت مين أنت،
-                    وعرفت مكانك،
-                    ودرجة بشرتك،
-                    والوقت اللي يناسبك.
-                </p>
-
-                <p>
-                    الخطوة الجاية مش هتبقى مجرد شكل حلو...
-                    هنبدأ ندخل البيانات الحقيقية للشمس
-                    والـ UV والطقس عشان الحساب يبقى أذكى.
-                </p>
-
-            </div>
-
-
-            <div class="final-badge">
-                <span>☀️</span>
-                SunDose
-                <small>
-                    أول رحلة اكتملت
-                </small>
-            </div>
-
-        </div>
-
-    `;
-
-
-    typeSanaText(
-
-        `وأهو كده يا ${user.name || "صديقي"}... وصلنا لأول محطة فعلية في SunDose ☀️💛. ومن هنا بقى تبدأ الحكاية الحقيقية.`,
-
-        sunMessage,
-
-        45
-
-    );
-
-}
-
-
-/* =========================================
-   جرعة الشمس
+   فتح محطة الشمس
 ========================================= */
 
 function openSunDose(){
@@ -2598,17 +1652,10 @@ function openSunDose(){
     showPage(sunDose);
 
 
-    sunFlowRunning = false;
-
-
     changeSanaImage(
-
         sunSana,
-
         "assets/sana_sun_01.png",
-
         "☀️"
-
     );
 
 
@@ -2619,83 +1666,71 @@ function openSunDose(){
 
     sunMessage.textContent =
 
-        `تمام يا ${name} ☀️ وصلنا للمرحلة اللي هنبدأ فيها نحول كل اللي عرفته عنك لقراءة مخصصة. مش مجرد رقم ثابت لكل الناس.`;
+        `أهو كده يا ${name} ☀️ وصلنا لأول محطة فعلية في SunDose. أنا عرفت بياناتك، لكن مش هخمن الشمس. دلوقتي محتاجة أشوف الشمس الحقيقية عند مكانك.`;
 
 
-    const journey =
-        document.getElementById(
-            "sunJourney"
-        );
+    updateSunUserData();
+
+}
 
 
-    if (journey){
+/* =========================================
+   عرض بيانات المستخدم
+========================================= */
 
-        journey.innerHTML = `
+function updateSunUserData(){
 
-            <div class="sun-hero-animation">
+    const skinNames = {
 
-                <div class="sun-sky">
+        "very-light":"فاتحة جدًا",
+        "light":"فاتحة",
+        "medium":"متوسطة",
+        "dark":"سمراء",
+        "very-dark":"داكنة"
 
-                    <div class="sky-cloud cloud-one"></div>
-
-                    <div class="sky-cloud cloud-two"></div>
-
-                    <div class="sunrise-sun">
-                        ☀️
-                    </div>
-
-                    <div class="sun-horizon"></div>
-
-                </div>
+    };
 
 
-                <div class="journey-intro">
+    const timeNames = {
 
-                    <span>
-                        SunDose
-                    </span>
+        morning:"الصبح",
+        midday:"الظهر",
+        afternoon:"بعد الظهر",
+        evening:"العصر"
 
-                    <h2>
-                        خليني أقرأ يومك ☀️
-                    </h2>
-
-                    <p>
-                        مش هقولك رقم من غير ما أفهم الصورة كاملة.
-                    </p>
-
-                </div>
+    };
 
 
-                <button
-                    id="startSunAnalysis"
-                    class="primary-btn sun-start-btn"
-                >
-                    ابدأ التحليل ✨
-                </button>
+    if(sunSkinValue){
 
-            </div>
+        sunSkinValue.textContent =
+            skinNames[user.skinTone] ||
+            "—";
 
-        `;
+    }
 
 
-        const startAnalysis =
-            document.getElementById(
-                "startSunAnalysis"
-            );
+    if(sunTimeValue){
+
+        sunTimeValue.textContent =
+            timeNames[user.sunTime] ||
+            "—";
+
+    }
 
 
-        if (startAnalysis){
+    if(sunLocationValue){
 
-            startAnalysis.addEventListener(
-                "click",
-                function(){
+        sunLocationValue.textContent =
+            "غير محدد";
 
-                    startSunJourney();
+    }
 
-                }
-            );
 
-        }
+    if(uvValue){
+
+        uvValue.textContent =
+            "—";
 
     }
 
@@ -2703,10 +1738,421 @@ function openSunDose(){
 
 
 /* =========================================
-   الرجوع للعادات
+   تحديد الموقع
 ========================================= */
 
-if (backToHabits){
+if(locationButton){
+
+    locationButton.addEventListener(
+        "click",
+        requestLocation
+    );
+
+}
+
+
+function requestLocation(){
+
+    if(!navigator.geolocation){
+
+        showLocationError(
+            "المتصفح ده مش بيدعم تحديد الموقع."
+        );
+
+        return;
+
+    }
+
+
+    locationButton.disabled =
+        true;
+
+    locationButton.textContent =
+        "📍 جاري تحديد مكانك...";
+
+
+    sunStatus.textContent =
+        "بنحدد موقعك الحقيقي...";
+
+
+    navigator.geolocation.getCurrentPosition(
+
+        position => {
+
+            const lat =
+                position.coords.latitude;
+
+            const lon =
+                position.coords.longitude;
+
+
+            loadSunData(
+                lat,
+                lon
+            );
+
+        },
+
+        error => {
+
+            console.error(
+                "SunDose location:",
+                error
+            );
+
+
+            showLocationError(
+                "محتاجين إذن الموقع عشان نقرأ الشمس الحقيقية عندك."
+            );
+
+        },
+
+        {
+            enableHighAccuracy:true,
+            timeout:10000,
+            maximumAge:300000
+        }
+
+    );
+
+}
+
+
+/* =========================================
+   قراءة الشمس والطقس
+========================================= */
+
+async function loadSunData(
+    latitude,
+    longitude
+){
+
+    sunStatus.textContent =
+        "بنقرأ حالة الشمس والـ UV...";
+
+
+    analysisTitle.textContent =
+        "بنحلل الشمس";
+
+
+    analysisText.textContent =
+        "سنا بتجمع بيانات المكان والـ UV عشان تبني أول قراءة فعلية.";
+
+
+    try{
+
+        const url =
+
+            `https://api.open-meteo.com/v1/forecast` +
+
+            `?latitude=${latitude}` +
+
+            `&longitude=${longitude}` +
+
+            `&current=temperature_2m,uv_index,is_day` +
+
+            `&hourly=uv_index,temperature_2m` +
+
+            `&daily=sunrise,sunset,uv_index_max` +
+
+            `&timezone=auto`;
+
+
+        const response =
+            await fetch(url);
+
+
+        if(!response.ok){
+
+            throw new Error(
+                "Weather API error"
+            );
+
+        }
+
+
+        const data =
+            await response.json();
+
+
+        sunData = data;
+
+
+        const uv =
+            Number(
+                data.current?.uv_index ?? 0
+            );
+
+
+        const temperature =
+            Number(
+                data.current?.temperature_2m ?? 0
+            );
+
+
+        const isDay =
+            Number(
+                data.current?.is_day ?? 0
+            );
+
+
+        updateSunResult(
+            latitude,
+            longitude,
+            uv,
+            temperature,
+            isDay
+        );
+
+
+    }catch(error){
+
+        console.error(
+            "SunDose API:",
+            error
+        );
+
+
+        sunStatus.textContent =
+            "تعذر قراءة بيانات الشمس";
+
+
+        analysisTitle.textContent =
+            "مفيش قراءة حالية";
+
+
+        analysisText.textContent =
+            "حصلت مشكلة في الاتصال ببيانات الطقس. جرّب تاني بعد لحظات.";
+
+
+        analysisIcon.textContent =
+            "🌥️";
+
+
+        locationButton.disabled =
+            false;
+
+        locationButton.textContent =
+            "🔄 المحاولة مرة تانية";
+
+    }
+
+}
+
+
+/* =========================================
+   نتيجة الشمس
+========================================= */
+
+function updateSunResult(
+    latitude,
+    longitude,
+    uv,
+    temperature,
+    isDay
+){
+
+    const roundedUV =
+        Math.round(
+            uv * 10
+        ) / 10;
+
+
+    if(sunLocationValue){
+
+        sunLocationValue.textContent =
+            `${latitude.toFixed(2)}, ${longitude.toFixed(2)}`;
+
+    }
+
+
+    if(uvValue){
+
+        uvValue.textContent =
+            roundedUV.toString();
+
+    }
+
+
+    if(!isDay){
+
+        sunStatus.textContent =
+            "الشمس دلوقتي تحت الأفق 🌙";
+
+        analysisTitle.textContent =
+            "النهار خلص";
+
+        analysisText.textContent =
+            "مفيش داعي نخمن. هنستنى نافذة شمس مناسبة ونبني القراءة عليها.";
+
+        analysisIcon.textContent =
+            "🌙";
+
+    }
+
+    else if(uv < 3){
+
+        sunStatus.textContent =
+            `UV منخفض • ${temperature}°`;
+
+        analysisTitle.textContent =
+            "الشمس هادية ☀️";
+
+        analysisText.textContent =
+            "الـ UV الحالي منخفض. دي قراءة أولية فقط؛ المرحلة التالية هتربط الوقت والبشرة والطقس مع بعض.";
+
+        analysisIcon.textContent =
+            "🌤️";
+
+    }
+
+    else if(uv < 6){
+
+        sunStatus.textContent =
+            `UV متوسط • ${temperature}°`;
+
+        analysisTitle.textContent =
+            "الشمس نشطة ☀️";
+
+        analysisText.textContent =
+            "الـ UV داخل نطاق متوسط. هنا يبدأ SunDose يفرق بين الأشخاص بدل ما يستخدم رقم واحد للجميع.";
+
+        analysisIcon.textContent =
+            "☀️";
+
+    }
+
+    else if(uv < 8){
+
+        sunStatus.textContent =
+            `UV مرتفع • ${temperature}°`;
+
+        analysisTitle.textContent =
+            "الشمس قوية ⚠️";
+
+        analysisText.textContent =
+            "الـ UV مرتفع، فالأولوية للحماية وتقليل التعرض غير المحمي. مش هنحوّل الرقم لوقت تعرض عشوائي.";
+
+        analysisIcon.textContent =
+            "⚠️";
+
+    }
+
+    else{
+
+        sunStatus.textContent =
+            `UV شديد • ${temperature}°`;
+
+        analysisTitle.textContent =
+            "الشمس شديدة جدًا ⚠️";
+
+        analysisText.textContent =
+            "الـ UV شديد جدًا. SunDose مش هيشجع على التعرض غير المحمي في الظروف دي.";
+
+        analysisIcon.textContent =
+            "🚫";
+
+    }
+
+
+    locationButton.classList.add(
+        "hidden"
+    );
+
+
+    /* سنا تتفاعل */
+
+    if(uv >= 8){
+
+        changeSanaImage(
+            sunSana,
+            "assets/sana_calm.png",
+            "⚠️"
+        );
+
+    }
+
+    else if(uv >= 3){
+
+        changeSanaImage(
+            sunSana,
+            "assets/sana_excited.png",
+            "☀️"
+        );
+
+    }
+
+    else{
+
+        changeSanaImage(
+            sunSana,
+            "assets/sana_calm.png",
+            "🌤️"
+        );
+
+    }
+
+
+    const name =
+        user.name ||
+        "صديقي";
+
+
+    if(!isDay){
+
+        sunMessage.textContent =
+            `تمام يا ${name} 🌙 الشمس دلوقتي مش في نافذتها، وده أحسن من إني أخمنلك رقم. أول ما يكون عندنا نافذة مناسبة، نكمل التحليل.`;
+
+    }
+
+    else{
+
+        sunMessage.textContent =
+            `لقيتها يا ${name} ☀️ دي الشمس الحقيقية عند مكانك دلوقتي. كده SunDose بدأ يشتغل ببيانات حقيقية بدل الكلام العام.`;
+
+    }
+
+}
+
+
+/* =========================================
+   خطأ الموقع
+========================================= */
+
+function showLocationError(
+    message
+){
+
+    sunStatus.textContent =
+        "الموقع محتاج إذن";
+
+
+    analysisTitle.textContent =
+        "محتاج موقعك 📍";
+
+
+    analysisText.textContent =
+        message;
+
+
+    analysisIcon.textContent =
+        "📍";
+
+
+    locationButton.disabled =
+        false;
+
+    locationButton.textContent =
+        "📍 تحديد موقعي وابدأ التحليل";
+
+}
+
+
+/* =========================================
+   الرجوع
+========================================= */
+
+if(backToHabits){
 
     backToHabits.addEventListener(
         "click",
@@ -2721,29 +2167,29 @@ if (backToHabits){
 
 
 /* =========================================
-   حماية من العناصر الناقصة
+   تشغيل الصفحة
 ========================================= */
 
-if (!startButton){
+if(!startButton){
 
     console.error(
-        "SunDose: startButton غير موجود في index.html"
+        "SunDose: startButton غير موجود"
     );
 
 }
 
-if (!nextButton){
+if(!nextButton){
 
     console.error(
-        "SunDose: nextButton غير موجود في index.html"
+        "SunDose: nextButton غير موجود"
     );
 
 }
 
-if (!habitList){
+if(!habitList){
 
     console.error(
-        "SunDose: habitList غير موجود في index.html"
+        "SunDose: habitList غير موجود"
     );
 
-}
+           }
