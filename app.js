@@ -1,5 +1,6 @@
 /* =========================================
    SunDose ☀️ - النسخة النهائية الكاملة
+   مع دعم SVG سنا الجديدة
 ========================================= */
 
 /* =========================================
@@ -107,11 +108,6 @@ const backToHabits = document.getElementById("backToHabits");
 const goToHealthPortalBtn = document.getElementById("goToHealthPortal");
 const backFromPortal = document.getElementById("backFromPortal");
 
-const sanaImage = document.getElementById("sanaImage");
-const questionSana = document.getElementById("questionSana");
-const habitSana = document.getElementById("habitSana");
-const sunSana = document.getElementById("sunSana");
-const portalSana = document.getElementById("portalSana");
 const sanaReaction = document.getElementById("sanaReaction");
 
 const locationButton = document.getElementById("locationButton");
@@ -132,6 +128,14 @@ const doseText = document.getElementById("doseText");
 const portalGreeting = document.getElementById("portalGreeting");
 const portalSubGreeting = document.getElementById("portalSubGreeting");
 
+// SVG elements for Sana (new design)
+const sanaSvg = document.getElementById("sanaSvg");
+const questionSanaSvg = document.getElementById("questionSanaSvg");
+const habitSanaSvg = document.getElementById("habitSanaSvg");
+const learnSanaSvg = document.getElementById("learnSanaSvg");
+const sunSanaSvg = document.getElementById("sunSanaSvg");
+const portalSanaSvg = document.getElementById("portalSanaSvg");
+
 /* =========================================
    STATE
 ========================================= */
@@ -144,74 +148,46 @@ let waitingForContinue = false;
 let sunData = null;
 
 /* =========================================
-   SANA EYES & ANIMATIONS
+   SANA EXPRESSIONS & ANIMATIONS (SVG)
 ========================================= */
 
-function blinkSanaEyes(containerId) {
-    const container = document.getElementById(containerId);
+function setSanaExpression(elementId, expression) {
+    const container = document.getElementById(elementId);
     if (!container) return;
-    const eyes = container.querySelectorAll('.eye');
-    eyes.forEach(eye => {
-        eye.classList.add('blink');
-        setTimeout(() => {
-            eye.classList.remove('blink');
-        }, 150);
-    });
+    // expression: 'happy', 'surprised', 'thinking', 'flirty', 'calm', 'excited', 'wave'
+    const classes = ['sana-happy', 'sana-surprised', 'sana-thinking', 'sana-flirty', 'sana-calm', 'sana-excited', 'sana-wave'];
+    classes.forEach(c => container.classList.remove(c));
+    if (expression) container.classList.add('sana-' + expression);
 }
 
 function setSanaMood(elementId, moodClass, reaction = "") {
-    const img = document.getElementById(elementId);
-    if (!img) return;
-    img.classList.remove('sana-look-left', 'sana-look-right', 'sana-happy-bounce', 'sana-thinking', 'sana-excited', 'sana-wave');
-    if (moodClass) img.classList.add(moodClass);
+    const container = document.getElementById(elementId);
+    if (!container) return;
+    // remove old mood classes
+    container.classList.remove('sana-float', 'sana-look-left', 'sana-look-right', 'sana-happy-bounce', 'sana-thinking', 'sana-excited', 'sana-wave');
+    if (moodClass) container.classList.add(moodClass);
     if (sanaReaction && reaction) {
         sanaReaction.textContent = reaction;
         sanaReaction.classList.remove('hidden');
     } else if (sanaReaction) {
         sanaReaction.classList.add('hidden');
     }
-    const container = img.closest('.sana-container');
-    if (container) {
-        const eyes = container.querySelectorAll('.eye');
-        eyes.forEach(eye => {
-            setTimeout(() => {
-                eye.classList.add('blink');
-                setTimeout(() => {
-                    eye.classList.remove('blink');
-                }, 150);
-            }, 500 + Math.random() * 1500);
-        });
-    }
+    // add expression
+    let expr = 'happy';
+    if (moodClass === 'sana-thinking') expr = 'thinking';
+    else if (moodClass === 'sana-excited') expr = 'excited';
+    else if (moodClass === 'sana-look-left' || moodClass === 'sana-look-right') expr = 'flirty';
+    else if (moodClass === 'sana-wave') expr = 'wave';
+    else expr = 'happy';
+    setSanaExpression(elementId, expr);
 }
 
 function changeSanaImage(element, image, reaction = "", moodClass = "") {
+    // في التصميم الجديد بنستخدم SVG فقط، مش صور
+    // لكن بنحتفظ بالدالة عشان التوافق، بس هنغير المود
     if (!element) return;
-    element.classList.remove('sana-changing');
-    void element.offsetWidth;
-    element.classList.add('sana-changing');
-    element.src = image;
-    element.classList.remove('sana-look-left', 'sana-look-right', 'sana-happy-bounce', 'sana-thinking', 'sana-excited', 'sana-wave');
-    if (moodClass) element.classList.add(moodClass);
-    if (sanaReaction) {
-        if (reaction) {
-            sanaReaction.textContent = reaction;
-            sanaReaction.classList.remove('hidden');
-        } else {
-            sanaReaction.classList.add('hidden');
-        }
-    }
-    const container = element.closest('.sana-container');
-    if (container) {
-        const eyes = container.querySelectorAll('.eye');
-        setTimeout(() => {
-            eyes.forEach(eye => {
-                eye.classList.add('blink');
-                setTimeout(() => {
-                    eye.classList.remove('blink');
-                }, 150);
-            });
-        }, 300);
-    }
+    // نفترض إن element هو الـ container بتاع الـ SVG
+    setSanaMood(element.id, moodClass, reaction);
 }
 
 /* =========================================
@@ -276,20 +252,20 @@ const introMessages = [
 ];
 
 function setIntroSana() {
-    if (!sanaImage) return;
-    const images = [
-        { src: "assets/sana_welcome_01.png", reaction: "✨", mood: "sana-look-left" },
-        { src: "assets/sana_thinking.png", reaction: "🤔", mood: "sana-thinking" },
-        { src: "assets/sana_excited.png", reaction: "🔥", mood: "sana-excited" },
-        { src: "assets/sana_flirty.png", reaction: "😏", mood: "sana-happy-bounce" },
-        { src: "assets/sana_curious.png", reaction: "👀", mood: "sana-thinking" },
-        { src: "assets/sana_thinking.png", reaction: "🤔", mood: "sana-thinking" },
-        { src: "assets/sana_sun_01.png", reaction: "☀️", mood: "sana-look-right" },
-        { src: "assets/sana_excited.png", reaction: "🔥", mood: "sana-excited" }
+    if (!sanaSvg) return;
+    const moods = [
+        { mood: 'sana-look-left', reaction: '✨', expr: 'flirty' },
+        { mood: 'sana-thinking', reaction: '🤔', expr: 'thinking' },
+        { mood: 'sana-excited', reaction: '🔥', expr: 'excited' },
+        { mood: 'sana-happy-bounce', reaction: '😏', expr: 'happy' },
+        { mood: 'sana-thinking', reaction: '👀', expr: 'thinking' },
+        { mood: 'sana-thinking', reaction: '🤔', expr: 'thinking' },
+        { mood: 'sana-look-right', reaction: '☀️', expr: 'flirty' },
+        { mood: 'sana-excited', reaction: '🔥', expr: 'excited' }
     ];
-    const idx = Math.min(introStep, images.length - 1);
-    const current = images[idx];
-    changeSanaImage(sanaImage, current.src, current.reaction, current.mood);
+    const idx = Math.min(introStep, moods.length - 1);
+    const current = moods[idx];
+    setSanaMood('sanaSvg', current.mood, current.reaction);
 }
 
 function renderIntro() {
@@ -389,29 +365,30 @@ function personalizeQuestion(text) {
 }
 
 function setQuestionSana() {
-    if (!questionSana) return;
+    if (!questionSanaSvg) return;
     const step = steps[currentStep];
     const map = {
-        gender: { src: "assets/sana_flirty.png", reaction: "😏", mood: "sana-happy-bounce" },
-        name: { src: "assets/sana_curious.png", reaction: "👀", mood: "sana-thinking" },
-        age: { src: "assets/sana_happy.png", reaction: "😄", mood: "sana-happy-bounce" },
-        weight: { src: "assets/sana_calm.png", reaction: "💛", mood: "sana-look-left" },
-        height: { src: "assets/sana_flirty.png", reaction: "😏", mood: "sana-look-right" },
-        country: { src: "assets/sana_curious.png", reaction: "🌍", mood: "sana-thinking" },
-        skinTone: { src: "assets/sana_thinking.png", reaction: "☀️", mood: "sana-thinking" },
-        sunTime: { src: "assets/sana_sun_01.png", reaction: "☀️", mood: "sana-look-right" }
+        gender: { mood: 'sana-happy-bounce', reaction: '😏', expr: 'happy' },
+        name: { mood: 'sana-thinking', reaction: '👀', expr: 'thinking' },
+        age: { mood: 'sana-happy-bounce', reaction: '😄', expr: 'happy' },
+        weight: { mood: 'sana-look-left', reaction: '💛', expr: 'flirty' },
+        height: { mood: 'sana-look-right', reaction: '😏', expr: 'flirty' },
+        country: { mood: 'sana-thinking', reaction: '🌍', expr: 'thinking' },
+        skinTone: { mood: 'sana-thinking', reaction: '☀️', expr: 'thinking' },
+        sunTime: { mood: 'sana-look-right', reaction: '☀️', expr: 'flirty' }
     };
     const selected = map[step.key];
     if (selected) {
-        changeSanaImage(questionSana, selected.src, selected.reaction, selected.mood);
+        setSanaMood('questionSanaSvg', selected.mood, selected.reaction);
+        setSanaExpression('questionSanaSvg', selected.expr);
     }
 }
 
 function getGenderStyle() {
     if (user.gender === "female") {
-        return { word: "يا جميلة", pronoun: "المؤنث", image: "assets/sana_flirty.png", reaction: "😏", mood: "sana-happy-bounce" };
+        return { word: "يا جميلة", pronoun: "المؤنث", mood: 'sana-happy-bounce', reaction: '😏', expr: 'happy' };
     }
-    return { word: "يا بطل", pronoun: "المذكر", image: "assets/sana_flirty.png", reaction: "😏", mood: "sana-happy-bounce" };
+    return { word: "يا بطل", pronoun: "المذكر", mood: 'sana-happy-bounce', reaction: '😏', expr: 'happy' };
 }
 
 function renderStep() {
@@ -441,7 +418,8 @@ function renderStep() {
                 document.querySelectorAll(".gender-btn").forEach(btn => btn.classList.remove('active'));
                 this.classList.add('active');
                 const style = getGenderStyle();
-                changeSanaImage(questionSana, style.image, style.reaction, style.mood);
+                setSanaMood('questionSanaSvg', style.mood, style.reaction);
+                setSanaExpression('questionSanaSvg', style.expr);
                 addPoints(2);
             });
         });
@@ -482,7 +460,8 @@ function renderStep() {
                 const color = this.querySelector('.skin-color')?.style.background;
                 const skinChip = document.querySelector('.skin-chip i');
                 if (skinChip && color) skinChip.style.background = color;
-                changeSanaImage(questionSana, "assets/sana_thinking.png", "☀️", "sana-thinking");
+                setSanaMood('questionSanaSvg', 'sana-thinking', '☀️');
+                setSanaExpression('questionSanaSvg', 'thinking');
                 addPoints(3);
             });
         });
@@ -504,7 +483,8 @@ function renderStep() {
                 user.sunTime = this.dataset.time;
                 document.querySelectorAll(".time-btn").forEach(btn => btn.classList.remove('active'));
                 this.classList.add('active');
-                changeSanaImage(questionSana, "assets/sana_sun_01.png", "☀️", "sana-look-right");
+                setSanaMood('questionSanaSvg', 'sana-look-right', '☀️');
+                setSanaExpression('questionSanaSvg', 'flirty');
                 addPoints(2);
             });
         });
@@ -559,38 +539,46 @@ function getResponse(step) {
     const genderWord = female ? "يا جميلة" : "يا بطل";
 
     if (step.key === "gender") {
-        changeSanaImage(questionSana, "assets/sana_flirty.png", female ? "😏" : "🔥", "sana-happy-bounce");
+        setSanaMood('questionSanaSvg', 'sana-happy-bounce', female ? '😏' : '🔥');
+        setSanaExpression('questionSanaSvg', 'happy');
         return female ? "تمام يا جميلة 😏 من هنا هكلمك بصيغة المؤنث... كده اتفقنا." : "تمام يا بطل 😏 من هنا هكلمك بصيغة المذكر... كده فهمت اللعبة.";
     }
     if (step.key === "name") {
-        changeSanaImage(questionSana, "assets/sana_happy.png", "💛", "sana-happy-bounce");
+        setSanaMood('questionSanaSvg', 'sana-happy-bounce', '💛');
+        setSanaExpression('questionSanaSvg', 'happy');
         return female ? `تشرفت بيكي يا ${user.name} 💛 خلاص كده الاسم دخل عند سنا رسمي.` : `تشرفت بيك يا ${user.name} 💛 خلاص كده الاسم دخل عند سنا رسمي.`;
     }
     if (step.key === "age") {
-        changeSanaImage(questionSana, "assets/sana_curious.png", "😄", "sana-thinking");
+        setSanaMood('questionSanaSvg', 'sana-thinking', '😄');
+        setSanaExpression('questionSanaSvg', 'thinking');
         return `تمام ${genderWord} 😄 ${Number(user.age)} سنة واتسجلوا. لسه الصورة بتتكوّن عندي واحدة واحدة.`;
     }
     if (step.key === "weight") {
-        changeSanaImage(questionSana, "assets/sana_calm.png", "💛", "sana-look-left");
+        setSanaMood('questionSanaSvg', 'sana-look-left', '💛');
+        setSanaExpression('questionSanaSvg', 'flirty');
         return `وصلت يا ${name} 💛 ${user.weight} كجم. الرقم ده لوحده مش هيحكم على أي حاجة.`;
     }
     if (step.key === "height") {
-        changeSanaImage(questionSana, "assets/sana_flirty.png", "😏", "sana-look-right");
+        setSanaMood('questionSanaSvg', 'sana-look-right', '😏');
+        setSanaExpression('questionSanaSvg', 'flirty');
         let extra = "";
         if (Number(user.height) >= 185) extra = " وبالمناسبة... الطول ده محتاج شاشة أطول شوية 😂";
         else if (Number(user.height) >= 175) extra = " تمام يا طويل 😏";
         return `تمام يا ${name} 🌱 ${user.height} سم اتسجلت.${extra}`;
     }
     if (step.key === "country") {
-        changeSanaImage(questionSana, "assets/sana_curious.png", "🌍", "sana-thinking");
+        setSanaMood('questionSanaSvg', 'sana-thinking', '🌍');
+        setSanaExpression('questionSanaSvg', 'thinking');
         return `وصلت يا ${name} 🌍 سجلت ${user.country}. والمكان ده هيبقى مهم جدًا لما نبدأ نقرأ الشمس الحقيقية.`;
     }
     if (step.key === "skinTone") {
-        changeSanaImage(questionSana, "assets/sana_thinking.png", "☀️", "sana-thinking");
+        setSanaMood('questionSanaSvg', 'sana-thinking', '☀️');
+        setSanaExpression('questionSanaSvg', 'thinking');
         return `تمام يا ${name} ☀️ درجة بشرتك دخلت الحساب. دلوقتي SunDose بدأ يفهم استجابتك للشمس بشكل أفضل.`;
     }
     if (step.key === "sunTime") {
-        changeSanaImage(questionSana, "assets/sana_sun_01.png", "☀️", "sana-look-right");
+        setSanaMood('questionSanaSvg', 'sana-look-right', '☀️');
+        setSanaExpression('questionSanaSvg', 'flirty');
         return `
             حلو يا ${name} ☀️ 
             كده خلصنا الطبقة الأولى من بياناتك. 
@@ -654,7 +642,8 @@ if (startButton) {
 
 function showHabits() {
     showPage(habits);
-    changeSanaImage(habitSana, "assets/sana_happy.png", "💛", "sana-happy-bounce");
+    setSanaMood('habitSanaSvg', 'sana-happy-bounce', '💛');
+    setSanaExpression('habitSanaSvg', 'happy');
     const name = user.name || "صديقي";
     habitMessage.textContent = `كده يا ${name} أنا عرفت الطبقة الأولى منك 💛 دلوقتي عندنا كذا حاجة نقدر نبنيها على بياناتك. بس أنا عندي فضول أعرف الشمس الأول ☀️`;
     const habitData = [
@@ -678,7 +667,8 @@ function showHabits() {
             if (selected === "sun") {
                 openSunLearn();
             } else {
-                changeSanaImage(habitSana, "assets/sana_thinking.png", "💛", "sana-thinking");
+                setSanaMood('habitSanaSvg', 'sana-thinking', '💛');
+                setSanaExpression('habitSanaSvg', 'thinking');
                 alert("هنفتح القسم ده بعد ما نخلص محطة الشمس ☀️");
             }
         });
@@ -691,7 +681,8 @@ function showHabits() {
 
 function openSunLearn() {
     showPage(sunLearn);
-    changeSanaImage(learnSana, "assets/sana_sun_01.png", "☀️", "sana-look-right");
+    setSanaMood('learnSanaSvg', 'sana-look-right', '☀️');
+    setSanaExpression('learnSanaSvg', 'flirty');
     const name = user.name || "يا صديقي";
     learnMessage.textContent = `
         بص يا ${name} ☀️ 
@@ -723,7 +714,8 @@ if (backFromLearn) {
 
 function openSunDose() {
     showPage(sunDose);
-    changeSanaImage(sunSana, "assets/sana_sun_01.png", "☀️", "sana-look-right");
+    setSanaMood('sunSanaSvg', 'sana-look-right', '☀️');
+    setSanaExpression('sunSanaSvg', 'flirty');
     const name = user.name || "صديقي";
     sunMessage.textContent = `أهو كده يا ${name} ☀️ دلوقتي بقى دوري الحقيقي. هآخد بياناتك، وأشوف الشمس عند مكانك، وبعدها أركّب الصورة كلها مع بعض.`;
     updateSunUserData();
@@ -826,7 +818,7 @@ async function loadSunData(latitude, longitude) {
 }
 
 /* =========================================
-   SUN RESULT (مع كل الإضافات)
+   SUN RESULT
 ========================================= */
 
 function updateSunResult(latitude, longitude, uv, temperature, isDay, cloudCover, uvMax) {
@@ -843,16 +835,15 @@ function updateSunResult(latitude, longitude, uv, temperature, isDay, cloudCover
         doseMeterFill.style.width = "0%";
         const name = user.name || "صديقي";
         sunMessage.textContent = `لقيتها يا ${name} 🌙 الشمس مش موجودة دلوقتي، وده أحسن من أي تخمين. SunDose شاف الحقيقة وقالك الحقيقة.`;
-        changeSanaImage(sunSana, "assets/sana_calm.png", "🌙", "sana-look-left");
+        setSanaMood('sunSanaSvg', 'sana-look-left', '🌙');
+        setSanaExpression('sunSanaSvg', 'calm');
         if (goToHealthPortalBtn) goToHealthPortalBtn.classList.add('hidden');
-        // إخفاء الإضافات
         document.getElementById('prosCons')?.classList.add('hidden');
         document.getElementById('advancedTips')?.classList.add('hidden');
         document.getElementById('extraActions')?.classList.add('hidden');
         return;
     }
 
-    // تصنيف حسب WHO
     if (uv < 3) {
         sunStatus.textContent = `UV هادي • ${temperature}°`;
         analysisTitle.textContent = "الشمس هادية ☀️";
@@ -880,19 +871,22 @@ function updateSunResult(latitude, longitude, uv, temperature, isDay, cloudCover
     const name = user.name || "صديقي";
     if (uv >= 8) {
         sunMessage.textContent = `يا ${name} ⚠️ الـUV ${roundedUV}، وده شديد جداً. سنا بتنصحك متقعدش في الشمس دلوقتي خالص، الحماية أولاً.`;
-        changeSanaImage(sunSana, "assets/sana_calm.png", "⚠️", "sana-thinking");
+        setSanaMood('sunSanaSvg', 'sana-thinking', '⚠️');
+        setSanaExpression('sunSanaSvg', 'thinking');
     } else if (uv >= 6) {
         sunMessage.textContent = `يا ${name} ☀️ الـUV ${roundedUV}، الشمس نشطة وقوية. لو هتتعرض، خليها دقايق معدودة وابقى محمي.`;
-        changeSanaImage(sunSana, "assets/sana_excited.png", "☀️", "sana-happy-bounce");
+        setSanaMood('sunSanaSvg', 'sana-happy-bounce', '☀️');
+        setSanaExpression('sunSanaSvg', 'happy');
     } else if (uv >= 3) {
         sunMessage.textContent = `يا ${name} ☀️ الـUV ${roundedUV}، الشمس معتدلة. ده وقت مناسب للتعرض لكن بلاش تهمل الحماية لو هتقعد فترة طويلة.`;
-        changeSanaImage(sunSana, "assets/sana_happy.png", "☀️", "sana-look-right");
+        setSanaMood('sunSanaSvg', 'sana-look-right', '☀️');
+        setSanaExpression('sunSanaSvg', 'flirty');
     } else {
         sunMessage.textContent = `يا ${name} ☀️ الـUV ${roundedUV}، الشمس هادية. ممكن تاخد جرعتك بأمان، لكن بردو خلي بالك من وقت التعرض حسب بشرتك.`;
-        changeSanaImage(sunSana, "assets/sana_sun_01.png", "🌤️", "sana-look-left");
+        setSanaMood('sunSanaSvg', 'sana-look-left', '🌤️');
+        setSanaExpression('sunSanaSvg', 'calm');
     }
 
-    // إظهار الإضافات
     showExtraFeatures(uv);
 
     addCheck(uv);
@@ -902,11 +896,10 @@ function updateSunResult(latitude, longitude, uv, temperature, isDay, cloudCover
 }
 
 /* =========================================
-   EXTRA FEATURES (جديد)
+   EXTRA FEATURES
 ========================================= */
 
 function showExtraFeatures(uv) {
-    // إيجابيات وسلبيات
     const prosCons = document.getElementById('prosCons');
     if (prosCons) {
         prosCons.classList.remove('hidden');
@@ -915,7 +908,6 @@ function showExtraFeatures(uv) {
         document.getElementById('consList').innerHTML = cons.map(c => `<li>${c}</li>`).join('');
     }
 
-    // نصائح متقدمة
     const tipsDiv = document.getElementById('advancedTips');
     if (tipsDiv) {
         tipsDiv.classList.remove('hidden');
@@ -923,13 +915,11 @@ function showExtraFeatures(uv) {
         document.getElementById('tipsList').innerHTML = tips.map(t => `<p>${t}</p>`).join('');
     }
 
-    // أزرار إضافية
     const extraActions = document.getElementById('extraActions');
     if (extraActions) {
         extraActions.classList.remove('hidden');
     }
 
-    // حفظ السجل
     let status = 'safe';
     if (uv >= 8) status = 'danger';
     else if (uv >= 3) status = 'warning';
@@ -1008,7 +998,7 @@ function getAdvancedTips(uv, skinTone) {
 }
 
 /* =========================================
-   HISTORY (سجل التعرض)
+   HISTORY
 ========================================= */
 
 let exposureHistory = JSON.parse(localStorage.getItem('sundose_history')) || [];
@@ -1081,7 +1071,7 @@ function renderHistory() {
 }
 
 /* =========================================
-   FORECAST (توقعات UV)
+   FORECAST
 ========================================= */
 
 async function loadForecast(latitude, longitude) {
@@ -1108,7 +1098,6 @@ function renderForecast(forecastData) {
     }
 
     const days = ['الأحد', 'الإثنين', 'الثلاثاء', 'الأربعاء', 'الخميس', 'الجمعة', 'السبت'];
-    const today = new Date();
     
     const items = forecastData.daily.time.map((date, index) => {
         const uvMax = forecastData.daily.uv_index_max[index];
@@ -1180,13 +1169,11 @@ ${status === 'safe' ? '• التعرض آمن، استمتع بالشمس بح�
    ربط الأزرار الجديدة
 ========================================= */
 
-// زر عرض السجل
 document.getElementById('viewHistoryBtn')?.addEventListener('click', function() {
     renderHistory();
     showPage(document.getElementById('historyLog'));
 });
 
-// زر عرض التوقعات
 document.getElementById('viewForecastBtn')?.addEventListener('click', function() {
     if (sunData) {
         const lat = parseFloat(sunLocationValue?.textContent?.split(',')[0]) || 0;
@@ -1200,7 +1187,6 @@ document.getElementById('viewForecastBtn')?.addEventListener('click', function()
     }
 });
 
-// زر مشاركة التقرير
 document.getElementById('shareReportBtn')?.addEventListener('click', function() {
     const uv = parseFloat(uvValue?.textContent) || 0;
     const minutes = doseMinutes?.textContent || '—';
@@ -1223,12 +1209,10 @@ document.getElementById('shareReportBtn')?.addEventListener('click', function() 
     }
 });
 
-// الرجوع من السجل
 document.getElementById('backFromHistory')?.addEventListener('click', function() {
     showPage(document.getElementById('sunDose'));
 });
 
-// الرجوع من التوقعات
 document.getElementById('backFromForecast')?.addEventListener('click', function() {
     showPage(document.getElementById('sunDose'));
 });
@@ -1333,7 +1317,8 @@ if (goToHealthPortalBtn) {
         else if (hour < 16) best = "بعد 4 عصراً";
         else best = "غداً قبل 10 صباحاً";
         document.getElementById('statBestTime').textContent = best;
-        changeSanaImage(portalSana, "assets/sana_happy.png", "💛", "sana-happy-bounce");
+        setSanaMood('portalSanaSvg', 'sana-happy-bounce', '💛');
+        setSanaExpression('portalSanaSvg', 'happy');
     });
 }
 
@@ -1370,3 +1355,5 @@ if (savedReminder) {
 if (!startButton) console.error("SunDose: startButton غير موجود");
 if (!nextButton) console.error("SunDose: nextButton غير موجود");
 if (!habitList) console.error("SunDose: habitList غير موجود");
+
+console.log("☀️ SunDose loaded successfully!");
