@@ -1,85 +1,202 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <title>SunDose ☀️</title>
 
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800&display=swap" rel="stylesheet">
-
     <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
 
-    <main class="app">
+<div class="app">
 
-        <!-- =========================
-             مشهد الترحيب
-        ========================== -->
+    <!-- =========================
+         الصفحة الرئيسية
+    ========================== -->
 
-        <section class="welcome-screen" id="welcomeScreen">
+    <section id="home" class="screen">
 
-            <div class="sana-wrapper" id="sanaWrapper">
+        <div class="brand">
+            ☀️ SunDose
+        </div>
+
+        <div class="home-content">
+
+            <!-- =========================
+                 منطقة سنا في الترحيب
+            ========================== -->
+
+            <div class="sana-stage">
 
                 <img
-                    id="sanaImage"
-                    class="sana-image"
+                    id="sanaWelcome"
                     src="assets/sana_welcome_01.png"
+                    class="sana sana-welcome"
                     alt="سنا"
                 >
 
-                <!-- كلام سنا -->
-                <div class="sana-speech" id="sanaSpeech">
-                    <span id="speechText"></span>
-                </div>
+                <div class="sana-message welcome-message">
 
-            </div>
+                    <strong>سنا 💛</strong>
 
-        </section>
-
-
-        <!-- =========================
-             التطبيق
-        ========================== -->
-
-        <section class="app-content" id="appContent">
-
-            <div class="control-panel">
-
-                <h1>جرّب روح سنا ☀️</h1>
-
-                <div class="reaction-grid">
-
-                    <button>ترحيب 👋</button>
-                    <button>فرحانة 😊</button>
-                    <button>واثقة 😌</button>
-                    <button>فضولية 🤨</button>
-                    <button>متحمسة ✨</button>
-                    <button>بتفكر 🧐</button>
-                    <button>الشمس ☀️</button>
-                    <button>المياه 💧</button>
-                    <button>هادية 🌿</button>
-                    <button>رياضة 🏃‍♀️</button>
-                    <button>زعلانة 😔</button>
-                    <button>مندهشة 😳</button>
-                    <button>إنجاز 🥳</button>
-                    <button>الختام 💛</button>
+                    <p id="introText"></p>
 
                 </div>
 
             </div>
 
-        </section>
 
-    </main>
+            <button
+                id="introNext"
+                class="primary-btn"
+            >
+                متابعة
+            </button>
 
-    <script src="script.js"></script>
+
+            <button
+                id="startButton"
+                class="primary-btn hidden"
+            >
+                نبدأ التعارف ☀️
+            </button>
+
+        </div>
+
+    </section>
+
+
+    <!-- =========================
+         التعارف
+    ========================== -->
+
+    <section id="welcome" class="screen hidden">
+
+        <div class="brand">
+            ☀️ SunDose
+        </div>
+
+        <div class="progress">
+            <span id="progressBar"></span>
+        </div>
+
+        <img
+            id="sanaNormal"
+            src="assets/sana.png"
+            class="sana small"
+            alt="سنا"
+        >
+
+        <div class="sana-message">
+
+            <strong>سنا 💛</strong>
+
+            <p id="question"></p>
+
+        </div>
+
+        <div id="answerArea"></div>
+
+        <button
+            id="nextButton"
+            class="primary-btn"
+        >
+            نكمّل سوا 💛
+        </button>
+
+    </section>
+
+
+    <!-- =========================
+         العادات
+    ========================== -->
+
+    <section id="habits" class="screen hidden">
+
+        <div class="brand">
+            ☀️ SunDose
+        </div>
+
+        <img
+            id="sanaHabits"
+            src="assets/sana.png"
+            class="sana small"
+            alt="سنا"
+        >
+
+        <div class="sana-message">
+
+            <strong>سنا 💛</strong>
+
+            <p id="habitMessage"></p>
+
+        </div>
+
+        <div
+            id="habitList"
+            class="habit-list"
+        ></div>
+
+    </section>
+
+
+    <!-- =========================
+         جرعة الشمس
+    ========================== -->
+
+    <section id="sunDose" class="screen hidden">
+
+        <div class="brand">
+            ☀️ SunDose
+        </div>
+
+        <img
+            id="sanaSun"
+            src="assets/sana.png"
+            class="sana small"
+            alt="سنا"
+        >
+
+        <div class="sana-message">
+
+            <strong>سنا 💛</strong>
+
+            <p id="sunMessage"></p>
+
+        </div>
+
+        <div class="dose-card">
+
+            <div class="dose-icon">
+                ☀️
+            </div>
+
+            <h2>
+                جرعة الشمس
+            </h2>
+
+            <p>
+                هنا هنبدأ نبني جرعتك اليومية
+                بشكل يناسبك خطوة بخطوة.
+            </p>
+
+        </div>
+
+        <button
+            id="backToHabits"
+            class="secondary-btn"
+        >
+            رجوع للعادات
+        </button>
+
+    </section>
+
+</div>
+
+<script src="app.js"></script>
 
 </body>
-
 </html>
