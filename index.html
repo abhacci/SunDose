@@ -2,6 +2,7 @@
 <html lang="ar" dir="rtl">
 
 <head>
+
     <meta charset="UTF-8">
 
     <meta
@@ -11,28 +12,33 @@
 
     <title>SunDose ☀️</title>
 
-    <link rel="stylesheet" href="style.css">
+    <link
+        rel="stylesheet"
+        href="style.css"
+    >
+
 </head>
+
 
 <body>
 
 <div class="app">
 
-    <!-- =====================================
-         HOME
-    ====================================== -->
 
-    <section id="home" class="screen">
+    <!-- =================================
+         الرئيسية
+    ================================== -->
 
-        <div class="topbar home-topbar">
+    <section
+        id="home"
+        class="screen"
+    >
+
+        <div class="topbar">
 
             <div class="brand">
                 <span>☀️</span>
                 SunDose
-            </div>
-
-            <div class="mini-brand">
-                مع سنا
             </div>
 
         </div>
@@ -59,7 +65,7 @@
             </div>
 
 
-            <div class="speech-bubble home-bubble">
+            <div class="speech-bubble">
 
                 <div class="bubble-name">
                     سنا 💛
@@ -77,7 +83,7 @@
                 id="introNext"
                 class="primary-btn"
             >
-                كمّل معايا
+                نكمل 😄
             </button>
 
 
@@ -85,7 +91,7 @@
                 id="startButton"
                 class="primary-btn hidden"
             >
-                نتعرّف على بعض ☀️
+                يلا نبدأ ☀️
             </button>
 
         </div>
@@ -93,11 +99,15 @@
     </section>
 
 
-    <!-- =====================================
-         PERSONAL DATA
-    ====================================== -->
 
-    <section id="welcome" class="screen hidden">
+    <!-- =================================
+         التعارف
+    ================================== -->
+
+    <section
+        id="welcome"
+        class="screen hidden"
+    >
 
         <div class="topbar">
 
@@ -107,26 +117,39 @@
             </div>
 
             <div class="step-counter">
-                <span id="stepNumber">1</span>
+
+                <span id="stepNumber">
+                    1
+                </span>
+
                 /
-                <span id="stepTotal">9</span>
+
+                <span id="stepTotal">
+                    8
+                </span>
+
             </div>
 
         </div>
 
 
         <div class="progress">
-            <span id="progressBar"></span>
+
+            <span
+                id="progressBar"
+            ></span>
+
         </div>
 
 
         <div class="conversation">
 
-            <div class="sana-stage question-stage">
+
+            <div class="sana-stage">
 
                 <img
                     id="questionSana"
-                    src="assets/sana_happy.png"
+                    src="assets/sana_flirty.png"
                     class="sana question-sana sana-character"
                     alt="سنا"
                 >
@@ -134,10 +157,10 @@
             </div>
 
 
-            <div class="speech-bubble question-bubble">
+            <div class="speech-bubble">
 
                 <div class="bubble-name">
-                    سنا
+                    سنا 💛
                 </div>
 
                 <p
@@ -158,7 +181,7 @@
                 id="nextButton"
                 class="primary-btn"
             >
-                نكمّل سوا 💛
+                نكمل 😄
             </button>
 
         </div>
@@ -166,11 +189,15 @@
     </section>
 
 
-    <!-- =====================================
-         HABITS
-    ====================================== -->
 
-    <section id="habits" class="screen hidden">
+    <!-- =================================
+         العادات
+    ================================== -->
+
+    <section
+        id="habits"
+        class="screen hidden"
+    >
 
         <div class="topbar">
 
@@ -179,14 +206,10 @@
                 SunDose
             </div>
 
-            <div class="mini-brand">
-                عالمك
-            </div>
-
         </div>
 
 
-        <div class="conversation habit-conversation">
+        <div class="conversation">
 
             <div class="sana-stage">
 
@@ -224,11 +247,15 @@
     </section>
 
 
-    <!-- =====================================
-         SUN EDUCATION
-    ====================================== -->
 
-    <section id="sunLearn" class="screen hidden">
+    <!-- =================================
+         شرح الشمس
+    ================================== -->
+
+    <section
+        id="sunEducation"
+        class="screen hidden"
+    >
 
         <div class="topbar">
 
@@ -237,101 +264,49 @@
                 SunDose
             </div>
 
-            <div class="mini-brand">
-                قبل الحساب
-            </div>
-
         </div>
 
 
-        <div class="learn-wrap">
+        <div class="education-content">
 
-            <div class="sana-stage learn-sana-stage">
+
+            <div class="sana-stage">
 
                 <img
-                    id="learnSana"
+                    id="educationSana"
                     src="assets/sana_sun_01.png"
-                    class="sana learn-sana sana-character"
+                    class="sana question-sana sana-character"
                     alt="سنا"
                 >
 
             </div>
 
 
-            <div class="speech-bubble learn-bubble">
+            <div class="education-title">
+                طب ليه الشمس؟ ☀️
+            </div>
+
+
+            <div class="speech-bubble education-bubble">
 
                 <div class="bubble-name">
                     سنا ☀️
                 </div>
 
                 <p
-                    id="learnMessage"
-                    class="dialogue"
+                    id="educationText"
+                    class="dialogue education-text"
                 ></p>
 
             </div>
 
 
-            <div class="science-strip">
-
-                <div class="science-icon">
-                    UV
-                </div>
-
-                <div>
-                    <b>يعني إيه UV؟</b>
-
-                    <span>
-                        ببساطة: دي قوة الأشعة فوق البنفسجية اللي واصلة لجلدك.
-                        مش حرارة الجو.
-                    </span>
-                </div>
-
-            </div>
-
-
-            <div class="fact-line">
-
-                <span>☀️</span>
-
-                <p>
-                    كل ما رقم UV يعلى، الأشعة بتبقى أقوى
-                    والجلد ممكن يتضرر في وقت أقل.
-                </p>
-
-            </div>
-
-
-            <div class="fact-line">
-
-                <span>🧠</span>
-
-                <p>
-                    عشان كده SunDose مش بيبص للساعة بس...
-                    بيبص للشمس نفسها.
-                </p>
-
-            </div>
-
-
-            <div class="learn-source">
-                مبني على إرشادات منظمة الصحة العالمية WHO
-            </div>
-
-
             <button
-                id="startSunAnalysis"
+                id="educationNext"
                 class="primary-btn"
+                disabled
             >
-                طيب خلّي سنا تشوف الشمس ☀️
-            </button>
-
-
-            <button
-                id="backFromLearn"
-                class="secondary-btn"
-            >
-                ← رجوع
+                نروح نشوفها ☀️
             </button>
 
         </div>
@@ -339,11 +314,15 @@
     </section>
 
 
-    <!-- =====================================
-         SUN STATION
-    ====================================== -->
 
-    <section id="sunDose" class="screen hidden">
+    <!-- =================================
+         محطة الشمس
+    ================================== -->
+
+    <section
+        id="sunDose"
+        class="screen hidden"
+    >
 
         <div class="topbar">
 
@@ -359,9 +338,11 @@
         </div>
 
 
+        <!-- سنا -->
+
         <div class="sun-intro">
 
-            <div class="sana-stage sun-sana-stage">
+            <div class="sana-stage">
 
                 <img
                     id="sunSana"
@@ -389,16 +370,21 @@
         </div>
 
 
-        <!-- =====================================
-             SUN STATION
-        ====================================== -->
+
+        <!-- محطة الشمس -->
 
         <div class="sun-station">
 
             <div class="station-glow"></div>
 
-            <div class="sun-orbit orbit-one"></div>
-            <div class="sun-orbit orbit-two"></div>
+            <div
+                class="sun-orbit orbit-one"
+            ></div>
+
+            <div
+                class="sun-orbit orbit-two"
+            ></div>
+
 
             <div class="station-sun">
 
@@ -410,11 +396,15 @@
 
 
             <div class="station-title">
-                محطة الشمس
+
+                <span>
+                    محطة الشمس
+                </span>
 
                 <small>
                     SUN STATION
                 </small>
+
             </div>
 
 
@@ -422,31 +412,31 @@
                 id="sunStatus"
                 class="sun-status"
             >
-                جاهزين نبدأ التحليل
+                جاهزين نبدأ
             </div>
 
         </div>
 
 
-        <!-- =====================================
-             PERSONAL DATA
-        ====================================== -->
+
+        <!-- بيانات -->
 
         <div class="mini-data-grid">
 
+
             <div class="data-chip">
 
-                <span class="chip-icon skin-chip">
-                    <i></i>
+                <span class="chip-icon">
+                    🎨
                 </span>
 
-                <div>
-                    <small>بشرتك</small>
+                <small>
+                    البشرة
+                </small>
 
-                    <b id="sunSkinValue">
-                        —
-                    </b>
-                </div>
+                <b id="sunSkinValue">
+                    —
+                </b>
 
             </div>
 
@@ -454,16 +444,16 @@
             <div class="data-chip">
 
                 <span class="chip-icon">
-                    ◷
+                    🕐
                 </span>
 
-                <div>
-                    <small>وقت مناسب</small>
+                <small>
+                    الوقت
+                </small>
 
-                    <b id="sunTimeValue">
-                        —
-                    </b>
-                </div>
+                <b id="sunTimeValue">
+                    —
+                </b>
 
             </div>
 
@@ -471,42 +461,41 @@
             <div class="data-chip">
 
                 <span class="chip-icon">
-                    ◎
+                    📍
                 </span>
 
-                <div>
-                    <small>موقعك</small>
+                <small>
+                    المكان
+                </small>
 
-                    <b id="sunLocationValue">
-                        غير محدد
-                    </b>
-                </div>
+                <b id="sunLocationValue">
+                    لسه
+                </b>
 
             </div>
 
 
             <div class="data-chip">
 
-                <span class="chip-icon uv-chip">
+                <span class="chip-icon">
+                    ☀️
+                </span>
+
+                <small>
                     UV
-                </span>
+                </small>
 
-                <div>
-                    <small>قوة الشمس</small>
-
-                    <b id="uvValue">
-                        —
-                    </b>
-                </div>
+                <b id="uvValue">
+                    —
+                </b>
 
             </div>
 
         </div>
 
 
-        <!-- =====================================
-             ANALYSIS
-        ====================================== -->
+
+        <!-- التحليل -->
 
         <div
             id="sunAnalysis"
@@ -522,7 +511,7 @@
                     </small>
 
                     <h2 id="analysisTitle">
-                        لسه بنجمع البيانات
+                        مستنيين الشمس
                     </h2>
 
                 </div>
@@ -538,73 +527,10 @@
             </div>
 
 
-            <div
-                id="doseMeter"
-                class="dose-meter"
-            >
-
-                <div class="meter-track">
-
-                    <span
-                        id="doseMeterFill"
-                    ></span>
-
-                </div>
-
-                <div class="meter-labels">
-
-                    <span>
-                        هادي
-                    </span>
-
-                    <span>
-                        نشطة
-                    </span>
-
-                    <span>
-                        قوية
-                    </span>
-
-                </div>
-
-            </div>
-
-
-            <div
-                id="doseResult"
-                class="dose-result hidden"
-            >
-
-                <div class="dose-number">
-
-                    <strong id="doseMinutes">
-                        —
-                    </strong>
-
-                    <span>
-                        دقيقة
-                    </span>
-
-                </div>
-
-
-                <div class="dose-copy">
-
-                    <b id="doseTitle">
-                        —
-                    </b>
-
-                    <p id="doseText">
-                        —
-                    </p>
-
-                </div>
-
-            </div>
-
-
             <p id="analysisText">
-                أول خطوة إننا نعرف حالة الشمس عند مكانك الحقيقي.
+
+                أول خطوة نعرف الشمس عند مكانك الحقيقي.
+
             </p>
 
 
@@ -614,7 +540,7 @@
                     id="locationButton"
                     class="primary-btn"
                 >
-                    📍 تحديد موقعي وابدأ التحليل
+                    حدد موقعي 📍
                 </button>
 
             </div>
@@ -623,7 +549,10 @@
 
 
         <div class="tiny-note">
-            القراءة تخطيطية وليست وصفة طبية أو جرعة فيتامين D.
+
+            SunDose يساعدك تفهم وتخطط للتعرض للشمس،
+            وليس بديلًا عن التشخيص أو العلاج الطبي.
+
         </div>
 
 
@@ -631,7 +560,7 @@
             id="backToHabits"
             class="secondary-btn"
         >
-            ← رجوع للعادات
+            ← نرجع
         </button>
 
     </section>
@@ -642,4 +571,5 @@
 <script src="app.js"></script>
 
 </body>
-</html>
+
+                        </html>
