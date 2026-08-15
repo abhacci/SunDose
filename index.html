@@ -3,14 +3,8 @@
 
 <head>
     <meta charset="UTF-8">
-
-    <meta
-        name="viewport"
-        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
-    >
-
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>SunDose ☀️</title>
-
     <link rel="stylesheet" href="style.css">
 </head>
 
@@ -23,621 +17,270 @@
     ====================================== -->
 
     <section id="home" class="screen">
-
         <div class="topbar home-topbar">
-
-            <div class="brand">
-                <span>☀️</span>
-                SunDose
-            </div>
-
-            <div class="mini-brand">
-                مع سنا
-            </div>
-
+            <div class="brand"><span>☀️</span> SunDose</div>
+            <div class="mini-brand">مع سنا</div>
+            <div class="streak-badge">🔥 <span id="streakCount">0</span></div>
         </div>
-
-
         <div class="home-content">
-
             <div class="sana-stage premium">
-
-                <div
-                    id="sanaReaction"
-                    class="sana-reaction hidden"
-                >
-                    ✨
+                <div id="sanaReaction" class="sana-reaction hidden">✨</div>
+                <div class="sana-container" id="sanaContainer">
+                    <img id="sanaImage" src="assets/sana_welcome_01.png" class="sana sana-character" alt="سنا">
+                    <div class="sana-eyes" id="sanaEyes">
+                        <div class="eye left-eye"></div>
+                        <div class="eye right-eye"></div>
+                    </div>
                 </div>
-
-                <img
-                    id="sanaImage"
-                    src="assets/sana_welcome_01.png"
-                    class="sana sana-character"
-                    alt="سنا"
-                >
-
             </div>
-
-
             <div class="speech-bubble home-bubble">
-
-                <div class="bubble-name">
-                    سنا 💛
-                </div>
-
-                <p
-                    id="introText"
-                    class="dialogue"
-                ></p>
-
+                <div class="bubble-name">سنا 💛</div>
+                <p id="introText" class="dialogue"></p>
             </div>
-
-
-            <button
-                id="introNext"
-                class="primary-btn"
-            >
-                كمّل معايا
-            </button>
-
-
-            <button
-                id="startButton"
-                class="primary-btn hidden"
-            >
-                نتعرّف على بعض ☀️
-            </button>
-
+            <button id="introNext" class="primary-btn">كمّل معايا</button>
+            <button id="startButton" class="primary-btn hidden">نتعرّف على بعض ☀️</button>
         </div>
-
     </section>
-
 
     <!-- =====================================
          PERSONAL DATA
     ====================================== -->
 
     <section id="welcome" class="screen hidden">
-
         <div class="topbar">
-
-            <div class="brand">
-                <span>☀️</span>
-                SunDose
-            </div>
-
-            <div class="step-counter">
-                <span id="stepNumber">1</span>
-                /
-                <span id="stepTotal">9</span>
-            </div>
-
+            <div class="brand"><span>☀️</span> SunDose</div>
+            <div class="step-counter"><span id="stepNumber">1</span> / <span id="stepTotal">8</span></div>
+            <div class="streak-badge">🔥 <span id="streakCount2">0</span></div>
         </div>
-
-
-        <div class="progress">
-            <span id="progressBar"></span>
-        </div>
-
-
+        <div class="progress"><span id="progressBar"></span></div>
         <div class="conversation">
-
             <div class="sana-stage question-stage">
-
-                <img
-                    id="questionSana"
-                    src="assets/sana_happy.png"
-                    class="sana question-sana sana-character"
-                    alt="سنا"
-                >
-
-            </div>
-
-
-            <div class="speech-bubble question-bubble">
-
-                <div class="bubble-name">
-                    سنا
+                <div class="sana-container">
+                    <img id="questionSana" src="assets/sana_happy.png" class="sana question-sana sana-character" alt="سنا">
+                    <div class="sana-eyes" id="questionEyes">
+                        <div class="eye left-eye"></div>
+                        <div class="eye right-eye"></div>
+                    </div>
                 </div>
-
-                <p
-                    id="question"
-                    class="dialogue"
-                ></p>
-
             </div>
-
-
-            <div
-                id="answerArea"
-                class="answer-area"
-            ></div>
-
-
-            <button
-                id="nextButton"
-                class="primary-btn"
-            >
-                نكمّل سوا 💛
-            </button>
-
+            <div class="speech-bubble question-bubble">
+                <div class="bubble-name">سنا</div>
+                <p id="question" class="dialogue"></p>
+            </div>
+            <div id="answerArea" class="answer-area"></div>
+            <button id="nextButton" class="primary-btn">نكمّل سوا 💛</button>
         </div>
-
     </section>
-
 
     <!-- =====================================
          HABITS
     ====================================== -->
 
     <section id="habits" class="screen hidden">
-
         <div class="topbar">
-
-            <div class="brand">
-                <span>☀️</span>
-                SunDose
-            </div>
-
-            <div class="mini-brand">
-                عالمك
-            </div>
-
+            <div class="brand"><span>☀️</span> SunDose</div>
+            <div class="mini-brand">عالمك</div>
+            <div class="streak-badge">🔥 <span id="streakCount3">0</span></div>
         </div>
-
-
         <div class="conversation habit-conversation">
-
             <div class="sana-stage">
-
-                <img
-                    id="habitSana"
-                    src="assets/sana_happy.png"
-                    class="sana question-sana sana-character"
-                    alt="سنا"
-                >
-
-            </div>
-
-
-            <div class="speech-bubble">
-
-                <div class="bubble-name">
-                    سنا 💛
+                <div class="sana-container">
+                    <img id="habitSana" src="assets/sana_happy.png" class="sana question-sana sana-character" alt="سنا">
+                    <div class="sana-eyes" id="habitEyes">
+                        <div class="eye left-eye"></div>
+                        <div class="eye right-eye"></div>
+                    </div>
                 </div>
-
-                <p
-                    id="habitMessage"
-                    class="dialogue"
-                ></p>
-
             </div>
-
+            <div class="speech-bubble">
+                <div class="bubble-name">سنا 💛</div>
+                <p id="habitMessage" class="dialogue"></p>
+            </div>
         </div>
-
-
-        <div
-            id="habitList"
-            class="habit-list"
-        ></div>
-
+        <div id="habitList" class="habit-list"></div>
     </section>
-
 
     <!-- =====================================
          SUN EDUCATION
     ====================================== -->
 
     <section id="sunLearn" class="screen hidden">
-
         <div class="topbar">
-
-            <div class="brand">
-                <span>☀️</span>
-                SunDose
-            </div>
-
-            <div class="mini-brand">
-                قبل الحساب
-            </div>
-
+            <div class="brand"><span>☀️</span> SunDose</div>
+            <div class="mini-brand">قبل الحساب</div>
+            <div class="streak-badge">🔥 <span id="streakCount4">0</span></div>
         </div>
-
-
         <div class="learn-wrap">
-
             <div class="sana-stage learn-sana-stage">
-
-                <img
-                    id="learnSana"
-                    src="assets/sana_sun_01.png"
-                    class="sana learn-sana sana-character"
-                    alt="سنا"
-                >
-
+                <div class="sana-container">
+                    <img id="learnSana" src="assets/sana_sun_01.png" class="sana learn-sana sana-character" alt="سنا">
+                    <div class="sana-eyes" id="learnEyes">
+                        <div class="eye left-eye"></div>
+                        <div class="eye right-eye"></div>
+                    </div>
+                </div>
             </div>
-
-
             <div class="speech-bubble learn-bubble">
-
-                <div class="bubble-name">
-                    سنا ☀️
-                </div>
-
-                <p
-                    id="learnMessage"
-                    class="dialogue"
-                ></p>
-
+                <div class="bubble-name">سنا ☀️</div>
+                <p id="learnMessage" class="dialogue"></p>
             </div>
-
-
             <div class="science-strip">
-
-                <div class="science-icon">
-                    UV
-                </div>
-
+                <div class="science-icon">UV</div>
                 <div>
                     <b>يعني إيه UV؟</b>
-
-                    <span>
-                        ببساطة: دي قوة الأشعة فوق البنفسجية اللي واصلة لجلدك.
-                        مش حرارة الجو.
-                    </span>
+                    <span>ببساطة: دي قوة الأشعة فوق البنفسجية اللي واصلة لجلدك. مش حرارة الجو.</span>
                 </div>
-
             </div>
-
-
             <div class="fact-line">
-
                 <span>☀️</span>
-
-                <p>
-                    كل ما رقم UV يعلى، الأشعة بتبقى أقوى
-                    والجلد ممكن يتضرر في وقت أقل.
-                </p>
-
+                <p>كل ما رقم UV يعلى، الأشعة بتبقى أقوى والجلد ممكن يتضرر في وقت أقل. منظمة الصحة العالمية بتقول إن الحماية مطلوبة لما UV = 3 أو أكتر.</p>
             </div>
-
-
             <div class="fact-line">
-
                 <span>🧠</span>
-
-                <p>
-                    عشان كده SunDose مش بيبص للساعة بس...
-                    بيبص للشمس نفسها.
-                </p>
-
+                <p>عشان كده SunDose مش بيبص للساعة بس... بيبص للشمس نفسها.</p>
             </div>
-
-
-            <div class="learn-source">
-                مبني على إرشادات منظمة الصحة العالمية WHO
-            </div>
-
-
-            <button
-                id="startSunAnalysis"
-                class="primary-btn"
-            >
-                طيب خلّي سنا تشوف الشمس ☀️
-            </button>
-
-
-            <button
-                id="backFromLearn"
-                class="secondary-btn"
-            >
-                ← رجوع
-            </button>
-
+            <div class="learn-source">مبني على إرشادات منظمة الصحة العالمية WHO</div>
+            <button id="startSunAnalysis" class="primary-btn">طيب خلّي سنا تشوف الشمس ☀️</button>
+            <button id="backFromLearn" class="secondary-btn">← رجوع</button>
         </div>
-
     </section>
-
 
     <!-- =====================================
          SUN STATION
     ====================================== -->
 
     <section id="sunDose" class="screen hidden">
-
         <div class="topbar">
-
-            <div class="brand">
-                <span>☀️</span>
-                SunDose
-            </div>
-
-            <div class="live-dot">
-                LIVE
-            </div>
-
+            <div class="brand"><span>☀️</span> SunDose</div>
+            <div class="live-dot">LIVE</div>
+            <div class="streak-badge">🔥 <span id="streakCount5">0</span></div>
         </div>
-
-
         <div class="sun-intro">
-
             <div class="sana-stage sun-sana-stage">
-
-                <img
-                    id="sunSana"
-                    src="assets/sana_sun_01.png"
-                    class="sana sun-sana sana-character"
-                    alt="سنا"
-                >
-
-            </div>
-
-
-            <div class="speech-bubble sun-bubble">
-
-                <div class="bubble-name">
-                    سنا ☀️
+                <div class="sana-container">
+                    <img id="sunSana" src="assets/sana_sun_01.png" class="sana sun-sana sana-character" alt="سنا">
+                    <div class="sana-eyes" id="sunEyes">
+                        <div class="eye left-eye"></div>
+                        <div class="eye right-eye"></div>
+                    </div>
                 </div>
-
-                <p
-                    id="sunMessage"
-                    class="dialogue"
-                ></p>
-
             </div>
-
+            <div class="speech-bubble sun-bubble">
+                <div class="bubble-name">سنا ☀️</div>
+                <p id="sunMessage" class="dialogue"></p>
+            </div>
         </div>
-
-
-        <!-- =====================================
-             SUN STATION
-        ====================================== -->
-
         <div class="sun-station">
-
             <div class="station-glow"></div>
-
             <div class="sun-orbit orbit-one"></div>
             <div class="sun-orbit orbit-two"></div>
-
-            <div class="station-sun">
-
-                <div class="sun-core">
-                    ☀️
-                </div>
-
-            </div>
-
-
-            <div class="station-title">
-                محطة الشمس
-
-                <small>
-                    SUN STATION
-                </small>
-            </div>
-
-
-            <div
-                id="sunStatus"
-                class="sun-status"
-            >
-                جاهزين نبدأ التحليل
-            </div>
-
+            <div class="station-sun"><div class="sun-core">☀️</div></div>
+            <div class="station-title">محطة الشمس <small>SUN STATION</small></div>
+            <div id="sunStatus" class="sun-status">جاهزين نبدأ التحليل</div>
         </div>
-
-
-        <!-- =====================================
-             PERSONAL DATA
-        ====================================== -->
-
         <div class="mini-data-grid">
-
             <div class="data-chip">
-
-                <span class="chip-icon skin-chip">
-                    <i></i>
-                </span>
-
-                <div>
-                    <small>بشرتك</small>
-
-                    <b id="sunSkinValue">
-                        —
-                    </b>
-                </div>
-
+                <span class="chip-icon skin-chip"><i></i></span>
+                <div><small>نوع بشرتك</small><b id="sunSkinValue">—</b></div>
             </div>
-
-
             <div class="data-chip">
-
-                <span class="chip-icon">
-                    ◷
-                </span>
-
-                <div>
-                    <small>وقت مناسب</small>
-
-                    <b id="sunTimeValue">
-                        —
-                    </b>
-                </div>
-
+                <span class="chip-icon">◷</span>
+                <div><small>وقتك المفضل</small><b id="sunTimeValue">—</b></div>
             </div>
-
-
             <div class="data-chip">
-
-                <span class="chip-icon">
-                    ◎
-                </span>
-
-                <div>
-                    <small>موقعك</small>
-
-                    <b id="sunLocationValue">
-                        غير محدد
-                    </b>
-                </div>
-
+                <span class="chip-icon">◎</span>
+                <div><small>موقعك</small><b id="sunLocationValue">غير محدد</b></div>
             </div>
-
-
             <div class="data-chip">
-
-                <span class="chip-icon uv-chip">
-                    UV
-                </span>
-
-                <div>
-                    <small>قوة الشمس</small>
-
-                    <b id="uvValue">
-                        —
-                    </b>
-                </div>
-
+                <span class="chip-icon uv-chip">UV</span>
+                <div><small>قوة الشمس</small><b id="uvValue">—</b></div>
             </div>
-
         </div>
-
-
-        <!-- =====================================
-             ANALYSIS
-        ====================================== -->
-
-        <div
-            id="sunAnalysis"
-            class="sun-analysis"
-        >
-
+        <div id="sunAnalysis" class="sun-analysis">
             <div class="analysis-head">
-
-                <div>
-
-                    <small>
-                        قراءة SunDose
-                    </small>
-
-                    <h2 id="analysisTitle">
-                        لسه بنجمع البيانات
-                    </h2>
-
-                </div>
-
-
-                <div
-                    id="analysisIcon"
-                    class="analysis-icon"
-                >
-                    ☀️
-                </div>
-
+                <div><small>قراءة SunDose</small><h2 id="analysisTitle">لسه بنجمع البيانات</h2></div>
+                <div id="analysisIcon" class="analysis-icon">☀️</div>
             </div>
-
-
-            <div
-                id="doseMeter"
-                class="dose-meter"
-            >
-
-                <div class="meter-track">
-
-                    <span
-                        id="doseMeterFill"
-                    ></span>
-
-                </div>
-
-                <div class="meter-labels">
-
-                    <span>
-                        هادي
-                    </span>
-
-                    <span>
-                        نشطة
-                    </span>
-
-                    <span>
-                        قوية
-                    </span>
-
-                </div>
-
+            <div id="doseMeter" class="dose-meter">
+                <div class="meter-track"><span id="doseMeterFill"></span></div>
+                <div class="meter-labels"><span>هادي</span><span>نشطة</span><span>قوية</span></div>
             </div>
-
-
-            <div
-                id="doseResult"
-                class="dose-result hidden"
-            >
-
-                <div class="dose-number">
-
-                    <strong id="doseMinutes">
-                        —
-                    </strong>
-
-                    <span>
-                        دقيقة
-                    </span>
-
-                </div>
-
-
-                <div class="dose-copy">
-
-                    <b id="doseTitle">
-                        —
-                    </b>
-
-                    <p id="doseText">
-                        —
-                    </p>
-
-                </div>
-
+            <div id="doseResult" class="dose-result hidden">
+                <div class="dose-number"><strong id="doseMinutes">—</strong><span>دقيقة</span></div>
+                <div class="dose-copy"><b id="doseTitle">—</b><p id="doseText">—</p></div>
             </div>
-
-
-            <p id="analysisText">
-                أول خطوة إننا نعرف حالة الشمس عند مكانك الحقيقي.
-            </p>
-
-
-            <div class="analysis-action">
-
-                <button
-                    id="locationButton"
-                    class="primary-btn"
-                >
-                    📍 تحديد موقعي وابدأ التحليل
-                </button>
-
-            </div>
-
+            <p id="analysisText">أول خطوة إننا نعرف حالة الشمس عند مكانك الحقيقي.</p>
+            <div class="analysis-action"><button id="locationButton" class="primary-btn">📍 تحديد موقعي وابدأ التحليل</button></div>
         </div>
+        <div class="tiny-note">القراءة تخطيطية وليست وصفة طبية أو جرعة فيتامين D.</div>
+        <button id="goToHealthPortal" class="primary-btn hidden">🏥 ادخل بوابة صحتي</button>
+        <button id="backToHabits" class="secondary-btn">← رجوع للعادات</button>
+    </section>
 
+    <!-- =====================================
+         HEALTH PORTAL
+    ====================================== -->
 
-        <div class="tiny-note">
-            القراءة تخطيطية وليست وصفة طبية أو جرعة فيتامين D.
+    <section id="healthPortal" class="screen hidden">
+        <div class="topbar">
+            <div class="brand"><span>☀️</span> SunDose</div>
+            <div class="mini-brand">بوابتك الصحية</div>
+            <div class="streak-badge">🔥 <span id="streakCount6">0</span></div>
         </div>
-
-
-        <button
-            id="backToHabits"
-            class="secondary-btn"
-        >
-            ← رجوع للعادات
-        </button>
-
+        <div class="portal-content">
+            <div class="portal-header">
+                <div class="portal-avatar">
+                    <img id="portalSana" src="assets/sana_happy.png" class="sana portal-sana sana-character" alt="سنا">
+                </div>
+                <div class="portal-greeting">
+                    <h2 id="portalGreeting">أهلاً بك في بوابتك الصحية 💛</h2>
+                    <p id="portalSubGreeting">هنا هتلاقي كل حاجة محتاجها عشان تفضل في أمان مع الشمس</p>
+                </div>
+            </div>
+            <div class="portal-streak-section">
+                <div class="streak-card">
+                    <div class="streak-icon">🔥</div>
+                    <div><div class="streak-label">عدد الأيام المتتالية</div><div class="streak-number" id="portalStreak">0</div></div>
+                </div>
+                <div class="streak-card">
+                    <div class="streak-icon">⭐</div>
+                    <div><div class="streak-label">نقاط التحدي</div><div class="streak-number" id="portalPoints">0</div></div>
+                </div>
+            </div>
+            <div class="health-tips">
+                <h3>☀️ نصائح سنا الذهبية للشمس</h3>
+                <div class="tip-card"><div class="tip-icon">🕐</div><div><b>التوقيت المثالي</b><p>أفضل وقت للتعرض للشمس هو <strong>قبل الساعة 10 صباحاً</strong> أو <strong>بعد الساعة 4 عصراً</strong>. في الأوقات دي الأشعة فوق البنفسجية تكون أقل ضرراً.</p></div></div>
+                <div class="tip-card"><div class="tip-icon">🧴</div><div><b>واقي الشمس</b><p>استخدم واقي شمس بعامل حماية <strong>SPF 30+</strong> كل يوم، حتى في الأيام الغائمة. أعيد وضعه كل ساعتين، وبعد السباحة أو التعرق.</p></div></div>
+                <div class="tip-card"><div class="tip-icon">👕</div><div><b>الملابس المناسبة</b><p>ارتدِ ملابس خفيفة وفضفاضة تغطي الذراعين والساقين. القبعات والنظارات الشمسية تحمي عينيك ووجهك من الأشعة الضارة.</p></div></div>
+                <div class="tip-card"><div class="tip-icon">💧</div><div><b>الترطيب</b><p>اشرب <strong>8-10 أكواب</strong> من الماء يومياً. الشمس بتزيد فقدان السوائل، والجسم محتاج يعوض عشان يفضل نشيط وصحي.</p></div></div>
+                <div class="tip-card"><div class="tip-icon">🥗</div><div><b>فيتامين D من الأكل</b><p>لو مش بتتعرض للشمس كفاية، اعتمد على أكلات غنية بفيتامين D زي: <strong>السمك الدهني، البيض، الكبدة، والألبان المدعمة</strong>.</p></div></div>
+                <div class="tip-card"><div class="tip-icon">🌡️</div><div><b>مؤشر UV</b><p>لو الـ <strong>UV من 3 لـ 5</strong>، التعرض ١٠-٢٠ دقيقة آمن. لو <strong>UV من 6 لـ 7</strong>، قلل الوقت لـ ٥-١٠ دقايق. لو <strong>UV 8 فأكثر</strong>، تجنب التعرض المباشر نهائياً.</p></div></div>
+            </div>
+            <div class="reminder-section">
+                <h3>⏰ ذكرني بالشمس</h3>
+                <div class="reminder-box">
+                    <p>عايز سنا تذكرك كل يوم تاخد جرعتك من الشمس؟</p>
+                    <div class="reminder-controls">
+                        <input type="time" id="reminderTime" value="08:00">
+                        <button id="setReminder" class="primary-btn small-btn">فعّل التذكير</button>
+                    </div>
+                    <div id="reminderStatus" class="reminder-status">التذكير غير مفعّل حالياً</div>
+                </div>
+            </div>
+            <div class="stats-section">
+                <h3>📊 إحصائياتك الشمسية</h3>
+                <div class="stats-grid">
+                    <div class="stat-card"><span class="stat-number" id="statDays">0</span><span class="stat-label">يوم متابعة</span></div>
+                    <div class="stat-card"><span class="stat-number" id="statChecks">0</span><span class="stat-label">مرة فحصت فيها الشمس</span></div>
+                    <div class="stat-card"><span class="stat-number" id="statAvgUV">—</span><span class="stat-label">متوسط UV</span></div>
+                    <div class="stat-card"><span class="stat-number" id="statBestTime">—</span><span class="stat-label">أفضل وقت ليك</span></div>
+                </div>
+            </div>
+            <button id="backFromPortal" class="secondary-btn">← رجوع للرئيسية</button>
+        </div>
     </section>
 
 </div>
-
 
 <script src="app.js"></script>
 
