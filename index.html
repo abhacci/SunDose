@@ -25,7 +25,58 @@
             <div class="sana-stage premium">
                 <div id="sanaReaction" class="sana-reaction hidden">✨</div>
                 <div class="sana-container" id="sanaContainer">
-                    <img id="sanaImage" src="assets/sana_welcome_01.png" class="sana sana-character" alt="سنا">
+                    <!-- SVG سنا الجديدة -->
+                    <div id="sanaSvg" class="sana-character">
+                        <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg" width="130" height="130">
+                            <!-- تاج الشمس -->
+                            <g transform="translate(100, 20)">
+                                <circle cx="0" cy="0" r="14" fill="#ffd93d" stroke="#f3a712" stroke-width="2"/>
+                                <circle cx="0" cy="0" r="8" fill="#ffeb99"/>
+                                <g stroke="#f3a712" stroke-width="2" stroke-linecap="round">
+                                    <line x1="0" y1="-18" x2="0" y2="-24"/>
+                                    <line x1="15" y1="-9" x2="20" y2="-13"/>
+                                    <line x1="15" y1="9" x2="20" y2="13"/>
+                                    <line x1="0" y1="18" x2="0" y2="24"/>
+                                    <line x1="-15" y1="9" x2="-20" y2="13"/>
+                                    <line x1="-15" y1="-9" x2="-20" y2="-13"/>
+                                </g>
+                            </g>
+
+                            <!-- الشعر -->
+                            <path d="M30 60 Q30 15 100 10 Q170 15 170 60 Q170 55 160 50 Q140 35 100 35 Q60 35 40 50 Q30 55 30 60" fill="#5d3a1a"/>
+                            <path d="M30 60 Q30 30 100 25 Q170 30 170 60 Q160 45 130 40 Q100 38 70 40 Q40 45 30 60" fill="#7a4f2b"/>
+                            <!-- خصلة ذهبية -->
+                            <path d="M130 35 Q145 30 155 40 Q150 45 140 42 Q135 40 130 35" fill="#ffd93d" opacity="0.8"/>
+
+                            <!-- الوجه -->
+                            <circle cx="100" cy="100" r="60" fill="#fce6d5" stroke="#e8c9b0" stroke-width="2"/>
+
+                            <!-- العيون -->
+                            <g class="sana-eyes-g">
+                                <!-- عين يسرى -->
+                                <ellipse cx="75" cy="95" rx="12" ry="14" fill="white" stroke="#3d2b1f" stroke-width="1.5"/>
+                                <circle cx="78" cy="93" r="7" fill="#2d1f12"/>
+                                <circle cx="81" cy="89" r="2.5" fill="white"/>
+                                <!-- عين يمنى -->
+                                <ellipse cx="125" cy="95" rx="12" ry="14" fill="white" stroke="#3d2b1f" stroke-width="1.5"/>
+                                <circle cx="122" cy="93" r="7" fill="#2d1f12"/>
+                                <circle cx="119" cy="89" r="2.5" fill="white"/>
+                            </g>
+
+                            <!-- خدود وردية (تظهر عند الفرح) -->
+                            <ellipse cx="65" cy="118" rx="12" ry="6" fill="#ffb6c1" opacity="0.6" class="sana-blush"/>
+                            <ellipse cx="135" cy="118" rx="12" ry="6" fill="#ffb6c1" opacity="0.6" class="sana-blush"/>
+
+                            <!-- الفم (ابتسامة) -->
+                            <path d="M85 125 Q100 140 115 125" stroke="#d9534f" stroke-width="2.5" fill="none" stroke-linecap="round" class="sana-mouth"/>
+                            <!-- فم مفتوح (للدهشة) -->
+                            <ellipse cx="100" cy="128" rx="12" ry="8" fill="#d9534f" class="sana-mouth-open" style="display:none"/>
+
+                            <!-- الحواجب -->
+                            <path d="M60 78 Q70 72 85 76" stroke="#5d3a1a" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+                            <path d="M140 78 Q130 72 115 76" stroke="#5d3a1a" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+                        </svg>
+                    </div>
                     <div class="sana-eyes" id="sanaEyes">
                         <div class="eye left-eye"></div>
                         <div class="eye right-eye"></div>
@@ -54,7 +105,11 @@
         <div class="conversation">
             <div class="sana-stage question-stage">
                 <div class="sana-container">
-                    <img id="questionSana" src="assets/sana_happy.png" class="sana question-sana sana-character" alt="سنا">
+                    <div id="questionSanaSvg" class="sana-character">
+                        <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg" width="120" height="120">
+                            <use href="#sana-body"/>
+                        </svg>
+                    </div>
                     <div class="sana-eyes" id="questionEyes">
                         <div class="eye left-eye"></div>
                         <div class="eye right-eye"></div>
@@ -82,7 +137,11 @@
         <div class="conversation habit-conversation">
             <div class="sana-stage">
                 <div class="sana-container">
-                    <img id="habitSana" src="assets/sana_happy.png" class="sana question-sana sana-character" alt="سنا">
+                    <div id="habitSanaSvg" class="sana-character">
+                        <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg" width="120" height="120">
+                            <use href="#sana-body"/>
+                        </svg>
+                    </div>
                     <div class="sana-eyes" id="habitEyes">
                         <div class="eye left-eye"></div>
                         <div class="eye right-eye"></div>
@@ -109,7 +168,11 @@
         <div class="learn-wrap">
             <div class="sana-stage learn-sana-stage">
                 <div class="sana-container">
-                    <img id="learnSana" src="assets/sana_sun_01.png" class="sana learn-sana sana-character" alt="سنا">
+                    <div id="learnSanaSvg" class="sana-character">
+                        <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg" width="110" height="110">
+                            <use href="#sana-body"/>
+                        </svg>
+                    </div>
                     <div class="sana-eyes" id="learnEyes">
                         <div class="eye left-eye"></div>
                         <div class="eye right-eye"></div>
@@ -142,7 +205,7 @@
     </section>
 
     <!-- =====================================
-         SUN DOSE (بكل الإضافات الجديدة)
+         SUN DOSE
     ====================================== -->
     <section id="sunDose" class="screen hidden">
         <div class="topbar">
@@ -150,11 +213,14 @@
             <div class="live-dot">LIVE</div>
             <div class="streak-badge">🔥 <span id="streakCount5">0</span></div>
         </div>
-
         <div class="sun-intro">
             <div class="sana-stage sun-sana-stage">
                 <div class="sana-container">
-                    <img id="sunSana" src="assets/sana_sun_01.png" class="sana sun-sana sana-character" alt="سنا">
+                    <div id="sunSanaSvg" class="sana-character">
+                        <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg" width="110" height="110">
+                            <use href="#sana-body"/>
+                        </svg>
+                    </div>
                     <div class="sana-eyes" id="sunEyes">
                         <div class="eye left-eye"></div>
                         <div class="eye right-eye"></div>
@@ -166,7 +232,6 @@
                 <p id="sunMessage" class="dialogue"></p>
             </div>
         </div>
-
         <div class="sun-station">
             <div class="station-glow"></div>
             <div class="sun-orbit orbit-one"></div>
@@ -175,7 +240,6 @@
             <div class="station-title">محطة الشمس <small>SUN STATION</small></div>
             <div id="sunStatus" class="sun-status">جاهزين نبدأ التحليل</div>
         </div>
-
         <div class="mini-data-grid">
             <div class="data-chip">
                 <span class="chip-icon skin-chip"><i></i></span>
@@ -194,61 +258,44 @@
                 <div><small>قوة الشمس</small><b id="uvValue">—</b></div>
             </div>
         </div>
-
         <div id="sunAnalysis" class="sun-analysis">
             <div class="analysis-head">
                 <div><small>قراءة SunDose</small><h2 id="analysisTitle">لسه بنجمع البيانات</h2></div>
                 <div id="analysisIcon" class="analysis-icon">☀️</div>
             </div>
-
             <div id="doseMeter" class="dose-meter">
                 <div class="meter-track"><span id="doseMeterFill"></span></div>
                 <div class="meter-labels"><span>هادي</span><span>نشطة</span><span>قوية</span></div>
             </div>
-
             <div id="doseResult" class="dose-result hidden">
                 <div class="dose-number"><strong id="doseMinutes">—</strong><span>دقيقة</span></div>
                 <div class="dose-copy"><b id="doseTitle">—</b><p id="doseText">—</p></div>
             </div>
-
             <p id="analysisText">أول خطوة إننا نعرف حالة الشمس عند مكانك الحقيقي.</p>
-
-            <!-- إيجابيات وسلبيات -->
             <div id="prosCons" class="pros-cons hidden">
-                <div class="pros">
-                    <h4>✅ إيجابيات التعرض للشمس اليوم</h4>
-                    <ul id="prosList"></ul>
-                </div>
-                <div class="cons">
-                    <h4>⚠️ تحذيرات اليوم</h4>
-                    <ul id="consList"></ul>
-                </div>
+                <div class="pros"><h4>✅ إيجابيات التعرض للشمس اليوم</h4><ul id="prosList"></ul></div>
+                <div class="cons"><h4>⚠️ تحذيرات اليوم</h4><ul id="consList"></ul></div>
             </div>
-
-            <!-- نصائح متقدمة -->
             <div id="advancedTips" class="advanced-tips hidden">
                 <h4>💡 نصائح سنا الذهبية</h4>
                 <div id="tipsList"></div>
             </div>
-
             <div class="analysis-action">
                 <button id="locationButton" class="primary-btn">📍 تحديد موقعي وابدأ التحليل</button>
             </div>
-
             <div class="analysis-actions-extra hidden" id="extraActions">
                 <button id="viewHistoryBtn" class="secondary-btn">📊 عرض سجل التعرض</button>
                 <button id="viewForecastBtn" class="secondary-btn">📅 توقعات الأيام القادمة</button>
                 <button id="shareReportBtn" class="secondary-btn">📤 مشاركة التقرير</button>
             </div>
         </div>
-
         <div class="tiny-note">القراءة تخطيطية وليست وصفة طبية أو جرعة فيتامين D.</div>
         <button id="goToHealthPortal" class="primary-btn hidden">🏥 ادخل بوابة صحتي</button>
         <button id="backToHabits" class="secondary-btn">← رجوع للعادات</button>
     </section>
 
     <!-- =====================================
-         HISTORY LOG
+         HISTORY
     ====================================== -->
     <section id="historyLog" class="screen hidden">
         <div class="topbar">
@@ -265,7 +312,7 @@
     </section>
 
     <!-- =====================================
-         FORECAST VIEW
+         FORECAST
     ====================================== -->
     <section id="forecastView" class="screen hidden">
         <div class="topbar">
@@ -293,7 +340,11 @@
         <div class="portal-content">
             <div class="portal-header">
                 <div class="portal-avatar">
-                    <img id="portalSana" src="assets/sana_happy.png" class="sana portal-sana sana-character" alt="سنا">
+                    <div id="portalSanaSvg" class="sana-character">
+                        <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg" width="80" height="80">
+                            <use href="#sana-body"/>
+                        </svg>
+                    </div>
                 </div>
                 <div class="portal-greeting">
                     <h2 id="portalGreeting">أهلاً بك في بوابتك الصحية 💛</h2>
