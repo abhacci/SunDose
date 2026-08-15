@@ -12,10 +12,7 @@
 
 <div class="app">
 
-    <!-- =====================================
-         HOME
-    ====================================== -->
-
+    <!-- HOME -->
     <section id="home" class="screen">
         <div class="topbar home-topbar">
             <div class="brand"><span>☀️</span> SunDose</div>
@@ -42,10 +39,7 @@
         </div>
     </section>
 
-    <!-- =====================================
-         PERSONAL DATA
-    ====================================== -->
-
+    <!-- WELCOME -->
     <section id="welcome" class="screen hidden">
         <div class="topbar">
             <div class="brand"><span>☀️</span> SunDose</div>
@@ -72,10 +66,7 @@
         </div>
     </section>
 
-    <!-- =====================================
-         HABITS
-    ====================================== -->
-
+    <!-- HABITS -->
     <section id="habits" class="screen hidden">
         <div class="topbar">
             <div class="brand"><span>☀️</span> SunDose</div>
@@ -100,10 +91,7 @@
         <div id="habitList" class="habit-list"></div>
     </section>
 
-    <!-- =====================================
-         SUN EDUCATION
-    ====================================== -->
-
+    <!-- SUN LEARN -->
     <section id="sunLearn" class="screen hidden">
         <div class="topbar">
             <div class="brand"><span>☀️</span> SunDose</div>
@@ -145,16 +133,15 @@
         </div>
     </section>
 
-    <!-- =====================================
-         SUN STATION
-    ====================================== -->
-
+    <!-- SUN DOSE (مع كل الإضافات الجديدة) -->
     <section id="sunDose" class="screen hidden">
         <div class="topbar">
             <div class="brand"><span>☀️</span> SunDose</div>
             <div class="live-dot">LIVE</div>
             <div class="streak-badge">🔥 <span id="streakCount5">0</span></div>
         </div>
+
+        <!-- سنا والفقاعة -->
         <div class="sun-intro">
             <div class="sana-stage sun-sana-stage">
                 <div class="sana-container">
@@ -170,6 +157,8 @@
                 <p id="sunMessage" class="dialogue"></p>
             </div>
         </div>
+
+        <!-- محطة الشمس -->
         <div class="sun-station">
             <div class="station-glow"></div>
             <div class="sun-orbit orbit-one"></div>
@@ -178,6 +167,8 @@
             <div class="station-title">محطة الشمس <small>SUN STATION</small></div>
             <div id="sunStatus" class="sun-status">جاهزين نبدأ التحليل</div>
         </div>
+
+        <!-- البيانات المصغرة -->
         <div class="mini-data-grid">
             <div class="data-chip">
                 <span class="chip-icon skin-chip"><i></i></span>
@@ -196,31 +187,97 @@
                 <div><small>قوة الشمس</small><b id="uvValue">—</b></div>
             </div>
         </div>
+
+        <!-- التحليل -->
         <div id="sunAnalysis" class="sun-analysis">
             <div class="analysis-head">
                 <div><small>قراءة SunDose</small><h2 id="analysisTitle">لسه بنجمع البيانات</h2></div>
                 <div id="analysisIcon" class="analysis-icon">☀️</div>
             </div>
+
+            <!-- مؤشر الجرعة -->
             <div id="doseMeter" class="dose-meter">
                 <div class="meter-track"><span id="doseMeterFill"></span></div>
                 <div class="meter-labels"><span>هادي</span><span>نشطة</span><span>قوية</span></div>
             </div>
+
+            <!-- نتيجة الجرعة -->
             <div id="doseResult" class="dose-result hidden">
                 <div class="dose-number"><strong id="doseMinutes">—</strong><span>دقيقة</span></div>
                 <div class="dose-copy"><b id="doseTitle">—</b><p id="doseText">—</p></div>
             </div>
+
+            <!-- النص التحليلي -->
             <p id="analysisText">أول خطوة إننا نعرف حالة الشمس عند مكانك الحقيقي.</p>
-            <div class="analysis-action"><button id="locationButton" class="primary-btn">📍 تحديد موقعي وابدأ التحليل</button></div>
+
+            <!-- إيجابيات وسلبيات -->
+            <div id="prosCons" class="pros-cons hidden">
+                <div class="pros">
+                    <h4>✅ إيجابيات التعرض للشمس اليوم</h4>
+                    <ul id="prosList"></ul>
+                </div>
+                <div class="cons">
+                    <h4>⚠️ تحذيرات اليوم</h4>
+                    <ul id="consList"></ul>
+                </div>
+            </div>
+
+            <!-- نصائح متقدمة -->
+            <div id="advancedTips" class="advanced-tips hidden">
+                <h4>💡 نصائح سنا الذهبية</h4>
+                <div id="tipsList"></div>
+            </div>
+
+            <!-- زر تحديد الموقع -->
+            <div class="analysis-action">
+                <button id="locationButton" class="primary-btn">📍 تحديد موقعي وابدأ التحليل</button>
+            </div>
+
+            <!-- أزرار إضافية -->
+            <div class="analysis-actions-extra hidden" id="extraActions">
+                <button id="viewHistoryBtn" class="secondary-btn">📊 عرض سجل التعرض</button>
+                <button id="viewForecastBtn" class="secondary-btn">📅 توقعات الأيام القادمة</button>
+                <button id="shareReportBtn" class="secondary-btn">📤 مشاركة التقرير</button>
+            </div>
         </div>
+
         <div class="tiny-note">القراءة تخطيطية وليست وصفة طبية أو جرعة فيتامين D.</div>
+
         <button id="goToHealthPortal" class="primary-btn hidden">🏥 ادخل بوابة صحتي</button>
         <button id="backToHabits" class="secondary-btn">← رجوع للعادات</button>
     </section>
 
-    <!-- =====================================
-         HEALTH PORTAL
-    ====================================== -->
+    <!-- سجل التعرض -->
+    <section id="historyLog" class="screen hidden">
+        <div class="topbar">
+            <div class="brand"><span>☀️</span> SunDose</div>
+            <div class="mini-brand">سجل التعرض</div>
+            <div class="streak-badge">🔥 <span id="streakCount7">0</span></div>
+        </div>
+        <div class="history-content">
+            <h2>📊 سجل التعرض للشمس</h2>
+            <div id="historyList" class="history-list"></div>
+            <div class="history-stats" id="historyStats"></div>
+            <button id="backFromHistory" class="secondary-btn">← رجوع</button>
+        </div>
+    </section>
 
+    <!-- توقعات UV -->
+    <section id="forecastView" class="screen hidden">
+        <div class="topbar">
+            <div class="brand"><span>☀️</span> SunDose</div>
+            <div class="mini-brand">توقعات UV</div>
+            <div class="streak-badge">🔥 <span id="streakCount8">0</span></div>
+        </div>
+        <div class="forecast-content">
+            <h2>📅 توقعات الـUV للأيام القادمة</h2>
+            <div id="forecastList" class="forecast-list"></div>
+            <div id="forecastAdvice" class="forecast-advice"></div>
+            <button id="backFromForecast" class="secondary-btn">← رجوع</button>
+        </div>
+    </section>
+
+    <!-- HEALTH PORTAL -->
     <section id="healthPortal" class="screen hidden">
         <div class="topbar">
             <div class="brand"><span>☀️</span> SunDose</div>
