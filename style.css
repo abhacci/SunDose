@@ -3,31 +3,35 @@
    التصميم الرئيسي
 ========================================= */
 
-*{
-    box-sizing:border-box;
+* {
+    box-sizing: border-box;
 }
 
 html,
-body{
-    margin:0;
-    padding:0;
-    min-height:100%;
-    font-family:Arial,"Cairo",Tahoma,sans-serif;
-    background:#fff8e8;
-    color:#40382f;
+body {
+    margin: 0;
+    padding: 0;
+    min-height: 100%;
+    font-family: Arial, "Cairo", Tahoma, sans-serif;
+    background: #fff8e8;
+    color: #40382f;
 }
 
-body{
-    overflow-x:hidden;
+body {
+    overflow-x: hidden;
 }
 
 button,
-input{
-    font-family:inherit;
+input {
+    font-family: inherit;
 }
 
-button{
-    -webkit-tap-highlight-color:transparent;
+button {
+    -webkit-tap-highlight-color: transparent;
+}
+
+.hidden {
+    display: none !important;
 }
 
 
@@ -35,20 +39,16 @@ button{
    التطبيق
 ========================================= */
 
-.app{
-    width:100%;
-    min-height:100vh;
+.app {
+    width: 100%;
+    min-height: 100vh;
 }
 
-.screen{
-    width:min(100%,520px);
-    min-height:100vh;
-    margin:auto;
-    padding:22px 18px 35px;
-}
-
-.hidden{
-    display:none !important;
+.screen {
+    width: min(100%, 560px);
+    min-height: 100vh;
+    margin: auto;
+    padding: 20px 18px 42px;
 }
 
 
@@ -56,16 +56,12 @@ button{
    البراند
 ========================================= */
 
-.brand{
-    text-align:center;
-    color:#eda51a;
-    font-size:21px;
-    font-weight:900;
-    margin-bottom:20px;
-}
-
-.brand span{
-    font-size:22px;
+.brand {
+    text-align: center;
+    color: #dfa016;
+    font-size: 21px;
+    font-weight: 900;
+    margin-bottom: 18px;
 }
 
 
@@ -73,28 +69,28 @@ button{
    الصفحة الرئيسية
 ========================================= */
 
-.home-content{
-    min-height:calc(100vh - 90px);
-    display:flex;
-    flex-direction:column;
-    align-items:center;
-    justify-content:center;
-    text-align:center;
+.home-content {
+    min-height: calc(100vh - 90px);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
 }
 
-.home-content h1{
-    margin:8px 0 12px;
-    color:#e9a018;
-    font-size:38px;
-    line-height:1.3;
+.home-content h1 {
+    margin: 8px 0 12px;
+    color: #e9a018;
+    font-size: 38px;
+    line-height: 1.3;
 }
 
-.home-text{
-    max-width:440px;
-    margin:0 auto 28px;
-    font-size:18px;
-    line-height:2;
-    color:#74695d;
+.home-text {
+    max-width: 440px;
+    margin: 0 auto 28px;
+    font-size: 18px;
+    line-height: 2;
+    color: #74695d;
 }
 
 
@@ -102,21 +98,21 @@ button{
    سنا
 ========================================= */
 
-.sana-stage{
-    position:relative;
-    width:max-content;
-    margin:0 auto 15px;
-    z-index:2;
+.sana-stage {
+    position: relative;
+    width: max-content;
+    margin: 0 auto 8px;
+    z-index: 5;
 }
 
-.sana{
-    display:block;
-    width:180px;
-    height:180px;
-    object-fit:contain;
+.sana {
+    display: block;
+    width: 210px;
+    height: 210px;
+    object-fit: contain;
 
     filter:
-        drop-shadow(0 10px 16px #e9a91f25);
+        drop-shadow(0 12px 20px rgba(181, 126, 21, .16));
 
     transition:
         transform .45s ease,
@@ -124,55 +120,54 @@ button{
         opacity .35s ease;
 }
 
-.sana.small{
-    width:155px;
-    height:155px;
+.sana.small {
+    width: 190px;
+    height: 190px;
 }
 
-.sana-stage.premium .sana{
-    width:225px;
-    height:225px;
+.sana-stage.premium .sana {
+    width: 230px;
+    height: 230px;
 }
 
 
 /* =========================================
-   حركة سنا الأساسية
+   حركة سنا
 ========================================= */
 
-.sana-character{
+.sana-character {
     animation:
-        sanaFloat 3.5s ease-in-out infinite;
-
-    transform-origin:center bottom;
+        sanaFloat 3.6s ease-in-out infinite;
+    transform-origin: center bottom;
 }
 
-@keyframes sanaFloat{
+@keyframes sanaFloat {
 
-    0%{
+    0% {
         transform:
             translateY(0)
             rotate(0deg);
     }
 
-    25%{
+    25% {
         transform:
             translateY(-5px)
             rotate(-1deg);
     }
 
-    50%{
+    50% {
         transform:
-            translateY(-9px)
+            translateY(-11px)
             rotate(1deg);
     }
 
-    75%{
+    75% {
         transform:
             translateY(-5px)
             rotate(-1deg);
     }
 
-    100%{
+    100% {
         transform:
             translateY(0)
             rotate(0deg);
@@ -181,74 +176,37 @@ button{
 
 
 /* =========================================
-   انتقال تغيير صورة سنا
+   تغيير الصورة
 ========================================= */
 
-.sana-changing{
+.sana-changing {
     animation:
         sanaChange .55s ease;
 }
 
-@keyframes sanaChange{
+@keyframes sanaChange {
 
-    0%{
-        opacity:.25;
+    0% {
+        opacity: .25;
         transform:
-            scale(.92)
-            translateY(10px)
+            scale(.90)
+            translateY(12px)
             rotate(-3deg);
     }
 
-    45%{
-        opacity:.7;
+    45% {
+        opacity: .75;
         transform:
             scale(1.04)
-            translateY(-5px)
+            translateY(-6px)
             rotate(2deg);
     }
 
-    100%{
-        opacity:1;
+    100% {
+        opacity: 1;
         transform:
             scale(1)
             translateY(0)
-            rotate(0);
-    }
-}
-
-
-/* =========================================
-   دخول سنا
-========================================= */
-
-.sana-enter{
-    animation:
-        sanaEnter .8s cubic-bezier(.2,.8,.2,1);
-}
-
-@keyframes sanaEnter{
-
-    0%{
-        opacity:0;
-        transform:
-            translateY(45px)
-            scale(.82)
-            rotate(-7deg);
-    }
-
-    55%{
-        opacity:1;
-        transform:
-            translateY(-8px)
-            scale(1.04)
-            rotate(3deg);
-    }
-
-    100%{
-        opacity:1;
-        transform:
-            translateY(0)
-            scale(1)
             rotate(0);
     }
 }
@@ -258,80 +216,137 @@ button{
    رد فعل سنا
 ========================================= */
 
-.sana-reaction{
-    position:absolute;
-    top:2px;
-    left:-18px;
+.sana-reaction {
+    position: absolute;
+    top: 5px;
+    left: -22px;
 
-    width:42px;
-    height:42px;
+    width: 44px;
+    height: 44px;
 
-    display:grid;
-    place-items:center;
+    display: grid;
+    place-items: center;
 
-    background:#fff;
-    border-radius:50%;
+    background: rgba(255,255,255,.96);
+
+    border: 1px solid #f0dfb9;
+
+    border-radius: 50%;
 
     box-shadow:
-        0 6px 18px #70501a18;
+        0 7px 20px rgba(112,80,26,.12);
 
-    font-size:22px;
+    font-size: 21px;
 
     animation:
         reactionFloat 2.4s ease-in-out infinite;
 }
 
-@keyframes reactionFloat{
+@keyframes reactionFloat {
 
-    0%,100%{
+    0%,
+    100% {
         transform:
             translateY(0)
             rotate(-4deg);
     }
 
-    50%{
+    50% {
         transform:
-            translateY(-6px)
+            translateY(-7px)
             rotate(4deg);
     }
 }
 
 
 /* =========================================
-   حالات سنا
+   فقاعة كلام سنا
 ========================================= */
 
-.sana.happy{
-    transform:
-        translateY(-4px)
-        rotate(-2deg)
-        scale(1.02);
+.sana-message {
+    position: relative;
+
+    width: 100%;
+
+    background: rgba(255,255,255,.97);
+
+    border-radius: 26px;
+
+    padding: 20px 18px 19px;
+
+    text-align: right;
+
+    box-shadow:
+        0 12px 34px rgba(96,74,32,.09);
+
+    border: 1px solid rgba(255,255,255,.95);
+
+    animation:
+        messageBoxIn .45s ease;
 }
 
-.sana.excited{
-    transform:
-        translateY(-6px)
-        rotate(3deg)
-        scale(1.04);
+.sana-message::before {
+    content: "";
 
-    filter:
-        drop-shadow(0 12px 18px #f1ae2440);
+    position: absolute;
+
+    top: -13px;
+
+    right: 50%;
+
+    width: 25px;
+    height: 25px;
+
+    background: #fff;
+
+    transform:
+        translateX(50%)
+        rotate(45deg);
+
+    border-radius: 4px;
+
+    z-index: -1;
 }
 
-.sana.thinking{
-    transform:
-        rotate(-2deg);
+.sana-message strong {
+    display: block;
+
+    color: #dfa016;
+
+    font-size: 16px;
+    font-weight: 900;
+
+    margin-bottom: 7px;
 }
 
-.sana.warm{
-    transform:
-        scale(1.02);
+.dialogue {
+    min-height: 58px;
+
+    margin: 0;
+
+    font-size: 20px;
+    line-height: 1.95;
+
+    color: #51483e;
+
+    white-space: pre-line;
 }
 
-.sana.care{
-    transform:
-        translateY(2px)
-        scale(.98);
+@keyframes messageBoxIn {
+
+    from {
+        opacity: 0;
+        transform:
+            translateY(14px)
+            scale(.98);
+    }
+
+    to {
+        opacity: 1;
+        transform:
+            translateY(0)
+            scale(1);
+    }
 }
 
 
@@ -339,11 +354,13 @@ button{
    الأزرار
 ========================================= */
 
-.primary-btn{
-    width:100%;
-    border:0;
-    border-radius:18px;
-    padding:16px 18px;
+.primary-btn {
+    width: 100%;
+
+    border: 0;
+    border-radius: 19px;
+
+    padding: 16px 18px;
 
     background:
         linear-gradient(
@@ -352,13 +369,15 @@ button{
             #f5a415
         );
 
-    color:#fff;
-    font-size:19px;
-    font-weight:900;
-    cursor:pointer;
+    color: #fff;
+
+    font-size: 18px;
+    font-weight: 900;
+
+    cursor: pointer;
 
     box-shadow:
-        0 10px 25px #f3a81730;
+        0 12px 27px rgba(243,168,23,.18);
 
     transition:
         transform .2s ease,
@@ -366,32 +385,40 @@ button{
         opacity .2s ease;
 }
 
-.primary-btn:hover{
-    transform:translateY(-2px);
+.primary-btn:hover {
+    transform: translateY(-2px);
 }
 
-.primary-btn:active{
-    transform:scale(.98);
+.primary-btn:active {
+    transform: scale(.98);
 }
 
-.primary-btn:disabled{
-    opacity:.65;
-    cursor:default;
+.primary-btn:disabled {
+    opacity: .65;
+    cursor: default;
 }
 
-.secondary-btn{
-    width:100%;
-    border:1px solid #eadfc9;
-    border-radius:16px;
-    padding:14px;
+.secondary-btn {
+    width: 100%;
 
-    background:#fff;
-    color:#776b5c;
+    border: 1px solid #eadfc9;
 
-    font-size:16px;
-    font-weight:800;
+    border-radius: 17px;
 
-    cursor:pointer;
+    padding: 14px;
+
+    background: #fff;
+
+    color: #776b5c;
+
+    font-size: 16px;
+    font-weight: 800;
+
+    cursor: pointer;
+}
+
+.next-btn {
+    margin-top: 15px;
 }
 
 
@@ -399,27 +426,32 @@ button{
    التقدم
 ========================================= */
 
-.progress{
-    height:8px;
-    background:#eee3cd;
-    border-radius:99px;
-    overflow:hidden;
-    margin:5px 0 25px;
+.progress {
+    height: 7px;
+
+    background: #eee3cd;
+
+    border-radius: 99px;
+
+    overflow: hidden;
+
+    margin: 4px 0 20px;
 }
 
-.progress span{
-    display:block;
-    width:0;
-    height:100%;
+.progress span {
+    display: block;
+
+    width: 0;
+    height: 100%;
 
     background:
         linear-gradient(
             90deg,
-            #ffd15a,
-            #ffad1f
+            #ffc331,
+            #f1a716
         );
 
-    border-radius:99px;
+    border-radius: 99px;
 
     transition:
         width .45s ease;
@@ -427,391 +459,366 @@ button{
 
 
 /* =========================================
-   المحادثة
+   الإجابة
 ========================================= */
 
-.conversation{
-    width:100%;
-    display:flex;
-    flex-direction:column;
-    align-items:center;
-}
+.answer-area {
+    width: 100%;
 
-
-/* =========================================
-   فقاعة سنا
-========================================= */
-
-.sana-message{
-    position:relative;
-
-    width:100%;
-
-    background:rgba(255,255,255,.97);
-
-    border-radius:24px;
-
-    padding:21px 19px;
-
-    text-align:right;
-
-    box-shadow:
-        0 10px 30px #604a2012;
-
-    border:1px solid #fff;
-
-    animation:
-        messageBoxIn .45s ease;
-}
-
-
-/* رأس الفقاعة ناحية سنا */
-
-.sana-message::before{
-    content:"";
-
-    position:absolute;
-
-    top:-12px;
-    right:50%;
-
-    width:23px;
-    height:23px;
-
-    background:#fff;
-
-    transform:
-        translateX(50%)
-        rotate(45deg);
-
-    border-radius:5px;
-
-    z-index:-1;
-}
-
-
-/* =========================================
-   دخول الفقاعة
-========================================= */
-
-@keyframes messageBoxIn{
-
-    from{
-        opacity:0;
-        transform:
-            translateY(12px)
-            scale(.98);
-    }
-
-    to{
-        opacity:1;
-        transform:
-            translateY(0)
-            scale(1);
-    }
-}
-
-.sana-message strong{
-    color:#dfa016;
-    font-size:16px;
-    font-weight:900;
-}
-
-.sana-message p{
-    margin:10px 0 0;
-}
-
-.message-name{
-    color:#dfa016;
-    font-size:16px;
-    font-weight:900;
-    margin-bottom:9px;
-}
-
-.dialogue{
-    min-height:66px;
-
-    font-size:20px;
-    line-height:2;
-
-    color:#51483e;
-
-    white-space:pre-line;
-}
-
-.next-btn{
-    margin-top:16px;
-}
-
-
-/* =========================================
-   منطقة الإجابة
-========================================= */
-
-.answer-area{
-    width:100%;
-    margin-top:17px;
+    margin-top: 16px;
 
     animation:
         answerIn .4s ease;
 }
 
-@keyframes answerIn{
+@keyframes answerIn {
 
-    from{
-        opacity:0;
-        transform:translateY(10px);
+    from {
+        opacity: 0;
+        transform: translateY(10px);
     }
 
-    to{
-        opacity:1;
-        transform:translateY(0);
+    to {
+        opacity: 1;
+        transform: translateY(0);
     }
 }
 
-.field{
-    width:100%;
+.field {
+    width: 100%;
 }
 
-.field label{
-    display:block;
-    margin-bottom:8px;
+.field label {
+    display: block;
 
-    font-size:17px;
-    font-weight:900;
+    margin-bottom: 8px;
+
+    font-size: 16px;
+    font-weight: 900;
 }
 
-input{
-    width:100%;
+input {
+    width: 100%;
 
-    border:1.5px solid #eadfc9;
+    border: 1.5px solid #eadfc9;
 
-    background:#fff;
+    background: #fff;
 
-    border-radius:16px;
+    border-radius: 17px;
 
-    padding:15px;
+    padding: 15px;
 
-    outline:none;
+    outline: none;
 
-    font-size:18px;
+    font-size: 18px;
 
-    color:#40382f;
+    color: #40382f;
 }
 
-input:focus{
-    border-color:#f6b328;
+input:focus {
+    border-color: #f6b328;
 
     box-shadow:
-        0 0 0 3px #f6b32815;
+        0 0 0 3px rgba(246,179,40,.10);
 }
 
-.unit{
-    margin-top:6px;
-    color:#938777;
-    font-size:13px;
+.unit {
+    margin-top: 6px;
+
+    color: #938777;
+
+    font-size: 13px;
 }
 
 
 /* =========================================
-   أزرار الجنس
+   الجنس
 ========================================= */
 
-.gender-grid{
-    width:100%;
+.gender-grid {
+    width: 100%;
 
-    display:grid;
+    display: grid;
 
-    grid-template-columns:1fr 1fr;
+    grid-template-columns: 1fr 1fr;
 
-    gap:10px;
+    gap: 11px;
 }
 
-.gender-btn{
-    border:1.5px solid #eadfc9;
+.gender-btn {
+    border: 1.5px solid #eadfc9;
 
-    background:#fff;
+    background: #fff;
 
-    border-radius:17px;
+    border-radius: 18px;
 
-    padding:17px 10px;
+    padding: 17px 10px;
 
-    font-size:18px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 6px;
 
-    font-weight:800;
+    font-size: 17px;
+    font-weight: 800;
 
-    color:#51483e;
+    color: #51483e;
 
-    cursor:pointer;
+    cursor: pointer;
 
-    transition:.2s ease;
+    transition: .2s ease;
 }
 
-.gender-btn:hover{
-    transform:translateY(-2px);
+.choice-icon {
+    font-size: 28px;
+
+    color: #d99c19;
 }
 
-.gender-btn.active{
-    border-color:#ffb323;
+.gender-btn:hover {
+    transform: translateY(-2px);
+}
 
-    background:#fff7db;
+.gender-btn.active {
+    border-color: #ffb323;
 
-    color:#c88708;
+    background: #fff7db;
+
+    color: #c88708;
 
     box-shadow:
-        0 7px 18px #f4b02118;
+        0 8px 20px rgba(244,176,33,.12);
 }
 
 
 /* =========================================
-   لون البشرة الحقيقي
+   درجات البشرة
 ========================================= */
 
-.skin-grid{
-    width:100%;
+.skin-grid {
+    width: 100%;
 
-    display:grid;
+    display: grid;
 
     grid-template-columns:
-        repeat(2,1fr);
+        repeat(2, 1fr);
 
-    gap:11px;
+    gap: 10px;
 }
 
-.skin-btn{
-    border:1.5px solid #eadfc9;
+.skin-btn {
+    border: 1.5px solid #eadfc9;
 
-    background:#fff;
+    background: #fff;
 
-    border-radius:18px;
+    border-radius: 19px;
 
-    padding:17px 10px;
+    padding: 15px 9px;
 
-    color:#4d443a;
+    display: flex;
+    align-items: center;
+    gap: 11px;
 
-    font-size:16px;
+    color: #4d443a;
 
-    font-weight:800;
+    font-size: 15px;
+    font-weight: 800;
 
-    cursor:pointer;
+    cursor: pointer;
 
-    display:flex;
-
-    align-items:center;
-
-    justify-content:center;
-
-    gap:10px;
-
-    transition:
-        transform .2s ease,
-        border-color .2s ease,
-        box-shadow .2s ease,
-        background .2s ease;
+    transition: .2s ease;
 }
 
-.skin-btn:hover{
-    transform:translateY(-2px);
+.skin-btn:hover {
+    transform: translateY(-2px);
 }
 
-.skin-btn.active{
-    border-color:#e8a116;
+.skin-swatch {
+    width: 43px;
+    height: 43px;
 
-    background:#fff9e8;
+    flex: 0 0 43px;
+
+    border-radius: 50%;
+
+    border: 4px solid rgba(255,255,255,.95);
 
     box-shadow:
-        0 7px 20px #f4b02120;
+        0 0 0 1px rgba(75,54,30,.12),
+        inset 0 1px 3px rgba(255,255,255,.3);
 }
 
-.skin-color{
-    width:34px;
-    height:34px;
+.skin-very-light {
+    background: #f7d8c4;
+}
 
-    flex:0 0 34px;
+.skin-light {
+    background: #eec2a5;
+}
 
-    border-radius:50%;
+.skin-medium {
+    background: #d99b72;
+}
 
-    border:2px solid rgba(64,56,47,.12);
+.skin-tan {
+    background: #b9764f;
+}
+
+.skin-dark {
+    background: #8a513b;
+}
+
+.skin-very-dark {
+    background: #56342c;
+}
+
+.skin-label {
+    line-height: 1.5;
+}
+
+.skin-btn.active {
+    border-color: #e9a31a;
+
+    background: #fff8e3;
 
     box-shadow:
-        inset 0 1px 2px #ffffff55,
-        0 2px 5px #604a2015;
-}
-
-.skin-label{
-    white-space:nowrap;
+        0 8px 20px rgba(244,176,33,.12);
 }
 
 
 /* =========================================
-   وقت الشمس
+   اختيار الوقت
 ========================================= */
 
-.time-grid{
-    width:100%;
+.time-grid {
+    width: 100%;
 
-    display:grid;
+    display: grid;
 
-    grid-template-columns:1fr 1fr;
+    grid-template-columns:
+        1fr 1fr;
 
-    gap:11px;
+    gap: 11px;
 }
 
-.time-btn{
-    min-height:125px;
+.time-btn {
+    min-height: 145px;
 
-    border:1.5px solid #eadfc9;
+    border: 1.5px solid #eadfc9;
 
-    background:#fff;
+    background: #fff;
 
-    border-radius:18px;
+    border-radius: 20px;
 
-    padding:15px 10px;
+    padding: 15px 10px;
 
-    cursor:pointer;
+    cursor: pointer;
 
-    color:#4c443a;
+    color: #4c443a;
 
-    font-size:31px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
 
-    font-weight:800;
+    gap: 7px;
 
-    transition:.2s ease;
-
-    display:flex;
-
-    flex-direction:column;
-
-    align-items:center;
-
-    justify-content:center;
-
-    gap:5px;
+    transition: .25s ease;
 }
 
-.time-btn span{
-    font-size:17px;
+.time-btn:hover {
+    transform: translateY(-3px);
 }
 
-.time-btn small{
-    font-size:12px;
-    color:#918576;
-    font-weight:600;
-}
+.time-btn.active {
+    border-color: #ffb323;
 
-.time-btn:hover{
-    transform:translateY(-2px);
-}
+    background: #fff8df;
 
-.time-btn.active{
-    border-color:#ffb323;
-
-    background:#fff7dc;
-
-    transform:translateY(-3px);
+    transform:
+        translateY(-4px);
 
     box-shadow:
-        0 7px 18px #f4b02118;
+        0 9px 22px rgba(244,176,33,.14);
+}
+
+.time-art {
+    position: relative;
+
+    width: 66px;
+    height: 66px;
+
+    border-radius: 50%;
+}
+
+.time-art::before {
+    content: "";
+
+    position: absolute;
+
+    width: 28px;
+    height: 28px;
+
+    border-radius: 50%;
+
+    left: 19px;
+    top: 19px;
+
+    background:
+        radial-gradient(
+            circle at 35% 30%,
+            #ffe98c,
+            #ffb313
+        );
+
+    box-shadow:
+        0 0 18px rgba(255,185,32,.32);
+}
+
+.morning-art {
+    background:
+        linear-gradient(
+            to top,
+            #f8dca2 0 30%,
+            #fff4cf 30% 100%
+        );
+}
+
+.midday-art {
+    background:
+        linear-gradient(
+            to top,
+            #d8edff 0 30%,
+            #fff8ce 30% 100%
+        );
+}
+
+.afternoon-art {
+    background:
+        linear-gradient(
+            to top,
+            #f6d8a0 0 30%,
+            #ffeac0 30% 100%
+        );
+}
+
+.evening-art {
+    background:
+        linear-gradient(
+            to top,
+            #dca46b 0 30%,
+            #f8c9a0 30% 100%
+        );
+}
+
+.time-title {
+    font-size: 17px;
+    font-weight: 900;
+}
+
+.time-btn small {
+    color: #978878;
+    font-size: 12px;
 }
 
 
@@ -819,29 +826,29 @@ input:focus{
    العادات
 ========================================= */
 
-.habit-list{
-    width:100%;
+.habit-list {
+    width: 100%;
 
-    display:grid;
+    display: grid;
 
-    gap:12px;
+    gap: 12px;
 
-    margin-top:18px;
+    margin-top: 18px;
 }
 
-.habit{
-    background:#fff;
+.habit {
+    background: #fff;
 
-    border:1px solid #eadfc9;
+    border: 1px solid #eadfc9;
 
-    border-radius:20px;
+    border-radius: 21px;
 
-    padding:18px;
+    padding: 18px;
 
-    cursor:pointer;
+    cursor: pointer;
 
     box-shadow:
-        0 6px 20px #604a200b;
+        0 7px 22px rgba(96,74,32,.06);
 
     transition:
         transform .2s ease,
@@ -849,280 +856,415 @@ input:focus{
         border-color .2s ease;
 }
 
-.habit:hover{
-    transform:translateY(-3px);
+.habit:hover {
+    transform: translateY(-3px);
 
     box-shadow:
-        0 10px 25px #604a2015;
+        0 11px 27px rgba(96,74,32,.10);
 }
 
-.habit.active{
-    border-color:#ffb323;
-    background:#fffaf0;
+.habit.active {
+    border-color: #ffb323;
+
+    background: #fffaf0;
 }
 
-.habit .icon{
-    font-size:30px;
-    margin-bottom:6px;
+.habit .icon {
+    font-size: 30px;
+
+    color: #e5a018;
+
+    margin-bottom: 7px;
 }
 
-.habit b{
-    font-size:19px;
+.habit b {
+    font-size: 18px;
 }
 
-.habit p{
-    margin:6px 0 0;
+.habit p {
+    margin: 6px 0 0;
 
-    color:#74695d;
+    color: #74695d;
 
-    font-size:15px;
+    font-size: 14px;
 
-    line-height:1.8;
+    line-height: 1.8;
 }
 
 
 /* =========================================
-   مرحلة جرعة الشمس
+   مشهد الشمس
 ========================================= */
 
-.sun-scene{
-    position:relative;
+.sun-scene {
+    position: relative;
 
-    width:100%;
+    width: 100%;
 
-    height:180px;
+    height: 285px;
 
-    margin-top:20px;
+    overflow: hidden;
 
-    border-radius:26px;
+    border-radius: 30px;
 
-    overflow:hidden;
+    margin-top: 22px;
+
+    border: 1px solid rgba(205,170,83,.28);
 
     background:
         linear-gradient(
             180deg,
-            #fff3bc 0%,
-            #fff8e8 65%,
-            #e9f0d5 100%
+            #fff4c5 0%,
+            #fff9e6 48%,
+            #eef4dc 100%
         );
 
-    border:1px solid #eadfc9;
-
     box-shadow:
-        0 10px 30px #604a2010;
+        inset 0 0 70px rgba(255,255,255,.65),
+        0 12px 30px rgba(110,80,20,.08);
+
+    isolation: isolate;
 }
 
+.sun-scene::before {
+    content: "";
 
-/* الشمس نفسها */
+    position: absolute;
 
-.sun-visual{
-    position:absolute;
+    left: -15%;
+    right: -15%;
+    bottom: -35px;
 
-    width:74px;
-    height:74px;
+    height: 100px;
 
-    border-radius:50%;
+    border-radius: 50% 50% 0 0;
+
+    background:
+        linear-gradient(
+            180deg,
+            rgba(188,210,158,.18),
+            rgba(180,205,146,.32)
+        );
+
+    z-index: 0;
+}
+
+.sun-glow {
+    position: absolute;
+
+    width: 230px;
+    height: 230px;
+
+    border-radius: 50%;
+
+    left: 50%;
+    top: 50%;
+
+    transform:
+        translate(-50%, -50%);
 
     background:
         radial-gradient(
             circle,
+            rgba(255,196,35,.34) 0%,
+            rgba(255,207,69,.17) 32%,
+            rgba(255,214,100,.06) 56%,
+            transparent 72%
+        );
+
+    filter: blur(4px);
+
+    animation:
+        glowBreath 3s ease-in-out infinite;
+
+    z-index: 1;
+}
+
+@keyframes glowBreath {
+
+    0%,
+    100% {
+        transform:
+            translate(-50%, -50%)
+            scale(.95);
+        opacity: .75;
+    }
+
+    50% {
+        transform:
+            translate(-50%, -50%)
+            scale(1.08);
+        opacity: 1;
+    }
+}
+
+.sun-orb {
+    position: absolute;
+
+    width: 112px;
+    height: 112px;
+
+    border-radius: 50%;
+
+    left: 50%;
+    top: 50%;
+
+    transform:
+        translate(-50%, -50%);
+
+    background:
+        radial-gradient(
+            circle at 34% 30%,
             #fff3a1 0%,
-            #ffd03b 45%,
-            #ffad18 100%
+            #ffd447 27%,
+            #ffb00b 70%,
+            #ed9500 100%
         );
 
     box-shadow:
-        0 0 0 10px #ffd84b25,
-        0 0 40px #ffc42e80;
+        0 0 35px rgba(255,183,19,.40),
+        inset -8px -8px 18px rgba(214,128,0,.12);
 
-    top:25px;
-    left:50%;
+    z-index: 3;
 
-    transform:
-        translateX(-50%)
-        scale(.2);
-
-    opacity:0;
-
-    transition:
-        top .7s ease,
-        transform .7s ease,
-        opacity .7s ease;
+    animation:
+        sunFloat 4s ease-in-out infinite;
 }
 
+@keyframes sunFloat {
 
-/* أشعة الشمس */
+    0%,
+    100% {
+        transform:
+            translate(-50%, -50%)
+            scale(1);
+    }
 
-.sun-visual::before{
-    content:"";
+    50% {
+        transform:
+            translate(-50%, -53%)
+            scale(1.045);
+    }
+}
 
-    position:absolute;
+.sun-rays {
+    position: absolute;
 
-    inset:-17px;
+    width: 175px;
+    height: 175px;
 
-    border-radius:50%;
+    left: 50%;
+    top: 50%;
+
+    transform:
+        translate(-50%, -50%);
+
+    border-radius: 50%;
+
+    z-index: 2;
+
+    animation:
+        raysRotate 20s linear infinite;
+}
+
+.sun-rays::before,
+.sun-rays::after {
+    content: "";
+
+    position: absolute;
+
+    inset: 0;
+
+    border-radius: 50%;
 
     background:
         repeating-conic-gradient(
             from 0deg,
-            #ffc12d 0deg 5deg,
-            transparent 5deg 25deg
+            rgba(255,190,28,.55) 0deg 3deg,
+            transparent 3deg 15deg
         );
 
-    opacity:.45;
-
-    animation:
-        raysRotate 12s linear infinite;
-}
-
-@keyframes raysRotate{
-
-    to{
-        transform:rotate(360deg);
-    }
-}
-
-
-/* ظهور الشمس */
-
-.sun-visual.sun-reveal{
-    opacity:1;
-
-    transform:
-        translateX(-50%)
-        scale(1);
-}
-
-
-/* الشمس حسب الوقت */
-
-.sun-morning{
-    top:62px;
-}
-
-.sun-midday{
-    top:20px;
-}
-
-.sun-afternoon{
-    top:48px;
-}
-
-.sun-evening{
-    top:72px;
-
-    background:
+    -webkit-mask:
         radial-gradient(
             circle,
-            #ffe59c 0%,
-            #ffbd45 48%,
-            #ef8734 100%
+            transparent 0 57%,
+            #000 58% 64%,
+            transparent 65%
         );
+
+    mask:
+        radial-gradient(
+            circle,
+            transparent 0 57%,
+            #000 58% 64%,
+            transparent 65%
+        );
+}
+
+.sun-rays::after {
+    transform: rotate(7deg);
+
+    opacity: .55;
+}
+
+@keyframes raysRotate {
+
+    to {
+        transform:
+            translate(-50%, -50%)
+            rotate(360deg);
+    }
 }
 
 
 /* =========================================
-   معلومات الجرعة
+   أوضاع الشمس حسب الوقت
 ========================================= */
 
-.sun-info-grid{
-    width:100%;
-
-    display:grid;
-
-    grid-template-columns:1fr 1fr;
-
-    gap:11px;
-
-    margin-top:16px;
+.scene-morning {
+    background:
+        linear-gradient(
+            180deg,
+            #ffe9bd 0%,
+            #fff4d7 48%,
+            #e9efd9 100%
+        );
 }
 
-.sun-info-card{
-    background:#fff;
+.scene-morning .sun-orb {
+    top: 62%;
+    transform:
+        translate(-50%, -50%)
+        scale(.88);
+}
 
-    border:1px solid #eadfc9;
+.scene-morning .sun-glow {
+    top: 62%;
+    transform:
+        translate(-50%, -50%)
+        scale(.95);
+}
 
-    border-radius:19px;
+.scene-midday {
+    background:
+        linear-gradient(
+            180deg,
+            #bfe5ff 0%,
+            #eaf6ff 48%,
+            #edf2d9 100%
+        );
+}
 
-    padding:15px;
+.scene-midday .sun-orb {
+    top: 35%;
+    transform:
+        translate(-50%, -50%)
+        scale(1.08);
+}
 
-    display:flex;
+.scene-midday .sun-glow {
+    top: 35%;
+    transform:
+        translate(-50%, -50%)
+        scale(1.12);
+}
 
-    align-items:center;
+.scene-afternoon {
+    background:
+        linear-gradient(
+            180deg,
+            #d5e9f7 0%,
+            #fff0ca 52%,
+            #e9efd8 100%
+        );
+}
 
-    gap:11px;
+.scene-afternoon .sun-orb {
+    top: 47%;
+    left: 64%;
+    transform:
+        translate(-50%, -50%)
+        scale(1);
+}
+
+.scene-afternoon .sun-glow {
+    top: 47%;
+    left: 64%;
+}
+
+.scene-evening {
+    background:
+        linear-gradient(
+            180deg,
+            #f2c29e 0%,
+            #f8d6a9 43%,
+            #d6dcbf 100%
+        );
+}
+
+.scene-evening .sun-orb {
+    top: 65%;
+    left: 72%;
+    transform:
+        translate(-50%, -50%)
+        scale(.82);
+}
+
+.scene-evening .sun-glow {
+    top: 65%;
+    left: 72%;
+    transform:
+        translate(-50%, -50%)
+        scale(.90);
+}
+
+
+/* =========================================
+   كارت البيانات
+========================================= */
+
+.dose-data {
+    margin-top: 14px;
+
+    display: grid;
+
+    grid-template-columns:
+        repeat(3, 1fr);
+
+    gap: 9px;
+}
+
+.dose-data-card {
+    background: rgba(255,255,255,.94);
+
+    border: 1px solid #eadfc9;
+
+    border-radius: 17px;
+
+    padding: 13px 8px;
+
+    text-align: center;
 
     box-shadow:
-        0 6px 20px #604a200b;
-
-    animation:
-        infoCardIn .55s ease both;
+        0 6px 20px rgba(96,74,32,.05);
 }
 
-.sun-info-card:nth-child(2){
-    animation-delay:.1s;
+.dose-data-card small {
+    display: block;
+
+    color: #958878;
+
+    font-size: 11px;
+
+    margin-bottom: 6px;
 }
 
-@keyframes infoCardIn{
+.dose-data-card strong {
+    display: block;
 
-    from{
-        opacity:0;
-        transform:translateY(10px);
-    }
+    color: #4e4439;
 
-    to{
-        opacity:1;
-        transform:translateY(0);
-    }
-}
-
-.info-skin{
-    width:38px;
-    height:38px;
-
-    border-radius:50%;
-
-    flex:0 0 38px;
-
-    border:2px solid #ffffff;
-
-    box-shadow:
-        0 2px 7px #604a2020;
-}
-
-.info-time{
-    width:38px;
-    height:38px;
-
-    display:grid;
-
-    place-items:center;
-
-    border-radius:12px;
-
-    background:#fff5d5;
-
-    font-size:22px;
-
-    flex:0 0 38px;
-}
-
-.sun-info-card small{
-    display:block;
-
-    color:#958777;
-
-    font-size:12px;
-
-    margin-bottom:3px;
-}
-
-.sun-info-card strong{
-    display:block;
-
-    color:#5b4d3e;
-
-    font-size:16px;
+    font-size: 14px;
 }
 
 
@@ -1130,38 +1272,38 @@ input:focus{
    كارت جرعة الشمس
 ========================================= */
 
-.dose-card{
-    margin-top:18px;
+.dose-card {
+    margin-top: 15px;
 
-    background:#fff;
+    background: #fff;
 
-    border:1px solid #eadfc9;
+    border: 1px solid #eadfc9;
 
-    border-radius:23px;
+    border-radius: 25px;
 
-    padding:24px 18px;
+    padding: 24px 18px;
 
-    text-align:center;
+    text-align: center;
 
     box-shadow:
-        0 8px 28px #604a2010;
+        0 10px 30px rgba(96,74,32,.08);
 
     animation:
         doseIn .55s ease;
 }
 
-@keyframes doseIn{
+@keyframes doseIn {
 
-    from{
-        opacity:0;
+    from {
+        opacity: 0;
 
         transform:
             translateY(18px)
             scale(.96);
     }
 
-    to{
-        opacity:1;
+    to {
+        opacity: 1;
 
         transform:
             translateY(0)
@@ -1169,156 +1311,63 @@ input:focus{
     }
 }
 
-.dose-icon{
-    font-size:55px;
+.dose-icon {
+    font-size: 54px;
+
+    color: #f0a30f;
 
     animation:
-        sunPulse 2.2s ease-in-out infinite;
+        doseIconPulse 2.4s ease-in-out infinite;
 }
 
-@keyframes sunPulse{
+@keyframes doseIconPulse {
 
-    0%,100%{
+    0%,
+    100% {
         transform:
             scale(1)
             rotate(0);
     }
 
-    50%{
+    50% {
         transform:
-            scale(1.1)
+            scale(1.10)
             rotate(5deg);
     }
 }
 
-.dose-card h2{
-    margin:8px 0;
+.dose-card h2 {
+    margin: 8px 0;
 
-    color:#e9a018;
+    color: #e4a018;
+
+    font-size: 28px;
 }
 
-.dose-card p{
-    margin:0;
+.dose-card p {
+    margin: 0;
 
-    color:#74695d;
+    color: #74695d;
 
-    line-height:1.9;
+    line-height: 1.95;
 
-    font-size:16px;
+    font-size: 16px;
 }
 
+.dose-status {
+    margin-top: 15px;
 
-/* =========================================
-   كروت التحليل
-========================================= */
+    padding: 12px;
 
-.analysis-cards{
-    width:100%;
+    border-radius: 14px;
 
-    display:grid;
+    background: #fff8e6;
 
-    gap:11px;
+    color: #bd7d05;
 
-    margin-top:16px;
-}
+    font-size: 13px;
 
-.analysis-card{
-    background:#fff;
-
-    border:1px solid #eadfc9;
-
-    border-radius:20px;
-
-    padding:17px;
-
-    box-shadow:
-        0 6px 20px #604a200b;
-}
-
-.analysis-card .card-icon{
-    font-size:28px;
-}
-
-.analysis-card h3{
-    margin:6px 0 6px;
-
-    font-size:18px;
-}
-
-.analysis-card p{
-    margin:0;
-
-    color:#74695d;
-
-    font-size:14px;
-
-    line-height:1.8;
-}
-
-.analysis-card .value{
-    margin-top:10px;
-
-    padding:10px;
-
-    border-radius:13px;
-
-    background:#fff8e7;
-
-    color:#bd7d05;
-
-    font-weight:900;
-}
-
-
-/* =========================================
-   الملاحظة الأخيرة
-========================================= */
-
-.final-note{
-    width:100%;
-
-    margin-top:14px;
-
-    background:#fff;
-
-    border-radius:18px;
-
-    padding:15px;
-
-    text-align:center;
-
-    color:#74695d;
-
-    line-height:1.8;
-
-    border:1px solid #eadfc9;
-}
-
-.final-note span{
-    font-size:20px;
-}
-
-
-/* =========================================
-   حركة ظهور النص
-========================================= */
-
-.message.appear{
-    animation:
-        messageAppear .35s ease;
-}
-
-@keyframes messageAppear{
-
-    from{
-        opacity:0;
-        transform:translateY(8px);
-    }
-
-    to{
-        opacity:1;
-        transform:translateY(0);
-    }
+    font-weight: 800;
 }
 
 
@@ -1326,49 +1375,41 @@ input:focus{
    الموبايل
 ========================================= */
 
-@media(max-width:380px){
+@media (max-width: 380px) {
 
-    .screen{
-        padding-left:14px;
-        padding-right:14px;
+    .screen {
+        padding-left: 14px;
+        padding-right: 14px;
     }
 
-    .home-content h1{
-        font-size:32px;
+    .sana {
+        width: 195px;
+        height: 195px;
     }
 
-    .home-text{
-        font-size:16px;
+    .sana.small {
+        width: 175px;
+        height: 175px;
     }
 
-    .sana{
-        width:165px;
-        height:165px;
+    .sana-stage.premium .sana {
+        width: 215px;
+        height: 215px;
     }
 
-    .sana.small{
-        width:140px;
-        height:140px;
+    .dialogue {
+        font-size: 18px;
     }
 
-    .sana-stage.premium .sana{
-        width:205px;
-        height:205px;
+    .sun-scene {
+        height: 255px;
     }
 
-    .dialogue{
-        font-size:18px;
+    .dose-data {
+        grid-template-columns: 1fr;
     }
 
-    .skin-grid{
-        grid-template-columns:1fr 1fr;
+    .skin-grid {
+        grid-template-columns: 1fr 1fr;
     }
-
-    .sun-info-grid{
-        grid-template-columns:1fr;
-    }
-
-    .sun-scene{
-        height:165px;
-    }
-       }
+}
