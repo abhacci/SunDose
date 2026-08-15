@@ -1,13 +1,9 @@
 /* =========================================
    SunDose ☀️
    app.js
-   النسخة القديمة + صور وحركة سنا
+   النسخة الكاملة + حركة سنا
 ========================================= */
 
-
-/* =========================================
-   بيانات المستخدم
-========================================= */
 
 const user = {
 
@@ -78,24 +74,23 @@ const backToHabits =
 
 
 /* =========================================
-   سنا - صور الترحيب
+   صور سنا
 ========================================= */
 
-const sanaWelcome =
-    document.getElementById("sanaWelcome");
+const sanaImage =
+    document.getElementById("sanaImage");
 
+const questionSana =
+    document.getElementById("questionSana");
 
-const sanaWelcomeImages = [
+const habitSana =
+    document.getElementById("habitSana");
 
-    "assets/sana_welcome_01.png",
-    "assets/sana_welcome_02.png"
+const sunSana =
+    document.getElementById("sunSana");
 
-];
-
-
-let sanaImageIndex = 0;
-
-let sanaSpeakingTimer = null;
+const sanaReaction =
+    document.getElementById("sanaReaction");
 
 
 /* =========================================
@@ -114,17 +109,69 @@ let waitingForContinue = false;
 
 
 /* =========================================
+   تغيير صورة سنا
+========================================= */
+
+function changeSanaImage(
+    element,
+    image,
+    reaction = ""
+){
+
+    if (!element) return;
+
+
+    element.classList.remove(
+        "sana-changing"
+    );
+
+
+    void element.offsetWidth;
+
+
+    element.classList.add(
+        "sana-changing"
+    );
+
+
+    element.src = image;
+
+
+    if (sanaReaction) {
+
+        if (reaction) {
+
+            sanaReaction.textContent =
+                reaction;
+
+            sanaReaction.classList.remove(
+                "hidden"
+            );
+
+        } else {
+
+            sanaReaction.classList.add(
+                "hidden"
+            );
+
+        }
+
+    }
+
+}
+
+
+/* =========================================
    إظهار صفحة واحدة فقط
 ========================================= */
 
-function showPage(page) {
+function showPage(page){
 
     [
         home,
         welcome,
         habits,
         sunDose
-
     ].forEach(section => {
 
         if (section) {
@@ -159,134 +206,6 @@ function showPage(page) {
 
 
 /* =========================================
-   بدء حركة سنا أثناء الكلام
-========================================= */
-
-function startSanaSpeaking() {
-
-    if (!sanaWelcome) {
-
-        return;
-
-    }
-
-
-    stopSanaSpeaking();
-
-
-    sanaWelcome.classList.remove(
-        "sana-idle"
-    );
-
-
-    sanaWelcome.classList.add(
-        "sana-speaking"
-    );
-
-
-    sanaSpeakingTimer =
-        setInterval(function () {
-
-            sanaImageIndex =
-                sanaImageIndex === 0
-                    ? 1
-                    : 0;
-
-
-            sanaWelcome.classList.remove(
-                "sana-frame-change"
-            );
-
-
-            /*
-             إعادة تشغيل animation
-             بدون إعادة تحميل الصفحة
-            */
-
-            void sanaWelcome.offsetWidth;
-
-
-            sanaWelcome.src =
-                sanaWelcomeImages[
-                    sanaImageIndex
-                ];
-
-
-            sanaWelcome.classList.add(
-                "sana-frame-change"
-            );
-
-
-        }, 950);
-
-}
-
-
-/* =========================================
-   إيقاف حركة سنا
-========================================= */
-
-function stopSanaSpeaking() {
-
-    if (sanaSpeakingTimer) {
-
-        clearInterval(
-            sanaSpeakingTimer
-        );
-
-        sanaSpeakingTimer = null;
-
-    }
-
-
-    if (sanaWelcome) {
-
-        sanaWelcome.classList.remove(
-            "sana-speaking"
-        );
-
-        sanaWelcome.classList.add(
-            "sana-idle"
-        );
-
-    }
-
-}
-
-
-/* =========================================
-   سنا تتكلم
-========================================= */
-
-function sanaTalks() {
-
-    startSanaSpeaking();
-
-}
-
-
-/* =========================================
-   سنا تسكت
-========================================= */
-
-function sanaStopsTalking() {
-
-    stopSanaSpeaking();
-
-
-    if (sanaWelcome) {
-
-        sanaImageIndex = 0;
-
-        sanaWelcome.src =
-            sanaWelcomeImages[0];
-
-    }
-
-}
-
-
-/* =========================================
    كتابة سنا ببطء
 ========================================= */
 
@@ -295,13 +214,9 @@ function typeSanaText(
     element,
     speed = 55,
     callback = null
-) {
+){
 
-    if (!element) {
-
-        return;
-
-    }
+    if (!element) return;
 
 
     if (typingTimer) {
@@ -317,86 +232,55 @@ function typeSanaText(
 
     isTyping = true;
 
-
     element.textContent = "";
-
-
-    /*
-       لو النص هو نص الترحيب،
-       نخلي سنا تتحرك وتبدل الصور.
-    */
-
-    if (element === introText) {
-
-        sanaTalks();
-
-    }
 
 
     let index = 0;
 
 
-    typingTimer =
-        setInterval(function () {
+    typingTimer = setInterval(() => {
 
-            element.textContent +=
-                text.charAt(index);
-
-
-            index++;
+        element.textContent +=
+            text.charAt(index);
 
 
-            if (
-                index >= text.length
-            ) {
-
-                clearInterval(
-                    typingTimer
-                );
-
-                typingTimer = null;
-
-                isTyping = false;
+        index++;
 
 
-                /*
-                   بعد انتهاء كلام الترحيب
-                   سنا تهدأ.
-                */
+        if (index >= text.length){
 
-                if (
-                    element === introText
-                ) {
+            clearInterval(
+                typingTimer
+            );
 
-                    sanaStopsTalking();
+            typingTimer = null;
 
-                }
+            isTyping = false;
 
 
-                if (callback) {
+            if (callback){
 
-                    callback();
-
-                }
+                callback();
 
             }
 
-        }, speed);
+        }
+
+    }, speed);
 
 }
 
 
 /* =========================================
-   لو المستخدم ضغط أثناء الكتابة
-   نكمّل الكتابة فورًا
+   إنهاء الكتابة فورًا
 ========================================= */
 
-function finishTypingImmediately() {
+function finishTypingImmediately(){
 
     if (
         !isTyping ||
         !typingTimer
-    ) {
+    ){
 
         return false;
 
@@ -410,20 +294,6 @@ function finishTypingImmediately() {
     typingTimer = null;
 
     isTyping = false;
-
-
-    /*
-       لو كان الكلام هو الترحيب،
-       نوقف حركة سنا.
-    */
-
-    if (
-        introText
-    ) {
-
-        sanaStopsTalking();
-
-    }
 
 
     return true;
@@ -453,15 +323,87 @@ const introMessages = [
 
 
 /* =========================================
-   عرض مقدمة سنا
+   حركة الترحيب
 ========================================= */
 
-function renderIntro() {
+function setIntroSana(){
+
+    if (!sanaImage) return;
+
+
+    if (introStep === 0){
+
+        changeSanaImage(
+            sanaImage,
+            "assets/sana_welcome_01.png",
+            "✨"
+        );
+
+    }
+
+    else if (introStep === 1){
+
+        changeSanaImage(
+            sanaImage,
+            "assets/sana_welcome_02.png",
+            "👋"
+        );
+
+    }
+
+    else if (introStep === 2){
+
+        changeSanaImage(
+            sanaImage,
+            "assets/sana_curious.png",
+            "👀"
+        );
+
+    }
+
+    else if (introStep === 3){
+
+        changeSanaImage(
+            sanaImage,
+            "assets/sana_happy.png",
+            "💛"
+        );
+
+    }
+
+    else if (introStep === 4){
+
+        changeSanaImage(
+            sanaImage,
+            "assets/sana_calm.png",
+            "🌱"
+        );
+
+    }
+
+    else {
+
+        changeSanaImage(
+            sanaImage,
+            "assets/sana_excited.png",
+            "☀️"
+        );
+
+    }
+
+}
+
+
+/* =========================================
+   عرض المقدمة
+========================================= */
+
+function renderIntro(){
 
     if (
         !introText ||
         !introNext
-    ) {
+    ){
 
         return;
 
@@ -469,6 +411,9 @@ function renderIntro() {
 
 
     introNext.disabled = true;
+
+
+    setIntroSana();
 
 
     typeSanaText(
@@ -479,23 +424,22 @@ function renderIntro() {
 
         55,
 
-        function () {
+        function(){
 
-            introNext.disabled =
-                false;
+            introNext.disabled = false;
 
 
             if (
                 introStep ===
                 introMessages.length - 1
-            ) {
+            ){
 
                 introNext.textContent =
                     "نبدأ التعارف ☀️";
 
             }
 
-            else {
+            else{
 
                 introNext.textContent =
                     "متابعة";
@@ -516,24 +460,18 @@ function renderIntro() {
 if (
     introText &&
     introNext
-) {
+){
 
     renderIntro();
 
 
     introNext.addEventListener(
         "click",
-        function () {
-
-
-            /*
-               لو سنا لسه بتكتب،
-               أول ضغطة تكمّل الكلام.
-            */
+        function(){
 
             if (
                 finishTypingImmediately()
-            ) {
+            ){
 
                 introText.textContent =
                     introMessages[introStep];
@@ -546,14 +484,14 @@ if (
                 if (
                     introStep ===
                     introMessages.length - 1
-                ) {
+                ){
 
                     introNext.textContent =
                         "نبدأ التعارف ☀️";
 
                 }
 
-                else {
+                else{
 
                     introNext.textContent =
                         "متابعة";
@@ -566,14 +504,10 @@ if (
             }
 
 
-            /*
-               الانتقال بين رسائل الترحيب
-            */
-
             if (
                 introStep <
                 introMessages.length - 1
-            ) {
+            ){
 
                 introStep++;
 
@@ -581,20 +515,31 @@ if (
 
             }
 
-            else {
+            else{
 
                 introNext.classList.add(
                     "hidden"
                 );
 
 
-                if (startButton) {
+                if (startButton){
 
                     startButton.classList.remove(
                         "hidden"
                     );
 
                 }
+
+
+                changeSanaImage(
+
+                    sanaImage,
+
+                    "assets/sana_welcome_02.png",
+
+                    "☀️"
+
+                );
 
             }
 
@@ -611,14 +556,14 @@ if (
 const steps = [
 
     {
-        key: "name",
+        key:"name",
 
         question:
             "أول حاجة بقى... اسمك إيه؟ 😊",
 
-        type: "text",
+        type:"text",
 
-        label: "اسمك",
+        label:"اسمك",
 
         placeholder:
             "اكتب اسمك هنا"
@@ -626,75 +571,75 @@ const steps = [
 
 
     {
-        key: "gender",
+        key:"gender",
 
         question:
             "حلو جدًا 💛 دلوقتي عايزة أعرف أخاطبك إزاي عشان كلامي معاك يبقى مناسب ليك.",
 
-        type: "gender"
+        type:"gender"
     },
 
 
     {
-        key: "age",
+        key:"age",
 
         question:
             "طيب قولي سنك كام؟ 😄 السن هيساعدني أفهم المرحلة اللي جسمك فيها وأخلي كلامي مناسب ليك.",
 
-        type: "number",
+        type:"number",
 
-        label: "العمر",
+        label:"العمر",
 
         placeholder:
             "مثال: 23",
 
-        unit: "سنة"
+        unit:"سنة"
     },
 
 
     {
-        key: "weight",
+        key:"weight",
 
         question:
             "تمام يا ${name}... وزنك كام تقريبًا؟ 😄 الرقم مش حكم عليك، أنا هربطه بباقي بياناتك.",
 
-        type: "number",
+        type:"number",
 
-        label: "الوزن",
+        label:"الوزن",
 
         placeholder:
             "مثال: 80",
 
-        unit: "كجم"
+        unit:"كجم"
     },
 
 
     {
-        key: "height",
+        key:"height",
 
         question:
             "وطولك كام؟ 🌱 كده أقدر أربط الطول بالوزن والعمر بدل ما أبص لكل رقم لوحده.",
 
-        type: "number",
+        type:"number",
 
-        label: "الطول",
+        label:"الطول",
 
         placeholder:
             "مثال: 175",
 
-        unit: "سم"
+        unit:"سم"
     },
 
 
     {
-        key: "country",
+        key:"country",
 
         question:
             "وإنت من أنهي بلد؟ 🌍 المكان عندي مش مجرد اسم؛ الشمس والطقس وطول النهار بيختلفوا من مكان لمكان.",
 
-        type: "text",
+        type:"text",
 
-        label: "البلد",
+        label:"البلد",
 
         placeholder:
             "مثال: مصر"
@@ -702,50 +647,157 @@ const steps = [
 
 
     {
-        key: "skinTone",
+        key:"skinTone",
 
         question:
             "وصلنا لحاجة مهمة جدًا ☀️ لون بشرتك أقرب لأنهي درجة؟ ده هيفرق معايا في فهم استجابة بشرتك للشمس.",
 
-        type: "skin"
+        type:"skin"
     },
 
 
     {
-        key: "sunTime",
+        key:"sunTime",
 
         question:
             "ولو هتتعرض للشمس، بتحب يكون الوقت اللي يناسبك إمتى؟ ☀️",
 
-        type: "time"
+        type:"time"
     }
 
 ];
 
 
 /* =========================================
+   صورة سنا حسب السؤال
+========================================= */
+
+function setQuestionSana(){
+
+    if (!questionSana) return;
+
+
+    const step =
+        steps[currentStep];
+
+
+    if (step.key === "name"){
+
+        changeSanaImage(
+            questionSana,
+            "assets/sana_curious.png",
+            "👀"
+        );
+
+    }
+
+    else if (
+        step.key === "gender"
+    ){
+
+        changeSanaImage(
+            questionSana,
+            "assets/sana_happy.png",
+            "💛"
+        );
+
+    }
+
+    else if (
+        step.key === "age"
+    ){
+
+        changeSanaImage(
+            questionSana,
+            "assets/sana_curious.png",
+            "😄"
+        );
+
+    }
+
+    else if (
+        step.key === "weight"
+    ){
+
+        changeSanaImage(
+            questionSana,
+            "assets/sana_calm.png",
+            "💛"
+        );
+
+    }
+
+    else if (
+        step.key === "height"
+    ){
+
+        changeSanaImage(
+            questionSana,
+            "assets/sana_thinking.png",
+            "🤔"
+        );
+
+    }
+
+    else if (
+        step.key === "country"
+    ){
+
+        changeSanaImage(
+            questionSana,
+            "assets/sana_curious.png",
+            "🌍"
+        );
+
+    }
+
+    else if (
+        step.key === "skinTone"
+    ){
+
+        changeSanaImage(
+            questionSana,
+            "assets/sana_thinking.png",
+            "☀️"
+        );
+
+    }
+
+    else if (
+        step.key === "sunTime"
+    ){
+
+        changeSanaImage(
+            questionSana,
+            "assets/sana_sun_01.png",
+            "☀️"
+        );
+
+    }
+
+}
+
+
+/* =========================================
    اسم المستخدم داخل السؤال
 ========================================= */
 
-function personalizeQuestion(text) {
+function personalizeQuestion(text){
 
     return text.replace(
-
         "${name}",
-
         user.name ||
         "يا صديقي"
-
     );
 
 }
 
 
 /* =========================================
-   ردود سنا بعد كل إجابة
+   ردود سنا
 ========================================= */
 
-function getResponse(step) {
+function getResponse(step){
 
     const name =
         user.name ||
@@ -756,24 +808,38 @@ function getResponse(step) {
         user.gender === "female";
 
 
-    /* الاسم */
-
     if (
         step.key === "name"
-    ) {
+    ){
+
+        changeSanaImage(
+            questionSana,
+            "assets/sana_happy.png",
+            "💛"
+        );
+
 
         return `تشرفت بيك يا ${user.name} 💛 اسمك حلو فعلًا. دلوقتي بقى عرفت أول حاجة عن الشخص اللي هكمل معاه الرحلة دي.`;
 
     }
 
 
-    /* الجنس */
-
     if (
         step.key === "gender"
-    ) {
+    ){
 
-        if (female) {
+        changeSanaImage(
+            questionSana,
+
+            female
+                ? "assets/sana_flirty.png"
+                : "assets/sana_happy.png",
+
+            "💛"
+        );
+
+
+        if (female){
 
             return `تمام يا ${name} 💛 كده عرفت إنّي أكلمك بصيغة المؤنث من هنا ورايح، وده هيخلّي كلام سنا معاكي طبيعي ومريح.`;
 
@@ -785,32 +851,29 @@ function getResponse(step) {
     }
 
 
-    /* العمر */
-
     if (
         step.key === "age"
-    ) {
+    ){
+
+        changeSanaImage(
+            questionSana,
+            "assets/sana_curious.png",
+            "😄"
+        );
+
 
         const age =
             Number(user.age);
 
 
-        if (
-            age < 18
-        ) {
+        if (age < 18){
 
-            return female
-
-                ? `يا ${name} 💛 سن ${age} سنة ولسه جسمك في مرحلة نمو، فهكون حريصة جدًا إن أي نصيحة أقولها تكون مناسبة لمرحلتك.`
-
-                : `يا ${name} 💛 سن ${age} سنة ولسه جسمك في مرحلة نمو، فهكون حريصة جدًا إن أي نصيحة أقولها تكون مناسبة لمرحلتك.`;
+            return `يا ${name} 💛 سن ${age} سنة ولسه جسمك في مرحلة نمو، فهكون حريصة جدًا إن أي نصيحة أقولها تكون مناسبة لمرحلتك.`;
 
         }
 
 
-        if (
-            age <= 25
-        ) {
+        if (age <= 25){
 
             return female
 
@@ -821,47 +884,48 @@ function getResponse(step) {
         }
 
 
-        if (
-            age <= 40
-        ) {
+        if (age <= 40){
 
-            return female
-
-                ? `ما شاء الله يا ${name} 💛 ${age} سنة. سن ممتاز نخلي فيه الجسم والطاقة والعادات اليومية ماشيين في صالحك بدل ما نستنى المشاكل تظهر.`
-
-                : `ما شاء الله يا ${name} 💛 ${age} سنة. سن ممتاز نخلي فيه الجسم والطاقة والعادات اليومية ماشيين في صالحك بدل ما نستنى المشاكل تظهر.`;
+            return `ما شاء الله يا ${name} 💛 ${age} سنة. سن ممتاز نخلي فيه الجسم والطاقة والعادات اليومية ماشيين في صالحك بدل ما نستنى المشاكل تظهر.`;
 
         }
 
 
-        return female
-
-            ? `يا ${name} 💛 ${age} سنة معناها إننا هنركز أكتر على العادات اللي تحافظ على صحتك ونشاطك على المدى الطويل.`
-
-            : `يا ${name} 💛 ${age} سنة معناها إننا هنركز أكتر على العادات اللي تحافظ على صحتك ونشاطك على المدى الطويل.`;
+        return `يا ${name} 💛 ${age} سنة معناها إننا هنركز أكتر على العادات اللي تحافظ على صحتك ونشاطك على المدى الطويل.`;
 
     }
 
 
-    /* الوزن */
-
     if (
         step.key === "weight"
-    ) {
+    ){
+
+        changeSanaImage(
+            questionSana,
+            "assets/sana_calm.png",
+            "💛"
+        );
+
 
         return `وصلني وزنك ${user.weight} كجم يا ${name} 💛 ومش هطلع حكم من الرقم ده لوحده. لسه عندي الطول والعمر، وبعدهم أقدر أكون صورة أصدق عن جسمك بدل الأحكام السريعة.`;
 
     }
 
 
-    /* الطول */
-
     if (
         step.key === "height"
-    ) {
+    ){
+
+        changeSanaImage(
+            questionSana,
+            "assets/sana_thinking.png",
+            "🤔"
+        );
+
 
         const weight =
             Number(user.weight);
+
 
         const height =
             Number(user.height);
@@ -869,42 +933,28 @@ function getResponse(step) {
 
         const bmi =
             height > 0
-
                 ? weight /
                   ((height / 100) ** 2)
-
                 : 0;
 
 
-        if (
-            bmi > 0
-        ) {
+        if (bmi > 0){
 
-            if (
-                bmi < 18.5
-            ) {
+            if (bmi < 18.5){
 
-                return female
-
-                    ? `تمام يا ${name} 🌱 طولك ${user.height} سم مع وزنك ${user.weight} كجم، وده مبدئيًا يخليني أحتاج أبص للصورة كاملة قبل أي حكم. المؤشر الحسابي هنا منخفض، لكن مش هعتبره تشخيص ولا هختصر جسمك في رقم.`
-
-                    : `تمام يا ${name} 🌱 طولك ${user.height} سم مع وزنك ${user.weight} كجم، وده مبدئيًا يخليني أحتاج أبص للصورة كاملة قبل أي حكم. المؤشر الحسابي هنا منخفض، لكن مش هعتبره تشخيص ولا هختصر جسمك في رقم.`;
+                return `تمام يا ${name} 🌱 طولك ${user.height} سم مع وزنك ${user.weight} كجم، وده مبدئيًا يخليني أحتاج أبص للصورة كاملة قبل أي حكم. المؤشر الحسابي هنا منخفض، لكن مش هعتبره تشخيص ولا هختصر جسمك في رقم.`;
 
             }
 
 
-            if (
-                bmi < 25
-            ) {
+            if (bmi < 25){
 
                 return `حلو يا ${name} 🌱 طولك ${user.height} سم مع وزنك ${user.weight} كجم. كده عندي بيانات أهم بكتير من الوزن لوحده، ونقدر نكمل الصورة بهدوء.`;
 
             }
 
 
-            if (
-                bmi < 30
-            ) {
+            if (bmi < 30){
 
                 return `تمام يا ${name} 💛 دلوقتي الصورة أوضح: ${user.height} سم طول و${user.weight} كجم وزن. المؤشر الحسابي يوحي إن الوزن أعلى من النطاق المعتاد، لكن ده مش تشخيص ولا حكم على شكل جسمك، ولسه محتاجين نفهم نشاطك وعاداتك.`;
 
@@ -921,11 +971,16 @@ function getResponse(step) {
     }
 
 
-    /* البلد */
-
     if (
         step.key === "country"
-    ) {
+    ){
+
+        changeSanaImage(
+            questionSana,
+            "assets/sana_curious.png",
+            "🌍"
+        );
+
 
         const country =
             user.country
@@ -936,7 +991,7 @@ function getResponse(step) {
         if (
             country.includes("مصر") ||
             country.includes("egypt")
-        ) {
+        ){
 
             return `مصر بقى 🇪🇬💛 تمام يا ${name}. كده أقدر أخلي معلومات الشمس والجو وطول النهار مرتبطة بمكانك بدل ما أديك كلام عام ينفع لبلد ومينفعش لبلد تانية.`;
 
@@ -946,7 +1001,7 @@ function getResponse(step) {
         if (
             country.includes("المغرب") ||
             country.includes("morocco")
-        ) {
+        ){
 
             return `المغرب 🇲🇦 جميل يا ${name} 💛. المكان بيفرق فعلًا في الشمس والطقس وطول النهار، وده هيكون جزء من الحسابات اللي هنستخدمها بعد كده.`;
 
@@ -958,22 +1013,32 @@ function getResponse(step) {
     }
 
 
-    /* لون البشرة */
-
     if (
         step.key === "skinTone"
-    ) {
+    ){
+
+        changeSanaImage(
+            questionSana,
+            "assets/sana_thinking.png",
+            "☀️"
+        );
+
 
         return `تمام يا ${name} ☀️ سجلت درجة بشرتك. المعلومة دي مهمة لأن لون البشرة من العوامل اللي بتدخل في استجابة الجلد للشمس، فمش هتعامل مع كل الناس بنفس الرقم.`;
 
     }
 
 
-    /* وقت الشمس */
-
     if (
         step.key === "sunTime"
-    ) {
+    ){
+
+        changeSanaImage(
+            questionSana,
+            "assets/sana_excited.png",
+            "☀️"
+        );
+
 
         return `حلو يا ${name} ☀️ كده بقي عندي وقت التعرض اللي يناسب يومك. لما أجمعه مع بلدك ودرجة بشرتك وبيانات جسمك، أقدر أبني لك حساب أدق بدل جرعة عشوائية.`;
 
@@ -989,7 +1054,7 @@ function getResponse(step) {
    عرض سؤال جديد
 ========================================= */
 
-function renderStep() {
+function renderStep(){
 
     const step =
         steps[currentStep];
@@ -1002,10 +1067,8 @@ function renderStep() {
 
 
     const progress =
-        (
-            (currentStep + 1) /
-            steps.length
-        ) * 100;
+        ((currentStep + 1) /
+        steps.length) * 100;
 
 
     progressBar.style.width =
@@ -1027,13 +1090,16 @@ function renderStep() {
         false;
 
 
+    setQuestionSana();
+
+
     /* =====================================
-       اختيار الجنس
+       الجنس
     ===================================== */
 
     if (
         step.type === "gender"
-    ) {
+    ){
 
         answerArea.innerHTML = `
 
@@ -1066,11 +1132,10 @@ function renderStep() {
             )
             .forEach(button => {
 
-
                 if (
                     user.gender ===
                     button.dataset.gender
-                ) {
+                ){
 
                     button.classList.add(
                         "active"
@@ -1081,7 +1146,7 @@ function renderStep() {
 
                 button.addEventListener(
                     "click",
-                    function () {
+                    function(){
 
                         user.gender =
                             this.dataset.gender;
@@ -1104,6 +1169,19 @@ function renderStep() {
                             "active"
                         );
 
+
+                        changeSanaImage(
+
+                            questionSana,
+
+                            user.gender === "female"
+                                ? "assets/sana_flirty.png"
+                                : "assets/sana_happy.png",
+
+                            "💛"
+
+                        );
+
                     }
                 );
 
@@ -1121,7 +1199,7 @@ function renderStep() {
 
     if (
         step.type === "skin"
-    ) {
+    ){
 
         answerArea.innerHTML = `
 
@@ -1183,11 +1261,10 @@ function renderStep() {
             )
             .forEach(button => {
 
-
                 if (
                     user.skinTone ===
                     button.dataset.skin
-                ) {
+                ){
 
                     button.classList.add(
                         "active"
@@ -1198,7 +1275,7 @@ function renderStep() {
 
                 button.addEventListener(
                     "click",
-                    function () {
+                    function(){
 
                         user.skinTone =
                             this.dataset.skin;
@@ -1221,6 +1298,17 @@ function renderStep() {
                             "active"
                         );
 
+
+                        changeSanaImage(
+
+                            questionSana,
+
+                            "assets/sana_thinking.png",
+
+                            "☀️"
+
+                        );
+
                     }
                 );
 
@@ -1238,7 +1326,7 @@ function renderStep() {
 
     if (
         step.type === "time"
-    ) {
+    ){
 
         answerArea.innerHTML = `
 
@@ -1291,11 +1379,10 @@ function renderStep() {
             )
             .forEach(button => {
 
-
                 if (
                     user.sunTime ===
                     button.dataset.time
-                ) {
+                ){
 
                     button.classList.add(
                         "active"
@@ -1306,7 +1393,7 @@ function renderStep() {
 
                 button.addEventListener(
                     "click",
-                    function () {
+                    function(){
 
                         user.sunTime =
                             this.dataset.time;
@@ -1327,6 +1414,17 @@ function renderStep() {
 
                         this.classList.add(
                             "active"
+                        );
+
+
+                        changeSanaImage(
+
+                            questionSana,
+
+                            "assets/sana_sun_01.png",
+
+                            "☀️"
+
                         );
 
                     }
@@ -1376,7 +1474,7 @@ function renderStep() {
         );
 
 
-    if (input) {
+    if (input){
 
         setTimeout(
             () => input.focus(),
@@ -1386,12 +1484,11 @@ function renderStep() {
 
         input.addEventListener(
             "keydown",
-            function (event) {
+            function(event){
 
                 if (
-                    event.key ===
-                    "Enter"
-                ) {
+                    event.key === "Enter"
+                ){
 
                     nextButton.click();
 
@@ -1409,7 +1506,7 @@ function renderStep() {
    التحقق من الإجابة
 ========================================= */
 
-function saveCurrentAnswer() {
+function saveCurrentAnswer(){
 
     const step =
         steps[currentStep];
@@ -1417,11 +1514,9 @@ function saveCurrentAnswer() {
 
     if (
         step.type === "gender"
-    ) {
+    ){
 
-        if (
-            !user.gender
-        ) {
+        if (!user.gender){
 
             alert(
                 "اختار الأول الطريقة اللي تحب سنا تكلمك بيها 💛"
@@ -1431,7 +1526,6 @@ function saveCurrentAnswer() {
 
         }
 
-
         return true;
 
     }
@@ -1439,11 +1533,9 @@ function saveCurrentAnswer() {
 
     if (
         step.type === "skin"
-    ) {
+    ){
 
-        if (
-            !user.skinTone
-        ) {
+        if (!user.skinTone){
 
             alert(
                 "اختار درجة بشرتك الأول ☀️"
@@ -1453,7 +1545,6 @@ function saveCurrentAnswer() {
 
         }
 
-
         return true;
 
     }
@@ -1461,11 +1552,9 @@ function saveCurrentAnswer() {
 
     if (
         step.type === "time"
-    ) {
+    ){
 
-        if (
-            !user.sunTime
-        ) {
+        if (!user.sunTime){
 
             alert(
                 "اختار الوقت اللي يناسبك الأول ☀️"
@@ -1474,7 +1563,6 @@ function saveCurrentAnswer() {
             return false;
 
         }
-
 
         return true;
 
@@ -1487,7 +1575,7 @@ function saveCurrentAnswer() {
         );
 
 
-    if (!input) {
+    if (!input){
 
         return false;
 
@@ -1498,13 +1586,15 @@ function saveCurrentAnswer() {
         input.value.trim();
 
 
-    if (!value) {
+    if (!value){
 
         alert(
             "اكتبلي الإجابة الأول 😊"
         );
 
+
         input.focus();
+
 
         return false;
 
@@ -1526,14 +1616,9 @@ function saveCurrentAnswer() {
 
 nextButton.addEventListener(
     "click",
-    function () {
+    function(){
 
-
-        /*
-           لو سنا لسه بتكتب
-        */
-
-        if (isTyping) {
+        if (isTyping){
 
             finishTypingImmediately();
 
@@ -1545,13 +1630,7 @@ nextButton.addEventListener(
         }
 
 
-        /*
-           لو الزر منتظر ضغط متابعة
-        */
-
-        if (
-            waitingForContinue
-        ) {
+        if (waitingForContinue){
 
             waitingForContinue =
                 false;
@@ -1563,13 +1642,13 @@ nextButton.addEventListener(
             if (
                 currentStep <
                 steps.length
-            ) {
+            ){
 
                 renderStep();
 
             }
 
-            else {
+            else{
 
                 showHabits();
 
@@ -1581,13 +1660,7 @@ nextButton.addEventListener(
         }
 
 
-        /*
-           حفظ الإجابة
-        */
-
-        if (
-            !saveCurrentAnswer()
-        ) {
+        if (!saveCurrentAnswer()){
 
             return;
 
@@ -1626,7 +1699,7 @@ nextButton.addEventListener(
 
             55,
 
-            function () {
+            function(){
 
                 nextButton.disabled =
                     false;
@@ -1643,22 +1716,15 @@ nextButton.addEventListener(
    بدء التعارف
 ========================================= */
 
-if (
-    startButton
-) {
+if (startButton){
 
     startButton.addEventListener(
         "click",
-        function () {
+        function(){
 
-            showPage(
-                welcome
-            );
+            showPage(welcome);
 
-
-            currentStep =
-                0;
-
+            currentStep = 0;
 
             renderStep();
 
@@ -1672,10 +1738,19 @@ if (
    صفحة العادات
 ========================================= */
 
-function showHabits() {
+function showHabits(){
 
-    showPage(
-        habits
+    showPage(habits);
+
+
+    changeSanaImage(
+
+        habitSana,
+
+        "assets/sana_happy.png",
+
+        "💛"
+
     );
 
 
@@ -1685,62 +1760,45 @@ function showHabits() {
 
 
     habitMessage.textContent =
+
         `كده يا ${name} أنا بقيت أعرف عنك حاجات مهمة فعلًا 💛 عندي سنك وبيانات جسمك ومكانك ودرجة بشرتك ووقت الشمس. دلوقتي نبدأ نحول المعلومات دي لاحتياجات حقيقية، بند بند، بدل أرقام محفوظة للجميع.`;
 
 
     const habitData = [
 
         {
-            id: "sun",
-
-            icon: "☀️",
-
-            title: "جرعة الشمس",
-
-            text:
-                "نربط بياناتك بالشمس والطقس ودرجة البشرة."
+            id:"sun",
+            icon:"☀️",
+            title:"جرعة الشمس",
+            text:"نربط بياناتك بالشمس والطقس ودرجة البشرة."
         },
 
-
         {
-            id: "water",
-
-            icon: "💧",
-
-            title: "شرب المياه",
-
-            text:
-                "نقدّر احتياجك اليومي ونبني طريقة سهلة للالتزام."
+            id:"water",
+            icon:"💧",
+            title:"شرب المياه",
+            text:"نقدّر احتياجك اليومي ونبني طريقة سهلة للالتزام."
         },
 
-
         {
-            id: "exercise",
-
-            icon: "🏃",
-
-            title: "الرياضة والحركة",
-
-            text:
-                "نحدد مستوى مناسب حسب جسمك ونشاطك."
+            id:"exercise",
+            icon:"🏃",
+            title:"الرياضة والحركة",
+            text:"نحدد مستوى مناسب حسب جسمك ونشاطك."
         },
 
-
         {
-            id: "supplements",
-
-            icon: "💊",
-
-            title: "العلاج والمكملات",
-
-            text:
-                "نرتب المعلومات بأمان ومن غير وصف أدوية."
+            id:"supplements",
+            icon:"💊",
+            title:"العلاج والمكملات",
+            text:"نرتب المعلومات بأمان ومن غير وصف أدوية."
         }
 
     ];
 
 
     habitList.innerHTML =
+
         habitData.map(
             habit => `
 
@@ -1768,16 +1826,12 @@ function showHabits() {
 
 
     document
-        .querySelectorAll(
-            ".habit"
-        )
+        .querySelectorAll(".habit")
         .forEach(element => {
-
 
             element.addEventListener(
                 "click",
-                function () {
-
+                function(){
 
                     const selected =
                         this.dataset.habit;
@@ -1803,16 +1857,22 @@ function showHabits() {
 
                     if (
                         selected === "sun"
-                    ) {
+                    ){
 
                         openSunDose();
 
                     }
 
-
                     else if (
                         selected === "water"
-                    ) {
+                    ){
+
+                        changeSanaImage(
+                            habitSana,
+                            "assets/sana_calm.png",
+                            "💧"
+                        );
+
 
                         alert(
                             "💧 قسم المياه هنبدأ نبنيه بناءً على بياناتك."
@@ -1820,10 +1880,16 @@ function showHabits() {
 
                     }
 
-
                     else if (
                         selected === "exercise"
-                    ) {
+                    ){
+
+                        changeSanaImage(
+                            habitSana,
+                            "assets/sana_sport.png",
+                            "🏃"
+                        );
+
 
                         alert(
                             "🏃 قسم الحركة والرياضة هنبدأ نحسبه بناءً على بياناتك."
@@ -1831,8 +1897,14 @@ function showHabits() {
 
                     }
 
+                    else{
 
-                    else {
+                        changeSanaImage(
+                            habitSana,
+                            "assets/sana_thinking.png",
+                            "💊"
+                        );
+
 
                         alert(
                             "💊 قسم العلاج والمكملات هنخليه منظم وآمن."
@@ -1852,10 +1924,19 @@ function showHabits() {
    جرعة الشمس
 ========================================= */
 
-function openSunDose() {
+function openSunDose(){
 
-    showPage(
-        sunDose
+    showPage(sunDose);
+
+
+    changeSanaImage(
+
+        sunSana,
+
+        "assets/sana_sun_01.png",
+
+        "☀️"
+
     );
 
 
@@ -1865,6 +1946,7 @@ function openSunDose() {
 
 
     sunMessage.textContent =
+
         `تمام يا ${name} ☀️ كده عندي المعلومات الأساسية اللي محتاجاها كبداية. هنستخدم درجة بشرتك وبلدك ووقت التعرض وباقي بياناتك عشان نبني جرعة شمس مناسبة، مش مجرد رقم محفوظ.`;
 
 }
@@ -1874,17 +1956,13 @@ function openSunDose() {
    الرجوع للعادات
 ========================================= */
 
-if (
-    backToHabits
-) {
+if (backToHabits){
 
     backToHabits.addEventListener(
         "click",
-        function () {
+        function(){
 
-            showPage(
-                habits
-            );
+            showHabits();
 
         }
     );
@@ -1896,9 +1974,7 @@ if (
    حماية من العناصر الناقصة
 ========================================= */
 
-if (
-    !startButton
-) {
+if (!startButton){
 
     console.error(
         "SunDose: startButton غير موجود في index.html"
@@ -1906,10 +1982,7 @@ if (
 
 }
 
-
-if (
-    !nextButton
-) {
+if (!nextButton){
 
     console.error(
         "SunDose: nextButton غير موجود في index.html"
@@ -1917,24 +1990,10 @@ if (
 
 }
 
-
-if (
-    !habitList
-) {
+if (!habitList){
 
     console.error(
         "SunDose: habitList غير موجود في index.html"
     );
 
 }
-
-
-if (
-    !sanaWelcome
-) {
-
-    console.error(
-        "SunDose: sanaWelcome غير موجود في index.html"
-    );
-
-                   }
