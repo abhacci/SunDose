@@ -1,286 +1,212 @@
 /* =========================================
-   إضافات بند الشمس الجديدة
+   SunDose ☀️ - النسخة النهائية
 ========================================= */
 
-/* =========================================
-   PROS & CONS
-========================================= */
-
-.pros-cons {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 8px;
-    margin: 8px 0;
+* {
+    box-sizing: border-box;
 }
 
-.pros,
-.cons {
-    background: #fff;
-    border-radius: 13px;
-    padding: 10px 12px;
-    border: 1px solid #eee2cc;
-}
-
-.pros h4 {
-    color: #2d8a4e;
-    font-size: 11px;
-    margin: 0 0 6px;
-}
-
-.cons h4 {
-    color: #c0392b;
-    font-size: 11px;
-    margin: 0 0 6px;
-}
-
-.pros-cons ul {
+html,
+body {
     margin: 0;
-    padding: 0 0 0 18px;
-    font-size: 9px;
-    line-height: 1.6;
-    color: #5c5247;
+    padding: 0;
+    min-height: 100%;
+    font-family: Arial, "Cairo", Tahoma, sans-serif;
+    background: radial-gradient(circle at 50% 0%, #fffef9 0%, #fff9e9 50%, #fff3d6 100%);
+    color: #51483e;
 }
 
-.pros-cons ul li {
-    margin-bottom: 2px;
+body {
+    overflow-x: hidden;
 }
 
-/* =========================================
-   ADVANCED TIPS
-========================================= */
-
-.advanced-tips {
-    background: #fff8e7;
-    border-radius: 13px;
-    padding: 10px 12px;
-    border: 1px solid #f3d48a;
-    margin: 8px 0;
+button,
+input {
+    font-family: inherit;
 }
 
-.advanced-tips h4 {
-    color: #d4940d;
-    font-size: 11px;
-    margin: 0 0 6px;
+button {
+    -webkit-tap-highlight-color: transparent;
 }
 
-.advanced-tips p {
-    margin: 0 0 4px;
-    font-size: 9px;
-    color: #5c5247;
-    line-height: 1.5;
-}
-
-.advanced-tips .tip-highlight {
-    background: #fff;
-    padding: 4px 8px;
-    border-radius: 8px;
-    margin: 3px 0;
-    border-right: 3px solid #f3b126;
-    font-size: 9px;
+.hidden {
+    display: none !important;
 }
 
 /* =========================================
-   ANALYSIS EXTRA ACTIONS
+   SCREEN
 ========================================= */
 
-.analysis-actions-extra {
-    display: flex;
-    flex-direction: column;
-    gap: 5px;
-    margin-top: 6px;
+.app {
+    width: 100%;
+    min-height: 100vh;
 }
 
-.analysis-actions-extra .secondary-btn {
-    margin-top: 0;
-    font-size: 10px;
-    padding: 7px;
+.screen {
+    width: min(100%, 430px);
+    min-height: 100vh;
+    margin: auto;
+    padding: 11px 13px 20px;
+    position: relative;
 }
 
 /* =========================================
-   HISTORY LOG
+   TOPBAR
 ========================================= */
 
-.history-content {
-    padding: 5px 0 15px;
-}
-
-.history-content h2 {
-    color: #d4940d;
-    font-size: 16px;
-    margin: 0 0 12px;
-}
-
-.history-list {
-    display: flex;
-    flex-direction: column;
-    gap: 6px;
-}
-
-.history-item {
+.topbar {
+    height: 32px;
     display: flex;
     align-items: center;
     justify-content: space-between;
-    background: #fff;
-    padding: 10px 12px;
-    border-radius: 13px;
-    border: 1px solid #eee2cc;
+    margin-bottom: 5px;
+    gap: 4px;
 }
 
-.history-item .date {
+.brand {
+    color: #dfa016;
+    font-size: 16px;
+    font-weight: 900;
+}
+
+.brand span {
+    font-size: 17px;
+}
+
+.mini-brand {
+    color: #a89578;
+    font-size: 10px;
+    font-weight: 900;
+    background: #fff;
+    border: 1px solid #eee2ca;
+    border-radius: 999px;
+    padding: 5px 9px;
+    white-space: nowrap;
+}
+
+.step-counter {
+    background: #fff;
+    border: 1px solid #eee2ca;
+    border-radius: 999px;
+    padding: 5px 10px;
+    color: #a58f70;
     font-size: 11px;
     font-weight: 900;
-    color: #51483e;
+    white-space: nowrap;
 }
 
-.history-item .uv {
-    font-size: 13px;
-    font-weight: 900;
-    color: #d4940d;
-}
-
-.history-item .time {
-    font-size: 10px;
-    color: #9a8d7d;
-}
-
-.history-item .status {
+.live-dot {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    color: #b68a25;
     font-size: 9px;
-    padding: 3px 8px;
-    border-radius: 999px;
-}
-
-.history-item .status.safe {
-    background: #e6f4ea;
-    color: #2d8a4e;
-}
-
-.history-item .status.warning {
-    background: #fef3e0;
-    color: #c98b2e;
-}
-
-.history-item .status.danger {
-    background: #fde8e8;
-    color: #c0392b;
-}
-
-.history-stats {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 6px;
-    margin-top: 12px;
-}
-
-.history-stats .stat-box {
-    background: #fff;
-    padding: 10px;
-    border-radius: 13px;
-    text-align: center;
-    border: 1px solid #eee2cc;
-}
-
-.history-stats .stat-box .number {
-    display: block;
-    font-size: 20px;
     font-weight: 900;
-    color: #d4940d;
+    background: #fff;
+    border: 1px solid #eadfc9;
+    border-radius: 999px;
+    padding: 5px 9px;
+    white-space: nowrap;
 }
 
-.history-stats .stat-box .label {
-    font-size: 8px;
-    color: #9a8d7d;
+.live-dot::before {
+    content: "";
+    width: 6px;
+    height: 6px;
+    background: #efb528;
+    border-radius: 50%;
+    animation: livePulse 1.4s ease-in-out infinite;
+}
+
+@keyframes livePulse {
+
+    0%,
+    100% {
+        opacity: .4;
+        transform: scale(.8);
+    }
+
+    50% {
+        opacity: 1;
+        transform: scale(1);
+    }
 }
 
 /* =========================================
-   FORECAST
+   STREAK BADGE
 ========================================= */
 
-.forecast-content {
-    padding: 5px 0 15px;
-}
-
-.forecast-content h2 {
-    color: #d4940d;
-    font-size: 16px;
-    margin: 0 0 12px;
-}
-
-.forecast-list {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 6px;
-}
-
-.forecast-item {
+.streak-badge {
+    display: flex;
+    align-items: center;
+    gap: 3px;
     background: #fff;
-    padding: 10px;
-    border-radius: 13px;
-    text-align: center;
-    border: 1px solid #eee2cc;
-}
-
-.forecast-item .day {
-    font-size: 11px;
-    font-weight: 900;
-    color: #51483e;
-}
-
-.forecast-item .uv-forecast {
-    font-size: 22px;
+    border: 1px solid #f3d48a;
+    border-radius: 999px;
+    padding: 3px 8px;
+    font-size: 12px;
     font-weight: 900;
     color: #d4940d;
-    margin: 4px 0;
+    box-shadow: 0 2px 8px rgba(212, 148, 13, 0.12);
+    white-space: nowrap;
 }
 
-.forecast-item .status {
-    font-size: 8px;
-    padding: 2px 8px;
-    border-radius: 999px;
+.streak-badge span {
+    min-width: 16px;
+    text-align: center;
+}
+
+/* =========================================
+   SANA CONTAINER
+========================================= */
+
+.sana-container {
+    position: relative;
     display: inline-block;
 }
 
-.forecast-item .status.safe {
-    background: #e6f4ea;
-    color: #2d8a4e;
+.sana {
+    display: block;
+    object-fit: contain;
+    filter: drop-shadow(0 7px 11px rgba(220, 160, 20, .14));
+    transition: transform 0.3s ease;
 }
 
-.forecast-item .status.warning {
-    background: #fef3e0;
-    color: #c98b2e;
+.sana-eyes {
+    position: absolute;
+    top: 30%;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 38%;
+    height: 15%;
+    display: flex;
+    justify-content: space-between;
+    pointer-events: none;
+    opacity: 0.75;
 }
 
-.forecast-item .status.danger {
-    background: #fde8e8;
-    color: #c0392b;
+.sana-eyes .eye {
+    width: 30%;
+    height: 100%;
+    background: #2d1f12;
+    border-radius: 50%;
+    position: relative;
+    transition: all 0.15s ease;
 }
 
-.forecast-advice {
-    margin-top: 12px;
-    background: #fff8e7;
-    padding: 12px;
-    border-radius: 13px;
-    border: 1px solid #f3d48a;
+.sana-eyes .eye::after {
+    content: "";
+    position: absolute;
+    width: 35%;
+    height: 35%;
+    background: #f5e6d3;
+    border-radius: 50%;
+    top: 20%;
+    left: 20%;
 }
 
-.forecast-advice p {
-    margin: 0;
-    font-size: 10px;
-    color: #5c5247;
-    line-height: 1.6;
-}
-
-/* =========================================
-   RESPONSIVE
-========================================= */
-
-@media(max-width:480px) {
-    .pros-cons {
-        grid-template-columns: 1fr;
-    }
-    .forecast-list {
-        grid-template-columns: repeat(2, 1fr);
-    }
-    .history-stats {
-        grid-template-columns: repeat(2, 1fr);
-    }
-}
+.sana-eyes .eye.blink {
+    height: 8%;
+    border-radius: 50%;
+    transform: scaleY(0.1);
+    transition: all 0.
