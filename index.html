@@ -1,44 +1,113 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
-
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 
-    <title>SunDose - سنا</title>
+    <title>SunDose ☀️</title>
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link
-        href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700;800&display=swap"
-        rel="stylesheet"
-    >
+
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800&display=swap"
+          rel="stylesheet">
 
     <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
 
-    <main class="welcome-screen">
+    <main class="app">
 
-        <!-- سنا -->
-        <div class="sana-stage">
+        <!-- منطقة سنا -->
+        <section class="sana-stage" id="sanaStage">
 
-            <img
-                id="sanaCharacter"
-                class="sana-character"
-                src="assets/sana_welcome_01.png"
-                alt="سنا"
-            >
+            <div class="sana-wrap" id="sanaWrap">
 
-            <!-- كلام سنا -->
-            <div
-                id="sanaSpeech"
-                class="sana-speech"
-                aria-live="polite">
+                <img
+                    id="sanaImage"
+                    class="sana-image"
+                    src="assets/sana_welcome_01.png"
+                    alt="سنا"
+                    draggable="false"
+                >
+
+                <!-- الكلام -->
+                <div class="speech" id="speech">
+                    <span id="speechText"></span>
+                </div>
+
             </div>
 
-        </div>
+        </section>
+
+
+        <!-- منطقة التجربة -->
+        <section class="demo-panel">
+
+            <div class="demo-title">
+                <span>☀️</span>
+                <strong>جرّب ردود سنا</strong>
+            </div>
+
+            <div class="demo-buttons">
+
+                <button data-reaction="welcome">
+                    👋 ترحيب
+                </button>
+
+                <button data-reaction="happy">
+                    😊 فرحانة
+                </button>
+
+                <button data-reaction="flirty">
+                    😉 واثقة
+                </button>
+
+                <button data-reaction="questioning">
+                    🤨 فضولية
+                </button>
+
+                <button data-reaction="thinking">
+                    🧐 بتفكر
+                </button>
+
+                <button data-reaction="excited">
+                    ✨ متحمسة
+                </button>
+
+                <button data-reaction="sun">
+                    ☀️ الشمس
+                </button>
+
+                <button data-reaction="water">
+                    💧 المياه
+                </button>
+
+                <button data-reaction="calm">
+                    🌿 هادية
+                </button>
+
+                <button data-reaction="sport">
+                    🏃‍♀️ رياضة
+                </button>
+
+                <button data-reaction="sad">
+                    😔 زعلانة
+                </button>
+
+                <button data-reaction="surprised">
+                    😳 مندهشة
+                </button>
+
+            </div>
+
+            <button class="auto-button" id="autoButton">
+                ▶️ تشغيل التبديل التلقائي
+            </button>
+
+        </section>
 
     </main>
 
