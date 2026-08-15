@@ -1,5 +1,5 @@
 /* =========================================
-   SunDose ☀️ - النسخة النهائية
+   SunDose ☀️ - مع تصميم سنا الجديد (SVG)
 ========================================= */
 
 * {
@@ -157,7 +157,7 @@ button {
 }
 
 /* =========================================
-   SANA CONTAINER
+   SANA - تصميم SVG الجديد
 ========================================= */
 
 .sana-container {
@@ -165,55 +165,54 @@ button {
     display: inline-block;
 }
 
-.sana {
+/* تعابير سنا المختلفة */
+.sana-character {
     display: block;
-    object-fit: contain;
     filter: drop-shadow(0 7px 11px rgba(220, 160, 20, .14));
     transition: transform 0.3s ease;
 }
 
-.sana-eyes {
-    position: absolute;
-    top: 30%;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 38%;
-    height: 15%;
-    display: flex;
-    justify-content: space-between;
-    pointer-events: none;
-    opacity: 0.75;
+/* تعابير العيون والوجه (تتحكم فيها JS) */
+.sana-eyes-g {
+    transition: all 0.3s ease;
 }
 
-.sana-eyes .eye {
-    width: 30%;
-    height: 100%;
-    background: #2d1f12;
-    border-radius: 50%;
-    position: relative;
-    transition: all 0.15s ease;
+.sana-blush {
+    opacity: 0.4;
+    transition: opacity 0.3s ease;
 }
 
-.sana-eyes .eye::after {
-    content: "";
-    position: absolute;
-    width: 35%;
-    height: 35%;
-    background: #f5e6d3;
-    border-radius: 50%;
-    top: 20%;
-    left: 20%;
+.sana-happy .sana-blush {
+    opacity: 0.8;
 }
 
-.sana-eyes .eye.blink {
-    height: 8%;
-    border-radius: 50%;
-    transform: scaleY(0.1);
-    transition: all 0.1s ease;
+.sana-happy .sana-mouth {
+    display: block;
+}
+
+.sana-happy .sana-mouth-open {
+    display: none;
+}
+
+.sana-surprised .sana-mouth {
+    display: none;
+}
+
+.sana-surprised .sana-mouth-open {
+    display: block;
+}
+
+.sana-thinking .sana-eyes-g {
+    transform: translateY(-2px);
+}
+
+.sana-thinking .sana-mouth {
+    stroke: #d9534f;
+    stroke-width: 2;
 }
 
 /* حركات سنا */
-.sana-character {
+.sana-float {
     animation: sanaFloat 3.8s ease-in-out infinite;
 }
 
@@ -316,26 +315,6 @@ button {
     }
 }
 
-.sana-wave {
-    animation: sanaWave 1.2s ease-in-out infinite;
-}
-
-@keyframes sanaWave {
-
-    0%,
-    100% {
-        transform: translateY(0) rotate(0deg) scale(1);
-    }
-
-    25% {
-        transform: translateY(-6px) rotate(-10deg) scale(1.05);
-    }
-
-    75% {
-        transform: translateY(-6px) rotate(10deg) scale(1.05);
-    }
-}
-
 /* =========================================
    SANA STAGE SIZES
 ========================================= */
@@ -346,27 +325,27 @@ button {
     margin: 0 auto;
 }
 
-.sana-stage.premium .sana {
+.sana-stage.premium .sana-character svg {
     width: 130px;
     height: 130px;
 }
 
-.sana.question-sana {
+.sana.question-sana svg {
     width: 120px;
     height: 120px;
 }
 
-.sana.sun-sana {
+.sana.sun-sana svg {
     width: 110px;
     height: 110px;
 }
 
-.sana.learn-sana {
+.sana.learn-sana svg {
     width: 110px;
     height: 110px;
 }
 
-.sana.portal-sana {
+.sana.portal-sana svg {
     width: 80px;
     height: 80px;
 }
@@ -425,21 +404,21 @@ button {
 }
 
 /* =========================================
-   SANA REACTION
+   SANA REACTION (الإيموشن)
 ========================================= */
 
 .sana-reaction {
     position: absolute;
-    top: -2px;
-    left: -8px;
-    width: 29px;
-    height: 29px;
+    top: -10px;
+    left: -10px;
+    width: 32px;
+    height: 32px;
     display: grid;
     place-items: center;
     background: #fff;
     border-radius: 50%;
     box-shadow: 0 4px 12px rgba(80, 60, 20, .10);
-    font-size: 15px;
+    font-size: 16px;
     z-index: 3;
     animation: reactionFloat 2.3s ease-in-out infinite;
 }
@@ -1215,30 +1194,7 @@ input:focus {
 }
 
 /* =========================================
-   IMAGE CHANGE
-========================================= */
-
-.sana-changing {
-    animation: sanaChange .45s ease;
-}
-
-@keyframes sanaChange {
-    0% {
-        opacity: .2;
-        transform: scale(.94) translateY(5px);
-    }
-    55% {
-        opacity: .85;
-        transform: scale(1.03) translateY(-3px);
-    }
-    100% {
-        opacity: 1;
-        transform: scale(1) translateY(0);
-    }
-}
-
-/* =========================================
-   PROS & CONS (جديد)
+   PROS & CONS
 ========================================= */
 
 .pros-cons {
@@ -1281,7 +1237,7 @@ input:focus {
 }
 
 /* =========================================
-   ADVANCED TIPS (جديد)
+   ADVANCED TIPS
 ========================================= */
 
 .advanced-tips {
@@ -1306,7 +1262,7 @@ input:focus {
 }
 
 /* =========================================
-   EXTRA ACTIONS (جديد)
+   EXTRA ACTIONS
 ========================================= */
 
 .analysis-actions-extra {
@@ -1323,7 +1279,7 @@ input:focus {
 }
 
 /* =========================================
-   HISTORY (جديد)
+   HISTORY
 ========================================= */
 
 .history-content {
@@ -1418,7 +1374,7 @@ input:focus {
 }
 
 /* =========================================
-   FORECAST (جديد)
+   FORECAST
 ========================================= */
 
 .forecast-content {
@@ -1521,7 +1477,7 @@ input:focus {
     flex: 0 0 auto;
 }
 
-.portal-avatar .sana {
+.portal-avatar .sana-character svg {
     width: 80px;
     height: 80px;
     border-radius: 50%;
@@ -1729,15 +1685,15 @@ input:focus {
         padding-left: 9px;
         padding-right: 9px;
     }
-    .sana-stage.premium .sana {
+    .sana-stage.premium .sana-character svg {
         width: 110px;
         height: 110px;
     }
-    .sana.question-sana {
+    .sana.question-sana svg {
         width: 100px;
         height: 100px;
     }
-    .sana.sun-sana {
+    .sana.sun-sana svg {
         width: 90px;
         height: 90px;
     }
@@ -1767,7 +1723,7 @@ input:focus {
 }
 
 /* =========================================
-   FIX: DUOLINGO LAYOUT
+   DUOLINGO LAYOUT
 ========================================= */
 
 .home-content,
@@ -1791,11 +1747,7 @@ input:focus {
     margin: 0 !important;
 }
 
-.sana-stage .sana,
-.sana-stage.premium .sana,
-.sana.question-sana,
-.sana.sun-sana,
-.sana.learn-sana {
+.sana-stage .sana-character svg {
     width: 130px !important;
     height: 130px !important;
     object-fit: contain !important;
@@ -1806,11 +1758,7 @@ input:focus {
         width: 110px !important;
         height: 110px !important;
     }
-    .sana-stage .sana,
-    .sana-stage.premium .sana,
-    .sana.question-sana,
-    .sana.sun-sana,
-    .sana.learn-sana {
+    .sana-stage .sana-character svg {
         width: 110px !important;
         height: 110px !important;
     }
