@@ -1,17 +1,15 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
+
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport"
-          content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <title>SunDose ☀️</title>
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-
-    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800&display=swap"
-          rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800&display=swap" rel="stylesheet">
 
     <link rel="stylesheet" href="style.css">
 </head>
@@ -20,21 +18,23 @@
 
     <main class="app">
 
-        <!-- منطقة سنا -->
-        <section class="sana-stage" id="sanaStage">
+        <!-- =========================
+             مشهد الترحيب
+        ========================== -->
 
-            <div class="sana-wrap" id="sanaWrap">
+        <section class="welcome-screen" id="welcomeScreen">
+
+            <div class="sana-wrapper" id="sanaWrapper">
 
                 <img
                     id="sanaImage"
                     class="sana-image"
                     src="assets/sana_welcome_01.png"
                     alt="سنا"
-                    draggable="false"
                 >
 
-                <!-- الكلام -->
-                <div class="speech" id="speech">
+                <!-- كلام سنا -->
+                <div class="sana-speech" id="sanaSpeech">
                     <span id="speechText"></span>
                 </div>
 
@@ -43,69 +43,36 @@
         </section>
 
 
-        <!-- منطقة التجربة -->
-        <section class="demo-panel">
+        <!-- =========================
+             التطبيق
+        ========================== -->
 
-            <div class="demo-title">
-                <span>☀️</span>
-                <strong>جرّب ردود سنا</strong>
-            </div>
+        <section class="app-content" id="appContent">
 
-            <div class="demo-buttons">
+            <div class="control-panel">
 
-                <button data-reaction="welcome">
-                    👋 ترحيب
-                </button>
+                <h1>جرّب روح سنا ☀️</h1>
 
-                <button data-reaction="happy">
-                    😊 فرحانة
-                </button>
+                <div class="reaction-grid">
 
-                <button data-reaction="flirty">
-                    😉 واثقة
-                </button>
+                    <button>ترحيب 👋</button>
+                    <button>فرحانة 😊</button>
+                    <button>واثقة 😌</button>
+                    <button>فضولية 🤨</button>
+                    <button>متحمسة ✨</button>
+                    <button>بتفكر 🧐</button>
+                    <button>الشمس ☀️</button>
+                    <button>المياه 💧</button>
+                    <button>هادية 🌿</button>
+                    <button>رياضة 🏃‍♀️</button>
+                    <button>زعلانة 😔</button>
+                    <button>مندهشة 😳</button>
+                    <button>إنجاز 🥳</button>
+                    <button>الختام 💛</button>
 
-                <button data-reaction="questioning">
-                    🤨 فضولية
-                </button>
-
-                <button data-reaction="thinking">
-                    🧐 بتفكر
-                </button>
-
-                <button data-reaction="excited">
-                    ✨ متحمسة
-                </button>
-
-                <button data-reaction="sun">
-                    ☀️ الشمس
-                </button>
-
-                <button data-reaction="water">
-                    💧 المياه
-                </button>
-
-                <button data-reaction="calm">
-                    🌿 هادية
-                </button>
-
-                <button data-reaction="sport">
-                    🏃‍♀️ رياضة
-                </button>
-
-                <button data-reaction="sad">
-                    😔 زعلانة
-                </button>
-
-                <button data-reaction="surprised">
-                    😳 مندهشة
-                </button>
+                </div>
 
             </div>
-
-            <button class="auto-button" id="autoButton">
-                ▶️ تشغيل التبديل التلقائي
-            </button>
 
         </section>
 
@@ -114,4 +81,5 @@
     <script src="script.js"></script>
 
 </body>
+
 </html>
