@@ -27,8 +27,7 @@
                 <div class="sana-container" id="sanaContainer">
                     <div id="sanaSvg" class="sana-character sana-float">
                         <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg" width="130" height="130">
-                            <!-- تاج الشمس -->
-                            <g transform="translate(100, 20)">
+                            <g transform="translate(100,20)">
                                 <circle cx="0" cy="0" r="14" fill="#ffd93d" stroke="#f3a712" stroke-width="2"/>
                                 <circle cx="0" cy="0" r="8" fill="#ffeb99"/>
                                 <g stroke="#f3a712" stroke-width="2" stroke-linecap="round">
@@ -40,13 +39,10 @@
                                     <line x1="-15" y1="-9" x2="-20" y2="-13"/>
                                 </g>
                             </g>
-                            <!-- الشعر -->
                             <path d="M30 60 Q30 15 100 10 Q170 15 170 60 Q170 55 160 50 Q140 35 100 35 Q60 35 40 50 Q30 55 30 60" fill="#5d3a1a"/>
                             <path d="M30 60 Q30 30 100 25 Q170 30 170 60 Q160 45 130 40 Q100 38 70 40 Q40 45 30 60" fill="#7a4f2b"/>
                             <path d="M130 35 Q145 30 155 40 Q150 45 140 42 Q135 40 130 35" fill="#ffd93d" opacity="0.8"/>
-                            <!-- الوجه -->
                             <circle cx="100" cy="100" r="60" fill="#fce6d5" stroke="#e8c9b0" stroke-width="2"/>
-                            <!-- العيون -->
                             <g class="sana-eyes-g">
                                 <ellipse cx="75" cy="95" rx="12" ry="14" fill="white" stroke="#3d2b1f" stroke-width="1.5"/>
                                 <circle cx="78" cy="93" r="7" fill="#2d1f12"/>
@@ -55,20 +51,13 @@
                                 <circle cx="122" cy="93" r="7" fill="#2d1f12"/>
                                 <circle cx="119" cy="89" r="2.5" fill="white"/>
                             </g>
-                            <!-- خدود -->
                             <ellipse cx="65" cy="118" rx="12" ry="6" fill="#ffb6c1" opacity="0.4" class="sana-blush"/>
                             <ellipse cx="135" cy="118" rx="12" ry="6" fill="#ffb6c1" opacity="0.4" class="sana-blush"/>
-                            <!-- الفم -->
                             <path d="M85 125 Q100 140 115 125" stroke="#d9534f" stroke-width="2.5" fill="none" stroke-linecap="round" class="sana-mouth"/>
                             <ellipse cx="100" cy="128" rx="12" ry="8" fill="#d9534f" class="sana-mouth-open" style="display:none"/>
-                            <!-- الحواجب -->
                             <path d="M60 78 Q70 72 85 76" stroke="#5d3a1a" stroke-width="2.5" fill="none" stroke-linecap="round"/>
                             <path d="M140 78 Q130 72 115 76" stroke="#5d3a1a" stroke-width="2.5" fill="none" stroke-linecap="round"/>
                         </svg>
-                    </div>
-                    <div class="sana-eyes" id="sanaEyes">
-                        <div class="eye left-eye"></div>
-                        <div class="eye right-eye"></div>
                     </div>
                 </div>
             </div>
@@ -99,10 +88,6 @@
                             <use href="#sana-body"/>
                         </svg>
                     </div>
-                    <div class="sana-eyes" id="questionEyes">
-                        <div class="eye left-eye"></div>
-                        <div class="eye right-eye"></div>
-                    </div>
                 </div>
             </div>
             <div class="speech-bubble question-bubble">
@@ -131,10 +116,6 @@
                             <use href="#sana-body"/>
                         </svg>
                     </div>
-                    <div class="sana-eyes" id="habitEyes">
-                        <div class="eye left-eye"></div>
-                        <div class="eye right-eye"></div>
-                    </div>
                 </div>
             </div>
             <div class="speech-bubble">
@@ -161,10 +142,6 @@
                         <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg" width="110" height="110">
                             <use href="#sana-body"/>
                         </svg>
-                    </div>
-                    <div class="sana-eyes" id="learnEyes">
-                        <div class="eye left-eye"></div>
-                        <div class="eye right-eye"></div>
                     </div>
                 </div>
             </div>
@@ -194,161 +171,113 @@
     </section>
 
     <!-- =====================================
-         SUN STATION (المحطة الجديدة كاملة)
+         SUN STATION (النسخة النهائية من الصورة)
     ====================================== -->
     <section id="sunDose" class="screen hidden">
+        <!-- TOP BAR -->
         <div class="topbar">
-            <div class="brand"><span>☀️</span> SunDose</div>
             <div class="live-dot" id="sunLiveStatus">LIVE</div>
+            <div class="brand"><span>☀️</span> SunDose</div>
             <div class="streak-badge">🔥 <span id="streakCount5">0</span></div>
         </div>
 
-        <!-- سنا والفقاعة -->
-        <div class="sun-intro">
-            <div class="sana-stage sun-sana-stage">
-                <div class="sana-container">
-                    <div id="sunSanaSvg" class="sana-character sana-float">
-                        <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg" width="110" height="110">
-                            <use href="#sana-body"/>
-                        </svg>
-                    </div>
-                    <div class="sana-eyes" id="sunEyes">
-                        <div class="eye left-eye"></div>
-                        <div class="eye right-eye"></div>
-                    </div>
+        <!-- سنا + الرسالة -->
+        <div class="sun-station-header">
+            <div class="sana-container sun-sana-container">
+                <div id="sunSanaSvg" class="sana-character sana-float">
+                    <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg" width="90" height="90">
+                        <use href="#sana-body"/>
+                    </svg>
                 </div>
             </div>
-            <div class="speech-bubble sun-bubble">
-                <div class="bubble-name">سنا ☀️</div>
-                <p id="sunMessage" class="dialogue"></p>
+            <div class="sun-greeting">
+                <div class="greeting-name">سنا ❤️</div>
+                <p id="sunMessage" class="greeting-text">حلو! خلينا نشوف الشمس الحقيقية عندك دلوقتي...</p>
             </div>
         </div>
 
-        <!-- حالة الشمس Live -->
-        <div class="sun-status-live" id="sunStatusLive">
-            <div class="status-icon" id="statusIcon">☀️</div>
-            <div class="status-text" id="statusText">الشمس مشرقة</div>
-            <div class="status-time" id="statusTime">--:--</div>
-        </div>
-
-        <!-- مؤشرات الشمس الأساسية -->
-        <div class="sun-metrics-grid">
-            <div class="metric-card">
-                <span class="metric-icon">📊</span>
-                <span class="metric-value" id="metricUV">—</span>
-                <span class="metric-label">UV Index</span>
+        <!-- حالة الشمس الآن -->
+        <div class="sun-status-card">
+            <div class="status-header">
+                <span class="status-title">☀️ حالة الشمس الآن</span>
+                <span class="status-badge" id="sunStatusBadge">هادية</span>
             </div>
-            <div class="metric-card">
-                <span class="metric-icon">🌡️</span>
-                <span class="metric-value" id="metricTemp">—°</span>
-                <span class="metric-label">الحرارة</span>
-            </div>
-            <div class="metric-card">
-                <span class="metric-icon">🌅</span>
-                <span class="metric-value" id="metricSunrise">—</span>
-                <span class="metric-label">الشروق</span>
-            </div>
-            <div class="metric-card">
-                <span class="metric-icon">🌇</span>
-                <span class="metric-value" id="metricSunset">—</span>
-                <span class="metric-label">الغروب</span>
-            </div>
-            <div class="metric-card">
-                <span class="metric-icon">☁️</span>
-                <span class="metric-value" id="metricCloud">—%</span>
-                <span class="metric-label">الغيوم</span>
-            </div>
-            <div class="metric-card">
-                <span class="metric-icon">🧴</span>
-                <span class="metric-value" id="metricSkin">—</span>
-                <span class="metric-label">نوع بشرتك</span>
-            </div>
-        </div>
-
-        <!-- أفضل وقت للتعرض -->
-        <div class="best-window" id="bestWindow">
-            <div class="window-header">
-                <span>🟢 أفضل نافذة اليوم</span>
-                <span id="windowTime">--:-- — --:--</span>
-            </div>
-            <div class="window-status" id="windowStatus">
-                <span id="windowStatusText">جاري تحديد النافذة...</span>
-            </div>
-            <div class="window-timer" id="windowTimer" style="display:none;">
-                <span>🔥 أنت داخل الوقت المثالي الآن</span>
-                <span id="windowCountdown">00:00</span>
-            </div>
-        </div>
-
-        <!-- جرعة الشمس -->
-        <div class="dose-tracker">
-            <div class="dose-header">
-                <span>☀️ جرعة الشمس اليوم</span>
-                <span id="doseProgressText">0%</span>
-            </div>
-            <div class="dose-bar">
-                <div class="dose-fill" id="doseFill" style="width:0%"></div>
-            </div>
-            <div class="dose-details">
-                <span id="doseMinutesToday">0</span>
-                <span>دقيقة من هدفك اليومي</span>
-                <span id="doseGoal">20</span>
-                <span>دقيقة</span>
-            </div>
-        </div>
-
-        <!-- سجل اليوم (Timeline) -->
-        <div class="day-timeline">
-            <div class="timeline-header">
-                <span>📊 سجل اليوم</span>
-            </div>
-            <div class="timeline-items" id="timelineItems">
-                <div class="timeline-item">
-                    <span class="timeline-icon">🌅</span>
-                    <span class="timeline-text">الشروق</span>
-                    <span class="timeline-time" id="timelineSunrise">--:--</span>
-                </div>
-                <div class="timeline-item">
-                    <span class="timeline-icon">☀️</span>
-                    <span class="timeline-text">بداية نافذتك</span>
-                    <span class="timeline-time" id="timelineWindowStart">--:--</span>
-                </div>
-                <div class="timeline-item">
-                    <span class="timeline-icon">🟡</span>
-                    <span class="timeline-text">بدأت تقل</span>
-                    <span class="timeline-time" id="timelineWindowEnd">--:--</span>
-                </div>
-                <div class="timeline-item">
-                    <span class="timeline-icon">🌇</span>
-                    <span class="timeline-text">الغروب</span>
-                    <span class="timeline-time" id="timelineSunset">--:--</span>
+            <div class="status-main">
+                <div class="status-icon-big" id="statusIconBig">🌤️</div>
+                <div class="status-desc">
+                    <div class="status-label" id="statusDesc">الشمس هادية ☀️</div>
+                    <div class="status-sub" id="statusSub">ظروف مناسبة للاستفادة من ضوء الشمس الطبيعي.</div>
                 </div>
             </div>
-        </div>
-
-        <!-- معلومة علمية اليوم -->
-        <div class="daily-fact">
-            <div class="fact-header">
-                <span>🧠 معلومة اليوم</span>
-                <span class="fact-day" id="factDay">اليوم 1</span>
+            <div class="uv-display">
+                <span class="uv-number" id="uvDisplay">2.1</span>
+                <span class="uv-label">UV INDEX</span>
+                <span class="uv-level" id="uvLevel">منخفض</span>
             </div>
-            <div class="fact-content" id="factContent">
-                <span class="fact-icon" id="factIcon">🌅</span>
-                <p id="factText">الضوء الصباحي مش مجرد إضاءة... جسمك بيستخدمه كإشارة لضبط إيقاعه اليومي.</p>
-            </div>
-        </div>
-
-        <!-- قسم "ماذا تفعل الآن؟" -->
-        <div class="action-guide" id="actionGuide">
-            <div class="action-header">
-                <span>🎯 ماذا تفعل الآن؟</span>
-            </div>
-            <div class="action-content" id="actionContent">
-                <p id="actionText">حدد موقعك عشان سنا تقولك إيه تعمل دلوقتي ☀️</p>
+            <div class="status-metrics">
+                <div class="metric"><span>🌡️</span> <span id="metricTemp2">31°C</span></div>
+                <div class="metric"><span>☁️</span> <span id="metricCloud2">20%</span></div>
+                <div class="metric"><span>🌅</span> <span id="metricSunrise2">05:18</span></div>
+                <div class="metric"><span>🌇</span> <span id="metricSunset2">18:43</span></div>
             </div>
         </div>
 
-        <div class="analysis-action">
+        <!-- محطة الشمس -->
+        <div class="station-card">
+            <div class="station-title">🌞 محطة الشمس <span class="station-sub">SUN STATION</span></div>
+            <div class="station-status" id="stationStatusText">الشمس دلوقتي فوق الأفق ☀️</div>
+        </div>
+
+        <!-- آخر تحديث + الموقع -->
+        <div class="update-location">
+            <div class="update-time">
+                <span>🔄 آخر تحديث</span>
+                <span id="updateTimeText">الآن • مباشر</span>
+            </div>
+            <div class="location-coords">
+                <span>📍</span>
+                <span id="locationCoords">31.72, 30.13</span>
+            </div>
+        </div>
+
+        <!-- نافذتك القادمة -->
+        <div class="window-card">
+            <div class="window-title">🟢 نافذتك القادمة</div>
+            <div class="window-sub">أفضل فترة للاستفادة من الشمس اليوم</div>
+            <div class="window-times">
+                <span id="windowStart">09:05 ص</span>
+                <span>—</span>
+                <span id="windowEnd">09:05 ص</span>
+            </div>
+            <div class="window-desc" id="windowDesc">ظروف مناسبة للحصول على ضوء طبيعي آمن وفعال. قد تتغير حسب حالة الشمس طول اليوم.</div>
+        </div>
+
+        <!-- ماذا أفعل الآن؟ -->
+        <div class="actions-card">
+            <div class="actions-title">🎯 ماذا أفعل الآن؟</div>
+            <div class="actions-list" id="actionsList">
+                <div class="action-item"><span>☀️</span> الخروج للحصول على ضوء الشمس</div>
+                <div class="action-item"><span>🕶️</span> ارتدي نظارة شمسية</div>
+                <div class="action-item"><span>💧</span> اشرب ماء</div>
+                <div class="action-item"><span>🧢</span> قبعة أو غطاء خفيف</div>
+            </div>
+        </div>
+
+        <!-- معلومات اليوم -->
+        <div class="fact-card">
+            <div class="fact-title">🧠 معلومات اليوم</div>
+            <div class="fact-content">
+                <span class="fact-icon" id="factIcon2">🌅</span>
+                <p id="factText2">الضوء الصباحي يضبط الساعة البيولوجية</p>
+            </div>
+            <div class="fact-source" id="factSource">National Institutes of Health (NIH)</div>
+        </div>
+
+        <!-- تنويه -->
+        <div class="disclaimer">قراءة SunDose تخطيطية وليست وصفة طبية أو جرعة فيتامين D.</div>
+
+        <!-- أزرار التحكم -->
+        <div class="station-actions">
             <button id="locationButton" class="primary-btn">📍 تحديد موقعي وابدأ التحليل</button>
         </div>
 
@@ -359,8 +288,6 @@
             <button id="dailyQuizBtn" class="secondary-btn">🧠 اختبار اليوم</button>
         </div>
 
-        <div class="tiny-note">القراءة تخطيطية وليست وصفة طبية أو جرعة فيتامين D.</div>
-        <button id="goToHealthPortal" class="primary-btn hidden">🏥 ادخل بوابة صحتي</button>
         <button id="backToHabits" class="secondary-btn">← رجوع للعادات</button>
     </section>
 
@@ -458,12 +385,11 @@
             </div>
             <div class="health-tips">
                 <h3>☀️ نصائح سنا الذهبية للشمس</h3>
-                <div class="tip-card"><div class="tip-icon">🕐</div><div><b>التوقيت المثالي</b><p>أفضل وقت للتعرض للشمس هو <strong>قبل الساعة 10 صباحاً</strong> أو <strong>بعد الساعة 4 عصراً</strong>. في الأوقات دي الأشعة فوق البنفسجية تكون أقل ضرراً.</p></div></div>
-                <div class="tip-card"><div class="tip-icon">🧴</div><div><b>واقي الشمس</b><p>استخدم واقي شمس بعامل حماية <strong>SPF 30+</strong> كل يوم، حتى في الأيام الغائمة. أعيد وضعه كل ساعتين، وبعد السباحة أو التعرق.</p></div></div>
-                <div class="tip-card"><div class="tip-icon">👕</div><div><b>الملابس المناسبة</b><p>ارتدِ ملابس خفيفة وفضفاضة تغطي الذراعين والساقين. القبعات والنظارات الشمسية تحمي عينيك ووجهك من الأشعة الضارة.</p></div></div>
-                <div class="tip-card"><div class="tip-icon">💧</div><div><b>الترطيب</b><p>اشرب <strong>8-10 أكواب</strong> من الماء يومياً. الشمس بتزيد فقدان السوائل، والجسم محتاج يعوض عشان يفضل نشيط وصحي.</p></div></div>
-                <div class="tip-card"><div class="tip-icon">🥗</div><div><b>فيتامين D من الأكل</b><p>لو مش بتتعرض للشمس كفاية، اعتمد على أكلات غنية بفيتامين D زي: <strong>السمك الدهني، البيض، الكبدة، والألبان المدعمة</strong>.</p></div></div>
-                <div class="tip-card"><div class="tip-icon">🌡️</div><div><b>مؤشر UV</b><p>لو الـ <strong>UV من 3 لـ 5</strong>، التعرض ١٠-٢٠ دقيقة آمن. لو <strong>UV من 6 لـ 7</strong>، قلل الوقت لـ ٥-١٠ دقايق. لو <strong>UV 8 فأكثر</strong>، تجنب التعرض المباشر نهائياً.</p></div></div>
+                <div class="tip-card"><div class="tip-icon">🕐</div><div><b>التوقيت المثالي</b><p>أفضل وقت للتعرض للشمس هو <strong>قبل الساعة 10 صباحاً</strong> أو <strong>بعد الساعة 4 عصراً</strong>.</p></div></div>
+                <div class="tip-card"><div class="tip-icon">🧴</div><div><b>واقي الشمس</b><p>استخدم واقي شمس بعامل حماية <strong>SPF 30+</strong> كل يوم، حتى في الأيام الغائمة.</p></div></div>
+                <div class="tip-card"><div class="tip-icon">👕</div><div><b>الملابس المناسبة</b><p>ارتدِ ملابس خفيفة وفضفاضة تغطي الذراعين والساقين.</p></div></div>
+                <div class="tip-card"><div class="tip-icon">💧</div><div><b>الترطيب</b><p>اشرب <strong>8-10 أكواب</strong> من الماء يومياً. الشمس بتزيد فقدان السوائل.</p></div></div>
+                <div class="tip-card"><div class="tip-icon">🥗</div><div><b>فيتامين D من الأكل</b><p>اعتمد على أكلات غنية بفيتامين D زي: <strong>السمك الدهني، البيض، الكبدة، والألبان المدعمة</strong>.</p></div></div>
             </div>
             <div class="reminder-section">
                 <h3>⏰ ذكرني بالشمس</h3>
@@ -494,4 +420,4 @@
 <script src="app.js"></script>
 
 </body>
-            </html>
+    </html>
