@@ -1,6 +1,6 @@
 /* =========================================
    SunDose ☀️ - النسخة النهائية الكاملة
-   مع دعم SVG سنا الجديدة
+   مع Sun Station المتطورة
 ========================================= */
 
 /* =========================================
@@ -28,6 +28,12 @@ let daysCount = parseInt(localStorage.getItem('sundose_days')) || 0;
 let checksCount = parseInt(localStorage.getItem('sundose_checks')) || 0;
 let uvHistory = JSON.parse(localStorage.getItem('sundose_uv_history')) || [];
 let lastCheckDate = localStorage.getItem('sundose_last_date') || '';
+let sunFactsLearned = JSON.parse(localStorage.getItem('sundose_facts_learned')) || 0;
+let quizCompleted = false;
+
+// جرعة الشمس اليومية
+let todayDoseMinutes = parseInt(localStorage.getItem('sundose_today_dose')) || 0;
+let dailyGoal = 20; // هدف يومي افتراضي (يتغير حسب البشرة)
 
 function updateStreak() {
     const today = new Date().toDateString();
@@ -44,6 +50,9 @@ function updateStreak() {
         localStorage.setItem('sundose_streak', streak.toString());
         localStorage.setItem('sundose_days', daysCount.toString());
         localStorage.setItem('sundose_last_date', lastCheckDate);
+        // إعادة ضبط الجرعة اليومية
+        todayDoseMinutes = 0;
+        localStorage.setItem('sundose_today_dose', '0');
     }
     document.querySelectorAll('.streak-badge span').forEach(el => {
         if (el.id && el.id.includes('streak')) {
@@ -71,6 +80,33 @@ function addCheck(uv) {
         const avg = uvHistory.reduce((a, b) => a + b, 0) / uvHistory.length;
         document.getElementById('statAvgUV').textContent = avg.toFixed(1);
     }
+}
+
+function addSunDose(minutes) {
+    todayDoseMinutes += minutes;
+    localStorage.setItem('sundose_today_dose', todayDoseMinutes.toString());
+    updateDoseDisplay();
+}
+
+function updateDoseDisplay() {
+    const goal = getDailyGoal();
+    const percent = Math.min(100, Math.round((todayDoseMinutes / goal) * 100));
+    document.getElementById('doseFill').style.width = percent + '%';
+    document.getElementById('doseProgressText').textContent = percent + '%';
+    document.getElementById('doseMinutesToday').textContent = todayDoseMinutes;
+    document.getElementById('doseGoal').textContent = goal;
+}
+
+function getDailyGoal() {
+    // حسب لون البشرة
+    const skinGoal = {
+        'very-light': 15,
+        'light': 18,
+        'medium': 22,
+        'dark': 28,
+        'very-dark': 35
+    };
+    return skinGoal[user.skinTone] || 20;
 }
 
 /* =========================================
@@ -128,7 +164,7 @@ const doseText = document.getElementById("doseText");
 const portalGreeting = document.getElementById("portalGreeting");
 const portalSubGreeting = document.getElementById("portalSubGreeting");
 
-// SVG elements for Sana (new design)
+// SVG Sana elements
 const sanaSvg = document.getElementById("sanaSvg");
 const questionSanaSvg = document.getElementById("questionSanaSvg");
 const habitSanaSvg = document.getElementById("habitSanaSvg");
@@ -147,6 +183,82 @@ let typingTimer = null;
 let waitingForContinue = false;
 let sunData = null;
 
+// Quiz state
+let quizData = [];
+let quizIndex = 0;
+let quizCorrect = 0;
+let quizAnswered = false;
+
+/* =========================================
+   SUN FACTS (6 حقائق علمية + اختبار)
+========================================= */
+
+const sunFacts = [
+    {
+        icon: '🌅',
+        fact: 'الضوء الصباحي مش مجرد إضاءة... جسمك بيستخدمه كإشارة لضبط إيقاعه اليومي. التعرض للضوء في الصباح يساعد على تحسين اليقظة نهاراً.',
+        source: 'NIGMS'
+    },
+    {
+        icon: '🦴',
+        fact: 'جسمك يقدر يصنع فيتامين D لما جلدك يتعرض لـ UVB ☀️ فيتامين D مهم للعظام والعضلات وامتصاص الكالسيوم.',
+        source: 'WHO'
+    },
+    {
+        icon: '☀️',
+        fact: 'UVB هو النوع المرتبط بتحفيز تصنيع فيتامين D، لكنه أيضًا السبب الرئيسي لحروق الشمس.',
+        source: 'WHO'
+    },
+    {
+        icon: '👀',
+        fact: 'الأشعة فوق البنفسجية ممكن تضر العين مع التعرض الزائد، عشان كده النظارة الشمسية المناسبة مش مجرد شكل.',
+        source: 'WHO'
+    },
+    {
+        icon: '☁️',
+        fact: 'الغيوم مش معناها إن UV اختفى ☁️ الأشعة فوق البنفسجية ممكن تظل موجودة حتى مع وجود السحب.',
+        source: 'WHO'
+    },
+    {
+        icon: '🧴',
+        fact: 'منظمة الصحة العالمية بتوصي باتخاذ إجراءات حماية من الشمس عندما يكون UV Index = 3 أو أعلى.',
+        source: 'WHO'
+    }
+];
+
+const quizQuestions = [
+    {
+        question: 'لما UV يبقى 3 أو أكتر، إيه اللي المفروض نعمله؟',
+        options: ['نقعد في الشمس عادي', 'نستخدم واقي شمس ونتحفظ', 'نلبس ملابس ثقيلة'],
+        correct: 1,
+        explanation: 'منظمة الصحة العالمية بتوصي بالحماية من الشمس لما UV = 3 أو أعلى.'
+    },
+    {
+        question: 'أيهما يسبب حروق الشمس؟',
+        options: ['UVA', 'UVB', 'كلاهما'],
+        correct: 1,
+        explanation: 'UVB هو النوع الرئيسي المسبب لحروق الشمس.'
+    },
+    {
+        question: 'الغيوم تمنع الأشعة فوق البنفسجية تماماً؟',
+        options: ['نعم، تمنعها كلها', 'لا، ممكن تخترق السحب', 'فقط في الشتاء'],
+        correct: 1,
+        explanation: 'الأشعة فوق البنفسجية ممكن تظل موجودة حتى مع وجود السحب.'
+    }
+];
+
+function getTodayFact() {
+    const day = sunFactsLearned % sunFacts.length;
+    return sunFacts[day];
+}
+
+function showDailyFact() {
+    const fact = getTodayFact();
+    document.getElementById('factIcon').textContent = fact.icon;
+    document.getElementById('factText').textContent = fact.fact;
+    document.getElementById('factDay').textContent = 'اليوم ' + (sunFactsLearned + 1);
+}
+
 /* =========================================
    SANA EXPRESSIONS & ANIMATIONS (SVG)
 ========================================= */
@@ -154,8 +266,7 @@ let sunData = null;
 function setSanaExpression(elementId, expression) {
     const container = document.getElementById(elementId);
     if (!container) return;
-    // expression: 'happy', 'surprised', 'thinking', 'flirty', 'calm', 'excited', 'wave'
-    const classes = ['sana-happy', 'sana-surprised', 'sana-thinking', 'sana-flirty', 'sana-calm', 'sana-excited', 'sana-wave'];
+    const classes = ['sana-happy', 'sana-surprised', 'sana-thinking', 'sana-flirty', 'sana-calm', 'sana-excited', 'sana-wave', 'sana-sleeping'];
     classes.forEach(c => container.classList.remove(c));
     if (expression) container.classList.add('sana-' + expression);
 }
@@ -163,8 +274,7 @@ function setSanaExpression(elementId, expression) {
 function setSanaMood(elementId, moodClass, reaction = "") {
     const container = document.getElementById(elementId);
     if (!container) return;
-    // remove old mood classes
-    container.classList.remove('sana-float', 'sana-look-left', 'sana-look-right', 'sana-happy-bounce', 'sana-thinking', 'sana-excited', 'sana-wave');
+    container.classList.remove('sana-float', 'sana-look-left', 'sana-look-right', 'sana-happy-bounce', 'sana-thinking', 'sana-excited', 'sana-wave', 'sana-sleeping');
     if (moodClass) container.classList.add(moodClass);
     if (sanaReaction && reaction) {
         sanaReaction.textContent = reaction;
@@ -172,21 +282,18 @@ function setSanaMood(elementId, moodClass, reaction = "") {
     } else if (sanaReaction) {
         sanaReaction.classList.add('hidden');
     }
-    // add expression
     let expr = 'happy';
     if (moodClass === 'sana-thinking') expr = 'thinking';
     else if (moodClass === 'sana-excited') expr = 'excited';
     else if (moodClass === 'sana-look-left' || moodClass === 'sana-look-right') expr = 'flirty';
     else if (moodClass === 'sana-wave') expr = 'wave';
+    else if (moodClass === 'sana-sleeping') expr = 'sleeping';
     else expr = 'happy';
     setSanaExpression(elementId, expr);
 }
 
 function changeSanaImage(element, image, reaction = "", moodClass = "") {
-    // في التصميم الجديد بنستخدم SVG فقط، مش صور
-    // لكن بنحتفظ بالدالة عشان التوافق، بس هنغير المود
     if (!element) return;
-    // نفترض إن element هو الـ container بتاع الـ SVG
     setSanaMood(element.id, moodClass, reaction);
 }
 
@@ -201,6 +308,10 @@ function showPage(page) {
     if (page) page.classList.remove('hidden');
     window.scrollTo({ top: 0, behavior: 'smooth' });
     updateStreak();
+    if (page === sunDose) {
+        showDailyFact();
+        updateDoseDisplay();
+    }
 }
 
 /* =========================================
@@ -237,7 +348,7 @@ function finishTypingImmediately() {
 }
 
 /* =========================================
-   INTRO (قصة سنا ومعنى اسمها)
+   INTRO
 ========================================= */
 
 const introMessages = [
@@ -299,63 +410,18 @@ if (introText && introNext) {
 }
 
 /* =========================================
-   STEPS (الجنس أولاً)
+   STEPS
 ========================================= */
 
 const steps = [
-    {
-        key: "gender",
-        question: "أول حاجة... أخاطبك إزاي؟ ولد ولا بنت؟ 😉",
-        type: "gender"
-    },
-    {
-        key: "name",
-        question: "طيب دلوقتي الاسم بقى... اسمك إيه؟ 😊 (هيبقى عندي في السجلات الذهبية)",
-        type: "text",
-        label: "اسمك",
-        placeholder: "اكتب اسمك هنا"
-    },
-    {
-        key: "age",
-        question: "حلو يا ${name} 😄 سنك كام؟ (مش هقول لحد 😂)",
-        type: "number",
-        label: "العمر",
-        placeholder: "مثال: 23",
-        unit: "سنة"
-    },
-    {
-        key: "weight",
-        question: "ووزنك تقريبًا كام يا ${name}؟ الرقم مش حكم عليك، ده مجرد جزء من الصورة.",
-        type: "number",
-        label: "الوزن",
-        placeholder: "مثال: 80",
-        unit: "كجم"
-    },
-    {
-        key: "height",
-        question: "وطولك كام؟ 😏 عايزة أعرف أتعامل مع صاحب القامة دي إزاي.",
-        type: "number",
-        label: "الطول",
-        placeholder: "مثال: 175",
-        unit: "سم"
-    },
-    {
-        key: "country",
-        question: "إنت من أنهي بلد يا ${name}؟ 🌍 الشمس عندك مش شرط تكون زي الشمس عند حد تاني.",
-        type: "text",
-        label: "البلد",
-        placeholder: "مثال: مصر"
-    },
-    {
-        key: "skinTone",
-        question: "وصلنا لواحدة مهمة ☀️ بشرتك أقرب لأنهي درجة؟ اختار الأقرب ليك (مقياس فيتزباتريك الحقيقي)",
-        type: "skin"
-    },
-    {
-        key: "sunTime",
-        question: "ولو هنخطط لوقتك مع الشمس... أنهي فترة تناسب يومك أكتر؟",
-        type: "time"
-    }
+    { key: "gender", question: "أول حاجة... أخاطبك إزاي؟ ولد ولا بنت؟ 😉", type: "gender" },
+    { key: "name", question: "طيب دلوقتي الاسم بقى... اسمك إيه؟ 😊 (هيبقى عندي في السجلات الذهبية)", type: "text", label: "اسمك", placeholder: "اكتب اسمك هنا" },
+    { key: "age", question: "حلو يا ${name} 😄 سنك كام؟ (مش هقول لحد 😂)", type: "number", label: "العمر", placeholder: "مثال: 23", unit: "سنة" },
+    { key: "weight", question: "ووزنك تقريبًا كام يا ${name}؟ الرقم مش حكم عليك، ده مجرد جزء من الصورة.", type: "number", label: "الوزن", placeholder: "مثال: 80", unit: "كجم" },
+    { key: "height", question: "وطولك كام؟ 😏 عايزة أعرف أتعامل مع صاحب القامة دي إزاي.", type: "number", label: "الطول", placeholder: "مثال: 175", unit: "سم" },
+    { key: "country", question: "إنت من أنهي بلد يا ${name}؟ 🌍 الشمس عندك مش شرط تكون زي الشمس عند حد تاني.", type: "text", label: "البلد", placeholder: "مثال: مصر" },
+    { key: "skinTone", question: "وصلنا لواحدة مهمة ☀️ بشرتك أقرب لأنهي درجة؟ اختار الأقرب ليك (مقياس فيتزباتريك الحقيقي)", type: "skin" },
+    { key: "sunTime", question: "ولو هنخطط لوقتك مع الشمس... أنهي فترة تناسب يومك أكتر؟", type: "time" }
 ];
 
 if (stepTotal) stepTotal.textContent = steps.length;
@@ -462,6 +528,8 @@ function renderStep() {
                 if (skinChip && color) skinChip.style.background = color;
                 setSanaMood('questionSanaSvg', 'sana-thinking', '☀️');
                 setSanaExpression('questionSanaSvg', 'thinking');
+                dailyGoal = getDailyGoal();
+                updateDoseDisplay();
                 addPoints(3);
             });
         });
@@ -709,7 +777,7 @@ if (backFromLearn) {
 }
 
 /* =========================================
-   OPEN SUN DOSE
+   OPEN SUN DOSE (المحطة)
 ========================================= */
 
 function openSunDose() {
@@ -719,6 +787,10 @@ function openSunDose() {
     const name = user.name || "صديقي";
     sunMessage.textContent = `أهو كده يا ${name} ☀️ دلوقتي بقى دوري الحقيقي. هآخد بياناتك، وأشوف الشمس عند مكانك، وبعدها أركّب الصورة كلها مع بعض.`;
     updateSunUserData();
+    showDailyFact();
+    updateDoseDisplay();
+    updateTimeline();
+    loadSavedData();
 }
 
 /* =========================================
@@ -743,6 +815,7 @@ function updateSunUserData() {
     if (sunTimeValue) sunTimeValue.textContent = timeNames[user.sunTime] || "—";
     if (sunLocationValue) sunLocationValue.textContent = "غير محدد";
     if (uvValue) uvValue.textContent = "—";
+    document.getElementById('metricSkin').textContent = skinNames[user.skinTone] || "—";
     const skinColors = {
         "very-light": "#f6d1b1",
         "light": "#e9b88e",
@@ -754,6 +827,135 @@ function updateSunUserData() {
     if (skinChip && skinColors[user.skinTone]) {
         skinChip.style.background = skinColors[user.skinTone];
     }
+    dailyGoal = getDailyGoal();
+    updateDoseDisplay();
+}
+
+/* =========================================
+   SUN STATUS & METRICS
+========================================= */
+
+function updateSunStatusLive(uv, isDay, sunrise, sunset) {
+    const iconEl = document.getElementById('statusIcon');
+    const textEl = document.getElementById('statusText');
+    const timeEl = document.getElementById('statusTime');
+    const now = new Date();
+    const currentHour = now.getHours();
+    const currentMinute = now.getMinutes();
+    const currentTime = currentHour * 60 + currentMinute;
+    
+    // تحويل أوقات الشروق والغروب
+    let sunriseMin = 0, sunsetMin = 0;
+    if (sunrise) {
+        const [h, m] = sunrise.split(':').map(Number);
+        sunriseMin = h * 60 + m;
+    }
+    if (sunset) {
+        const [h, m] = sunset.split(':').map(Number);
+        sunsetMin = h * 60 + m;
+    }
+
+    // تحديد الحالة
+    let icon = '☀️';
+    let text = 'الشمس مشرقة';
+    let sanaMood = 'sana-happy-bounce';
+    let sanaReaction = '☀️';
+    let sanaExpr = 'happy';
+
+    if (!isDay) {
+        icon = '🌙';
+        text = 'الشمس تحت الأفق 🌙';
+        sanaMood = 'sana-sleeping';
+        sanaReaction = '🌙';
+        sanaExpr = 'sleeping';
+    } else if (currentTime < sunriseMin - 30) {
+        icon = '🌅';
+        text = 'الشروق قريب 🌅';
+        sanaMood = 'sana-thinking';
+        sanaReaction = '🌅';
+        sanaExpr = 'thinking';
+    } else if (currentTime >= sunriseMin - 30 && currentTime < sunriseMin + 30) {
+        icon = '🌅';
+        text = 'الشمس بتشرق ☀️';
+        sanaMood = 'sana-excited';
+        sanaReaction = '🌅';
+        sanaExpr = 'excited';
+    } else if (currentTime > sunsetMin - 30 && currentTime < sunsetMin) {
+        icon = '🌇';
+        text = 'الغروب قريب 🌇';
+        sanaMood = 'sana-thinking';
+        sanaReaction = '🌇';
+        sanaExpr = 'thinking';
+    } else if (currentTime >= sunsetMin) {
+        icon = '🌙';
+        text = 'الشمس تحت الأفق 🌙';
+        sanaMood = 'sana-sleeping';
+        sanaReaction = '🌙';
+        sanaExpr = 'sleeping';
+    } else if (uv < 3) {
+        icon = '🌤️';
+        text = 'شمس خفيفة ☀️';
+        sanaMood = 'sana-look-left';
+        sanaReaction = '🌤️';
+        sanaExpr = 'calm';
+    } else if (uv < 6) {
+        icon = '☀️';
+        text = 'شمس نشطة ☀️';
+        sanaMood = 'sana-happy-bounce';
+        sanaReaction = '☀️';
+        sanaExpr = 'happy';
+    } else if (uv < 8) {
+        icon = '☀️';
+        text = 'شمس قوية ⚠️';
+        sanaMood = 'sana-thinking';
+        sanaReaction = '⚠️';
+        sanaExpr = 'thinking';
+    } else {
+        icon = '☀️';
+        text = 'شمس شديدة 🚫';
+        sanaMood = 'sana-thinking';
+        sanaReaction = '🚫';
+        sanaExpr = 'thinking';
+    }
+
+    iconEl.textContent = icon;
+    textEl.textContent = text;
+    timeEl.textContent = now.toLocaleTimeString('ar-EG', { hour: '2-digit', minute: '2-digit' });
+    
+    // تحديث سنا حسب الحالة
+    setSanaMood('sunSanaSvg', sanaMood, sanaReaction);
+    setSanaExpression('sunSanaSvg', sanaExpr);
+}
+
+function updateMetrics(uv, temp, sunrise, sunset, cloudCover) {
+    document.getElementById('metricUV').textContent = uv;
+    document.getElementById('metricTemp').textContent = temp + '°';
+    document.getElementById('metricSunrise').textContent = sunrise || '--:--';
+    document.getElementById('metricSunset').textContent = sunset || '--:--';
+    document.getElementById('metricCloud').textContent = cloudCover + '%';
+}
+
+function updateTimeline() {
+    // استخدام البيانات المحفوظة أو وقت تقديري
+    const sunrise = document.getElementById('metricSunrise').textContent || '06:00';
+    const sunset = document.getElementById('metricSunset').textContent || '18:00';
+    
+    // حساب النافذة (تقريباً)
+    const [sh, sm] = sunrise.split(':').map(Number);
+    const [ss, es] = sunset.split(':').map(Number);
+    const startMin = sh * 60 + sm + 60;
+    const endMin = ss * 60 + es - 60;
+    const startH = Math.floor(startMin / 60);
+    const startM = startMin % 60;
+    const endH = Math.floor(endMin / 60);
+    const endM = endMin % 60;
+    
+    document.getElementById('timelineSunrise').textContent = sunrise;
+    document.getElementById('timelineSunset').textContent = sunset;
+    document.getElementById('timelineWindowStart').textContent = 
+        String(startH).padStart(2, '0') + ':' + String(startM).padStart(2, '0');
+    document.getElementById('timelineWindowEnd').textContent = 
+        String(endH).padStart(2, '0') + ':' + String(endM).padStart(2, '0');
 }
 
 /* =========================================
@@ -805,7 +1007,19 @@ async function loadSunData(latitude, longitude) {
         const isDay = Number(data.current?.is_day ?? 0);
         const cloudCover = Number(data.current?.cloud_cover ?? 0);
         const uvMax = Number(data.daily?.uv_index_max?.[0] ?? uv);
-        updateSunResult(latitude, longitude, uv, temperature, isDay, cloudCover, uvMax);
+        
+        // استخراج أوقات الشروق والغروب
+        let sunrise = '--:--', sunset = '--:--';
+        if (data.daily?.sunrise?.[0]) {
+            const d = new Date(data.daily.sunrise[0]);
+            sunrise = d.toLocaleTimeString('ar-EG', { hour: '2-digit', minute: '2-digit' });
+        }
+        if (data.daily?.sunset?.[0]) {
+            const d = new Date(data.daily.sunset[0]);
+            sunset = d.toLocaleTimeString('ar-EG', { hour: '2-digit', minute: '2-digit' });
+        }
+        
+        updateSunResult(latitude, longitude, uv, temperature, isDay, cloudCover, uvMax, sunrise, sunset);
     } catch (error) {
         console.error("SunDose API:", error);
         sunStatus.textContent = "تعذر قراءة بيانات الشمس";
@@ -818,81 +1032,137 @@ async function loadSunData(latitude, longitude) {
 }
 
 /* =========================================
-   SUN RESULT
+   SUN RESULT (مع كل الإضافات الجديدة)
 ========================================= */
 
-function updateSunResult(latitude, longitude, uv, temperature, isDay, cloudCover, uvMax) {
+function updateSunResult(latitude, longitude, uv, temperature, isDay, cloudCover, uvMax, sunrise, sunset) {
     const roundedUV = Math.round(uv * 10) / 10;
     if (sunLocationValue) sunLocationValue.textContent = `${latitude.toFixed(2)}, ${longitude.toFixed(2)}`;
     if (uvValue) uvValue.textContent = roundedUV.toString();
 
-    if (!isDay) {
-        sunStatus.textContent = "الشمس دلوقتي تحت الأفق 🌙";
-        analysisTitle.textContent = "مفيش شمس دلوقتي";
-        analysisText.textContent = "وده بالظبط اللي كنا عايزين نعرفه. SunDose مش هيخمن جرعة بالليل؛ هنستنى نافذة شمس فعلية.";
-        analysisIcon.textContent = "🌙";
-        doseResult.classList.add('hidden');
-        doseMeterFill.style.width = "0%";
-        const name = user.name || "صديقي";
-        sunMessage.textContent = `لقيتها يا ${name} 🌙 الشمس مش موجودة دلوقتي، وده أحسن من أي تخمين. SunDose شاف الحقيقة وقالك الحقيقة.`;
-        setSanaMood('sunSanaSvg', 'sana-look-left', '🌙');
-        setSanaExpression('sunSanaSvg', 'calm');
-        if (goToHealthPortalBtn) goToHealthPortalBtn.classList.add('hidden');
-        document.getElementById('prosCons')?.classList.add('hidden');
-        document.getElementById('advancedTips')?.classList.add('hidden');
-        document.getElementById('extraActions')?.classList.add('hidden');
-        return;
-    }
+    // تحديث المؤشرات
+    updateMetrics(roundedUV, temperature, sunrise, sunset, cloudCover);
+    updateSunStatusLive(roundedUV, isDay, sunrise, sunset);
+    updateTimeline();
 
-    if (uv < 3) {
-        sunStatus.textContent = `UV هادي • ${temperature}°`;
-        analysisTitle.textContent = "الشمس هادية ☀️";
-        analysisText.textContent = `الـUV دلوقتي ${roundedUV}. الرقم منخفض نسبيًا، وسنا هتستخدم باقي بياناتك بدل ما تعتمد على UV لوحده.`;
-        analysisIcon.textContent = "🌤️";
-    } else if (uv < 6) {
-        sunStatus.textContent = `UV متوسط • ${temperature}°`;
-        analysisTitle.textContent = "الشمس نشطة ☀️";
-        analysisText.textContent = `الـUV دلوقتي ${roundedUV}. هنا بقى بيانات البشرة والوقت والمكان تبدأ تفرق في القراءة.`;
-        analysisIcon.textContent = "☀️";
-    } else if (uv < 8) {
-        sunStatus.textContent = `UV مرتفع • ${temperature}°`;
-        analysisTitle.textContent = "الشمس قوية ⚠️";
-        analysisText.textContent = `الـUV ${roundedUV}، وده مستوى محتاج تعامل أكثر حذرًا مع التعرض المباشر.`;
-        analysisIcon.textContent = "⚠️";
-    } else {
-        sunStatus.textContent = `UV شديد • ${temperature}°`;
-        analysisTitle.textContent = "الشمس شديدة جدًا ⚠️";
-        analysisText.textContent = `الـUV ${roundedUV}. SunDose هنا مش هيشجع على التعرض غير المحمي لمجرد الوصول لرقم معين.`;
-        analysisIcon.textContent = "🚫";
-    }
+    // تحديث النافذة المثالية
+    updateBestWindow(roundedUV, sunrise, sunset);
 
-    calculateSunPlan(uv, cloudCover, uvMax);
-
+    // تحديث رسالة سنا و"ماذا تفعل الآن؟"
     const name = user.name || "صديقي";
-    if (uv >= 8) {
-        sunMessage.textContent = `يا ${name} ⚠️ الـUV ${roundedUV}، وده شديد جداً. سنا بتنصحك متقعدش في الشمس دلوقتي خالص، الحماية أولاً.`;
-        setSanaMood('sunSanaSvg', 'sana-thinking', '⚠️');
-        setSanaExpression('sunSanaSvg', 'thinking');
-    } else if (uv >= 6) {
-        sunMessage.textContent = `يا ${name} ☀️ الـUV ${roundedUV}، الشمس نشطة وقوية. لو هتتعرض، خليها دقايق معدودة وابقى محمي.`;
-        setSanaMood('sunSanaSvg', 'sana-happy-bounce', '☀️');
-        setSanaExpression('sunSanaSvg', 'happy');
-    } else if (uv >= 3) {
-        sunMessage.textContent = `يا ${name} ☀️ الـUV ${roundedUV}، الشمس معتدلة. ده وقت مناسب للتعرض لكن بلاش تهمل الحماية لو هتقعد فترة طويلة.`;
-        setSanaMood('sunSanaSvg', 'sana-look-right', '☀️');
-        setSanaExpression('sunSanaSvg', 'flirty');
-    } else {
-        sunMessage.textContent = `يا ${name} ☀️ الـUV ${roundedUV}، الشمس هادية. ممكن تاخد جرعتك بأمان، لكن بردو خلي بالك من وقت التعرض حسب بشرتك.`;
+    let actionText = '';
+    let sanaMsg = '';
+
+    if (!isDay) {
+        actionText = '🌙 الشمس مش موجودة دلوقتي. ده وقت مناسب للراحة أو القراءة. نستنى شروق النهار الجديد ☀️';
+        sanaMsg = `لقيتها يا ${name} 🌙 الشمس مش موجودة دلوقتي، وده أحسن من أي تخمين. SunDose شاف الحقيقة وقالك الحقيقة.`;
+        setSanaMood('sunSanaSvg', 'sana-sleeping', '🌙');
+        setSanaExpression('sunSanaSvg', 'sleeping');
+    } else if (roundedUV < 3) {
+        actionText = '🌤️ UV منخفض، ده وقت ممتاز للتعرض للشمس بأمان. ممكن تخرج وتاخد جرعتك من الضوء الطبيعي ☀️';
+        sanaMsg = `يا ${name} ☀️ الـUV ${roundedUV}، الشمس هادية. ممكن تاخد جرعتك بأمان، لكن بردو خلي بالك من وقت التعرض حسب بشرتك.`;
         setSanaMood('sunSanaSvg', 'sana-look-left', '🌤️');
         setSanaExpression('sunSanaSvg', 'calm');
+    } else if (roundedUV < 6) {
+        actionText = '☀️ UV متوسط، التعرض القصير مفيد. لو هتخرج، استخدم واقي شمس واقعد في الظل بعد ١٠ دقايق.';
+        sanaMsg = `يا ${name} ☀️ الـUV ${roundedUV}، الشمس معتدلة. ده وقت مناسب للتعرض لكن بلاش تهمل الحماية لو هتقعد فترة طويلة.`;
+        setSanaMood('sunSanaSvg', 'sana-happy-bounce', '☀️');
+        setSanaExpression('sunSanaSvg', 'happy');
+    } else if (roundedUV < 8) {
+        actionText = '⚠️ UV مرتفع، خلي تعرضك قصير جداً (5-10 دقايق). استخدم واقي شمس SPF 50+ ولبس قبعة ونظارة.';
+        sanaMsg = `يا ${name} ☀️ الـUV ${roundedUV}، الشمس نشطة وقوية. لو هتتعرض، خليها دقايق معدودة وابقى محمي.`;
+        setSanaMood('sunSanaSvg', 'sana-thinking', '⚠️');
+        setSanaExpression('sunSanaSvg', 'thinking');
+    } else {
+        actionText = '🚫 UV شديد جداً، تجنب التعرض المباشر تماماً. لو مضطر تخرج، استخدم واقي شمس SPF 50+ كل ساعتين ولبس كامل التغطية.';
+        sanaMsg = `يا ${name} ⚠️ الـUV ${roundedUV}، وده شديد جداً. سنا بتنصحك متقعدش في الشمس دلوقتي خالص، الحماية أولاً.`;
+        setSanaMood('sunSanaSvg', 'sana-thinking', '🚫');
+        setSanaExpression('sunSanaSvg', 'thinking');
     }
 
+    document.getElementById('actionText').textContent = actionText;
+    sunMessage.textContent = sanaMsg;
+
+    // حساب الجرعة
+    calculateSunPlan(uv, cloudCover, uvMax);
+
+    // إظهار الإضافات
     showExtraFeatures(uv);
 
     addCheck(uv);
     if (goToHealthPortalBtn) goToHealthPortalBtn.classList.remove('hidden');
     locationButton.classList.add('hidden');
     addPoints(10);
+    updateDoseDisplay();
+
+    // زيادة عدد الحقائق المتعلمة (مرة واحدة في اليوم)
+    sunFactsLearned += 1;
+    localStorage.setItem('sundose_facts_learned', sunFactsLearned.toString());
+}
+
+/* =========================================
+   BEST WINDOW
+========================================= */
+
+function updateBestWindow(uv, sunrise, sunset) {
+    const windowEl = document.getElementById('bestWindow');
+    const windowTime = document.getElementById('windowTime');
+    const windowStatus = document.getElementById('windowStatusText');
+    const windowTimer = document.getElementById('windowTimer');
+    const countdown = document.getElementById('windowCountdown');
+
+    if (!sunrise || !sunset || sunrise === '--:--' || sunset === '--:--') {
+        windowTime.textContent = '--:-- — --:--';
+        windowStatus.textContent = 'جاري تحديد النافذة...';
+        windowTimer.style.display = 'none';
+        return;
+    }
+
+    // حساب النافذة (بعد الشروق بساعة وقبل الغروب بساعة)
+    const [sh, sm] = sunrise.split(':').map(Number);
+    const [ss, es] = sunset.split(':').map(Number);
+    const startMin = sh * 60 + sm + 60;
+    const endMin = ss * 60 + es - 60;
+    
+    const startH = Math.floor(startMin / 60) % 24;
+    const startM = startMin % 60;
+    const endH = Math.floor(endMin / 60) % 24;
+    const endM = endMin % 60;
+    
+    const startStr = String(startH).padStart(2, '0') + ':' + String(startM).padStart(2, '0');
+    const endStr = String(endH).padStart(2, '0') + ':' + String(endM).padStart(2, '0');
+    windowTime.textContent = `${startStr} — ${endStr}`;
+
+    // هل الوقت الحالي داخل النافذة؟
+    const now = new Date();
+    const currentMin = now.getHours() * 60 + now.getMinutes();
+    const isInWindow = currentMin >= startMin && currentMin <= endMin && uv < 6;
+
+    if (isInWindow && uv < 6) {
+        windowStatus.textContent = '🔥 أنت داخل الوقت المثالي الآن!';
+        windowTimer.style.display = 'flex';
+        // عد تنازلي (بالدقائق المتبقية للنافذة)
+        const remaining = Math.max(0, Math.floor((endMin - currentMin) / 60));
+        countdown.textContent = remaining + ' دقيقة متبقية';
+        windowEl.style.borderColor = '#4caf50';
+        windowEl.style.background = 'linear-gradient(135deg, #e8f5e9, #c8e6c9)';
+    } else if (currentMin < startMin) {
+        const wait = Math.floor((startMin - currentMin) / 60);
+        windowStatus.textContent = `⏳ هتفتح النافذة بعد ${wait} دقيقة`;
+        windowTimer.style.display = 'none';
+        windowEl.style.borderColor = '#ffb300';
+        windowEl.style.background = 'linear-gradient(135deg, #fff8e1, #ffecb3)';
+    } else if (currentMin > endMin) {
+        windowStatus.textContent = '🌙 النافذة انتهت اليوم. بكره هتفتح تاني ☀️';
+        windowTimer.style.display = 'none';
+        windowEl.style.borderColor = '#9e9e9e';
+        windowEl.style.background = 'linear-gradient(135deg, #f5f5f5, #e0e0e0)';
+    } else if (uv >= 6) {
+        windowStatus.textContent = '⚠️ UV مرتفع حالياً، انتظر وقت أقل UV';
+        windowTimer.style.display = 'none';
+        windowEl.style.borderColor = '#f44336';
+        windowEl.style.background = 'linear-gradient(135deg, #ffebee, #ffcdd2)';
+    }
 }
 
 /* =========================================
@@ -974,386 +1244,4 @@ function getAdvancedTips(uv, skinTone) {
         'dark': 'سمراء',
         'very-dark': 'داكنة'
     };
-    const skin = skinNames[skinTone] || 'غير معروفة';
-
-    tips.push(`🔹 بشرتك ${skin}، وده بيأثر على مدة التعرض الآمنة.`);
-    
-    if (uv < 3) {
-        tips.push(`🔹 التعرض ${uv < 1 ? '30' : '25'} دقيقة آمن لبشرتك`);
-    } else if (uv < 6) {
-        tips.push(`🔹 التعرض ${uv < 5 ? '18' : '12'} دقيقة مناسب لبشرتك`);
-    } else if (uv < 8) {
-        tips.push(`🔹 التعرض ${uv < 7 ? '7' : '5'} دقايق كحد أقصى لبشرتك`);
-    } else {
-        tips.push('🔹 التعرض المباشر غير آمن لبشرتك حالياً');
-    }
-
-    tips.push('🕐 أوقات الذروة: 10 صباحاً - 4 عصراً (تجنبها قدر الإمكان)');
-    tips.push('🧴 واقي الشمس ضروري عند UV 3 أو أكثر');
-    tips.push('👕 الملابس الفاتحة والفضفاضة تحمي أفضل');
-    tips.push('💧 اشرب ماء كافي قبل وبعد التعرض للشمس');
-    tips.push('🕶️ نظارة شمسية تحمي عينيك من الأشعة الضارة');
-
-    return tips;
-}
-
-/* =========================================
-   HISTORY
-========================================= */
-
-let exposureHistory = JSON.parse(localStorage.getItem('sundose_history')) || [];
-
-function saveExposureRecord(uv, minutes, status, date = new Date()) {
-    const record = {
-        date: date.toISOString(),
-        uv: uv,
-        minutes: minutes,
-        status: status,
-        temperature: sunData?.current?.temperature_2m || '—'
-    };
-    exposureHistory.push(record);
-    if (exposureHistory.length > 30) {
-        exposureHistory = exposureHistory.slice(-30);
-    }
-    localStorage.setItem('sundose_history', JSON.stringify(exposureHistory));
-}
-
-function renderHistory() {
-    const list = document.getElementById('historyList');
-    if (!list) return;
-    
-    if (exposureHistory.length === 0) {
-        list.innerHTML = `<div class="history-item" style="justify-content:center;color:#9a8d7d;">مفيش سجلات للتعرض للشمس حتى الآن ☀️</div>`;
-        return;
-    }
-
-    const recent = [...exposureHistory].reverse().slice(0, 10);
-    
-    list.innerHTML = recent.map(record => {
-        const date = new Date(record.date);
-        const dateStr = date.toLocaleDateString('ar-EG');
-        const timeStr = date.toLocaleTimeString('ar-EG', { hour: '2-digit', minute: '2-digit' });
-        const statusClass = record.status === 'safe' ? 'safe' : record.status === 'warning' ? 'warning' : 'danger';
-        const statusText = record.status === 'safe' ? 'آمن ✅' : record.status === 'warning' ? 'تنبيه ⚠️' : 'خطر 🚫';
-        
-        return `
-            <div class="history-item">
-                <div>
-                    <div class="date">${dateStr}</div>
-                    <div class="time">${timeStr}</div>
-                </div>
-                <div>
-                    <div class="uv">UV ${record.uv}</div>
-                    ${record.minutes ? `<div class="time">${record.minutes} دقيقة</div>` : ''}
-                </div>
-                <span class="status ${statusClass}">${statusText}</span>
-            </div>
-        `;
-    }).join('');
-
-    const stats = document.getElementById('historyStats');
-    if (stats) {
-        const total = exposureHistory.length;
-        const avgUV = (exposureHistory.reduce((sum, r) => sum + r.uv, 0) / total).toFixed(1);
-        const safeDays = exposureHistory.filter(r => r.status === 'safe').length;
-        const warningDays = exposureHistory.filter(r => r.status === 'warning').length;
-        const dangerDays = exposureHistory.filter(r => r.status === 'danger').length;
-        
-        stats.innerHTML = `
-            <div class="stat-box"><span class="number">${total}</span><span class="label">إجمالي الأيام</span></div>
-            <div class="stat-box"><span class="number">${avgUV}</span><span class="label">متوسط UV</span></div>
-            <div class="stat-box"><span class="number">${safeDays}</span><span class="label">أيام آمنة</span></div>
-            <div class="stat-box"><span class="number">${warningDays}</span><span class="label">أيام تنبيه</span></div>
-            <div class="stat-box"><span class="number">${dangerDays}</span><span class="label">أيام خطر</span></div>
-            <div class="stat-box"><span class="number">${Math.round(safeDays / total * 100)}%</span><span class="label">نسبة الأمان</span></div>
-        `;
-    }
-}
-
-/* =========================================
-   FORECAST
-========================================= */
-
-async function loadForecast(latitude, longitude) {
-    try {
-        const url = `https://api.open-meteo.com/v1/forecast?latitude=${latitude}&longitude=${longitude}&daily=uv_index_max&timezone=auto&forecast_days=7`;
-        const response = await fetch(url);
-        if (!response.ok) throw new Error('Forecast API error');
-        const data = await response.json();
-        return data;
-    } catch (error) {
-        console.error('Forecast error:', error);
-        return null;
-    }
-}
-
-function renderForecast(forecastData) {
-    const list = document.getElementById('forecastList');
-    const advice = document.getElementById('forecastAdvice');
-    if (!list) return;
-
-    if (!forecastData || !forecastData.daily) {
-        list.innerHTML = `<div style="text-align:center;color:#9a8d7d;">مفيش بيانات توقعات متاحة حالياً</div>`;
-        return;
-    }
-
-    const days = ['الأحد', 'الإثنين', 'الثلاثاء', 'الأربعاء', 'الخميس', 'الجمعة', 'السبت'];
-    
-    const items = forecastData.daily.time.map((date, index) => {
-        const uvMax = forecastData.daily.uv_index_max[index];
-        const d = new Date(date);
-        const dayName = index === 0 ? 'اليوم' : days[d.getDay()];
-        const status = uvMax < 3 ? 'safe' : uvMax < 6 ? 'warning' : 'danger';
-        const statusText = uvMax < 3 ? 'آمن ✅' : uvMax < 6 ? 'تنبيه ⚠️' : 'خطر 🚫';
-        
-        return `
-            <div class="forecast-item">
-                <div class="day">${dayName}</div>
-                <div class="uv-forecast">${uvMax}</div>
-                <span class="status ${status}">${statusText}</span>
-            </div>
-        `;
-    }).join('');
-
-    list.innerHTML = items;
-
-    const avgUV = forecastData.daily.uv_index_max.reduce((a, b) => a + b, 0) / forecastData.daily.uv_index_max.length;
-    let adviceText = '';
-    if (avgUV < 3) {
-        adviceText = '🌤️ الأيام القادمة هادية، ده وقت مناسب للتعرض للشمس بأمان. استمتع بالشمس وخلّي بالك من وقت التعرض حسب بشرتك.';
-    } else if (avgUV < 6) {
-        adviceText = '☀️ الأيام القادمة فيها UV متوسط، خلي تعرضك قصير ومحمي. متنساش واقي الشمس والقبعة.';
-    } else {
-        adviceText = '⚠️ الأيام القادمة فيها UV مرتفع، خلي بالك جداً. حاول تتجنب التعرض المباشر في أوقات الذروة (10ص-4م) واستخدم واقي شمس باستمرار.';
-    }
-    advice.innerHTML = `<p>💡 ${adviceText}</p>`;
-}
-
-/* =========================================
-   SHARE REPORT
-========================================= */
-
-function generateReport(uv, minutes, status, skinTone) {
-    const skinNames = {
-        'very-light': 'فاتحة جداً',
-        'light': 'فاتحة',
-        'medium': 'متوسطة',
-        'dark': 'سمراء',
-        'very-dark': 'داكنة'
-    };
-    const skin = skinNames[skinTone] || 'غير معروفة';
-    const date = new Date().toLocaleDateString('ar-EG');
-    const time = new Date().toLocaleTimeString('ar-EG', { hour: '2-digit', minute: '2-digit' });
-    const statusText = status === 'safe' ? 'آمن ✅' : status === 'warning' ? 'تنبيه ⚠️' : 'خطر 🚫';
-    
-    return `
-☀️ تقرير SunDose - ${date}
-
-📊 بيانات اليوم:
-• UV Index: ${uv}
-• الوقت: ${time}
-• بشرتك: ${skin}
-• الجرعة الموصى بها: ${minutes || 'غير متاحة'} دقيقة
-• الحالة: ${statusText}
-
-💡 نصائح:
-${status === 'safe' ? '• التعرض آمن، استمتع بالشمس بحذر' : status === 'warning' ? '• خلي تعرضك قصير واستخدم واقي شمس' : '• تجنب التعرض المباشر، الحماية أولاً'}
-
----
-تم إنشاء التقرير بواسطة SunDose ☀️
-صديقك الصحي للشمس
-    `;
-}
-
-/* =========================================
-   ربط الأزرار الجديدة
-========================================= */
-
-document.getElementById('viewHistoryBtn')?.addEventListener('click', function() {
-    renderHistory();
-    showPage(document.getElementById('historyLog'));
-});
-
-document.getElementById('viewForecastBtn')?.addEventListener('click', function() {
-    if (sunData) {
-        const lat = parseFloat(sunLocationValue?.textContent?.split(',')[0]) || 0;
-        const lon = parseFloat(sunLocationValue?.textContent?.split(',')[1]) || 0;
-        loadForecast(lat, lon).then(data => {
-            renderForecast(data);
-            showPage(document.getElementById('forecastView'));
-        });
-    } else {
-        alert('محتاج تحدد موقعك الأول عشان نشوف التوقعات ☀️');
-    }
-});
-
-document.getElementById('shareReportBtn')?.addEventListener('click', function() {
-    const uv = parseFloat(uvValue?.textContent) || 0;
-    const minutes = doseMinutes?.textContent || '—';
-    let status = 'safe';
-    if (uv >= 8) status = 'danger';
-    else if (uv >= 3) status = 'warning';
-    const report = generateReport(uv, minutes, status, user.skinTone);
-    
-    if (navigator.share) {
-        navigator.share({
-            title: 'تقرير SunDose اليومي ☀️',
-            text: report,
-        }).catch(() => {});
-    } else {
-        navigator.clipboard?.writeText(report).then(() => {
-            alert('✅ تم نسخ التقرير للحافظة، شاركه مع مين تحب!');
-        }).catch(() => {
-            alert('📝 التقرير:\n\n' + report);
-        });
-    }
-});
-
-document.getElementById('backFromHistory')?.addEventListener('click', function() {
-    showPage(document.getElementById('sunDose'));
-});
-
-document.getElementById('backFromForecast')?.addEventListener('click', function() {
-    showPage(document.getElementById('sunDose'));
-});
-
-/* =========================================
-   SUN PLAN
-========================================= */
-
-function calculateSunPlan(uv, cloudCover, uvMax) {
-    const skinFactor = {
-        "very-light": 0.55,
-        "light": 0.70,
-        "medium": 0.90,
-        "dark": 1.15,
-        "very-dark": 1.35
-    };
-    const selectedSkin = skinFactor[user.skinTone] || 0.90;
-
-    let baseMinutes;
-    if (uv <= 0) baseMinutes = 0;
-    else if (uv < 1) baseMinutes = 30;
-    else if (uv < 3) baseMinutes = 25;
-    else if (uv < 5) baseMinutes = 18;
-    else if (uv < 7) baseMinutes = 12;
-    else if (uv < 9) baseMinutes = 7;
-    else baseMinutes = 0;
-
-    let calculated = baseMinutes * selectedSkin;
-    const cloudFactor = 1 - (Math.min(cloudCover, 80) / 100 * 0.15);
-    calculated *= cloudFactor;
-    if (user.sunTime === "midday") calculated *= 0.80;
-    else if (user.sunTime === "morning" || user.sunTime === "evening") calculated *= 1.10;
-    calculated = Math.round(calculated);
-
-    if (uv >= 8) calculated = 0;
-
-    const meterPercent = Math.min(100, Math.max(0, (uv / 11) * 100));
-    if (doseMeterFill) doseMeterFill.style.width = `${meterPercent}%`;
-
-    if (!doseResult || !doseMinutes || !doseTitle || !doseText) return;
-
-    if (uv >= 8) {
-        doseResult.classList.remove('hidden');
-        doseMinutes.textContent = "—";
-        doseTitle.textContent = "سنا مش هتديك وقت تعرض مباشر";
-        doseText.textContent = "الـUV شديد جدًا. الأولوية هنا للحماية والظل، مش مطاردة رقم بالدقائق.";
-        return;
-    }
-    if (calculated <= 0) {
-        doseResult.classList.add('hidden');
-        return;
-    }
-
-    doseResult.classList.remove('hidden');
-    doseMinutes.textContent = calculated;
-
-    if (uv < 3) {
-        doseTitle.textContent = "نافذة هادئة نسبيًا ☀️";
-        doseText.textContent = "دي قراءة تخطيطية مبنية على بياناتك الحالية. لو هدفك فيتامين D أو عندك حالة خاصة، ده محتاج تقييم طبي منفصل.";
-    } else if (uv < 6) {
-        doseTitle.textContent = "نافذة قصيرة ومركزة ☀️";
-        doseText.textContent = "الشمس نشطة، فـSunDose بيقلل الوقت التخطيطي بدل ما يدي نفس الرقم لكل الناس.";
-    } else {
-        doseTitle.textContent = "نافذة شديدة الحذر ⚠️";
-        doseText.textContent = "الـUV مرتفع. الرقم هنا للتخطيط فقط، والحماية أهم من محاولة إكمال وقت معين.";
-    }
-}
-
-/* =========================================
-   LOCATION ERROR
-========================================= */
-
-function showLocationError(message) {
-    sunStatus.textContent = "الموقع محتاج إذن";
-    analysisTitle.textContent = "محتاج موقعك 📍";
-    analysisText.textContent = message;
-    analysisIcon.textContent = "📍";
-    locationButton.disabled = false;
-    locationButton.textContent = "📍 تحديد موقعي وابدأ التحليل";
-}
-
-/* =========================================
-   BACK & PORTAL
-========================================= */
-
-if (backToHabits) {
-    backToHabits.addEventListener("click", function() {
-        showHabits();
-    });
-}
-
-if (goToHealthPortalBtn) {
-    goToHealthPortalBtn.addEventListener("click", function() {
-        showPage(healthPortal);
-        portalGreeting.textContent = `أهلاً بك في بوابتك الصحية 💛`;
-        portalSubGreeting.textContent = `هنا هتلاقي كل حاجة محتاجها عشان تفضل في أمان مع الشمس`;
-        updateStreak();
-        const now = new Date();
-        const hour = now.getHours();
-        let best = "";
-        if (hour < 10) best = "قبل 10 صباحاً";
-        else if (hour < 16) best = "بعد 4 عصراً";
-        else best = "غداً قبل 10 صباحاً";
-        document.getElementById('statBestTime').textContent = best;
-        setSanaMood('portalSanaSvg', 'sana-happy-bounce', '💛');
-        setSanaExpression('portalSanaSvg', 'happy');
-    });
-}
-
-if (backFromPortal) {
-    backFromPortal.addEventListener("click", function() {
-        showPage(sunDose);
-    });
-}
-
-/* =========================================
-   REMINDER
-========================================= */
-
-document.getElementById('setReminder')?.addEventListener('click', function() {
-    const time = document.getElementById('reminderTime').value;
-    if (!time) return alert('حدد وقت التذكير');
-    localStorage.setItem('sundose_reminder', time);
-    document.getElementById('reminderStatus').textContent = `التذكير مفعّل عند الساعة ${time} ⏰`;
-    document.getElementById('reminderStatus').classList.add('active');
-    alert(`سنا هتذكرك كل يوم الساعة ${time} تاخد جرعتك من الشمس ☀️`);
-});
-
-const savedReminder = localStorage.getItem('sundose_reminder');
-if (savedReminder) {
-    document.getElementById('reminderTime').value = savedReminder;
-    document.getElementById('reminderStatus').textContent = `التذكير مفعّل عند الساعة ${savedReminder} ⏰`;
-    document.getElementById('reminderStatus').classList.add('active');
-}
-
-/* =========================================
-   SAFETY / DEBUG
-========================================= */
-
-if (!startButton) console.error("SunDose: startButton غير موجود");
-if (!nextButton) console.error("SunDose: nextButton غير موجود");
-if (!habitList) console.error("SunDose: habitList غير موجود");
-
-console.log("☀️ SunDose loaded successfully!");
+    const skin = skinNames[skinTone] || 'غير معروفة
