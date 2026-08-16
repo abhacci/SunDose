@@ -1,5 +1,5 @@
 /* =========================================
-   SunDose ☀️ - النسخة النهائية مع Sun Station
+   SunDose ☀️ - النسخة النهائية الكاملة
 ========================================= */
 
 * {
@@ -59,7 +59,7 @@ button {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    margin-bottom: 5px;
+    margin-bottom: 8px;
     gap: 4px;
 }
 
@@ -119,22 +119,9 @@ button {
 }
 
 @keyframes livePulse {
-
-    0%,
-    100% {
-        opacity: .4;
-        transform: scale(.8);
-    }
-
-    50% {
-        opacity: 1;
-        transform: scale(1);
-    }
+    0%, 100% { opacity: .4; transform: scale(.8); }
+    50% { opacity: 1; transform: scale(1); }
 }
-
-/* =========================================
-   STREAK BADGE
-========================================= */
 
 .streak-badge {
     display: flex;
@@ -180,73 +167,64 @@ button {
     transition: opacity 0.3s ease;
 }
 
-.sana-happy .sana-blush {
-    opacity: 0.8;
-}
-.sana-happy .sana-mouth {
-    display: block;
-}
-.sana-happy .sana-mouth-open {
-    display: none;
-}
-.sana-surprised .sana-mouth {
-    display: none;
-}
-.sana-surprised .sana-mouth-open {
-    display: block;
-}
-.sana-thinking .sana-eyes-g {
-    transform: translateY(-2px);
-}
-.sana-calm .sana-blush {
-    opacity: 0.2;
-}
+.sana-happy .sana-blush { opacity: 0.8; }
+.sana-happy .sana-mouth { display: block; }
+.sana-happy .sana-mouth-open { display: none; }
+.sana-surprised .sana-mouth { display: none; }
+.sana-surprised .sana-mouth-open { display: block; }
+.sana-thinking .sana-eyes-g { transform: translateY(-2px); }
+.sana-calm .sana-blush { opacity: 0.2; }
 
-/* حركات سنا */
 .sana-float {
     animation: sanaFloat 3.8s ease-in-out infinite;
 }
 @keyframes sanaFloat {
     0%, 100% { transform: translateY(0) rotate(0deg) scale(1); }
-    50% { transform: translateY(-10px) rotate(2deg) scale(1.03); }
+    50% { transform: translateY(-8px) rotate(2deg) scale(1.03); }
 }
+
 .sana-look-left {
     animation: sanaLookLeft 2.8s ease-in-out infinite;
 }
 @keyframes sanaLookLeft {
     0%, 100% { transform: translateY(0) rotate(0deg) scale(1); }
-    50% { transform: translateY(-8px) rotate(-6deg) scale(1.04); }
+    50% { transform: translateY(-6px) rotate(-5deg) scale(1.04); }
 }
+
 .sana-look-right {
     animation: sanaLookRight 2.8s ease-in-out infinite;
 }
 @keyframes sanaLookRight {
     0%, 100% { transform: translateY(0) rotate(0deg) scale(1); }
-    50% { transform: translateY(-8px) rotate(6deg) scale(1.04); }
+    50% { transform: translateY(-6px) rotate(5deg) scale(1.04); }
 }
+
 .sana-happy-bounce {
     animation: sanaHappyBounce 1.6s ease-in-out infinite;
 }
 @keyframes sanaHappyBounce {
     0%, 100% { transform: translateY(0) scale(1) rotate(0deg); }
-    30% { transform: translateY(-15px) scale(1.08) rotate(-3deg); }
-    60% { transform: translateY(-6px) scale(1.04) rotate(3deg); }
+    30% { transform: translateY(-12px) scale(1.08) rotate(-3deg); }
+    60% { transform: translateY(-5px) scale(1.04) rotate(3deg); }
 }
+
 .sana-thinking {
     animation: sanaThinking 2.8s ease-in-out infinite;
 }
 @keyframes sanaThinking {
     0%, 100% { transform: translateY(0) rotate(0deg) scale(1); }
-    25% { transform: translateY(-4px) rotate(-8deg) scale(1.02); }
-    75% { transform: translateY(-4px) rotate(8deg) scale(1.02); }
+    25% { transform: translateY(-4px) rotate(-7deg) scale(1.02); }
+    75% { transform: translateY(-4px) rotate(7deg) scale(1.02); }
 }
+
 .sana-excited {
     animation: sanaExcited 0.7s ease-in-out infinite alternate;
 }
 @keyframes sanaExcited {
     0% { transform: translateY(0) scale(1) rotate(-4deg); }
-    100% { transform: translateY(-15px) scale(1.1) rotate(4deg); }
+    100% { transform: translateY(-12px) scale(1.1) rotate(4deg); }
 }
+
 .sana-sleeping {
     animation: sanaSleeping 4s ease-in-out infinite;
 }
@@ -256,14 +234,8 @@ button {
 }
 
 /* =========================================
-   SANA STAGE SIZES
+   HOME
 ========================================= */
-
-.sana-stage {
-    position: relative;
-    width: max-content;
-    margin: 0 auto;
-}
 
 .sana-stage.premium .sana-character svg {
     width: 130px;
@@ -273,22 +245,18 @@ button {
     width: 120px;
     height: 120px;
 }
-.sana.sun-sana svg {
-    width: 110px;
-    height: 110px;
-}
 .sana.learn-sana svg {
     width: 110px;
     height: 110px;
 }
-.sana.portal-sana svg {
+.sun-sana-container svg {
+    width: 90px;
+    height: 90px;
+}
+.portal-avatar .sana-character svg {
     width: 80px;
     height: 80px;
 }
-
-/* =========================================
-   SPEECH BUBBLE
-========================================= */
 
 .speech-bubble {
     position: relative;
@@ -334,10 +302,6 @@ button {
 .home-bubble { margin-top: -1px; }
 .question-bubble { margin-top: -3px; }
 
-/* =========================================
-   SANA REACTION
-========================================= */
-
 .sana-reaction {
     position: absolute;
     top: -10px;
@@ -357,6 +321,337 @@ button {
 @keyframes reactionFloat {
     0%, 100% { transform: translateY(0) rotate(-3deg); }
     50% { transform: translateY(-4px) rotate(3deg); }
+}
+
+/* =========================================
+   SUN STATION - النسخة النهائية
+========================================= */
+
+.sun-station-header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    background: #fff;
+    border-radius: 18px;
+    padding: 10px 14px;
+    border: 1px solid #eadfc9;
+    margin-bottom: 10px;
+    box-shadow: 0 4px 12px rgba(90,65,25,.04);
+}
+
+.sun-greeting {
+    flex: 1;
+}
+
+.greeting-name {
+    color: #d69a12;
+    font-size: 12px;
+    font-weight: 900;
+}
+
+.greeting-text {
+    margin: 2px 0 0;
+    font-size: 12px;
+    line-height: 1.5;
+    color: #5c5247;
+}
+
+.sun-status-card {
+    background: #fff;
+    border-radius: 18px;
+    padding: 14px 16px;
+    border: 1px solid #eadfc9;
+    margin-bottom: 10px;
+    box-shadow: 0 4px 12px rgba(90,65,25,.04);
+}
+
+.status-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 8px;
+}
+
+.status-title {
+    font-size: 13px;
+    font-weight: 900;
+    color: #51483e;
+}
+
+.status-badge {
+    font-size: 10px;
+    font-weight: 700;
+    color: #2d8a4e;
+    background: #e6f4ea;
+    padding: 2px 10px;
+    border-radius: 999px;
+}
+
+.status-main {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.status-icon-big {
+    font-size: 38px;
+    line-height: 1;
+}
+
+.status-desc {
+    flex: 1;
+}
+
+.status-label {
+    font-size: 15px;
+    font-weight: 900;
+    color: #51483e;
+}
+
+.status-sub {
+    font-size: 11px;
+    color: #9a8d7d;
+    margin-top: 2px;
+}
+
+.uv-display {
+    display: flex;
+    align-items: baseline;
+    gap: 6px;
+    margin: 8px 0 6px;
+    padding: 6px 10px;
+    background: #f9f6f0;
+    border-radius: 12px;
+}
+
+.uv-number {
+    font-size: 24px;
+    font-weight: 900;
+    color: #d4940d;
+}
+
+.uv-label {
+    font-size: 10px;
+    font-weight: 700;
+    color: #9a8d7d;
+}
+
+.uv-level {
+    font-size: 11px;
+    font-weight: 700;
+    color: #2d8a4e;
+    margin-right: auto;
+}
+
+.status-metrics {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 6px;
+    margin-top: 8px;
+}
+
+.status-metrics .metric {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    font-size: 11px;
+    font-weight: 700;
+    color: #51483e;
+    background: #f9f6f0;
+    padding: 4px 6px;
+    border-radius: 8px;
+    justify-content: center;
+}
+
+.status-metrics .metric span:first-child {
+    font-size: 14px;
+}
+
+.station-card {
+    background: linear-gradient(135deg, #fff8e1, #ffecb3);
+    border-radius: 18px;
+    padding: 12px 16px;
+    border: 1px solid #f3d48a;
+    margin-bottom: 10px;
+}
+
+.station-title {
+    font-size: 14px;
+    font-weight: 900;
+    color: #d4940d;
+}
+
+.station-sub {
+    font-size: 9px;
+    font-weight: 700;
+    color: #b59b65;
+    margin-right: 6px;
+    letter-spacing: 1px;
+}
+
+.station-status {
+    font-size: 12px;
+    color: #5c5247;
+    margin-top: 4px;
+}
+
+.update-location {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: #fff;
+    border-radius: 14px;
+    padding: 8px 14px;
+    border: 1px solid #eadfc9;
+    margin-bottom: 10px;
+}
+
+.update-time {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 11px;
+    color: #9a8d7d;
+}
+
+.update-time span:last-child {
+    font-weight: 700;
+    color: #51483e;
+}
+
+.location-coords {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    font-size: 11px;
+    font-weight: 700;
+    color: #51483e;
+}
+
+.window-card {
+    background: #fff;
+    border-radius: 18px;
+    padding: 14px 16px;
+    border: 1px solid #eadfc9;
+    margin-bottom: 10px;
+}
+
+.window-title {
+    font-size: 14px;
+    font-weight: 900;
+    color: #2d8a4e;
+}
+
+.window-sub {
+    font-size: 11px;
+    color: #9a8d7d;
+    margin-top: 2px;
+}
+
+.window-times {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin: 8px 0 4px;
+}
+
+.window-times span {
+    font-size: 18px;
+    font-weight: 900;
+    color: #d4940d;
+}
+
+.window-desc {
+    font-size: 10px;
+    color: #9a8d7d;
+    line-height: 1.5;
+}
+
+.actions-card {
+    background: #fff;
+    border-radius: 18px;
+    padding: 14px 16px;
+    border: 1px solid #eadfc9;
+    margin-bottom: 10px;
+}
+
+.actions-title {
+    font-size: 14px;
+    font-weight: 900;
+    color: #51483e;
+    margin-bottom: 8px;
+}
+
+.actions-list {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 6px;
+}
+
+.action-item {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 11px;
+    color: #5c5247;
+    background: #f9f6f0;
+    padding: 6px 10px;
+    border-radius: 10px;
+}
+
+.action-item span:first-child {
+    font-size: 16px;
+}
+
+.fact-card {
+    background: linear-gradient(135deg, #e8f5e9, #c8e6c9);
+    border-radius: 18px;
+    padding: 14px 16px;
+    border: 1px solid #a5d6a7;
+    margin-bottom: 10px;
+}
+
+.fact-title {
+    font-size: 13px;
+    font-weight: 900;
+    color: #2d8a4e;
+    margin-bottom: 4px;
+}
+
+.fact-content {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+}
+
+.fact-icon {
+    font-size: 24px;
+}
+
+.fact-content p {
+    margin: 0;
+    font-size: 12px;
+    line-height: 1.5;
+    color: #1b5e20;
+}
+
+.fact-source {
+    font-size: 9px;
+    color: #4caf50;
+    margin-top: 4px;
+    font-weight: 700;
+}
+
+.disclaimer {
+    font-size: 8px;
+    color: #a39482;
+    text-align: center;
+    margin: 6px 0 10px;
+    line-height: 1.4;
+}
+
+.station-actions {
+    margin: 6px 0 4px;
 }
 
 /* =========================================
@@ -397,6 +692,18 @@ button {
     font-weight: 800;
     cursor: pointer;
     margin-top: 8px;
+}
+
+.analysis-actions-extra {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    margin-top: 6px;
+}
+.analysis-actions-extra .secondary-btn {
+    margin-top: 0;
+    font-size: 10px;
+    padding: 7px;
 }
 
 /* =========================================
@@ -701,399 +1008,7 @@ input:focus {
 }
 
 /* =========================================
-   SUN STATION (المحطة الجديدة)
-========================================= */
-
-.sun-intro {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-}
-.sun-bubble { margin-top: -3px; }
-
-/* حالة الشمس Live */
-.sun-status-live {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 12px;
-    background: #fff;
-    border-radius: 16px;
-    padding: 10px 14px;
-    border: 1px solid #eadfc9;
-    margin: 6px 0 10px;
-    box-shadow: 0 4px 12px rgba(90,65,25,.04);
-}
-.status-icon {
-    font-size: 28px;
-    line-height: 1;
-}
-.status-text {
-    font-size: 14px;
-    font-weight: 900;
-    color: #51483e;
-}
-.status-time {
-    font-size: 12px;
-    color: #9a8d7d;
-    font-weight: 700;
-}
-
-/* مؤشرات الشمس */
-.sun-metrics-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 6px;
-    margin: 6px 0 10px;
-}
-.metric-card {
-    background: #fff;
-    border-radius: 13px;
-    padding: 8px 6px;
-    text-align: center;
-    border: 1px solid #eee2cc;
-}
-.metric-icon {
-    display: block;
-    font-size: 18px;
-}
-.metric-value {
-    display: block;
-    font-size: 16px;
-    font-weight: 900;
-    color: #d4940d;
-}
-.metric-label {
-    display: block;
-    font-size: 7px;
-    color: #9a8d7d;
-    margin-top: 2px;
-}
-
-/* أفضل نافذة للتعرض */
-.best-window {
-    background: linear-gradient(135deg, #e8f5e9, #c8e6c9);
-    border-radius: 16px;
-    padding: 12px 14px;
-    border: 1px solid #a5d6a7;
-    margin: 6px 0 10px;
-}
-.window-header {
-    display: flex;
-    justify-content: space-between;
-    font-size: 11px;
-    font-weight: 900;
-    color: #2e7d32;
-}
-.window-status {
-    margin-top: 4px;
-    font-size: 12px;
-    color: #1b5e20;
-}
-.window-timer {
-    margin-top: 4px;
-    display: flex;
-    justify-content: space-between;
-    font-size: 13px;
-    font-weight: 900;
-    color: #d4940d;
-    background: #fff;
-    padding: 4px 10px;
-    border-radius: 8px;
-}
-
-/* جرعة الشمس */
-.dose-tracker {
-    background: #fff;
-    border-radius: 16px;
-    padding: 12px 14px;
-    border: 1px solid #eadfc9;
-    margin: 6px 0 10px;
-}
-.dose-header {
-    display: flex;
-    justify-content: space-between;
-    font-size: 12px;
-    font-weight: 900;
-    color: #51483e;
-}
-.dose-bar {
-    width: 100%;
-    height: 8px;
-    background: #eee6d8;
-    border-radius: 99px;
-    overflow: hidden;
-    margin: 6px 0 4px;
-}
-.dose-fill {
-    height: 100%;
-    border-radius: 99px;
-    background: linear-gradient(90deg, #f6d25d, #efa516, #e76d4d);
-    transition: width .8s ease;
-}
-.dose-details {
-    display: flex;
-    justify-content: center;
-    gap: 4px;
-    font-size: 10px;
-    color: #9a8d7d;
-}
-.dose-details span {
-    font-weight: 700;
-}
-
-/* سجل اليوم */
-.day-timeline {
-    background: #fff;
-    border-radius: 16px;
-    padding: 10px 14px;
-    border: 1px solid #eadfc9;
-    margin: 6px 0 10px;
-}
-.timeline-header {
-    font-size: 12px;
-    font-weight: 900;
-    color: #51483e;
-    margin-bottom: 6px;
-}
-.timeline-items {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 4px;
-}
-.timeline-item {
-    display: flex;
-    align-items: center;
-    gap: 4px;
-    font-size: 10px;
-    color: #51483e;
-    padding: 3px 6px;
-    background: #f9f6f0;
-    border-radius: 8px;
-}
-.timeline-icon { font-size: 14px; }
-.timeline-text { flex: 1; }
-.timeline-time { font-weight: 700; color: #d4940d; }
-
-/* معلومة اليوم */
-.daily-fact {
-    background: linear-gradient(135deg, #fff8e1, #ffecb3);
-    border-radius: 16px;
-    padding: 12px 14px;
-    border: 1px solid #f3d48a;
-    margin: 6px 0 10px;
-}
-.fact-header {
-    display: flex;
-    justify-content: space-between;
-    font-size: 11px;
-    font-weight: 900;
-    color: #d4940d;
-}
-.fact-content {
-    display: flex;
-    align-items: flex-start;
-    gap: 10px;
-    margin-top: 4px;
-}
-.fact-icon { font-size: 22px; }
-.fact-content p {
-    margin: 0;
-    font-size: 11px;
-    line-height: 1.5;
-    color: #5c5247;
-}
-
-/* ماذا تفعل الآن؟ */
-.action-guide {
-    background: #fff;
-    border-radius: 16px;
-    padding: 12px 14px;
-    border: 1px solid #eadfc9;
-    margin: 6px 0 10px;
-}
-.action-header {
-    font-size: 12px;
-    font-weight: 900;
-    color: #51483e;
-    margin-bottom: 4px;
-}
-.action-content p {
-    margin: 0;
-    font-size: 11px;
-    color: #76695a;
-    line-height: 1.5;
-}
-
-/* التحليل */
-.sun-analysis {
-    margin-top: 7px;
-    background: #fff;
-    border: 1px solid #eadfc9;
-    border-radius: 17px;
-    padding: 10px;
-    box-shadow: 0 6px 17px rgba(90,65,25,.04);
-}
-.analysis-head {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 8px;
-}
-.analysis-head small {
-    color: #9c8c75;
-    font-size: 8px;
-}
-.analysis-head h2 {
-    margin: 2px 0 0;
-    color: #d39a14;
-    font-size: 15px;
-}
-.analysis-icon {
-    width: 36px;
-    height: 36px;
-    display: grid;
-    place-items: center;
-    background: #fff8dc;
-    border-radius: 11px;
-    font-size: 19px;
-}
-.dose-meter {
-    margin: 8px 0 7px;
-}
-.meter-track {
-    width: 100%;
-    height: 7px;
-    background: #eee6d8;
-    border-radius: 99px;
-    overflow: hidden;
-}
-.meter-track span {
-    display: block;
-    width: 0%;
-    height: 100%;
-    border-radius: 99px;
-    background: linear-gradient(90deg, #f6d25d, #efa516, #e76d4d);
-    transition: width .8s ease;
-}
-.meter-labels {
-    display: flex;
-    justify-content: space-between;
-    margin-top: 3px;
-    color: #a4937e;
-    font-size: 7px;
-}
-
-.dose-result {
-    display: flex;
-    align-items: center;
-    gap: 9px;
-    padding: 8px 9px;
-    background: #fffaf0;
-    border: 1px solid #f0dfba;
-    border-radius: 13px;
-    margin-bottom: 7px;
-}
-.dose-number {
-    min-width: 55px;
-    text-align: center;
-}
-.dose-number strong {
-    display: block;
-    color: #d4940d;
-    font-size: 25px;
-    line-height: 1;
-}
-.dose-number span {
-    color: #a58c69;
-    font-size: 7px;
-}
-.dose-copy b {
-    display: block;
-    color: #5d5040;
-    font-size: 10px;
-    margin-bottom: 2px;
-}
-.dose-copy p {
-    margin: 0;
-    color: #857764;
-    font-size: 8px;
-    line-height: 1.5;
-}
-
-.sun-analysis > p {
-    margin: 6px 0;
-    color: #76695a;
-    font-size: 9px;
-    line-height: 1.55;
-}
-.analysis-action {
-    margin-top: 5px;
-}
-.tiny-note {
-    margin-top: 6px;
-    text-align: center;
-    color: #a39482;
-    font-size: 7px;
-    line-height: 1.4;
-}
-
-.pros-cons {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 8px;
-    margin: 8px 0;
-}
-.pros, .cons {
-    background: #fff;
-    border-radius: 13px;
-    padding: 10px 12px;
-    border: 1px solid #eee2cc;
-}
-.pros h4 { color: #2d8a4e; font-size: 11px; margin: 0 0 6px; }
-.cons h4 { color: #c0392b; font-size: 11px; margin: 0 0 6px; }
-.pros-cons ul {
-    margin: 0;
-    padding: 0 0 0 18px;
-    font-size: 9px;
-    line-height: 1.6;
-    color: #5c5247;
-}
-.pros-cons ul li { margin-bottom: 2px; }
-
-.advanced-tips {
-    background: #fff8e7;
-    border-radius: 13px;
-    padding: 10px 12px;
-    border: 1px solid #f3d48a;
-    margin: 8px 0;
-}
-.advanced-tips h4 {
-    color: #d4940d;
-    font-size: 11px;
-    margin: 0 0 6px;
-}
-.advanced-tips p {
-    margin: 0 0 4px;
-    font-size: 9px;
-    color: #5c5247;
-    line-height: 1.5;
-}
-
-.analysis-actions-extra {
-    display: flex;
-    flex-direction: column;
-    gap: 5px;
-    margin-top: 6px;
-}
-.analysis-actions-extra .secondary-btn {
-    margin-top: 0;
-    font-size: 10px;
-    padding: 7px;
-}
-
-/* =========================================
-   HISTORY
+   HISTORY / FORECAST / QUIZ / PORTAL
 ========================================= */
 
 .history-content {
@@ -1149,7 +1064,6 @@ input:focus {
     background: #fde8e8;
     color: #c0392b;
 }
-
 .history-stats {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
@@ -1173,10 +1087,6 @@ input:focus {
     font-size: 8px;
     color: #9a8d7d;
 }
-
-/* =========================================
-   FORECAST
-========================================= */
 
 .forecast-content {
     padding: 5px 0 15px;
@@ -1227,7 +1137,6 @@ input:focus {
     background: #fde8e8;
     color: #c0392b;
 }
-
 .forecast-advice {
     margin-top: 12px;
     background: #fff8e7;
@@ -1241,10 +1150,6 @@ input:focus {
     color: #5c5247;
     line-height: 1.6;
 }
-
-/* =========================================
-   QUIZ
-========================================= */
 
 .quiz-content {
     padding: 5px 0 15px;
@@ -1374,7 +1279,6 @@ input:focus {
     font-size: 11px;
     line-height: 1.4;
 }
-
 .portal-streak-section {
     display: grid;
     grid-template-columns: 1fr 1fr;
@@ -1404,7 +1308,6 @@ input:focus {
     font-weight: 900;
     color: #d4940d;
 }
-
 .health-tips h3 {
     color: #5a4e41;
     font-size: 14px;
@@ -1443,7 +1346,6 @@ input:focus {
 .tip-card p strong {
     color: #d4940d;
 }
-
 .reminder-section h3 {
     color: #5a4e41;
     font-size: 14px;
@@ -1488,7 +1390,6 @@ input:focus {
     color: #2d8a4e;
     background: #e6f4ea;
 }
-
 .stats-section h3 {
     color: #5a4e41;
     font-size: 14px;
@@ -1526,32 +1427,38 @@ input:focus {
 ========================================= */
 
 @media(max-width:480px) {
-    .pros-cons { grid-template-columns: 1fr; }
-    .forecast-list { grid-template-columns: repeat(2, 1fr); }
-    .history-stats { grid-template-columns: repeat(2, 1fr); }
-    .sun-metrics-grid { grid-template-columns: repeat(3, 1fr); }
-    .timeline-items { grid-template-columns: 1fr 1fr; }
+    .status-metrics {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    .actions-list {
+        grid-template-columns: 1fr 1fr;
+    }
+    .forecast-list {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    .history-stats {
+        grid-template-columns: repeat(2, 1fr);
+    }
 }
 
 @media(max-width:360px) {
     .screen { padding-left: 9px; padding-right: 9px; }
-    .sana-stage.premium .sana-character svg { width: 110px; height: 110px; }
-    .sana.question-sana svg { width: 100px; height: 100px; }
-    .sana.sun-sana svg { width: 90px; height: 90px; }
-    .speech-bubble { padding: 9px 11px; }
-    .dialogue { font-size: 12px; line-height: 1.55; }
-    .sun-metrics-grid { grid-template-columns: repeat(2, 1fr); }
-    .timeline-items { grid-template-columns: 1fr 1fr; }
+    .sun-sana-container svg { width: 75px; height: 75px; }
+    .status-icon-big { font-size: 30px; }
+    .status-label { font-size: 13px; }
+    .uv-number { font-size: 20px; }
+    .window-times span { font-size: 15px; }
+    .actions-list { grid-template-columns: 1fr; }
+    .status-metrics { grid-template-columns: 1fr 1fr; }
 }
 
 /* =========================================
-   DUOLINGO LAYOUT
+   DUOLINGO LAYOUT (للهوم والأسئلة)
 ========================================= */
 
 .home-content,
 .conversation,
-.learn-wrap,
-.sun-intro {
+.learn-wrap {
     display: flex;
     flex-direction: row-reverse !important;
     align-items: center !important;
@@ -1621,12 +1528,10 @@ input:focus {
     margin-bottom: 2px !important;
 }
 .question-stage,
-.learn-sana-stage,
-.sun-sana-stage { margin: 0 !important; }
+.learn-sana-stage { margin: 0 !important; }
 .home-bubble,
 .question-bubble,
-.learn-bubble,
-.sun-bubble { margin-top: 0 !important; }
+.learn-bubble { margin-top: 0 !important; }
 
 .home-content { flex-wrap: wrap !important; }
 .home-content .sana-stage { order: 1; }
