@@ -1,5 +1,5 @@
 /* =========================================
-   SunDose ☀️ - مع تصميم سنا الجديد (SVG)
+   SunDose ☀️ - النسخة النهائية مع Sun Station
 ========================================= */
 
 * {
@@ -157,7 +157,7 @@ button {
 }
 
 /* =========================================
-   SANA - تصميم SVG الجديد
+   SANA SVG
 ========================================= */
 
 .sana-container {
@@ -165,14 +165,12 @@ button {
     display: inline-block;
 }
 
-/* تعابير سنا المختلفة */
 .sana-character {
     display: block;
     filter: drop-shadow(0 7px 11px rgba(220, 160, 20, .14));
     transition: transform 0.3s ease;
 }
 
-/* تعابير العيون والوجه (تتحكم فيها JS) */
 .sana-eyes-g {
     transition: all 0.3s ease;
 }
@@ -185,134 +183,76 @@ button {
 .sana-happy .sana-blush {
     opacity: 0.8;
 }
-
 .sana-happy .sana-mouth {
     display: block;
 }
-
 .sana-happy .sana-mouth-open {
     display: none;
 }
-
 .sana-surprised .sana-mouth {
     display: none;
 }
-
 .sana-surprised .sana-mouth-open {
     display: block;
 }
-
 .sana-thinking .sana-eyes-g {
     transform: translateY(-2px);
 }
-
-.sana-thinking .sana-mouth {
-    stroke: #d9534f;
-    stroke-width: 2;
+.sana-calm .sana-blush {
+    opacity: 0.2;
 }
 
 /* حركات سنا */
 .sana-float {
     animation: sanaFloat 3.8s ease-in-out infinite;
 }
-
 @keyframes sanaFloat {
-
-    0%,
-    100% {
-        transform: translateY(0) rotate(0deg) scale(1);
-    }
-
-    50% {
-        transform: translateY(-10px) rotate(2deg) scale(1.03);
-    }
+    0%, 100% { transform: translateY(0) rotate(0deg) scale(1); }
+    50% { transform: translateY(-10px) rotate(2deg) scale(1.03); }
 }
-
 .sana-look-left {
     animation: sanaLookLeft 2.8s ease-in-out infinite;
 }
-
 @keyframes sanaLookLeft {
-
-    0%,
-    100% {
-        transform: translateY(0) rotate(0deg) scale(1);
-    }
-
-    50% {
-        transform: translateY(-8px) rotate(-6deg) scale(1.04);
-    }
+    0%, 100% { transform: translateY(0) rotate(0deg) scale(1); }
+    50% { transform: translateY(-8px) rotate(-6deg) scale(1.04); }
 }
-
 .sana-look-right {
     animation: sanaLookRight 2.8s ease-in-out infinite;
 }
-
 @keyframes sanaLookRight {
-
-    0%,
-    100% {
-        transform: translateY(0) rotate(0deg) scale(1);
-    }
-
-    50% {
-        transform: translateY(-8px) rotate(6deg) scale(1.04);
-    }
+    0%, 100% { transform: translateY(0) rotate(0deg) scale(1); }
+    50% { transform: translateY(-8px) rotate(6deg) scale(1.04); }
 }
-
 .sana-happy-bounce {
     animation: sanaHappyBounce 1.6s ease-in-out infinite;
 }
-
 @keyframes sanaHappyBounce {
-
-    0%,
-    100% {
-        transform: translateY(0) scale(1) rotate(0deg);
-    }
-
-    30% {
-        transform: translateY(-15px) scale(1.08) rotate(-3deg);
-    }
-
-    60% {
-        transform: translateY(-6px) scale(1.04) rotate(3deg);
-    }
+    0%, 100% { transform: translateY(0) scale(1) rotate(0deg); }
+    30% { transform: translateY(-15px) scale(1.08) rotate(-3deg); }
+    60% { transform: translateY(-6px) scale(1.04) rotate(3deg); }
 }
-
 .sana-thinking {
     animation: sanaThinking 2.8s ease-in-out infinite;
 }
-
 @keyframes sanaThinking {
-
-    0%,
-    100% {
-        transform: translateY(0) rotate(0deg) scale(1);
-    }
-
-    25% {
-        transform: translateY(-4px) rotate(-8deg) scale(1.02);
-    }
-
-    75% {
-        transform: translateY(-4px) rotate(8deg) scale(1.02);
-    }
+    0%, 100% { transform: translateY(0) rotate(0deg) scale(1); }
+    25% { transform: translateY(-4px) rotate(-8deg) scale(1.02); }
+    75% { transform: translateY(-4px) rotate(8deg) scale(1.02); }
 }
-
 .sana-excited {
     animation: sanaExcited 0.7s ease-in-out infinite alternate;
 }
-
 @keyframes sanaExcited {
-
-    0% {
-        transform: translateY(0) scale(1) rotate(-4deg);
-    }
-
-    100% {
-        transform: translateY(-15px) scale(1.1) rotate(4deg);
-    }
+    0% { transform: translateY(0) scale(1) rotate(-4deg); }
+    100% { transform: translateY(-15px) scale(1.1) rotate(4deg); }
+}
+.sana-sleeping {
+    animation: sanaSleeping 4s ease-in-out infinite;
+}
+@keyframes sanaSleeping {
+    0%, 100% { transform: translateY(2px) rotate(0deg) scale(0.98); }
+    50% { transform: translateY(-2px) rotate(1deg) scale(1); }
 }
 
 /* =========================================
@@ -329,22 +269,18 @@ button {
     width: 130px;
     height: 130px;
 }
-
 .sana.question-sana svg {
     width: 120px;
     height: 120px;
 }
-
 .sana.sun-sana svg {
     width: 110px;
     height: 110px;
 }
-
 .sana.learn-sana svg {
     width: 110px;
     height: 110px;
 }
-
 .sana.portal-sana svg {
     width: 80px;
     height: 80px;
@@ -395,16 +331,11 @@ button {
     min-height: 0;
 }
 
-.home-bubble {
-    margin-top: -1px;
-}
-
-.question-bubble {
-    margin-top: -3px;
-}
+.home-bubble { margin-top: -1px; }
+.question-bubble { margin-top: -3px; }
 
 /* =========================================
-   SANA REACTION (الإيموشن)
+   SANA REACTION
 ========================================= */
 
 .sana-reaction {
@@ -424,15 +355,8 @@ button {
 }
 
 @keyframes reactionFloat {
-
-    0%,
-    100% {
-        transform: translateY(0) rotate(-3deg);
-    }
-
-    50% {
-        transform: translateY(-4px) rotate(3deg);
-    }
+    0%, 100% { transform: translateY(0) rotate(-3deg); }
+    50% { transform: translateY(-4px) rotate(3deg); }
 }
 
 /* =========================================
@@ -452,14 +376,8 @@ button {
     box-shadow: 0 7px 16px rgba(239, 163, 21, .18);
     transition: transform .18s ease, opacity .18s ease;
 }
-
-.primary-btn:active {
-    transform: scale(.985);
-}
-
-.primary-btn:disabled {
-    opacity: .55;
-}
+.primary-btn:active { transform: scale(.985); }
+.primary-btn:disabled { opacity: .55; }
 
 .small-btn {
     padding: 7px 14px !important;
@@ -492,7 +410,6 @@ button {
     overflow: hidden;
     margin: 2px 0 8px;
 }
-
 .progress span {
     display: block;
     width: 0;
@@ -512,10 +429,7 @@ button {
     flex-direction: column;
     align-items: center;
 }
-
-.question-stage {
-    margin-top: 0;
-}
+.question-stage { margin-top: 0; }
 
 /* =========================================
    ANSWER
@@ -527,29 +441,17 @@ button {
     margin-bottom: 7px;
     animation: answerIn .28s ease;
 }
-
 @keyframes answerIn {
-    from {
-        opacity: 0;
-        transform: translateY(5px);
-    }
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
+    from { opacity: 0; transform: translateY(5px); }
+    to { opacity: 1; transform: translateY(0); }
 }
-
-.field {
-    width: 100%;
-}
-
+.field { width: 100%; }
 .field label {
     display: block;
     margin-bottom: 4px;
     font-size: 11px;
     font-weight: 900;
 }
-
 input {
     width: 100%;
     border: 1.5px solid #eadfc9;
@@ -560,12 +462,10 @@ input {
     font-size: 14px;
     color: #40382f;
 }
-
 input:focus {
     border-color: #f4b329;
     box-shadow: 0 0 0 3px rgba(244, 179, 41, .08);
 }
-
 .unit {
     margin-top: 3px;
     color: #9a8d7d;
@@ -573,7 +473,7 @@ input:focus {
 }
 
 /* =========================================
-   GENDER
+   GENDER / SKIN / TIME
 ========================================= */
 
 .gender-grid {
@@ -582,7 +482,6 @@ input:focus {
     grid-template-columns: repeat(2, 1fr);
     gap: 7px;
 }
-
 .gender-btn {
     border: 1.5px solid #eadfc9;
     background: #fff;
@@ -594,16 +493,11 @@ input:focus {
     cursor: pointer;
     transition: .18s ease;
 }
-
 .gender-btn.active {
     border-color: #f2b126;
     background: #fff8dc;
     box-shadow: 0 5px 13px rgba(244, 179, 41, .09);
 }
-
-/* =========================================
-   SKIN TONE
-========================================= */
 
 .skin-grid {
     width: 100%;
@@ -611,7 +505,6 @@ input:focus {
     grid-template-columns: repeat(5, 1fr);
     gap: 5px;
 }
-
 .skin-btn {
     position: relative;
     min-height: 75px;
@@ -623,38 +516,30 @@ input:focus {
     cursor: pointer;
     transition: .18s ease;
 }
-
 .skin-btn .skin-color {
     display: block;
     width: 31px;
     height: 31px;
     margin: 0 auto 5px;
     border-radius: 50%;
-    box-shadow: inset 0 0 0 1px rgba(0, 0, 0, .08);
+    box-shadow: inset 0 0 0 1px rgba(0,0,0,.08);
     transition: .18s ease;
 }
-
 .skin-btn small {
     display: block;
     font-size: 8px;
     font-weight: 800;
     line-height: 1.2;
 }
-
 .skin-btn.active {
     border-color: #f2b126;
     background: #fffaf0;
     transform: translateY(-2px);
     box-shadow: 0 6px 14px rgba(244, 179, 41, .10);
 }
-
 .skin-btn.active .skin-color {
     box-shadow: 0 0 0 3px #fff, 0 0 0 5px #f2b126;
 }
-
-/* =========================================
-   TIME
-========================================= */
 
 .time-grid {
     width: 100%;
@@ -662,7 +547,6 @@ input:focus {
     grid-template-columns: repeat(2, 1fr);
     gap: 7px;
 }
-
 .time-btn {
     border: 1.5px solid #eadfc9;
     background: #fff;
@@ -672,18 +556,15 @@ input:focus {
     cursor: pointer;
     transition: .18s ease;
 }
-
 .time-symbol {
     display: block;
     font-size: 22px;
     margin-bottom: 3px;
 }
-
 .time-name {
     font-size: 11px;
     font-weight: 900;
 }
-
 .time-btn.active {
     border-color: #f2b126;
     background: #fff8dc;
@@ -694,10 +575,7 @@ input:focus {
    HABITS
 ========================================= */
 
-.habit-conversation {
-    margin-top: 0;
-}
-
+.habit-conversation { margin-top: 0; }
 .habit-list {
     width: 100%;
     display: grid;
@@ -705,28 +583,22 @@ input:focus {
     gap: 7px;
     margin-top: 6px;
 }
-
 .habit {
     position: relative;
-    background: rgba(255, 255, 255, .94);
+    background: rgba(255,255,255,.94);
     border: 1px solid #eadfc9;
     border-radius: 16px;
     padding: 11px;
     cursor: pointer;
-    box-shadow: 0 5px 14px rgba(90, 65, 25, .04);
+    box-shadow: 0 5px 14px rgba(90,65,25,.04);
     transition: .18s ease;
 }
-
-.habit:active {
-    transform: scale(.985);
-}
-
+.habit:active { transform: scale(.985); }
 .habit.active {
     border-color: #f3b126;
     background: #fffaf0;
     transform: translateY(-2px);
 }
-
 .habit .icon {
     width: 38px;
     height: 38px;
@@ -737,12 +609,7 @@ input:focus {
     font-size: 20px;
     margin-bottom: 6px;
 }
-
-.habit b {
-    display: block;
-    font-size: 12px;
-}
-
+.habit b { display: block; font-size: 12px; }
 .habit p {
     margin: 3px 0 0;
     color: #827566;
@@ -760,14 +627,8 @@ input:focus {
     align-items: center;
     width: 100%;
 }
-
-.learn-sana-stage {
-    margin-top: 0;
-}
-
-.learn-bubble {
-    margin-top: -2px;
-}
+.learn-sana-stage { margin-top: 0; }
+.learn-bubble { margin-top: -2px; }
 
 .science-strip {
     width: 100%;
@@ -780,7 +641,6 @@ input:focus {
     background: linear-gradient(135deg, #fffdf6, #fff8e7);
     margin-bottom: 7px;
 }
-
 .science-icon {
     width: 37px;
     height: 37px;
@@ -792,23 +652,20 @@ input:focus {
     color: #fff;
     font-size: 11px;
     font-weight: 900;
-    box-shadow: 0 5px 12px rgba(239, 169, 21, .16);
+    box-shadow: 0 5px 12px rgba(239,169,21,.16);
 }
-
 .science-strip b {
     display: block;
     font-size: 11px;
     color: #5a4e41;
     margin-bottom: 2px;
 }
-
 .science-strip span {
     display: block;
     color: #8a7b68;
     font-size: 9px;
     line-height: 1.5;
 }
-
 .fact-line {
     width: 100%;
     display: flex;
@@ -820,8 +677,7 @@ input:focus {
     border-radius: 13px;
     margin-bottom: 6px;
 }
-
-.fact-line>span {
+.fact-line > span {
     width: 25px;
     height: 25px;
     flex: none;
@@ -831,14 +687,12 @@ input:focus {
     border-radius: 9px;
     font-size: 13px;
 }
-
 .fact-line p {
     margin: 0;
     color: #706456;
     font-size: 9px;
     line-height: 1.55;
 }
-
 .learn-source {
     color: #a39482;
     font-size: 8px;
@@ -847,7 +701,7 @@ input:focus {
 }
 
 /* =========================================
-   SUN STATION
+   SUN STATION (المحطة الجديدة)
 ========================================= */
 
 .sun-intro {
@@ -855,232 +709,246 @@ input:focus {
     flex-direction: column;
     align-items: center;
 }
+.sun-bubble { margin-top: -3px; }
 
-.sun-bubble {
-    margin-top: -3px;
-}
-
-.sun-station {
-    position: relative;
-    width: 100%;
-    height: 178px;
-    overflow: hidden;
-    border-radius: 20px;
-    border: 1px solid #eadfc9;
-    background: radial-gradient(circle at 50% 43%, #fff9c8 0%, #fff5b0 23%, #fff7d7 48%, #f4f7df 100%);
-    box-shadow: 0 7px 21px rgba(90, 65, 25, .06);
+/* حالة الشمس Live */
+.sun-status-live {
     display: flex;
-    flex-direction: column;
     align-items: center;
     justify-content: center;
+    gap: 12px;
+    background: #fff;
+    border-radius: 16px;
+    padding: 10px 14px;
+    border: 1px solid #eadfc9;
+    margin: 6px 0 10px;
+    box-shadow: 0 4px 12px rgba(90,65,25,.04);
 }
-
-.station-glow {
-    position: absolute;
-    width: 130px;
-    height: 130px;
-    border-radius: 50%;
-    background: rgba(255, 196, 39, .18);
-    filter: blur(17px);
-    animation: glowPulse 3s ease-in-out infinite;
-}
-
-@keyframes glowPulse {
-
-    0%,
-    100% {
-        transform: scale(.9);
-        opacity: .55;
-    }
-
-    50% {
-        transform: scale(1.12);
-        opacity: .95;
-    }
-}
-
-.station-sun {
-    position: relative;
-    z-index: 2;
-    width: 65px;
-    height: 65px;
-    display: grid;
-    place-items: center;
-    border-radius: 50%;
-    background: radial-gradient(circle at 35% 30%, #fff7ad, #ffc52e 55%, #efa310 100%);
-    box-shadow: 0 0 0 8px rgba(255, 194, 36, .12), 0 0 30px rgba(255, 183, 22, .27);
-    animation: sunFloat 3.2s ease-in-out infinite;
-}
-
-.sun-core {
-    font-size: 35px;
+.status-icon {
+    font-size: 28px;
     line-height: 1;
-    filter: drop-shadow(0 3px 5px rgba(210, 145, 0, .18));
 }
-
-@keyframes sunFloat {
-
-    0%,
-    100% {
-        transform: translateY(0) rotate(0);
-    }
-
-    50% {
-        transform: translateY(-5px) rotate(4deg);
-    }
-}
-
-.sun-orbit {
-    position: absolute;
-    width: 105px;
-    height: 105px;
-    border: 1px dashed rgba(224, 161, 22, .24);
-    border-radius: 50%;
-    animation: orbitSpin 12s linear infinite;
-}
-
-.orbit-one {
-    transform: rotate(20deg);
-}
-
-.orbit-two {
-    width: 140px;
-    height: 140px;
-    animation-duration: 18s;
-    animation-direction: reverse;
-}
-
-@keyframes orbitSpin {
-    to {
-        transform: rotate(360deg);
-    }
-}
-
-.station-title {
-    position: relative;
-    z-index: 3;
-    margin-top: 6px;
-    color: #c98d0b;
-    font-size: 15px;
+.status-text {
+    font-size: 14px;
     font-weight: 900;
+    color: #51483e;
+}
+.status-time {
+    font-size: 12px;
+    color: #9a8d7d;
+    font-weight: 700;
 }
 
-.station-title small {
-    display: block;
-    text-align: center;
-    margin-top: 0;
-    color: #b59b65;
-    font-size: 7px;
-    letter-spacing: 1px;
-}
-
-.sun-status {
-    position: relative;
-    z-index: 3;
-    margin-top: 3px;
-    color: #8d7a5c;
-    font-size: 9px;
-}
-
-/* =========================================
-   MINI DATA
-========================================= */
-
-.mini-data-grid {
+/* مؤشرات الشمس */
+.sun-metrics-grid {
     display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 5px;
-    margin-top: 7px;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 6px;
+    margin: 6px 0 10px;
+}
+.metric-card {
+    background: #fff;
+    border-radius: 13px;
+    padding: 8px 6px;
+    text-align: center;
+    border: 1px solid #eee2cc;
+}
+.metric-icon {
+    display: block;
+    font-size: 18px;
+}
+.metric-value {
+    display: block;
+    font-size: 16px;
+    font-weight: 900;
+    color: #d4940d;
+}
+.metric-label {
+    display: block;
+    font-size: 7px;
+    color: #9a8d7d;
+    margin-top: 2px;
 }
 
-.data-chip {
+/* أفضل نافذة للتعرض */
+.best-window {
+    background: linear-gradient(135deg, #e8f5e9, #c8e6c9);
+    border-radius: 16px;
+    padding: 12px 14px;
+    border: 1px solid #a5d6a7;
+    margin: 6px 0 10px;
+}
+.window-header {
     display: flex;
-    flex-direction: column;
-    align-items: center;
+    justify-content: space-between;
+    font-size: 11px;
+    font-weight: 900;
+    color: #2e7d32;
+}
+.window-status {
+    margin-top: 4px;
+    font-size: 12px;
+    color: #1b5e20;
+}
+.window-timer {
+    margin-top: 4px;
+    display: flex;
+    justify-content: space-between;
+    font-size: 13px;
+    font-weight: 900;
+    color: #d4940d;
+    background: #fff;
+    padding: 4px 10px;
+    border-radius: 8px;
+}
+
+/* جرعة الشمس */
+.dose-tracker {
+    background: #fff;
+    border-radius: 16px;
+    padding: 12px 14px;
+    border: 1px solid #eadfc9;
+    margin: 6px 0 10px;
+}
+.dose-header {
+    display: flex;
+    justify-content: space-between;
+    font-size: 12px;
+    font-weight: 900;
+    color: #51483e;
+}
+.dose-bar {
+    width: 100%;
+    height: 8px;
+    background: #eee6d8;
+    border-radius: 99px;
+    overflow: hidden;
+    margin: 6px 0 4px;
+}
+.dose-fill {
+    height: 100%;
+    border-radius: 99px;
+    background: linear-gradient(90deg, #f6d25d, #efa516, #e76d4d);
+    transition: width .8s ease;
+}
+.dose-details {
+    display: flex;
     justify-content: center;
     gap: 4px;
-    background: #fff;
-    border: 1px solid #eadfc9;
-    border-radius: 13px;
-    padding: 7px 3px;
-    min-width: 0;
-    text-align: center;
-}
-
-.chip-icon {
-    width: 27px;
-    height: 27px;
-    flex: none;
-    display: grid;
-    place-items: center;
-    background: #fff8df;
-    border-radius: 9px;
-    font-size: 14px;
-    color: #c7931d;
-    font-weight: 900;
-}
-
-.data-chip small {
-    display: block;
+    font-size: 10px;
     color: #9a8d7d;
-    font-size: 7px;
-    margin-bottom: 1px;
+}
+.dose-details span {
+    font-weight: 700;
 }
 
-.data-chip b {
-    display: block;
-    color: #574c3f;
-    font-size: 9px;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    max-width: 75px;
+/* سجل اليوم */
+.day-timeline {
+    background: #fff;
+    border-radius: 16px;
+    padding: 10px 14px;
+    border: 1px solid #eadfc9;
+    margin: 6px 0 10px;
+}
+.timeline-header {
+    font-size: 12px;
+    font-weight: 900;
+    color: #51483e;
+    margin-bottom: 6px;
+}
+.timeline-items {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4px;
+}
+.timeline-item {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    font-size: 10px;
+    color: #51483e;
+    padding: 3px 6px;
+    background: #f9f6f0;
+    border-radius: 8px;
+}
+.timeline-icon { font-size: 14px; }
+.timeline-text { flex: 1; }
+.timeline-time { font-weight: 700; color: #d4940d; }
+
+/* معلومة اليوم */
+.daily-fact {
+    background: linear-gradient(135deg, #fff8e1, #ffecb3);
+    border-radius: 16px;
+    padding: 12px 14px;
+    border: 1px solid #f3d48a;
+    margin: 6px 0 10px;
+}
+.fact-header {
+    display: flex;
+    justify-content: space-between;
+    font-size: 11px;
+    font-weight: 900;
+    color: #d4940d;
+}
+.fact-content {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    margin-top: 4px;
+}
+.fact-icon { font-size: 22px; }
+.fact-content p {
+    margin: 0;
+    font-size: 11px;
+    line-height: 1.5;
+    color: #5c5247;
 }
 
-.skin-chip {
-    position: relative;
-    overflow: hidden;
+/* ماذا تفعل الآن؟ */
+.action-guide {
+    background: #fff;
+    border-radius: 16px;
+    padding: 12px 14px;
+    border: 1px solid #eadfc9;
+    margin: 6px 0 10px;
+}
+.action-header {
+    font-size: 12px;
+    font-weight: 900;
+    color: #51483e;
+    margin-bottom: 4px;
+}
+.action-content p {
+    margin: 0;
+    font-size: 11px;
+    color: #76695a;
+    line-height: 1.5;
 }
 
-.skin-chip i {
-    display: block;
-    width: 15px;
-    height: 15px;
-    border-radius: 50%;
-    background: #d6a47c;
-}
-
-/* =========================================
-   ANALYSIS
-========================================= */
-
+/* التحليل */
 .sun-analysis {
     margin-top: 7px;
     background: #fff;
     border: 1px solid #eadfc9;
     border-radius: 17px;
     padding: 10px;
-    box-shadow: 0 6px 17px rgba(90, 65, 25, .04);
+    box-shadow: 0 6px 17px rgba(90,65,25,.04);
 }
-
 .analysis-head {
     display: flex;
     align-items: center;
     justify-content: space-between;
     gap: 8px;
 }
-
 .analysis-head small {
     color: #9c8c75;
     font-size: 8px;
 }
-
 .analysis-head h2 {
     margin: 2px 0 0;
     color: #d39a14;
     font-size: 15px;
 }
-
 .analysis-icon {
     width: 36px;
     height: 36px;
@@ -1090,15 +958,9 @@ input:focus {
     border-radius: 11px;
     font-size: 19px;
 }
-
-/* =========================================
-   DOSE METER
-========================================= */
-
 .dose-meter {
     margin: 8px 0 7px;
 }
-
 .meter-track {
     width: 100%;
     height: 7px;
@@ -1106,7 +968,6 @@ input:focus {
     border-radius: 99px;
     overflow: hidden;
 }
-
 .meter-track span {
     display: block;
     width: 0%;
@@ -1115,7 +976,6 @@ input:focus {
     background: linear-gradient(90deg, #f6d25d, #efa516, #e76d4d);
     transition: width .8s ease;
 }
-
 .meter-labels {
     display: flex;
     justify-content: space-between;
@@ -1123,10 +983,6 @@ input:focus {
     color: #a4937e;
     font-size: 7px;
 }
-
-/* =========================================
-   DOSE RESULT
-========================================= */
 
 .dose-result {
     display: flex;
@@ -1138,31 +994,26 @@ input:focus {
     border-radius: 13px;
     margin-bottom: 7px;
 }
-
 .dose-number {
     min-width: 55px;
     text-align: center;
 }
-
 .dose-number strong {
     display: block;
     color: #d4940d;
     font-size: 25px;
     line-height: 1;
 }
-
 .dose-number span {
     color: #a58c69;
     font-size: 7px;
 }
-
 .dose-copy b {
     display: block;
     color: #5d5040;
     font-size: 10px;
     margin-bottom: 2px;
 }
-
 .dose-copy p {
     margin: 0;
     color: #857764;
@@ -1170,21 +1021,15 @@ input:focus {
     line-height: 1.5;
 }
 
-/* =========================================
-   ANALYSIS TEXT
-========================================= */
-
-.sun-analysis>p {
+.sun-analysis > p {
     margin: 6px 0;
     color: #76695a;
     font-size: 9px;
     line-height: 1.55;
 }
-
 .analysis-action {
     margin-top: 5px;
 }
-
 .tiny-note {
     margin-top: 6px;
     text-align: center;
@@ -1193,37 +1038,20 @@ input:focus {
     line-height: 1.4;
 }
 
-/* =========================================
-   PROS & CONS
-========================================= */
-
 .pros-cons {
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: 8px;
     margin: 8px 0;
 }
-
-.pros,
-.cons {
+.pros, .cons {
     background: #fff;
     border-radius: 13px;
     padding: 10px 12px;
     border: 1px solid #eee2cc;
 }
-
-.pros h4 {
-    color: #2d8a4e;
-    font-size: 11px;
-    margin: 0 0 6px;
-}
-
-.cons h4 {
-    color: #c0392b;
-    font-size: 11px;
-    margin: 0 0 6px;
-}
-
+.pros h4 { color: #2d8a4e; font-size: 11px; margin: 0 0 6px; }
+.cons h4 { color: #c0392b; font-size: 11px; margin: 0 0 6px; }
 .pros-cons ul {
     margin: 0;
     padding: 0 0 0 18px;
@@ -1231,14 +1059,7 @@ input:focus {
     line-height: 1.6;
     color: #5c5247;
 }
-
-.pros-cons ul li {
-    margin-bottom: 2px;
-}
-
-/* =========================================
-   ADVANCED TIPS
-========================================= */
+.pros-cons ul li { margin-bottom: 2px; }
 
 .advanced-tips {
     background: #fff8e7;
@@ -1247,13 +1068,11 @@ input:focus {
     border: 1px solid #f3d48a;
     margin: 8px 0;
 }
-
 .advanced-tips h4 {
     color: #d4940d;
     font-size: 11px;
     margin: 0 0 6px;
 }
-
 .advanced-tips p {
     margin: 0 0 4px;
     font-size: 9px;
@@ -1261,17 +1080,12 @@ input:focus {
     line-height: 1.5;
 }
 
-/* =========================================
-   EXTRA ACTIONS
-========================================= */
-
 .analysis-actions-extra {
     display: flex;
     flex-direction: column;
     gap: 5px;
     margin-top: 6px;
 }
-
 .analysis-actions-extra .secondary-btn {
     margin-top: 0;
     font-size: 10px;
@@ -1285,19 +1099,16 @@ input:focus {
 .history-content {
     padding: 5px 0 15px;
 }
-
 .history-content h2 {
     color: #d4940d;
     font-size: 16px;
     margin: 0 0 12px;
 }
-
 .history-list {
     display: flex;
     flex-direction: column;
     gap: 6px;
 }
-
 .history-item {
     display: flex;
     align-items: center;
@@ -1307,40 +1118,33 @@ input:focus {
     border-radius: 13px;
     border: 1px solid #eee2cc;
 }
-
 .history-item .date {
     font-size: 11px;
     font-weight: 900;
     color: #51483e;
 }
-
 .history-item .uv {
     font-size: 13px;
     font-weight: 900;
     color: #d4940d;
 }
-
 .history-item .time {
     font-size: 10px;
     color: #9a8d7d;
 }
-
 .history-item .status {
     font-size: 9px;
     padding: 3px 8px;
     border-radius: 999px;
 }
-
 .history-item .status.safe {
     background: #e6f4ea;
     color: #2d8a4e;
 }
-
 .history-item .status.warning {
     background: #fef3e0;
     color: #c98b2e;
 }
-
 .history-item .status.danger {
     background: #fde8e8;
     color: #c0392b;
@@ -1352,7 +1156,6 @@ input:focus {
     gap: 6px;
     margin-top: 12px;
 }
-
 .history-stats .stat-box {
     background: #fff;
     padding: 10px;
@@ -1360,14 +1163,12 @@ input:focus {
     text-align: center;
     border: 1px solid #eee2cc;
 }
-
 .history-stats .stat-box .number {
     display: block;
     font-size: 20px;
     font-weight: 900;
     color: #d4940d;
 }
-
 .history-stats .stat-box .label {
     font-size: 8px;
     color: #9a8d7d;
@@ -1380,19 +1181,16 @@ input:focus {
 .forecast-content {
     padding: 5px 0 15px;
 }
-
 .forecast-content h2 {
     color: #d4940d;
     font-size: 16px;
     margin: 0 0 12px;
 }
-
 .forecast-list {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     gap: 6px;
 }
-
 .forecast-item {
     background: #fff;
     padding: 10px;
@@ -1400,37 +1198,31 @@ input:focus {
     text-align: center;
     border: 1px solid #eee2cc;
 }
-
 .forecast-item .day {
     font-size: 11px;
     font-weight: 900;
     color: #51483e;
 }
-
 .forecast-item .uv-forecast {
     font-size: 22px;
     font-weight: 900;
     color: #d4940d;
     margin: 4px 0;
 }
-
 .forecast-item .status {
     font-size: 8px;
     padding: 2px 8px;
     border-radius: 999px;
     display: inline-block;
 }
-
 .forecast-item .status.safe {
     background: #e6f4ea;
     color: #2d8a4e;
 }
-
 .forecast-item .status.warning {
     background: #fef3e0;
     color: #c98b2e;
 }
-
 .forecast-item .status.danger {
     background: #fde8e8;
     color: #c0392b;
@@ -1443,12 +1235,101 @@ input:focus {
     border-radius: 13px;
     border: 1px solid #f3d48a;
 }
-
 .forecast-advice p {
     margin: 0;
     font-size: 10px;
     color: #5c5247;
     line-height: 1.6;
+}
+
+/* =========================================
+   QUIZ
+========================================= */
+
+.quiz-content {
+    padding: 5px 0 15px;
+}
+.quiz-header {
+    text-align: center;
+    margin-bottom: 16px;
+}
+.quiz-icon {
+    font-size: 40px;
+    display: block;
+}
+.quiz-header h2 {
+    color: #d4940d;
+    font-size: 18px;
+    margin: 4px 0;
+}
+.quiz-header p {
+    color: #9a8d7d;
+    font-size: 12px;
+    margin: 0;
+}
+.quiz-question {
+    background: #fff;
+    border-radius: 16px;
+    padding: 16px;
+    border: 1px solid #eadfc9;
+}
+.quiz-question p {
+    font-size: 14px;
+    font-weight: 700;
+    color: #51483e;
+    margin: 0 0 12px;
+}
+.quiz-options {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+.quiz-options button {
+    padding: 10px 12px;
+    border: 1.5px solid #eadfc9;
+    border-radius: 12px;
+    background: #fff;
+    font-size: 12px;
+    font-weight: 700;
+    color: #51483e;
+    cursor: pointer;
+    transition: .18s ease;
+    text-align: right;
+}
+.quiz-options button:hover {
+    border-color: #f3b126;
+    background: #fffaf0;
+}
+.quiz-options button.correct {
+    border-color: #2d8a4e;
+    background: #e6f4ea;
+    color: #2d8a4e;
+}
+.quiz-options button.wrong {
+    border-color: #c0392b;
+    background: #fde8e8;
+    color: #c0392b;
+}
+.quiz-options button:disabled {
+    cursor: default;
+    opacity: 0.8;
+}
+.quiz-result {
+    margin-top: 12px;
+    padding: 10px 12px;
+    border-radius: 12px;
+    font-size: 12px;
+    line-height: 1.5;
+}
+.quiz-result.correct {
+    background: #e6f4ea;
+    color: #2d8a4e;
+    border: 1px solid #a5d6a7;
+}
+.quiz-result.wrong {
+    background: #fde8e8;
+    color: #c0392b;
+    border: 1px solid #ef9a9a;
 }
 
 /* =========================================
@@ -1461,7 +1342,6 @@ input:focus {
     gap: 14px;
     padding: 5px 0 15px;
 }
-
 .portal-header {
     display: flex;
     align-items: center;
@@ -1470,13 +1350,11 @@ input:focus {
     border-radius: 18px;
     padding: 12px 14px;
     border: 1px solid #eadfc9;
-    box-shadow: 0 4px 14px rgba(90, 65, 25, .05);
+    box-shadow: 0 4px 14px rgba(90,65,25,.05);
 }
-
 .portal-avatar {
     flex: 0 0 auto;
 }
-
 .portal-avatar .sana-character svg {
     width: 80px;
     height: 80px;
@@ -1485,13 +1363,11 @@ input:focus {
     padding: 4px;
     background: #fffdf7;
 }
-
 .portal-greeting h2 {
     margin: 0 0 4px;
     color: #d4940d;
     font-size: 16px;
 }
-
 .portal-greeting p {
     margin: 0;
     color: #8a7b68;
@@ -1504,7 +1380,6 @@ input:focus {
     grid-template-columns: 1fr 1fr;
     gap: 8px;
 }
-
 .streak-card {
     display: flex;
     align-items: center;
@@ -1515,18 +1390,15 @@ input:focus {
     border: 1px solid #f3d48a;
     background: linear-gradient(135deg, #fffdf6, #fff8e7);
 }
-
 .streak-icon {
     font-size: 26px;
     line-height: 1;
 }
-
 .streak-label {
     font-size: 8px;
     color: #9a8d7d;
     margin-bottom: 2px;
 }
-
 .streak-number {
     font-size: 22px;
     font-weight: 900;
@@ -1540,7 +1412,6 @@ input:focus {
     padding-right: 8px;
     border-right: 3px solid #f3b126;
 }
-
 .tip-card {
     display: flex;
     align-items: flex-start;
@@ -1551,28 +1422,24 @@ input:focus {
     border: 1px solid #eee2cc;
     margin-bottom: 7px;
 }
-
 .tip-icon {
     font-size: 20px;
     flex: 0 0 auto;
     width: 32px;
     text-align: center;
 }
-
 .tip-card b {
     display: block;
     font-size: 11px;
     color: #5a4e41;
     margin-bottom: 3px;
 }
-
 .tip-card p {
     margin: 0;
     color: #76695a;
     font-size: 9px;
     line-height: 1.55;
 }
-
 .tip-card p strong {
     color: #d4940d;
 }
@@ -1584,27 +1451,23 @@ input:focus {
     padding-right: 8px;
     border-right: 3px solid #f3b126;
 }
-
 .reminder-box {
     background: #fff;
     border-radius: 14px;
     padding: 12px;
     border: 1px solid #eadfc9;
 }
-
 .reminder-box p {
     margin: 0 0 10px;
     color: #76695a;
     font-size: 11px;
 }
-
 .reminder-controls {
     display: flex;
     gap: 8px;
     align-items: center;
     flex-wrap: wrap;
 }
-
 .reminder-controls input[type="time"] {
     width: auto;
     flex: 1;
@@ -1613,7 +1476,6 @@ input:focus {
     border-radius: 10px;
     font-size: 13px;
 }
-
 .reminder-status {
     margin-top: 8px;
     font-size: 9px;
@@ -1622,7 +1484,6 @@ input:focus {
     background: #f9f6f0;
     border-radius: 8px;
 }
-
 .reminder-status.active {
     color: #2d8a4e;
     background: #e6f4ea;
@@ -1635,13 +1496,11 @@ input:focus {
     padding-right: 8px;
     border-right: 3px solid #f3b126;
 }
-
 .stats-grid {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     gap: 7px;
 }
-
 .stat-card {
     background: #fff;
     border-radius: 13px;
@@ -1649,7 +1508,6 @@ input:focus {
     text-align: center;
     border: 1px solid #eee2cc;
 }
-
 .stat-number {
     display: block;
     font-size: 22px;
@@ -1657,7 +1515,6 @@ input:focus {
     color: #d4940d;
     margin-bottom: 2px;
 }
-
 .stat-label {
     display: block;
     font-size: 8px;
@@ -1669,57 +1526,22 @@ input:focus {
 ========================================= */
 
 @media(max-width:480px) {
-    .pros-cons {
-        grid-template-columns: 1fr;
-    }
-    .forecast-list {
-        grid-template-columns: repeat(2, 1fr);
-    }
-    .history-stats {
-        grid-template-columns: repeat(2, 1fr);
-    }
+    .pros-cons { grid-template-columns: 1fr; }
+    .forecast-list { grid-template-columns: repeat(2, 1fr); }
+    .history-stats { grid-template-columns: repeat(2, 1fr); }
+    .sun-metrics-grid { grid-template-columns: repeat(3, 1fr); }
+    .timeline-items { grid-template-columns: 1fr 1fr; }
 }
 
 @media(max-width:360px) {
-    .screen {
-        padding-left: 9px;
-        padding-right: 9px;
-    }
-    .sana-stage.premium .sana-character svg {
-        width: 110px;
-        height: 110px;
-    }
-    .sana.question-sana svg {
-        width: 100px;
-        height: 100px;
-    }
-    .sana.sun-sana svg {
-        width: 90px;
-        height: 90px;
-    }
-    .speech-bubble {
-        padding: 9px 11px;
-    }
-    .dialogue {
-        font-size: 12px;
-        line-height: 1.55;
-    }
-    .sun-station {
-        height: 168px;
-    }
-    .skin-btn {
-        min-height: 70px;
-    }
-    .skin-btn .skin-color {
-        width: 28px;
-        height: 28px;
-    }
-    .portal-streak-section {
-        grid-template-columns: 1fr 1fr;
-    }
-    .stats-grid {
-        grid-template-columns: 1fr 1fr;
-    }
+    .screen { padding-left: 9px; padding-right: 9px; }
+    .sana-stage.premium .sana-character svg { width: 110px; height: 110px; }
+    .sana.question-sana svg { width: 100px; height: 100px; }
+    .sana.sun-sana svg { width: 90px; height: 90px; }
+    .speech-bubble { padding: 9px 11px; }
+    .dialogue { font-size: 12px; line-height: 1.55; }
+    .sun-metrics-grid { grid-template-columns: repeat(2, 1fr); }
+    .timeline-items { grid-template-columns: 1fr 1fr; }
 }
 
 /* =========================================
@@ -1746,22 +1568,14 @@ input:focus {
     height: 130px !important;
     margin: 0 !important;
 }
-
 .sana-stage .sana-character svg {
     width: 130px !important;
     height: 130px !important;
     object-fit: contain !important;
 }
-
 @media(max-width:480px) {
-    .sana-stage {
-        width: 110px !important;
-        height: 110px !important;
-    }
-    .sana-stage .sana-character svg {
-        width: 110px !important;
-        height: 110px !important;
-    }
+    .sana-stage { width: 110px !important; height: 110px !important; }
+    .sana-stage .sana-character svg { width: 110px !important; height: 110px !important; }
 }
 
 .speech-bubble {
@@ -1772,7 +1586,6 @@ input:focus {
     border-radius: 16px !important;
     width: auto !important;
 }
-
 .speech-bubble::before {
     content: "" !important;
     position: absolute !important;
@@ -1782,7 +1595,7 @@ input:focus {
     transform: translateY(-50%) !important;
     width: 14px !important;
     height: 14px !important;
-    background: rgba(255, 255, 255, .97) !important;
+    background: rgba(255,255,255,.97) !important;
     clip-path: polygon(0 0, 100% 50%, 0 100%) !important;
     border: none !important;
     border-radius: 0 !important;
@@ -1795,64 +1608,32 @@ input:focus {
     border-radius: 12px !important;
     margin-top: 4px !important;
 }
-
 .secondary-btn {
     padding: 7px 10px !important;
     font-size: 10px !important;
 }
-
 .dialogue {
     font-size: 12px !important;
     line-height: 1.5 !important;
 }
-
 .bubble-name {
     font-size: 9px !important;
     margin-bottom: 2px !important;
 }
-
 .question-stage,
 .learn-sana-stage,
-.sun-sana-stage {
-    margin: 0 !important;
-}
-
+.sun-sana-stage { margin: 0 !important; }
 .home-bubble,
 .question-bubble,
 .learn-bubble,
-.sun-bubble {
-    margin-top: 0 !important;
-}
+.sun-bubble { margin-top: 0 !important; }
 
-.home-content {
-    flex-wrap: wrap !important;
-}
-.home-content .sana-stage {
-    order: 1;
-}
-.home-content .speech-bubble {
-    order: 2;
-    flex-basis: calc(100% - 142px) !important;
-}
-.home-content .primary-btn {
-    order: 3;
-    flex-basis: 100% !important;
-    margin-top: 8px !important;
-}
+.home-content { flex-wrap: wrap !important; }
+.home-content .sana-stage { order: 1; }
+.home-content .speech-bubble { order: 2; flex-basis: calc(100% - 142px) !important; }
+.home-content .primary-btn { order: 3; flex-basis: 100% !important; margin-top: 8px !important; }
 
-.conversation .sana-stage {
-    order: 1;
-}
-.conversation .speech-bubble {
-    order: 2;
-    flex-basis: calc(100% - 142px) !important;
-}
-.conversation .answer-area {
-    order: 3;
-    flex-basis: 100% !important;
-}
-.conversation .primary-btn {
-    order: 4;
-    flex-basis: 100% !important;
-    margin-top: 8px !important;
-   }
+.conversation .sana-stage { order: 1; }
+.conversation .speech-bubble { order: 2; flex-basis: calc(100% - 142px) !important; }
+.conversation .answer-area { order: 3; flex-basis: 100% !important; }
+.conversation .primary-btn { order: 4; flex-basis: 100% !important; margin-top: 8px !important; }
