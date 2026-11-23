@@ -1,0 +1,62 @@
+{
+  "license": "https://www.pexels.com/license/",
+  "downloaded": "2026-11-23",
+  "sources": [
+    {
+      "title": "Classy glass of water served on wooden table · Free Stock Photo — pexels.com",
+      "page": "https://www.pexels.com/photo/classy-glass-of-water-served-on-wooden-table-6387835/",
+      "image": "https://images.pexels.com/photos/6387835/pexels-photo-6387835.jpeg?auto=compress&w=1260&h=750&dpr=1",
+      "section": "water",
+      "local": "src/assets/scenes/water.webp"
+    },
+    {
+      "title": "Cozy Bedroom Night Scene with Table Lamp · Free Stock Photo — pexels.com",
+      "page": "https://www.pexels.com/photo/cozy-bedroom-night-scene-with-table-lamp-28500445/",
+      "image": "https://images.pexels.com/photos/28500445/pexels-photo-28500445/free-photo-of-cozy-bedroom-night-scene-with-table-lamp.jpeg?auto=compress&w=1260&h=750&dpr=1",
+      "section": "sleep",
+      "local": "src/assets/scenes/sleep.webp"
+    },
+    {
+      "title": "Empty Running Track Lanes with Shadows · Free Stock Photo — pexels.com",
+      "page": "https://www.pexels.com/photo/empty-running-track-lanes-with-shadows-37718513/",
+      "image": "https://images.pexels.com/photos/37718513/pexels-photo-37718513/free-photo-of-empty-running-track-lanes-with-shadows.jpeg?auto=compress&w=1260&h=750&dpr=1",
+      "section": "sport",
+      "local": "src/assets/scenes/sport.webp"
+    },
+    {
+      "title": "Flatlay Photography of Fruits · Free Stock Photo — pexels.com",
+      "page": "https://www.pexels.com/photo/flatlay-photography-of-fruits-1334131/",
+      "image": "https://images.pexels.com/photos/1334131/pexels-photo-1334131.jpeg?auto=compress&w=1260&h=750&dpr=1",
+      "section": "vitamins",
+      "local": "src/assets/scenes/vitamins.webp"
+    },
+    {
+      "title": "Golden Sunrise Over Tranquil Seaside Beach · Free Stock Photo — pexels.com",
+      "page": "https://www.pexels.com/photo/golden-sunrise-over-tranquil-seaside-beach-31832390/",
+      "image": "https://images.pexels.com/photos/31832390/pexels-photo-31832390/free-photo-of-golden-sunrise-over-tranquil-seaside-beach.jpeg?auto=compress&w=1260&h=750&dpr=1",
+      "section": "sun",
+      "local": "src/assets/scenes/sun.webp"
+    },
+    {
+      "title": "Serene Tree-Lined Park Trail in Morning Light · Free Stock Photo — pexels.com",
+      "page": "https://www.pexels.com/photo/serene-tree-lined-park-trail-in-morning-light-38304254/",
+      "image": "https://images.pexels.com/photos/38304254/pexels-photo-38304254/free-photo-of-serene-tree-lined-park-trail-in-morning-light.jpeg?auto=compress&w=1260&h=750&dpr=1",
+      "section": "walk",
+      "local": "src/assets/scenes/walk.webp"
+    },
+    {
+      "title": "Glass Of Water And Medication On White Surface · Free Stock Photo — pexels.com",
+      "page": "https://www.pexels.com/photo/glass-of-water-and-medication-on-white-surface-6753139/",
+      "image": "https://images.pexels.com/photos/6753139/pexels-photo-6753139.jpeg?auto=compress&w=1260&h=750&dpr=1",
+      "section": "meds",
+      "local": "src/assets/scenes/meds.webp"
+    },
+    {
+      "title": "Pink Weighing Scale on a White Surface  · Free Stock Photo — pexels.com",
+      "page": "https://www.pexels.com/photo/pink-weighing-scale-on-a-white-surface-6975463/",
+      "image": "https://images.pexels.com/photos/6975463/pexels-photo-6975463.jpeg?auto=compress&w=1260&h=750&dpr=1",
+      "section": "bmi",
+      "local": "src/assets/scenes/bmi.webp"
+    }
+  ]
+}
